@@ -1,0 +1,62 @@
+*{padding: 0;margin: 0;}
+.content-tabs {
+    position: relative;
+    height: 42px;
+    background: #fafafa;
+    line-height: 40px;
+    border-bottom:solid 0px #ffffff;
+}
+.page-tabs a {
+    display: block;
+    float: left;
+    border-right: solid 1px #eee;
+    padding: 0 15px;
+    color: #a0a0a0;
+    background: #f5f5f5;
+    text-decoration: none;
+}
+nav.page-tabs {
+    margin-left: 40px;
+    width: 100000px;
+    height: 40px;
+    overflow: hidden
+}
+nav.page-tabs .page-tabs-content {
+    float: left
+}
+.content-tabs button {
+    background: #fff;
+    border: 0;
+    height: 40px;
+    width: 40px;
+    outline: 0;
+    cursor: pointer;
+
+}
+.content-tabs .roll-nav,.page-tabs-list {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    color: #999;
+    z-index: 2;
+    top: 0
+}
+.content-tabs .roll-left {
+    left: 0;
+    border-right: solid 1px #eee
+}
+.content-tabs .roll-right {
+    right: 0;
+    border-left: solid 1px #eee
+}
+.page-tabs a.active {
+    background: #009688;
+    color: #fff
+}
+
+.page-tabs a.active:hover, .page-tabs a.active i:hover {
+    background: #00c8b5;
+    color: #fff;
+}
+

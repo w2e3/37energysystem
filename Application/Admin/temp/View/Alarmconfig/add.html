@@ -1,0 +1,84 @@
+﻿﻿<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">数据编辑</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+                <div>
+                    <!--<ul class="nav nav-tabs">-->
+                        <!--&lt;!&ndash;<li class="active"><a data-toggle="tab" href="#tab-1">基础信息</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li class=""><a data-toggle="tab" href="#tab-2">球员/领队信息</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li class=""><a data-toggle="tab" href="#tab-3">裁判信息</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li class=""><a data-toggle="tab" href="#tab-4">保险信息</a></li>&ndash;&gt;-->
+                    <!--</ul>-->
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <if condition="$data['almc_regionid'] neq ''">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        园区（位置点）：
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <select name="almc_regionid" id="almc_regionid" class="chosen-select">
+                                            <option value="">&nbsp;==请选择==</option>
+                                            <foreach name="ds_region" item="rgn_v" key="rgn_k">
+                                                <option value="{$rgn_v.rgn_atpid}" <if condition="$data['almc_regionid'] eq $rgn_v['rgn_atpid']">selected<else /></if>>{$rgn_v.rgn_name}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <else/>
+                                    <input name="almc_regionid" type="hidden" value="{$Think.get.rgn_atpid}" class="form-control">
+                                </if>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        报警名称：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="almc_name" type="text" value="{$data.almc_name}" class="form-control" required>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        报警等级：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select name="almc_level" class="chosen-select" required>
+                                            <option value="">&nbsp;==请选择==</option>
+                                            <foreach name="ds_level" item="ds_v" key="ds_k" >
+                                                <option value="{$ds_v}" <if condition="$data['almc_level'] eq $ds_v">selected<else /></if> >{$ds_v}</option>
+                                            </foreach>
+                                        </select>
+                                        <!--<input name="almc_level" type="text" value="{$data.almc_level}" class="form-control">-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input name="almc_atpid" type="hidden" value="{$data.almc_atpid}" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            <button type="button" name="bc" id="sys_dlg_submit" class="btn btn-primary">保存</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+$(function () {
+    $(".js-switch").each(function(){
+        new Switchery(this, {color: '#1AB394'});
+    });
+    $(".file-pretty").prettyFile();
+    $("#almc_regionid").chosen({disable_search_threshold: 6, search_contains: true,width:'750px'});
+    $(".chosen-select").chosen({disable_search_threshold: 6, search_contains: true,width:'284px'});
+});
+</script>

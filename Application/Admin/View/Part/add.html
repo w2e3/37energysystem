@@ -1,0 +1,90 @@
+﻿<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">数据编辑</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+
+
+                <div>
+
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        厂家名称：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <!--
+                                        <select name="part_factoryname" id="part_factoryname" class="chosen-select">
+                                            <option value="">&nbsp;==请选择==</option>
+                                            <foreach name="company" item="t_v" key="t_k" >
+                                                <option value="{$t_v.cpy_atpid}" <if condition="$data['part_factoryname'] eq $t_v['cpy_atpid']">selected<else /></if>>{$t_v.cpy_name}</option>
+                                            </foreach>
+                                        </select>
+                                        -->
+                                        <input name="part_factoryname" type="text" value="{$data.part_factoryname}" class="form-control" required>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        设备名称：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="part_name" type="text" value="{$data.part_name}" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        规格：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="part_format" type="text" value="{$data.part_format}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        图片：</label>
+                                    <div class="col-sm-4">
+                                        <input name="part_pic" type="file" value="{$data.part_pic}" class="form-control file-pretty">
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <if condition="($data.part_pic neq '')">
+                                            <img src="__PUBLIC__/uploads/{$data.part_pic}" width="100px" />
+                                        </if>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <input name="part_atpid" type="hidden" value="{$data.part_atpid}" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            <button type="button" data-dismiss="modal" id="sys_dlg_submit" class="btn btn-primary">保存</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+    $(function () {
+        $(".js-switch").each(function(){
+            new Switchery(this, {color: '#1AB394'});
+        });
+        $(".file-pretty").prettyFile();
+        $(".chosen-select").chosen({disable_search_threshold: 6, search_contains: true,width:'284px'});
+    });
+</script>

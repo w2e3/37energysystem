@@ -1,0 +1,50 @@
+.list-block ul {
+	background: none;
+}
+body {
+	background: #ff5500;
+}
+
+.bar-nav {
+	background: #ff5500;
+	color: #fff;
+} 
+.bar-nav a {
+	color: #fff;
+}
+.bar-nav .title {
+	color: #fff;
+}
+
+.buttons-tab .button.active {
+	color: #ff5500;
+}
+.buttons-tab .button.active {
+	border-color:#ff5500;
+}
+
+.bar-tab .tab-item.active {
+	color: #ff5500;
+}
+
+.bar .button-link {
+	color: #fff;
+}
+
+.row a {
+	color: #ff5500;
+}
+a {
+	color: #ff5500;
+}
+
+.buttons-row .button.active {
+	background-color: #ff5500;
+}
+
+.buttons-row .button {
+	border: 1px solid #ff5500;
+	color: #ff5500;
+}
+
+

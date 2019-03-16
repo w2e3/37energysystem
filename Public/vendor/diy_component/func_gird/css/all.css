@@ -1,0 +1,53 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+ul,li{
+    list-style: none;
+}
+
+body{
+    background-color: #f8f8f8;
+}
+
+.wai{
+    background-color: #f8f8f8;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.zhong{
+    width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 0px 20px;
+}
+
+.zhong p{
+    font-weight: bold;
+    line-height: 60px;
+    font-size: 20px;
+    border-bottom: 2px solid #dddddd;
+}
+
+.zhong ul li{
+    width: 90px;
+    margin-left: 23px;
+    margin-right: 23px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.zhong ul{
+    margin-top: 20px;
+}
+
+.zhong ul li span{
+    text-align: center;
+    color: #6b6b6b;
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+}

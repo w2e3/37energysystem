@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>制冷机房</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/machine-room.css">
+</head>
+<body>
+<div class="full_building">
+	<img src="images/boiler-room.jpg" width="100%" style="margin-top: 20px">
+</div>
+<div class="list-right">
+	
+	<a href="javascript:;" class="energy_message cur" target="_self">
+	    <header>
+	        <p class="fl">锅炉房能源情况</p></header>
+	    <div class="alarmlist">
+	        <div class="listfooter">
+	            <div>
+	                <p>暖能用量(MW)</p>
+	                <p>12325</p>
+	            </div>
+	            <div>
+	                <p>用水量(千吨)</p>
+	                <p>12325</p>
+	            </div>
+	            <div>
+	                <p>用电量(MW)</p>
+	                <p>12325</p>
+	            </div>
+	        </div>
+	    </div>
+	</a>
+</div>
+<script src="js/jquery-1.7.2.js"></script>
+<script>
+    $('.energy_message header').on('click', function() {
+        $(this).next('.alarmlist').toggle();
+    });
+    
+    $('.alarmdian').on('click',function() {
+		$('.unusual1').toggle();
+	})
+	
+    // 取消点击事件冒泡
+    $(".energy_message header").click(function(event) {
+        event.stopPropagation();
+    });
+</script>
+</body>
+</html>

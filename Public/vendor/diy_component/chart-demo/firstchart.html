@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="container" style="height: 400px"></div>
+<script src="jquery-1.12.4.js"></script>
+<script src="highcharts.js"></script>
+<script src="highcharts-3d.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 5,
+                viewDistance: 25,
+                depth: 60
+            },
+            marginRight: 40
+        },
+        title: {
+            text: '分项对比'
+        },
+        xAxis: {
+            categories: ['2#A座', '2#B座', '2#C座', '2#D座', '2#F座']
+        },
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: '能量消耗量'
+            }
+        },
+        tooltip: {
+            headerFormat: '<b>{point.key}</b><br>',
+            pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                depth: 40
+            }
+        },
+        series: [{
+            name: '水能',
+            data: [5, 3, 4, 7, 2],
+            stack: '1'
+        }, {
+            name: '电能',
+            data: [3, 4, 4, 2, 5],
+            stack: '2'
+        }, {
+            name: '冷暖用量',
+            data: [2, 5, 6, 5, 8],
+            stack: '3'
+        }]
+    });
+});
+
+</script>
+	
+</body>
+</html>

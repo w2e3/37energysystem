@@ -1,0 +1,2309 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>地图显示</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main.css?v=1.0"/>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=94b0edb1de06559ee062fae3f913095f"></script>
+    <script type="text/javascript">
+        function winopen(pageUrl, target, WinWidth, WinHeight) {
+//            var popwin = window.open(pageUrl, target, "scrollbars=yes,toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,width=" + WinWidth + ",height=" + WinHeight + ",left=" + (screen.width - WinWidth) / 2 + ",top=" + (screen.height - WinHeight - 100) / 2);
+//            popwin.focus();
+            alert("功能已注释");
+            return false;
+        }
+    </script>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .amap-info-close{
+            top:10px;
+        }
+        a:link {
+            text-decoration: none;
+        }
+        a:visited {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        a:active {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div id="mapContainer"></div>
+<script type="text/javascript">
+    //初始化地图对象，加载地图
+    var map = new AMap.Map("mapContainer", {
+        resizeEnable: true,
+        zoom: 13
+    });
+
+
+    var lnglats = [
+        [116.371574, 39.841202], [116.396846, 39.964277], [116.478115, 39.903096], [116.379435, 39.97825], [116.421447, 39.85967], [116.394226, 39.858682], [116.419804, 39.858959], [116.360452, 39.930321], [116.425278, 39.857508], [116.470206, 39.942703], [116.467329, 39.944028], [116.469105, 39.948005], [116.474849, 39.903247], [116.514381, 39.928635], [116.402198, 39.852898], [116.439202, 39.930759], [116.371896, 39.865746], [116.482529, 39.923955], [116.278591, 39.907924], [116.446533, 39.884377], [116.499692, 39.926083], [116.364503, 39.957931], [116.413941, 39.864159], [116.454134, 39.955348], [116.516344, 39.913287], [116.450564, 39.891075], [116.442296, 39.865646], [116.501182, 39.913228], [116.453253, 39.920125], [116.42103, 39.850268], [116.455092, 39.913311], [116.449019, 39.88534], [116.409002, 39.998495], [116.409043, 39.997476], [116.412482, 39.854045], [116.366773, 39.865506], [116.343881, 39.946703], [116.487108, 39.889022], [116.467082, 39.90752], [116.455556, 39.926666], [116.43563, 39.952095], [116.498624, 39.895873], [116.329187, 40.05576], [116.470165, 39.986753], [116.387436, 39.849205], [116.364745, 39.930982], [116.460175, 39.922537], [116.414274, 39.850707], [116.422396, 39.858465], [116.46204, 39.923574], [116.519479, 39.925823], [116.430901, 39.851379], [116.463093, 39.947153], [116.408572, 39.845533], [116.333533, 40.057812], [116.405429, 39.958772], [116.335073, 39.956305], [116.378746, 39.865206], [116.480064, 39.919446], [116.478331, 39.917472], [116.428683, 39.837754], [116.374833, 39.85304], [116.461096, 39.922082], [116.450684, 39.883918], [116.501699, 39.912093], [116.482299, 39.907944], [116.466331, 39.920123], [116.467259, 39.884876], [116.457814, 39.877494], [116.484786, 39.89159], [116.464915, 39.956711], [116.465825, 39.9326], [116.441407, 39.925399], [116.469335, 39.892006], [116.435187, 39.859971], [116.475629, 39.895621], [116.488806, 39.90078], [116.43361, 39.846933], [116.469669, 39.911698], [116.467712, 39.92653], [116.468684, 39.945313], [116.453248, 39.913254], [116.474, 39.913474], [116.473105, 39.913528], [116.454066, 39.883638], [116.473145, 39.930916], [116.371796, 39.852525], [116.456703, 39.923924], [116.413611, 39.842406], [116.409428, 39.859043], [116.38071, 39.983738], [116.482194, 39.918526], [116.457398, 39.868887], [116.47805, 39.905477], [116.376198, 39.856306], [116.483162, 39.921122], [116.470284, 39.94537], [116.437523, 39.981658], [116.4705, 39.942829], [116.44849, 39.965322], [116.441774, 39.8664], [116.452471, 39.885072], [116.418098, 39.861054], [116.423466, 39.847671], [116.392721, 39.860929], [116.44483, 39.943828], [116.379027, 39.969214], [116.431352, 39.979639], [116.293481, 39.862322], [116.472305, 39.870436], [116.387484, 39.982929], [116.457211, 39.999267], [116.48454, 39.900858], [116.336135, 40.044101], [116.421628, 39.860725], [116.405231, 39.957261], [116.480807, 39.926902], [116.465766, 39.933026], [116.502764, 39.893566], [116.436403, 39.919428], [116.445067, 39.853699], [116.476631, 39.922075], [116.452282, 39.952384], [116.441375, 39.959083], [116.450749, 39.917789], [116.425653, 39.851097], [116.448844, 39.962198], [116.444426, 39.966518], [116.459698, 39.887846], [116.426794, 39.864163], [116.388363, 39.86076], [116.407188, 39.854483], [116.348323, 39.937611], [116.452898, 39.881023], [116.472886, 39.932395], [116.511988, 39.860026], [116.507626, 39.89938], [116.438796, 39.898773], [116.44558, 39.849758], [116.451106, 39.87082], [116.502653, 39.857638], [116.495683, 39.894594], [116.471337, 39.907673], [116.447865, 39.900647], [116.464201, 39.89396], [116.463756, 39.893806], [116.47939, 39.884642], [116.451161, 39.935813], [116.407984, 39.868875], [116.37154, 39.836078], [116.50392, 39.897644], [116.439495, 39.854847], [116.496554, 39.908601], [116.482896, 39.92395], [116.47483, 39.89577], [116.472376, 39.907616], [116.464384, 39.900818], [116.472105, 39.872293], [116.480941, 39.927241], [116.3688, 39.940455], [116.449977, 39.914473], [116.346854, 39.932984], [116.468443, 39.876414], [116.404166, 39.866024], [116.355306, 39.936417], [116.356269, 39.933874], [116.452374, 39.869696], [116.45719, 39.870361], [116.424766, 39.853046], [116.376075, 39.981263], [116.378137, 39.853511], [116.413684, 39.862814], [116.416643, 39.844657], [116.44241, 39.905359], [116.484983, 39.93125], [116.507237, 39.898357], [116.360959, 39.965204], [116.510271, 39.868938], [116.406034, 39.958175], [116.416197, 39.861841], [116.48043, 39.900592], [116.421656, 39.84819], [116.450636, 39.909587], [116.451313, 39.907843], [116.448296, 39.907167], [116.499579, 39.894828], [116.380977, 39.976547], [116.342787, 39.958065], [116.491767, 39.892637], [116.439444, 39.971325], [116.41453, 39.865445], [116.506001, 39.913568], [116.504137, 39.923352], [116.449861, 39.924573], [116.454181, 39.95191], [116.413584, 39.866866], [116.454985, 39.881624], [116.436272, 39.859867], [116.390039, 39.865355], [116.469428, 39.900296], [116.34312, 39.958055], [116.450001, 39.91076], [116.462719, 39.928834], [116.448237, 39.964029], [116.466609, 39.895973], [116.495828, 39.927375], [116.342556, 39.962874], [116.458255, 39.922411], [116.466932, 39.92931], [116.414156, 39.858369], [116.412754, 39.865424], [116.400492, 39.866909], [116.47896, 39.915854], [116.465396, 39.917662], [116.387123, 39.856578], [116.3617, 39.864391], [116.47937, 39.919496], [116.517453, 39.929991], [116.387627, 39.982739], [116.486581, 39.93104], [116.464367, 39.954447], [116.389395, 39.86362], [116.368143, 39.855142], [116.46694, 39.93195], [116.452867, 39.923595], [116.443546, 39.933895], [116.45165, 39.933882], [116.46363, 39.920106], [116.462232, 39.933408], [116.450533, 39.923535], [116.472531, 39.933462], [116.466778, 39.934017], [116.455623, 39.933506], [116.469615, 39.875634], [116.375246, 39.971287], [116.465412, 39.920483], [116.43794, 39.906519], [116.370278, 39.972882], [116.460557, 39.891627], [116.430868, 39.855612], [116.434835, 39.944669], [116.480483, 39.915353], [116.487809, 39.900771], [116.436364, 39.915659], [116.44488, 39.874323], [116.484963, 39.884666], [116.400131, 39.84518], [116.462049, 39.935775],];
+    var terminalstatuss = [
+        './amp_files/open3.png', './amp_files/open1.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/close1.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open3.png', './amp_files/open4.png', './amp_files/open3.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/close3.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open3.png', './amp_files/open3.png', './amp_files/open5.png', './amp_files/open3.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open3.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open1.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/close1.png', './amp_files/open1.png', './amp_files/open2.png', './amp_files/open3.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open3.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open3.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open3.png', './amp_files/open4.png', './amp_files/open3.png', './amp_files/open4.png', './amp_files/open1.png', './amp_files/open3.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open1.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open3.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open1.png', './amp_files/open5.png', './amp_files/open3.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open3.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open2.png', './amp_files/open5.png', './amp_files/open1.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open3.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open2.png', './amp_files/open5.png', './amp_files/close3.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/close3.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open3.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open1.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open1.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open3.png', './amp_files/open3.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open3.png', './amp_files/open1.png', './amp_files/open4.png', './amp_files/open4.png', './amp_files/open3.png', './amp_files/open4.png', './amp_files/open1.png', './amp_files/open4.png', './amp_files/open1.png', './amp_files/open1.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open1.png', './amp_files/open4.png', './amp_files/open1.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open5.png', './amp_files/open4.png', './amp_files/open4.png',];
+    var shows = [
+        '<b>Z20160304156</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '1+1便利店<br>' +
+        '丰台区马家堡西路26号院3号楼1-1底商<br>' +
+        '王冬梅13717736117<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9D01303A-38EF-40CF-9B64-CDB945AA6B8B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303133</b><br>' +
+        '<b>启用,1级,安永祥 签约</b><br>' +
+        '安华洗衣店<br>' +
+        '安华西里二区15号楼前<br>' +
+        '严绘明84241124<br>' +
+        '1级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=DA58034D-93A2-4758-8768-60804497DD67\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313253</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '八王坟长途汽车站平价超市。<br>' +
+        '朝阳区大望路八王坟长途汽车站内。<br>' +
+        '吴女士18211030672<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=480E7C8E-8C86-4416-8BD8-CA5DF17BBE27\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160301099</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '百货超市<br>' +
+        '牡丹园东路花卉市场百货超市<br>' +
+        '刘新果15101110430<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=FA7C0ED9-8283-42CA-853E-B15F398F2F8E\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315279</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '百佳微利超市。<br>' +
+        '丰台区蒲黄榆路刘家窑桥北100米路西。<br>' +
+        '郑女士87613810<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=6EA1C560-254F-4036-B6CE-2818EF181B19\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160321331</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '百栗香干果店。<br>' +
+        '丰台区西罗园2区东门，旁。<br>' +
+        '姚女士13716241513<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=985D783A-9462-4702-98DC-80F5D4B3ECEA\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316287</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '百姓顺发生活超市。<br>' +
+        '丰台区刘家窑南里28号楼底商。<br>' +
+        '罗生强57172505<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=469E5C7F-8950-4701-961A-A5F3F0762080\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160108020</b><br>' +
+        '<b>停用,1级,范嘉欣 签约</b><br>' +
+        '北京东方天宝<br>' +
+        '西直门南小街188号<br>' +
+        '武英说66120645<br>' +
+        '1级终端 范嘉欣 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=D92B3EEA-1D08-4DED-A219-6175756D8915\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317312</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '北京东伟诚烟酒总汇。<br>' +
+        '丰台区南三环东路10号。横六条北口<br>' +
+        '孙先生87673912<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=43E8EC2E-095C-4BB9-ABDC-C0AE2A1B00E2\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160301089</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '北京蓝唯仕商贸公司<br>' +
+        '朝阳区农展馆甲5号一层，永安宾馆南门。<br>' +
+        '陈辉15510647403<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=CFA478B1-7DC7-4C35-A44D-8BBC87936D49\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160301094</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '北京美丽森林食品店。<br>' +
+        '朝阳区麦子店街8号院。农展北路。<br>' +
+        '崔心苓13263297228<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=76F660B3-D97A-4C00-B335-4C6C0CE86C99\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160229083</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '北京四季轩食品店<br>' +
+        '朝阳区麦子店枣营北里31号楼西侧食品店。<br>' +
+        '胡和义15210867958<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=19B2490B-8DDD-4B10-A863-02BBB939F74F\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313254</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '北京特产烟酒店。<br>' +
+        '朝阳区大望路北京国家广告产业园，7天连锁酒店旁。<br>' +
+        '孙丽华。13041097587<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B90D1410-F3DD-4348-B840-4B0AFB735513\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160322348</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '便家家超市。<br>' +
+        '朝阳区青年路华纺易城20号楼零七底商。<br>' +
+        '王女士58710578<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=EDD93B43-6136-4188-9428-2216C7D620AE\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317316</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '便利超市。<br>' +
+        '丰台区木樨园，才华长途汽车站北侧。<br>' +
+        '孟庆艳。13651118862<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=618A41B5-676F-411C-A732-A2793147F270\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311227</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '便利超市。<br>' +
+        '东城区王家园胡同路16号。辉腾商务酒店东侧。<br>' +
+        '苏广松。15501140032<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=7C081AA4-5766-4A92-BA9D-C44D2036F61C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303146</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '便利店<br>' +
+        '丰台区开阳里七区四号楼底商<br>' +
+        '米森13671106502<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=0F74D423-1EF1-41DF-AA2F-368BBE44570C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160304148</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '便利店<br>' +
+        '朝阳区甜水园东里2号商务中心。<br>' +
+        '熊翠平13641142850<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=208D68B2-9933-422C-A468-48E9B5493A24\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160304147</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '便利店<br>' +
+        '复兴路30号一层东门<br>' +
+        '李传州15011004300<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=DDB22691-4A5C-4E32-B294-DA5E7C18D6B1\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160312241</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '便利店。<br>' +
+        '朝阳区光明桥东，劲松路劲松8区836号楼底商<br>' +
+        '郝全超13001169112<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=00F6729C-5EDB-4B29-993F-6394C5717F56\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160322352</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '便利店。<br>' +
+        '朝阳区八里庄北里，314号楼底商。<br>' +
+        '包先生13520733246<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E6ED1D47-F5E3-45E5-AE97-03514D8B6C19\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160112031</b><br>' +
+        '<b>停用,3级,范嘉欣 签约</b><br>' +
+        '便民超市<br>' +
+        '学院南路乙12号院2号楼便民超市<br>' +
+        '马树栋15652388968<br>' +
+        '3级终端 范嘉欣 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=73645093-0E00-44DC-B0A3-C8A954259D49\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316291</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '便民超市。<br>' +
+        '东城区景泰东里一号楼旁。<br>' +
+        '郭先生67671603<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=2D171B6C-10C4-48D4-A690-E31E5C50A989\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160323356</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '便民超市。<br>' +
+        '朝阳区三元里北小街甲一号。<br>' +
+        '刘东明。84552280<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=585CA03C-B6EE-4317-82A5-93B1EB4F2801\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160322345</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '便民超市。<br>' +
+        '朝阳区甘露园南里2区14号楼对面。<br>' +
+        '龚女士57722755<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=67CF6184-D908-4CDD-8759-9B01F0837B9C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160312236</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '便民超市。<br>' +
+        '东城区广渠家园24号楼对面。<br>' +
+        '赵凯15010413172<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=AE9938F4-07B8-46D9-B7CC-D78F9F3A60BE\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315272</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '便民超市。<br>' +
+        '丰台区，地铁方庄站，紫芳园一区5号楼底商，小区北门口旁。<br>' +
+        '王女士87655578<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=CDF16859-1AE0-455D-8CF4-C6E7C99B7700\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160322339</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '便民超市水站<br>' +
+        '朝阳区朝阳路十里铺，都会国际西二门。。<br>' +
+        '白敏65563047<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=86AC7896-3D1F-4ABD-BC4B-1D9D914B383A\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310210</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '便民食品店。<br>' +
+        '朝阳区东大桥东里12号楼旁。朝外soho大厦对面。<br>' +
+        '王成全65025247<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=562570F9-46B2-4EA7-9F84-EC7739CD173D\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317313</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '博隆吉超市。<br>' +
+        '丰台区同仁东路与沙子口路交叉口。<br>' +
+        '刘先生67922400<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=08C75B02-4799-4CD6-A286-28B7BC9E03C2\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310204</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '彩票烟酒便利店。<br>' +
+        '朝阳区光华里一号楼临街。汉威大厦对面<br>' +
+        '李女士18811522885<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=43364D5B-9128-41DA-A61F-0BADA74EE4D3\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160312240</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '菜篮子社区便民服务店。<br>' +
+        '朝阳区，广和南里二条，二号楼底商。<br>' +
+        '郝先生15101599668<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=457B1305-4199-43DE-A7D0-C46074392225\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b></b><br>' +
+        '<b>启用,3级,梁娟 签约</b><br>' +
+        '测试<br>' +
+        '测试<br>' +
+        '测试测试<br>' +
+        '3级终端 梁娟 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=0F94AE2E-6A20-4F76-A2F7-CED17F3FFEFD\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b></b><br>' +
+        '<b>启用,3级,梁娟 签约</b><br>' +
+        '测试<br>' +
+        '测试<br>' +
+        '133133<br>' +
+        '3级终端 梁娟 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=D9830423-0543-436F-ACD8-7CA28A90D2C4\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317314</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '昌龙聚兴超市。<br>' +
+        '丰台区光彩体育馆北门对面。<br>' +
+        '蔡先生87271924<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=629378A7-6DE5-4808-BBE4-569496F8BD89\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305173</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '诚海便民店<br>' +
+        '丰台区开阳里三街三区对门<br>' +
+        '唐海诚83533069<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=BC00DABC-3B65-4D15-9BD6-C3AD4EB94512\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160112035</b><br>' +
+        '<b>启用,5级,范嘉欣 签约</b><br>' +
+        '诚信烟酒<br>' +
+        '高粱桥斜街乙40号上园饭店旁边<br>' +
+        '王楠15727382627<br>' +
+        '5级终端 范嘉欣 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=12DBE5B0-B6EA-4DD4-9F2A-9D35B3ADCB27\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313247</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '春雷宝喜百货便利超市<br>' +
+        '朝阳区大郊亭，红星美凯龙西侧。<br>' +
+        '郭英俊。13552015758<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9B9BE0D4-78AE-4FCC-8BB9-A68F2079F4CF\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160307183</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '大北宾馆南便民商店<br>' +
+        '朝阳区建国路南郎家园。大北宾馆南，旁边。<br>' +
+        '王雪15210906757<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B54F2819-60CB-4714-BE6C-A9F8768A75ED\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310214</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '东长安商务酒店内部超市<br>' +
+        '朝阳区白家庄路6号。<br>' +
+        '李娟13521386972<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=F25DF855-738A-42DD-B434-1DF918CCABC2\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160323360</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '东直香北便民食品店。<br>' +
+        '东城区香河园北里西门。<br>' +
+        '王女士13436657393<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=46F6BF68-392A-4494-9814-4301327B23CF\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160318320</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '福顺康便利超市。<br>' +
+        '朝阳区东石门村路一号。<br>' +
+        '刘女士15010815902<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=EE803E1C-62F6-4CF4-8A03-1D12D81CCEB6\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b></b><br>' +
+        '<b>启用,3级,安永祥 签约</b><br>' +
+        '高鑫超市<br>' +
+        '西三旗西南角（鲲鹏物业门口）<br>' +
+        '赵凤娇82713221<br>' +
+        '3级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=260BB9BC-ECC4-4FDE-8095-07B9AD10EAC9\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160325366</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '共飞烟酒经营部。<br>' +
+        '朝阳区望花路望京大厦东侧。<br>' +
+        '陈女士64725063<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=76774E50-1BF3-4ABE-9CD5-D18E7373D5A4\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160321336</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '共青团便民超市。<br>' +
+        '丰台区马家堡东路88号，北京同仁京苑医院旁。<br>' +
+        '王先生51455041<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=81D2B1CE-1615-4D7A-B73D-9E425353C47F\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160108022</b><br>' +
+        '<b>启用,5级,范嘉欣 签约</b><br>' +
+        '谷玥超市<br>' +
+        '西城区富国里1号楼<br>' +
+        '徐秀玲15810939818<br>' +
+        '5级终端 范嘉欣 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=1C1F4562-4ABC-423D-B02C-29F2EE20F906\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310216</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '关东店烟酒食品店。<br>' +
+        '朝阳区关东店北街10号楼三门临街。<br>' +
+        '荣雪锋65046380<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E446EB38-A450-4364-95FA-A012E6880377\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317317</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '光彩盛源烟酒店。<br>' +
+        '丰台区光彩路，光彩体育馆东门南侧。<br>' +
+        '蒋女士67234917<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=16B8F54F-5771-48BE-B341-30E5D79A1B38\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315280</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '桂兰烟酒超市<br>' +
+        '丰台区刘家窑桥北路东。<br>' +
+        '路阳67606054<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=EB370585-2085-4265-8D3E-2F6ECFD12584\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303135</b><br>' +
+        '<b>启用,1级,张立兴 签约</b><br>' +
+        '郭宇利民食品店<br>' +
+        '朝阳区团结湖南里7号楼旁。<br>' +
+        '郭宇01065071482<br>' +
+        '1级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=74847DAC-8F50-4CDF-8347-4F2DDFB9067A\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160322346</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '国华超市。<br>' +
+        '朝阳区大悦城北门。<br>' +
+        '李翠85523473<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=5BE5B744-3901-4A18-B83D-EBE5E139B24E\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315283</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '国源超市。<br>' +
+        '丰台区顺六条。<br>' +
+        '段敬微18911052696<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=77C4728F-C613-4D2E-A1A0-5829F056A44A\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160301095</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '果然新鲜食品店<br>' +
+        '朝阳区，东三环，亮马河大厦北门。<br>' +
+        '刘娟13801278715<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=DB846767-6966-44CC-AB62-C8A063F857F1\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317306</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '河源便利店。<br>' +
+        '丰台区石榴庄路，邮局宿舍楼旁。<br>' +
+        '何先生13520234319<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=01248421-9D70-43F7-853F-6B9CF7A27982\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160228079</b><br>' +
+        '<b>停用,1级,安永祥 签约</b><br>' +
+        '恒大冰泉超市<br>' +
+        '西三旗桥东300米（汉庭酒店底商）<br>' +
+        '冯术13910165895<br>' +
+        '1级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=61C5619A-E940-4DC9-84A1-F95E6742E8DB\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303141</b><br>' +
+        '<b>启用,1级,安永祥 签约</b><br>' +
+        '恒大冰泉同城便利店<br>' +
+        '青年湖北里8号底商<br>' +
+        '王海生84114122<br>' +
+        '1级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B5835242-429F-441D-A3CA-CB43DC5607B3\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160112032</b><br>' +
+        '<b>启用,2级,范嘉欣 签约</b><br>' +
+        '红黄蓝便利店<br>' +
+        '海淀区大柳树路5号院<br>' +
+        '王天桥13717861326<br>' +
+        '2级终端 范嘉欣 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=8DA1206D-CCB6-490E-8541-4FC70A50D0CC\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305172</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '红螺<br>' +
+        '北京南站地铁北出口<br>' +
+        '张波13439774667<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=8320DE61-23AE-4B56-BD67-6E36D989B5FB\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305160</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '红庙北里商店<br>' +
+        '朝阳区红庙北里35号楼旁。<br>' +
+        '邵良珍17701266552<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=4EEBD502-294E-44A6-B612-1988F71C9B15\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305164</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '红庙商店<br>' +
+        '朝阳区红庙北里63号楼旁。<br>' +
+        '陈正先13161990023<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=F17CFDC8-8E5F-4446-B4DB-6C9C9808668C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317303</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '鸿运广发超市。<br>' +
+        '丰台区顶秀欣园，东苑，2号楼底商。<br>' +
+        '林先生87615908<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B23A1FC6-7D8F-4C96-9B9A-D5D1EEE22F5C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313252</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '鸿运水果烟酒<br>' +
+        '丰台区马家堡西里26号<br>' +
+        '段彦锋13611311292<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=D1FB3D00-0420-44C4-9C39-A68E0C87FBCF\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310217</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '呼家楼地铁口食品店<br>' +
+        '朝阳区东三环呼家楼地铁站西南出口旁。<br>' +
+        '涂先生13261659617<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=D95217E6-3E0C-4D3B-A28B-1DCC24686DC5\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160312242</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '华丰缘商店。<br>' +
+        '朝阳区劲松西口劲松8区801号楼南侧。<br>' +
+        '袁女士13691093313<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=C8EFB6C7-496B-4551-9D10-C69B6CA96975\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160322342</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '华联超市。<br>' +
+        '朝阳区十里铺东恒时代3期16号楼底商。<br>' +
+        '杜先生56108516<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=38360490-5B10-494A-AB47-E8164524BD22\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160308184</b><br>' +
+        '<b>启用,3级,张立兴 签约</b><br>' +
+        '华贸中心对面货亭<br>' +
+        '朝阳区建国路华贸中心对面过街天桥南边。<br>' +
+        '李先生13260102286<br>' +
+        '3级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=339F7B99-D29E-40B0-B695-77C93D86B785\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305166</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '华泰商店<br>' +
+        '朝阳区呼家楼西里首创禧瑞都北门。<br>' +
+        '安成柱65068650<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=7DF214B6-1138-4E48-8A99-315F2C043C42\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309192</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '华腾北塘大厦超市。<br>' +
+        '朝阳区南磨房路华腾北塘商务大厦内。<br>' +
+        '王琳13121318808<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9D307B4C-AEFD-48DD-A364-3C24BB94AF99\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160314268</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '华威便民店。<br>' +
+        '朝阳区潘家园华威北里，32号楼对面<br>' +
+        '李女士67747320<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=53A2C4B5-8A7F-46BF-85B8-4E4A5B393ED8\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313248</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '华祥超市。<br>' +
+        '朝阳区大郊亭北街16号院，临街。<br>' +
+        '吴女士13021985575<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=D1CC4EC2-5439-4B2A-8AB5-FAD840F6B4BE\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160301098</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '华远九都汇便民蔬果店。<br>' +
+        '朝阳区天泽路华远九都汇西门<br>' +
+        '王卫军13683292655<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=7C43564E-3615-45CC-A908-C4A516A05136\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303124</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '欢欢便利店。<br>' +
+        '朝阳区团结湖北二条甲6号。<br>' +
+        '丁欢欢010-65828959<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=2459FED0-AAA7-4C0E-BE28-6340BAB3EB80\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311226</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '吉祥里便民超市。<br>' +
+        '朝阳区，吉市口东路，吉祥里203号楼底商。<br>' +
+        '李金国65521204<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=2E3C3647-2332-4CE8-A78C-AC504137E5D9\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309194</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '佳购超市<br>' +
+        '朝阳区首城国际5号楼底商。<br>' +
+        '窦琳57460941<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=EB0AD62E-F3A4-4F69-BDD2-7699143F88D7\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315274</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '佳佳乐超市。<br>' +
+        '丰台区，芳星园3区甲20号楼旁。<br>' +
+        '吴女士15110001295<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=CFA665D4-2856-4403-B628-2BBF374D61BF\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309198</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '家合超市<br>' +
+        '朝阳区广渠路33号院4号楼，底商。<br>' +
+        '郭琪琪87767022<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9529A27B-1241-4B29-A8A9-6BFB8560AAE1\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309202</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '家乐超市。<br>' +
+        '朝阳区，百子湾桥西50米。<br>' +
+        '王立波13717648020<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=3CB86CC9-0400-4049-910E-02E97C191EA6\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315283</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '嘉诚超市<br>' +
+        '丰台区东铁营横一条。嘉城商务中心旁。<br>' +
+        '杨平56223315<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E699861F-1134-41BA-8ED7-5542D955864B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160308188</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '建外便民商亭<br>' +
+        '朝阳区景辉街与针织路交叉口东南角。<br>' +
+        '刘丽15910889411<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=BD35152F-AD9A-4C6F-A15B-E9B0A7ADCEBC\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303138</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '杰强便民超市<br>' +
+        '朝阳区团结湖中路南一条甲3号<br>' +
+        '韩丽15811040583<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=887367F9-1061-4CAF-8582-C08E71778A48\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160229087</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '金栗圣干果<br>' +
+        '朝阳区麦子店街6号楼东侧临街<br>' +
+        '徐映15611839528<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=C82FF504-8CAE-4A7D-B717-3B07646017D8\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310205</b><br>' +
+        '<b>启用,3级,张立兴 签约</b><br>' +
+        '金三元便利店。<br>' +
+        '朝阳区光华路22号，韩国文化院旁。<br>' +
+        '张凤鸽13366333162<br>' +
+        '3级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=7C5EB361-4CE3-4788-B860-9C8005240712\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160308186</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '金三元便利店。<br>' +
+        '朝阳区朝阳路红庙路口东，公交总站旁。<br>' +
+        '王立刚13261319599<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=C260D555-135C-40F7-BF5E-1B5981C445BE\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160308187</b><br>' +
+        '<b>启用,3级,张立兴 签约</b><br>' +
+        '金三元便民店195号。<br>' +
+        '朝阳区光华路东方梅地亚中心对面，十字路口东南角。<br>' +
+        '李先生13439964905<br>' +
+        '3级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=F76E21B6-C508-4C36-BE5E-4BDFD1C4DAC5\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160312243</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '劲松4区小卖部。<br>' +
+        '朝阳区劲松中街，劲松4区409楼旁。<br>' +
+        '张立兴67783120<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=3C7DED38-6C91-4B1F-86E2-6B568C3CAB3B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303131</b><br>' +
+        '<b>启用,1级,张立兴 签约</b><br>' +
+        '进静祥旅馆文印社<br>' +
+        '朝阳区水锥子北里2号楼底商<br>' +
+        '屈凌云15210597492<br>' +
+        '1级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=C69DB322-CF12-4591-AF93-3F0762165DF9\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313255</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '精品烟酒超市<br>' +
+        '丰台区马家堡西里31号<br>' +
+        '刘敏13717689796<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=597CCACA-B442-492A-AA67-ACA57CEB4C8C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310215</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '聚德缘意商店<br>' +
+        '朝阳区核桃园北里30号。复地国际公寓东侧。<br>' +
+        '关女士65007404<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=CF1E6153-4516-4923-AEE7-98951B23A3A5\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317304</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '君盟宾馆商品部。<br>' +
+        '丰台区南顶巷路5号。<br>' +
+        '班久生13718572422<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=052E5ED1-F977-450D-8CF2-BD4D3D65B1DF\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316295</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '康洁平价超市。<br>' +
+        '东城区，定安里36号楼底，临街。<br>' +
+        '胡先生13693114716<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=A778B8DC-3760-4B20-9B8E-4BD295C6D3BA\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303127</b><br>' +
+        '<b>启用,1级,安永祥 签约</b><br>' +
+        '科兴便利店<br>' +
+        '华严北里15号楼<br>' +
+        '张玉慧13260356803<br>' +
+        '1级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=8106FCB4-115E-4509-95CA-983B74FFACAE\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305161</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '可欣商店<br>' +
+        '朝阳区延静西里18号楼下。<br>' +
+        '郑先顺13683093397<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=61893BBE-58D9-408F-9E77-73B97886BDBF\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160314263</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '乐达超市。<br>' +
+        '朝阳区十里河文化园北门。<br>' +
+        '郭云浩18600482821<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E91F6C1D-B99D-46F4-87D1-54D96A1669D6\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160307179</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '莉莉便利店。<br>' +
+        '朝阳区西大望路大望桥南，路东。<br>' +
+        '刘爱玲13693288176<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=F5E3C054-F66F-47C7-A561-AB02E3D1FBB5\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313249</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '利民食品店<br>' +
+        '丰台区马家堡西里4号<br>' +
+        '苏翠花67569780<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=A5ED8ACB-E736-4974-861D-05D752360C88\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305158</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '利民食品店<br>' +
+        '朝阳区延静西里6号楼旁。<br>' +
+        '李素荣65005237<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=AEA3A656-C25B-4861-8D68-A24FD1178399\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160229085</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '亮马综合超市<br>' +
+        '朝阳区麦子店枣营北里37号楼旁<br>' +
+        '张瑞姬18001183133<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=4BAEFE69-0F78-4E1F-A9FA-684B495D77B8\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160324363</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '邻友居便利店。<br>' +
+        '朝阳区芍药居31号楼底商。<br>' +
+        '杨斌18701545658<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=84FE848C-534D-4A5A-96CB-5519D04E9FCC\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160301091</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '龙飞益鑫食品店<br>' +
+        '朝阳区麦子店街道，枣营南里南门23号楼旁<br>' +
+        '李换君18701062139<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=8EFBF076-E75A-4DF6-86F3-3D7BAE321923\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160302105</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '龙江便利超市<br>' +
+        '朝阳区西坝河东里30号楼对面。<br>' +
+        '龙江13671135158<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9BDAB6CD-679A-49F4-89B9-DED79347621A\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315273</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '绿洲干洗食品店。<br>' +
+        '丰台区芳城东里8号楼下。<br>' +
+        '张新强。87621568<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=26C9D813-53D5-4AC8-85A4-E4ACE455FC99\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160312239</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '美江华食品店。<br>' +
+        '朝阳区劲松二区226号楼底商。<br>' +
+        '刘女士15810610601<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=7FA12224-9CEB-4E4B-9C2B-DAFF7E3DA390\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316288</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '美廉便民超市。<br>' +
+        '丰台区刘家窑南里13号楼东侧。<br>' +
+        '单先生13718814898<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=CE2D786C-A86C-4862-A314-7230CC745BFA\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317309</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '美菱平价超市。<br>' +
+        '丰台区5间楼一号，五岳宾馆对面。<br>' +
+        '李女士15201428477<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=C1D098C9-276A-463D-AD44-501D84D0CAE9\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160321332</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '名烟名酒。<br>' +
+        '丰台区西罗园2区北门对面。<br>' +
+        '张女士13552268946<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=60E77C7E-2128-4598-9FBD-784B62E25BF8\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160323358</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '名烟名酒。<br>' +
+        '东城区东直门外小街10号院。凯协宾馆斜对面。<br>' +
+        '孟先生13552610555<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=D6327D32-E061-4B22-A810-1544749A04A8\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303120</b><br>' +
+        '<b>启用,1级,安永祥 签约</b><br>' +
+        '名烟名酒超市<br>' +
+        '马甸东路南村5号<br>' +
+        '李淑珍53802968<br>' +
+        '1级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=96CB2886-DAD5-4552-9083-122C68AAB00F\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160324364</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '名烟名酒超市。<br>' +
+        '朝阳区芍药居甲2号院，12号楼底商。如家快捷酒店旁。<br>' +
+        '陈女士13693150688<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=0E12166B-CF0E-4CA5-99C9-6F243F0BEE60\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160308190</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '南里便民超市<br>' +
+        '丰台区北大街南里小区<br>' +
+        '郭章民13718661086<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=FB35B8B4-4D24-4312-8CDC-1F2684693F6F\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160320330</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '南新园小区西门商店。<br>' +
+        '朝阳区南新园小区西门旁。<br>' +
+        '李女士87321824<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=06D4A946-EE24-4F66-B22D-F355EBC7576D\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303132</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '鹏得利便利店<br>' +
+        '朝阳区北辰西路69号1单元102号<br>' +
+        '郑先生13621156720<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=5B621FF3-DB1F-47DC-A3F4-7D64DD5E41EB\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160325367</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '平安便利店。<br>' +
+        '朝阳区望京，南湖西园，银领国际东门。<br>' +
+        '郭女士13911933457<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=EAA10CB2-B178-4627-BAAC-B9C14D816937\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309203</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '平价便利店<br>' +
+        '朝阳区后现代城，百子元园6号楼东侧。<br>' +
+        '刘鱼15321038820<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=697358CB-6100-4FFF-B00A-2DF1520C5AF7\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160301092</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '平价超市<br>' +
+        '海淀区清河小营桥东方美都汽配城东门<br>' +
+        '韩丽娟13691109857<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E6E46514-6E23-46B6-B9B0-3D02DABF2853\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315278</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '蒲兴顺超市。<br>' +
+        '丰台区，蒲黄榆路17号。路西。<br>' +
+        '贾先生87614197<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=C48E05C1-A79C-4EB5-A8C3-CD4124101E37\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303137</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '如民心超市<br>' +
+        '青年湖东里17号楼<br>' +
+        '段继霞13522546189<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=F3025822-FA07-4F9C-97A1-80C9FC838243\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160304154</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '如意综合商店<br>' +
+        '朝阳区甜水园北街3号楼，底商<br>' +
+        '郑崇库13439539418<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=75465FB5-2B90-45B4-B23F-0A8D4D5D03D2\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303121</b><br>' +
+        '<b>启用,3级,张立兴 签约</b><br>' +
+        '润邦美洁商店。<br>' +
+        '朝阳区团结湖北二条小区4号楼西侧。<br>' +
+        '徐先生13552224315<br>' +
+        '3级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=C110DBD3-2129-4EE8-825A-F6FD7B5339A1\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160318324</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '赛洛城超市。<br>' +
+        '朝阳区百子湾赛洛城，414号楼底商。<br>' +
+        '李文信。87215651<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=3DF9A09C-0929-4E4E-8218-3A8E1AE74F91\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311225</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '三丰里烟酒店。<br>' +
+        '朝阳区，三丰里5号楼一门101。秀水河胡同。兆泰国际中心对面。<br>' +
+        '朱先生13717937361<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=67311C50-99CA-4B01-BFE1-93EC0B16F496\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315285</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '山水时尚酒店商品部。<br>' +
+        '丰台区成寿寺路19号，山水时尚酒店内。<br>' +
+        '顾玉江15011160540<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=1981D514-A245-4CFB-AD92-5453E9954AD7\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305165</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '社区便利店<br>' +
+        '朝阳区金台北街一号楼底商<br>' +
+        '李永富15210465578<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=F9D2A6E3-5421-4F64-9DF0-E110692A84FA\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160323355</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '社区便利店。<br>' +
+        '朝阳区三源里小区15号楼底商。<br>' +
+        '梁培荣。64685162<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=10566BAB-5AD2-49E9-83D7-6CA415BBFB2B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160323361</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '社区便民超市。<br>' +
+        '朝阳区左家庄北里一号。国维财富大厦旁。<br>' +
+        '刘先生64673559<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=287F2070-069D-48FA-A5DD-A20FF86E9F3B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310209</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '社区便民超市。<br>' +
+        '朝阳区东大桥路16号楼底商。<br>' +
+        '高旗帜65000735<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=5A958010-F637-4676-913E-18CB3E55A9B7\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317310</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '社区便民店。<br>' +
+        '丰台区横七条44号院，4号楼底商。<br>' +
+        '董先生67670370<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=00B7B5B2-BFF2-48FC-9A28-1FA73BDA1E98\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160302104</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '社区便民店。<br>' +
+        '朝阳区曙光西里16号楼旁。<br>' +
+        '张波13311297122<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=6B61F281-C7A6-4EA5-978E-22EE05B55398\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160302107</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '社区便民干果店。<br>' +
+        '朝阳区西坝河东里85号楼底商。<br>' +
+        '郭广朝13466411327<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=EA7349C7-F5AF-48EF-8BDE-E965A668EEA7\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160312238</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '社区超市。<br>' +
+        '朝阳区垂杨柳中里17号楼，垂杨柳医院对面。<br>' +
+        '刘先生13501072142<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=EF664474-6821-4079-8FA7-338206A5AF75\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315277</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '社区福利彩票便民店。<br>' +
+        '丰台区芳群园2区13号楼旁，小区西南门旁。<br>' +
+        '张先生67665542<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=C1C07156-C3D4-4EBC-976F-53CBCDC0147E\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160321335</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '社区商店。<br>' +
+        '丰台区西罗园3区3号楼下。<br>' +
+        '张霞51332948<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=126FD47E-FD4D-4269-9B99-4892BCBF5CEA\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317315</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '生活超市。<br>' +
+        '丰台区东罗园3号楼，旁<br>' +
+        '高喜萍67263748<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=F6A82B59-C136-4F04-AAAA-A8DECC6447F1\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160112028</b><br>' +
+        '<b>启用,2级,范嘉欣 签约</b><br>' +
+        '生活食品超市<br>' +
+        '西直门铁路巷5号楼<br>' +
+        '王丽13011187579<br>' +
+        '2级终端 范嘉欣 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=DD4A7A55-6B84-4615-9883-8B0B4319CD5D\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160314271</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '盛祥家兴超市。<br>' +
+        '朝阳区劲松6区610号楼下。<br>' +
+        '张娟。67705071<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9539EFA6-6AC4-4D14-AEEA-82F31770D3D6\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303128</b><br>' +
+        '<b>启用,1级,张立兴 签约</b><br>' +
+        '食品店<br>' +
+        '朝阳区六里屯北里一号楼下。<br>' +
+        '赵先生01065944621<br>' +
+        '1级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=65594854-BD75-4CB5-B848-0AF7C5805630\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160320326</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '世纪好又多超市。<br>' +
+        '朝阳区垡头翠城馨园105号楼底商。<br>' +
+        '马先生67201586<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E32AB769-D31A-426E-8B1B-62E8D6BBCFAF\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160318323</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '世纪华联超市。<br>' +
+        '朝阳区百子湾家园a区109号楼底商。<br>' +
+        '苗女士87210288<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=1CB19080-DE04-4F67-9A89-807ABC01F841\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160312235</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '世纪华联超市。<br>' +
+        '东城区广渠门，忠实里西区7号楼底商。<br>' +
+        '殷先生83152636<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=242DFBDF-0644-40BE-AB2F-22D379AE45B4\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315286</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '世纪华联超市。<br>' +
+        '丰台区成寿寺路31号院一号楼底商。首大耳鼻喉科医院北侧。<br>' +
+        '王先生87628767<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=5057C9A0-3686-4F21-80D0-6DFC4D56D065\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160314266</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '世纪华联超市。<br>' +
+        '朝阳区，潘家园弘善家园304号楼底商。<br>' +
+        '刘先生15101024699<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=C6532B16-A025-4388-86A2-3390EC40B079\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160320328</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '世纪华联超市垡头店。<br>' +
+        '朝阳区垡头翠城馨园333号楼对面。<br>' +
+        '王先生67490834<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=675DE54E-31F6-4CBA-B875-4F62E5B1183F\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160318319</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '世纪华联超市金海店。<br>' +
+        '朝阳区大郊亭桥东，金海商富中心b座一层内<br>' +
+        '张先生56216193<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=ED486F6F-9041-465F-87F8-C6A8E2DF7F79\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160308189</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '世贸大厦b座超市<br>' +
+        '朝阳区建国路世贸大厦b座。<br>' +
+        '王红娟13641071410<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E8C49A1F-5B1C-457F-9217-A21B51D0753B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160312234</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '双花园烟酒食品店。<br>' +
+        '朝阳区双井双花园西里7号楼东侧。<br>' +
+        '房平13552184696<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=38663D3D-5B56-4FDF-BF7E-26CD1F4EEAF1\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309204</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '双井东院便利店。<br>' +
+        '朝阳区双井东院2号楼底。<br>' +
+        '邱阳15944827575<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=3D61F2B8-5237-4B9B-83CD-9E0B8F99C74B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309195</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '双井东院超市。<br>' +
+        '朝阳区双井东院一号楼3单元102室<br>' +
+        '王静17710281752<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=0080395A-57E8-4F85-81B2-9DF102AB6BCE\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313247</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '水果食品超市。<br>' +
+        '朝阳区南磨房。工业大学宿舍楼旁，恒安中医院对面。<br>' +
+        '雷女士15910672572<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B2B0A736-EEF7-48A4-A7C5-37D6EDDD6EAA\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311229</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '顺达商店。<br>' +
+        '朝阳区新东路。南三里屯37号楼底商，世贸广场对面。<br>' +
+        '杨淑娜。15801201705<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=56E812D4-BB68-4759-9212-9BCD6B0A53CB\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316300</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '顺祥超市。<br>' +
+        '东城区永外，桃杨路11号。<br>' +
+        '冯女士52667354<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=855975A5-8982-4132-A8A5-83882F782B3B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160304153</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '顺心便利店<br>' +
+        '丰台区东亚三环3号楼<br>' +
+        '吴凤13716452113<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=4DB47E6A-4B08-4FF8-805A-F2DB2BBD447B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160318321</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '思奔特便利购。<br>' +
+        '朝阳区百子湾东里205号楼底商。<br>' +
+        '王先生85912875<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=92B40BAF-C669-4B94-B8D5-1FD4789F474B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315284</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '四方景园便利店。<br>' +
+        '丰台区，方庄桥南四方景园4区3号楼旁。<br>' +
+        '李女士87647618<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=BF5DCE23-649A-471B-BD3E-BA9B1F7D3881\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160318325</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '四惠地铁站超市。<br>' +
+        '朝阳区四惠站地铁口a口。<br>' +
+        '张先生13910856462<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E12A086D-CF33-4F47-9DEA-5C658931CAF1\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160304149</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '松林园食品店<br>' +
+        '朝阳区甜水园东里23号楼前临街商铺。<br>' +
+        '付红01065007539<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=19BF2F92-2625-415C-B91D-A2BE9982DE9C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309197</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '随e购便利店。<br>' +
+        '朝阳区广渠路33号院3号楼，底商01。<br>' +
+        '王宇13439186340<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=699C6B98-0DBF-4935-8B25-3FD14380AE93\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160307180</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '随缘兴隆超市<br>' +
+        '朝阳区，世贸大厦东胡同。<br>' +
+        '杨爱萍13241094284<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B02B3CB7-B902-4A40-86AB-F8DFA9958DC5\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309199</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '天鹏荣超市。<br>' +
+        '朝阳区百子湾路西口，美豪富邦酒店对面。<br>' +
+        '杨桂琴67710524<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=10EBFDEF-D2B7-4196-AC1B-BE69050DB933\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313261</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '天缘食品店。<br>' +
+        '朝阳区，武胜东路，松榆里第六小区，17号楼旁，小区东门。<br>' +
+        '李军13522922829<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=11B2238D-692F-41B2-9699-8973BF1E7A49\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160304151</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '甜水园食品店<br>' +
+        '朝阳区，甜水园西里2号楼底商。<br>' +
+        '杨玉刚01065012895<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=302B9984-3F89-40C6-825A-92869F32A6B8\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160108021</b><br>' +
+        '<b>启用,2级,范嘉欣 签约</b><br>' +
+        '文芳百货店<br>' +
+        '赵登禹路2号<br>' +
+        '王庆凤13146917786<br>' +
+        '2级终端 范嘉欣 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=92AB1359-97B7-4240-81D0-DF76187C8E69\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310208</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '文霞烟酒店。<br>' +
+        '朝阳区东大桥路39号楼底商临街。<br>' +
+        '李年龙85617472<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=A98B0540-1472-4784-A08E-ED67FC0E209D\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160112027</b><br>' +
+        '<b>停用,3级,范嘉欣 签约</b><br>' +
+        '五栋便民超市<br>' +
+        '车公庄大街9号院五栋108(路东)<br>' +
+        '李儒华88395157<br>' +
+        '3级终端 范嘉欣 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=DBC448D5-90F6-40BC-9FF9-6246BCE70A95\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313260</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '武胜东里便利店。<br>' +
+        '朝阳区，松榆北路武胜东里南门旁<br>' +
+        '庞杰13261450943<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=F98E970B-605E-48B5-8456-382505F29B9C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316297</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '物客美超市。<br>' +
+        '东城区琉璃井路38号，汉威酒店旁。<br>' +
+        '江先生15601305557<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=64A9C7AE-B9DB-45C2-A20C-2581EBDF57ED\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160117041</b><br>' +
+        '<b>停用,3级,范嘉欣 签约</b><br>' +
+        '西直门人民医院东门报亭<br>' +
+        '西直门人民医院东门报亭<br>' +
+        '许庭13520881235<br>' +
+        '3级终端 范嘉欣 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E1A6423C-EB0D-415E-A558-CF0622FFC3E2\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160112036</b><br>' +
+        '<b>启用,5级,范嘉欣 签约</b><br>' +
+        '西直门社科院小卖铺<br>' +
+        '西直门南大街22号门口<br>' +
+        '任年军13601068744<br>' +
+        '5级终端 范嘉欣 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=2F924DCC-8853-4AF5-B0E4-B4ABE42B8F9F\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160314265</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '喜佳惠超市<br>' +
+        '朝阳区十里河，弘善家园309号楼一层307。<br>' +
+        '李磊18614097389<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=5EB70629-B9A1-4053-B940-9DA983A5A4D5\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160314264</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '鲜香果蔬店。<br>' +
+        '朝阳区，十里河，弘善家园101号楼南侧，对面。<br>' +
+        '吴女士13552120364<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=994170B8-50E8-4F20-B5B0-CACD1B15BA5D\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317311</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '香烟食品店。<br>' +
+        '丰台区顺五条嘉利华宾馆旁。<br>' +
+        '吴先生13146807918<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=98FF19D3-A3EB-4E66-BF7F-CC8FDF368CA7\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303126</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '小卖部<br>' +
+        '龙翔路5号楼小卖部<br>' +
+        '吴玉兰13522112086<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=18A2B516-DEB8-4397-8ADC-662309DD0797\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313250</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '小雨便利店<br>' +
+        '丰台区马家堡西里14号<br>' +
+        '郭华东13240100558<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=0211900A-D2E3-456E-8D53-0167B5DED64A\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316292</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '鑫利来烟酒超市。<br>' +
+        '东城区景泰路景泰西里11号楼下，东铁营一中旁。<br>' +
+        '李丽芳87288085<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=A8C40240-7675-422B-BF33-BB0EEA94B7C4\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317307</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '鑫鑫便利店。<br>' +
+        '丰台区石榴园南里16号楼底商。<br>' +
+        '张春叶13718576896<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=AE2A3CCA-B83E-445A-BDCD-AA12895890B8\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311222</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '信诚烟酒店。<br>' +
+        '朝阳区建外二道街，赛特南街。<br>' +
+        '邵女士13641288681<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=A9594BAE-FD49-4B92-9528-A1F334371F9A\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160304155</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '兴隆超市<br>' +
+        '朝阳区六里屯中街，公园大道对面<br>' +
+        '李斌18500331368<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=5C832AD2-86D0-4ABE-AF3F-D85100A42446\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160318322</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '星美瑞超市。<br>' +
+        '朝阳区百子湾东里224号楼四门底商<br>' +
+        '史先生53612754<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=883E3C91-B48F-41BF-A57E-CAF2811FC3C3\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309196</b><br>' +
+        '<b>启用,5级,安永祥 签约</b><br>' +
+        '叙缘快捷酒店<br>' +
+        '。。。<br>' +
+        '霍雅丽。。。。<br>' +
+        '5级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=28C7D984-928B-4ED5-91CA-EA15E604434A\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160320327</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟草便民商店。<br>' +
+        '朝阳区垡头金蝉北里21号院7号楼底商。<br>' +
+        '苏女士67380755<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=CAD2E167-D364-4B2F-9471-0D104E5CAAF9\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303139</b><br>' +
+        '<b>启用,5级,安永祥 签约</b><br>' +
+        '烟酒茶<br>' +
+        '青年湖北里5号（盛元香江酒店旁）<br>' +
+        '孙道影13671351765<br>' +
+        '5级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E80D9F7F-AC50-4633-83C4-6897CFB90DFA\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316293</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒茶超市。<br>' +
+        '丰台区定安路刘家窑南里3号楼下临街。<br>' +
+        '李吉87682282<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=46684C65-E0F1-46E9-9D27-8450AB2906E1\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313251</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒茶超市。<br>' +
+        '朝阳区百子湾路29号。大鸭梨饭店对面。<br>' +
+        '孙女士67715634<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=90020FC7-C4E9-4B46-90ED-429C181B5A25\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160317308</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒茶超市。<br>' +
+        '丰台区榴乡路石榴园北里22号楼底商，临街。<br>' +
+        '李光林13699277538<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=A2A9D85D-1111-439E-8C7D-763664E06374\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310206</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒茶超市。<br>' +
+        '朝阳区秀水街南口，贵友大厦北侧。<br>' +
+        '刘女士13051085368<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=D85FEA74-335A-4C7F-9A9A-5446BDE9AFCE\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311219</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒茶商行。<br>' +
+        '朝阳区建外大街永安里地铁口，艺嘉时尚大厦东厅。<br>' +
+        '吴青雄13552205109<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=F7622795-FB6A-4722-9801-715E6C0401FB\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311220</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒茶行<br>' +
+        '朝阳区永安西里10号院，双子座大厦后面，国泰宾馆旁<br>' +
+        '胡先生65667598<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=2B3754CC-8EC0-46B1-A675-E079B36E099B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160318320</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒茶行超市。<br>' +
+        '朝阳区，百子湾西里金泰先锋小区426号楼底商。<br>' +
+        '赵女士13691348988<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=A68AB559-9BDC-4693-98C3-36257A05147F\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303118</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '烟酒超市<br>' +
+        '北土城西路16号<br>' +
+        '苏涛13693019678<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=2F0A3225-D598-45E3-9A2E-A770DA210E46\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160222062</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '烟酒超市<br>' +
+        '中央财经大学对面（学院南路）<br>' +
+        '杨晓霞62220713<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=71A86595-C5F9-4A79-9507-DDC6C9FA6FF5\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160318318</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒超市<br>' +
+        '朝阳区大郊亭桥东，商务大酒店旁。<br>' +
+        '周女士13366677668<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=91CA32AD-0FB8-47EA-A345-F6CE065B594F\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160324363</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒超市。<br>' +
+        '朝阳区西坝河北里16号楼，底商。<br>' +
+        '吴女士13718347955<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=0119B664-BD03-4A00-839C-31F158A52558\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316289</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒超市。<br>' +
+        '东城区安乐林路与景泰路交叉口。东北角。<br>' +
+        '赵先生18793949828<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=26136F1A-9E63-43E9-9E8B-8A3A96AE82BB\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160322344</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒超市。<br>' +
+        '朝阳区十里铺，爱这城3期2号楼底商。<br>' +
+        '薛晶65576993<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=5355BB3F-B29C-44A1-8320-B5C26CACB00D\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160322349</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒超市。<br>' +
+        '朝阳区朝阳路十里铺南区6号楼底商。<br>' +
+        '王先生15901437401<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=693A330D-CB22-4461-8730-1C30DDC760B9\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310213</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒超市。<br>' +
+        '朝阳区工体东路9号楼底商。沱沱公社对面。<br>' +
+        '杨辉13121537787<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9124A313-6BDA-4252-93DA-EB8B4A113E9C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160323354</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒超市。<br>' +
+        '朝阳区，新源街18号，京味斋旁边。<br>' +
+        '陈先生18210360130<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9D85349A-F8A3-4B01-BF07-8DA032847FF8\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316290</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒超市。<br>' +
+        '东城区永外，景泰路景泰小学旁。<br>' +
+        '曲先生18310062027<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=A545677B-0BF4-4DF6-AC43-C016AC9BD433\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160314270</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒超市。<br>' +
+        '朝阳区潘家园东里18号楼底商。武汉大厦斜对面。<br>' +
+        '赵女士13439093057<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B7922CA7-F2CD-4760-B0A9-42872EE2C333\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315276</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒超市。<br>' +
+        '丰台区芳星园3区11号楼底商。<br>' +
+        '朱女士13691261988<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=D008E798-DDE1-4252-B349-3D54BD41F7D9\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160321333</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒超市。<br>' +
+        '东城区，西革新里110号，德奇宾馆旁。<br>' +
+        '吴德胜53328650<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=DECF097C-A6CA-4BBF-AB08-2C136E11C12F\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309200</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒海洋<br>' +
+        '朝阳区百子湾路32号院2号楼底商。<br>' +
+        '龚兴文58263307<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9AABE588-0B63-4337-9D9D-6021F84496FB\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160222063</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '烟酒平价超市<br>' +
+        '学院南路39号平房<br>' +
+        '张雅苏62289756<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=5901873C-7102-4745-A791-8A0FEDF718A2\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310207</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒商店。<br>' +
+        '朝阳区，秀水街东大桥路59号楼底商。<br>' +
+        '李万民13718778912<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=742FF5FE-C023-4CE9-BEE0-58540BE7A87B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303134</b><br>' +
+        '<b>启用,1级,张立兴 签约</b><br>' +
+        '烟酒商贸<br>' +
+        '朝阳区姚家园路，白家庄东里26号楼底商。<br>' +
+        '张爱丽17710867089<br>' +
+        '1级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=830228AE-FF92-4988-AA5B-C04197FC16C5\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160302101</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒商行<br>' +
+        '朝阳区三元西桥。时间国际大厦8号楼北区一层。<br>' +
+        '孙康健13911694443<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=88D8BBE2-75FA-43C1-9C95-88DC20FD61EE\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313257</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒商行。<br>' +
+        '朝阳区，百子湾南2路，东柏街，天之骄子东门4—08<br>' +
+        '康俊13521108993<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=6DC6908C-B1AE-4A1E-A792-D4E96E15AE35\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160322353</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒商行。<br>' +
+        '朝阳区八里庄北里54号院。北京耀中国际学校北侧。<br>' +
+        '丁先生13521408991<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=7398750B-C836-433F-B0A6-58C7D1072725\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160222066</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '烟酒食品百货超市<br>' +
+        '大钟寺甲21号四道口路<br>' +
+        '王娜13311282822<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B1D658DD-3049-43A6-ABCE-7F38A3E2CB40\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310218</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒食品超市。<br>' +
+        '朝阳区关东店北街。向军南里8号楼对面。马华拉面南侧。<br>' +
+        '夏女士65007044<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=4549AF70-FABB-4DCF-B411-C2DB1F4CA22B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303140</b><br>' +
+        '<b>启用,1级,张立兴 签约</b><br>' +
+        '烟酒食品店<br>' +
+        '朝阳区团结湖路17号楼底商。十字路口西南角。<br>' +
+        '张喜林13126980480<br>' +
+        '1级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=EE990C16-A459-43B7-B6B3-B5D81EB5B7DE\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316294</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒食品店<br>' +
+        '丰台区定安路，定安东里13号楼下。<br>' +
+        '白先生18701264088<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=FB9B6753-8AD4-4482-A261-905393F438EF\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316301</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '烟酒销售部。<br>' +
+        '东城区安乐林路，京坛医院斜对面。<br>' +
+        '吴女士87200167<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=59DB0E9A-C218-48CF-8C65-075D79BAA366\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160316298</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒专卖。<br>' +
+        '东城区永外大街，永外地铁站。<br>' +
+        '陈先生13241310362<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=6CBBB4E3-1D15-4DE5-A476-845C6831F8FC\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305162</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '烟酒专营<br>' +
+        '朝阳区红庙北里73号。<br>' +
+        '任飞13521638237<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=7216C10F-D626-4630-BA08-0C9A9B605DB4\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305170</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '央视北门报亭<br>' +
+        '朝阳区朝阳路央视裤衩楼北门。<br>' +
+        '王女士13161823134<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=248E82E0-FBAF-4B22-B8E9-591F8CEFD1A6\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160321335</b><br>' +
+        '<b>启用,3级,张立兴 签约</b><br>' +
+        '洋桥大中电器商亭<br>' +
+        '丰台区，南三环洋桥东南角。<br>' +
+        '郝女士13011113670<br>' +
+        '3级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=5BB3AAE4-A63B-42E4-9737-E0B3C65F780C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305174</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '一家店超市<br>' +
+        '丰台区右安门外玉林东里三区5号<br>' +
+        '孙英63296219<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B3A94A9B-1371-4C41-9E0C-D49F8E9E3FC3\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305159</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '英才商店<br>' +
+        '朝阳区红庙北里36号楼旁。<br>' +
+        '纪英春65860335<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=42185FE7-BD8A-4E59-8D1F-8CA3B94B7591\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160322347</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '营利便利店。<br>' +
+        '朝阳区青年路姚家园，青年路29号院0号楼对面<br>' +
+        '赵女士13126646698<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=DC1F755F-637F-4958-8BE1-9493A72A5E98\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303130</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '赢得利便利店<br>' +
+        '朝阳区民族园路9号院甲1号楼南侧1层1号<br>' +
+        '黄女士15321623100<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=06DEB0C1-8B4A-4E7C-8A83-10F4B84B2465\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160304157</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '永辉便民超市<br>' +
+        '朝阳区六里屯路18号院旁<br>' +
+        '耿先生13146000848<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=AD7C75AA-DAB3-434C-847B-FF0F36DF429D\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160301096</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '永利康食品店<br>' +
+        '朝阳区东方东路5号。美国使馆对面。<br>' +
+        '王永13693106144<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=63AB697B-6019-4571-804B-02E194B00C67\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160321334</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '永胜烟酒。<br>' +
+        '丰台区，西罗园北路西罗园4区，北门旁<br>' +
+        '张先生67218065<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=3437F7D6-949F-4765-A825-1A3FCC853E5C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313256</b><br>' +
+        '<b>启用,3级,杨子秋 签约</b><br>' +
+        '优选便利店<br>' +
+        '丰台区搜宝商务中心2号底商<br>' +
+        '张肖南56024145<br>' +
+        '3级终端 杨子秋 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E5E79D26-5E76-449D-AA45-49D86A564053\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303125</b><br>' +
+        '<b>启用,1级,张立兴 签约</b><br>' +
+        '邮局报亭<br>' +
+        '朝阳区团结湖路7号。<br>' +
+        '荆文芳15001391580<br>' +
+        '1级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=AEDF6C00-A16A-420D-BAD9-AB8859797354\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310211</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '邮局报亭51274。<br>' +
+        '朝阳区东大桥路口东，国安宾馆对面。<br>' +
+        '邵军红65003681<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=81E8BF6C-A3A3-4B29-9907-C4A31FF7AE5B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311228</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '邮政报亭11117<br>' +
+        '东城区春秀路南口，永利国际大厦对面，红绿灯西北角。<br>' +
+        '孔祥瑞。18801355855<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=A9E01E71-0B20-4CF7-AE2A-137F26D35B1C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311231</b><br>' +
+        '<b>启用,3级,张立兴 签约</b><br>' +
+        '邮政报亭51030。<br>' +
+        '朝阳区工体北路11号，三里屯soho斜对面。<br>' +
+        '张先生13693276982<br>' +
+        '3级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B89E5C27-75B3-4A08-9943-A36F3519C429\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305169</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '邮政报亭51041。<br>' +
+        '朝阳区东三环京广桥东。路南。泰康金融大厦对面。<br>' +
+        '李保伟。13261822129<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=CDCB0AB5-A64F-4850-9730-578C89CFFF8D\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303119</b><br>' +
+        '<b>启用,1级,张立兴 签约</b><br>' +
+        '邮政报亭51139。<br>' +
+        '朝阳区东三环长虹桥，十字路口东南角。<br>' +
+        '甄艺超13522289238<br>' +
+        '1级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=B2CD5E21-FADD-4853-B4B6-8D5E99F4F52A\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160310212</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '邮政报亭51203。<br>' +
+        '朝阳区东大桥地铁a口旁，蓝岛大厦对角。<br>' +
+        '马六莲13681228138<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=7FD0D172-6580-4C07-B2D5-F4B7E6D3F13C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303114</b><br>' +
+        '<b>启用,1级,张立兴 签约</b><br>' +
+        '邮政报亭51327<br>' +
+        '朝阳区农展馆南路嘉隆国际大厦南十字路口。<br>' +
+        '王祥15010947802<br>' +
+        '1级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=E7F5BBBD-4CB6-4568-BCD2-A56FFF55AEC3\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303115</b><br>' +
+        '<b>启用,1级,张立兴 签约</b><br>' +
+        '邮政报亭51328<br>' +
+        '朝阳区农展馆南路，瑞辰国际中心旁。<br>' +
+        '孔凡喜18310769828<br>' +
+        '1级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=6482410F-C007-45C0-B308-A3A326769D99\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311232</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '邮政报亭51349。<br>' +
+        '朝阳区工体北路，中宇大厦前边。三里屯繁华地段。<br>' +
+        '韩先生13611137707<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9D894624-C9F3-4F60-917A-D311AB406630\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313258</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '友缘便利店。<br>' +
+        '朝阳区松榆里小区25号楼旁。<br>' +
+        '郭先生13641046660<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=F61ADBA3-022A-4C56-983E-9C4923D54D0F\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303122</b><br>' +
+        '<b>启用,4级,安永祥 签约</b><br>' +
+        '豫西平超市<br>' +
+        '马甸南路北口月季园甲7号<br>' +
+        '张军辉62384932<br>' +
+        '4级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=9C61FB77-014B-44FF-B75E-36204BF44917\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160305168</b><br>' +
+        '<b>启用,1级,张立兴 签约</b><br>' +
+        '元吉便利店。<br>' +
+        '朝阳区呼家楼西里南街五巷7号院。呼家楼中学对面。<br>' +
+        '张燕华65920382<br>' +
+        '1级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=2F0A90FB-3980-4D35-AECA-385CF423C343\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311223</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '月河烟酒食品店。<br>' +
+        '朝阳区建外月河街3号楼，临街，长富宫酒店南侧。<br>' +
+        '刘汉军65683108<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=186F6A77-3809-480A-8743-E922618B585B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160301097</b><br>' +
+        '<b>启用,1级,安永祥 签约</b><br>' +
+        '月亮河商店<br>' +
+        '北三环中路43号院板三楼负一层<br>' +
+        '古天银62374704<br>' +
+        '1级终端 安永祥 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=46BA0CE6-59AC-44AF-A7B4-E102EDE1B42B\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160312237</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '云啊青食品店。<br>' +
+        '朝阳区双井桥垂杨柳北里一号楼旁。<br>' +
+        '王先生15910688952<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=5344ADD3-F5AF-4F48-A4D3-8BB28D74A237\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160315282</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '浙客隆超市。<br>' +
+        '丰台区，南三环顺三条。横一条小区20号楼对面。<br>' +
+        '向中先87674943<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=D5DD0D63-EB36-44E9-9F3A-4D7D1FCFEA78\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160323359</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '智霖华食品店。<br>' +
+        '东城区，东直门北大街香河园乙5号院。<br>' +
+        '陈女士13466638039<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=018B6175-3ABD-475C-9465-2398C105311C\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160308185</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '智宇泰食品店。<br>' +
+        '朝阳区朝阳路柴家湾5号楼4单元旁。<br>' +
+        '葛白静15811373891<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=40DA2F5E-EABF-48A4-BE15-A6AADD0C6808\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160309201</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '中国烟酒<br>' +
+        '朝阳区百子湾路16号。百子湾桥往西200米。<br>' +
+        '刘强87770426<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=6DC5A860-18BC-4195-A58A-899AAAAF804E\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160311224</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '中国烟酒。<br>' +
+        '朝阳区雅宝路西口，东方圣元大厦，楼下<br>' +
+        '陈亚13001018851<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=39127A3A-4B2C-4E06-AE30-594D25655555\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160314267</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '肿瘤医院旁便利店。<br>' +
+        '朝阳区潘家园南里17号院北门旁，肿瘤医院北侧。紧邻三环边儿。<br>' +
+        '孙岩15101617293<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=A52C05CB-CEA8-4E88-A4E2-66B5653198E9\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160313245</b><br>' +
+        '<b>启用,5级,张立兴 签约</b><br>' +
+        '自选超市。<br>' +
+        '朝阳区西大望路27号。南磨房城市管理中心对面。<br>' +
+        '侯女士15726619325<br>' +
+        '5级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=740D971F-9F5A-4FA9-840F-E0A964492A05\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160321337</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '自选超市。<br>' +
+        '丰台区，临泓路。苗圃西里2号楼底商。<br>' +
+        '杨先生18511857287<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=D0C58C34-3289-4D26-8404-222BFE5D1861\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>', '<b>Z20160303116</b><br>' +
+        '<b>启用,4级,张立兴 签约</b><br>' +
+        '自选商店。<br>' +
+        '朝阳区农展南里14号。<br>' +
+        '刘长燕18511846543<br>' +
+        '4级终端 张立兴 签约<br>' +
+        '<hr>销售数据统计↓(闭环状态近三次)<br>' +
+        '销售率：<span style="color: red">,,</span><br>' +
+        '毛利润：<span style="color: red">,,</span><br>' +
+        '<hr><a href="javascript:void(0);" onclick="winopen(\'/mis/index.php/Terminal/amapedit?id=BF4387A4-EBF7-4835-9DA8-4DCECF8FC3D1\',\'_BLACK\',\'800\',\'550\')" style="color: blue; font-weight: bold; ">--->编辑<---</a>',];
+
+
+    var infoWindow = new AMap.InfoWindow({offset:new AMap.Pixel(0,-30)});
+    for(var i= 0,marker;i<lnglats.length;i++){
+        var marker=new AMap.Marker({
+            position:lnglats[i],
+            map:map,
+            icon: new AMap.Icon({
+                image: terminalstatuss[i]
+            })
+        });
+        marker.content=shows[i];
+        marker.on('click',markerClick);
+        marker.emit('click',{target:marker});
+    }
+    function markerClick(e){
+        infoWindow.setContent(e.target.content);
+        infoWindow.open(map, e.target.getPosition());
+    }
+    map.setFitView();
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<include file="Public:header"/>
+
+<?php if(I('get.regiontype')=='rg') { ?>
+<include file="Public:menu" active="园区漫游"/>
+<?php }elseif (I('get.regiontype')=='sn') { ?>
+<include file="Public:menu" active="专项能源"/>
+<?php } ?>
+
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">综合信息</h1>
+    </header>
+    <div class="content">
+           <div class="weui-cells" style="width: 90%;margin: 10px auto;">
+               <div class="weui-cell" style="font-size: 12px;font-weight: bolder;color: #9b9b9b;">
+                   <div class="weui-cell__bd">类别 </div>
+                   <div class="weui-cell__bd">当日消耗</div>
+                   <div class="weui-cell__bd">当月消耗</div>
+                   <div class="weui-cell__bd">当年消耗</div>
+               </div>
+               <div class="weui-cell" style="font-size: 13px;color: #393939;">
+                   <div class="weui-cell__bd">用水量</div>
+                   <div class="weui-cell__bd">{$Result.m_ysl}<span style="font-size: 12px;font-weight: bold;">T</span></div>
+                   <div class="weui-cell__bd">{$Result.ysl}<span style="font-size: 12px;font-weight: bold;">T</span></div>
+                   <div class="weui-cell__bd">{$Result.y_ysl}<span style="font-size: 12px;font-weight: bold;">T</span></div>
+               </div>
+               <div class="weui-cell" style="font-size: 13px;color: #393939;">
+                   <div class="weui-cell__bd">用电量 </div>
+                   <div class="weui-cell__bd">{$Result.m_dgl}<span style="font-size: 12px;font-weight: bold;">Kwh</span></div>
+                   <div class="weui-cell__bd">{$Result.dgl}<span style="font-size: 12px;font-weight: bold;">Kwh</span></div>
+                   <div class="weui-cell__bd">{$Result.y_dgl}<span style="font-size: 12px;font-weight: bold;">Kwh</span></div>
+               </div>
+               <div class="weui-cell" style="font-size: 13px;color: #393939;">
+                   <div class="weui-cell__bd">用暖量 </div>
+                   <div class="weui-cell__bd">{$Result.m_ynl}<span style="font-size: 12px;font-weight: bold;">Kwh</span></div>
+                   <div class="weui-cell__bd">{$Result.ynl}<span style="font-size: 12px;font-weight: bold;">Kwh</span></div>
+                   <div class="weui-cell__bd">{$Result.y_ynl}<span style="font-size: 12px;font-weight: bold;">Kwh</span></div>
+               </div>
+               <div class="weui-cell" style="font-size: 13px;color: #393939;">
+                   <div class="weui-cell__bd">用冷量 </div>
+                   <div class="weui-cell__bd">{$Result.m_yll}<span style="font-size: 12px;font-weight: bold;">Kwh</span></div>
+                   <div class="weui-cell__bd">{$Result.yll}<span style="font-size: 12px;font-weight: bold;">Kwh</span></div>
+                   <div class="weui-cell__bd">{$Result.y_yll}<span style="font-size: 12px;font-weight: bold;">Kwh</span></div>
+               </div>
+           </div>
+
+            <!--最近一周能源花费表-->
+            <div class="weui-cells" style="width: 90%;margin: 10px auto;">
+                <iframe frameborder=0 width=100% height=300 marginheight=0 marginwidth=0 scrolling=no
+                    src='__CONTROLLER__/func_energytrend?rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Think.get.snname}'></iframe>
+            </div>
+            <div class="weui-cells" style="width: 90%;margin: 11px auto;">
+                <div class="weui-cell" style="font-size: 12px;font-weight: bolder;color: #9b9b9b;">
+                    <div class="weui-cell__bd">设备点 </div>
+                    <div class="weui-cell__bd">报警时间</div>
+                    <div class="weui-cell__bd">能源类别</div>
+                    <div class="weui-cell__bd">报警等级</div>
+                    <div class="weui-cell__bd">详情</div>
+                </div>
+                <volist name="Alarm_data" id="vo" offset="1" length='10'>
+                    <a href="__CONTROLLER__/alarmdetail?rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Tink.get.snname}&pre_rgn_atpid={$Think.get.pre_rgn_atpid}&alm_atpid={$vo.alm_atpid}" class="weui-cell weui-cell_access external" style="font-size: 10px;color: #393939;">
+                       <div class="weui-cell_bd" style="width: 20%;">{$vo.rgn_name}</div>
+                       <div class="weui-cell_bd" style="width: 25%;">{$vo.alm_datetime}</div>
+                       <div class="weui-cell_bd" style="width: 20%;">{$vo.alm_category}</div>
+                       <div class="weui-cell_bd" style="margin-left:-17px;width: 20%;">{$vo.alm_level}</div>
+                        <div class="weui-cell__ft" style="margin-left: 10px;"></div>
+                    </a>
+                </volist>
+                <empty name="Alarm_data">
+                    <div class="weui-cell empty">
+                        <span href="#" class="weui-cell_bd external" style="width:120px;font-size:14px;margin: 10px auto;color: #00a0e9;margin-left: 40%;">
+                            暂无数据
+                        </span>
+                    </div>
+                </empty>
+                <notempty name="Alarm_data">
+                    <div class="weui-cell">
+                        <a href="#" class="weui-cell_bd external" style="width:80px;font-size:12px;margin: 10px auto;margin-left: 42%;" onclick=alarm_fun();>查看更多</a>
+                    </div>
+                </notempty>
+            </div>
+
+    </div>
+</div>
+
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<include file="Public:footer"/>
+
+
+<script>
+    function alarm_fun()
+    {
+        var rgn_atpid=GetQueryString('rgn_atpid');
+        var regiontype=GetQueryString('regiontype');
+        var snname=GetQueryString('snname');
+        var  pre_rgn_atpid=GetQueryString("pre_rgn_atpid");
+
+        if(pre_rgn_atpid==null)
+        {
+            pre_rgn_atpid = rgn_atpid;
+        }
+        var html="__MODULE__/RgAlarmConfirm/index"+"?rgn_atpid="+rgn_atpid+"&regiontype="+regiontype+"&snname="+snname+"&pre_rgn_atpid="+pre_rgn_atpid;
+        window.location.href=html;
+        e.preventDefault();
+    }
+
+</script>
+<script>
+    function getAlarm(rgn_atpid){
+
+        var url="__MODULE__/RgAlarmConfirm?rgn_atpid="+rgn_atpid+'&pre_rgn_atpid={$Think.get.rgn_atpid}';
+        if('{$Think.get.regionlevel}' == 'devicepoint'){
+            window.location.href=url;
+        }else{
+            window.location.href=url;
+        }
+    }
+</script>
+<script>
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  decodeURI(r[2]); return null;
+    }
+</script>
+
+

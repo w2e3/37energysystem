@@ -1,0 +1,70 @@
+
+
+    <div class="modal-dialog" style="width: 80%;z-index: 10;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" class="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">数据搜索</h4>
+            </div>
+            <div class="modal-body">
+                <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">设备点名称:</label><div class="col-sm-4"><input id="rgn_name" value="{$Think.get.rgn_name}" type="text" class="form-control" style="width: 200px;" ></div>
+                        <label class="col-sm-2 control-label">能源类别:</label>
+                        <div class="col-sm-4">
+                            <select id="alm_category" class="chosen-select2" >
+                                <option value="">&nbsp;</option>
+                                <option value="水能" >水能</option>
+                                <option value="电能" >电能</option>
+                                <option value="冷能">冷能</option>
+                                <option value="暖能">暖能</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">报警开始时间:</label>
+                        <div class="col-sm-4">
+                            <input id="alm_datetime_start" type="text" class="form-control" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width: 200px;" >
+                        </div>
+                        <label class="col-sm-2 control-label">报警结束时间:</label>
+                        <div class="col-sm-4">
+                            <input id="alm_datetime_end" type="text" class="form-control" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width: 200px;" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">报警等级:</label>
+                        <div class="col-sm-4">
+                            <select id="alm_level" class="chosen-select2">
+                                <option value="">&nbsp;</option>
+                                <option value="轻度报警" >轻度报警</option>
+                                <option value="中度报警" >中度报警</option>
+                                <option value="重度报警">重度报警</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">事件详情:</label><div class="col-sm-4"><input id="alm_content" type="text" class="form-control" style="width: 200px;" ></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="clear">清除</button>
+                <button type="button" data-dismiss="modal" class="btn btn-default" id="closeadv">关闭</button>
+                <button type="button" data-dismiss="modal" id="sys_dlg_search_submit" class="btn btn-primary">搜索</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script type="text/javascript">
+    $('#clear').on('click', function() {
+        $.each($("#sys_dlg_form :input"), function( key, value ) {
+            if ($(value).attr('id') != null && $(value).attr('id') != "") {
+                var tid = $(value).attr('id');
+                $("#" + tid).val("");
+                $("#" + tid).trigger("chosen:updated");
+            }
+        });
+    });
+    $(".chosen-select2").chosen({disable_search_threshold: 10, search_contains: false,width:'200px'});
+</script>

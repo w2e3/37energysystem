@@ -1,0 +1,119 @@
+﻿﻿<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">数据编辑</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+                <div>
+                    <!--<ul class="nav nav-tabs">-->
+                        <!--&lt;!&ndash;<li class="active"><a data-toggle="tab" href="#tab-1">基础信息</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li class=""><a data-toggle="tab" href="#tab-2">球员/领队信息</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li class=""><a data-toggle="tab" href="#tab-3">裁判信息</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li class=""><a data-toggle="tab" href="#tab-4">保险信息</a></li>&ndash;&gt;-->
+                    <!--</ul>-->
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        厂家名称：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="cpy_name" type="text" value="{$data.cpy_name}" class="form-control" required>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        公司邮编：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="cpy_code" type="text" value="{$data.cpy_code}" class="form-control" pattern="^[0-9]\d{5}(?!\d)$" required>
+                                        <font color="red">邮编格式</font>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <!--<span style="color:#FF0033;">*</span>-->
+                                        <span style="color:red;">*</span>
+                                        联系人：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="cpy_linkman" type="text"  value="{$data.cpy_linkman}" class="form-control" required>
+                                        <!--<p class="help-block" id="u_name_p" style="color: #CD0200;display:none">必填项！</p>-->
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        <!--<span style="color:#FF0033;">*</span>-->
+                                        <span style="color:red;">*</span>
+                                        联系方式：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="cpy_linkphone" type="text"  value="{$data.cpy_linkphone}" class="form-control" required>
+                                        <!--<p class="help-block" id="u_name_p" style="color: #CD0200;display:none">必填项！</p>-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <!--<span style="color:#FF0033;">*</span>-->
+                                        邮箱：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="cpy_email" type="text"  value="{$data.cpy_email}" class="form-control" pattern="^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$" >
+                                        <font color="red">邮箱格式</font>
+                                        <!--<p class="help-block" id="u_name_p" style="color: #CD0200;display:none">必填项！</p>-->
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        <!--<span style="color:#FF0033;">*</span>-->
+                                        办公邮编：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="cpy_officecode" type="text"  value="{$data.cpy_officecode}" class="form-control" pattern="^[0-9]\d{5}(?!\d)$" >
+                                        <font color="red">邮编格式</font>
+                                        <!--<p class="help-block" id="u_name_p" style="color: #CD0200;display:none">必填项！</p>-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <!--<span style="color:#FF0033;">*</span>-->
+                                        企业地址：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="cpy_location" type="text"  value="{$data.cpy_location}" class="form-control" >
+                                        <!--<p class="help-block" id="u_name_p" style="color: #CD0200;display:none">必填项！</p>-->
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        <!--<span style="color:#FF0033;">*</span>-->
+                                        所在城市：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="cpy_city" type="text"  value="{$data.cpy_city}" class="form-control" >
+                                        <!--<p class="help-block" id="u_name_p" style="color: #CD0200;display:none">必填项！</p>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input name="cpy_atpid" type="hidden" value="{$data.cpy_atpid}" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            <button type="button" name="bc" id="sys_dlg_submit" class="btn btn-primary">保存</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+$(function () {
+    $(".js-switch").each(function(){
+        new Switchery(this, {color: '#1AB394'});
+    });
+    $(".file-pretty").prettyFile();
+    $("#role").chosen({disable_search_threshold: 6, search_contains: true,width:'750px'});
+    $(".chosen-select").chosen({disable_search_threshold: 6, search_contains: true,width:'284px'});
+});
+</script>

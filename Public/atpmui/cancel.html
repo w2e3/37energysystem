@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>账号绑定</title>
+    <link rel="stylesheet" href="lib/style/example.css">
+    <link rel="stylesheet" href="lib/style/zepto.min.js">
+    <link rel="stylesheet" type="text/css" href="lib/style/weui.css">
+    <!--<link rel="stylesheet" href="lib/style/main.css" type="text/css">-->
+    <link rel="stylesheet" type="text/css" href="lib/style/example.js">
+    <script src="lib/style/jquery.js"></script>
+</head>
+
+<body ontouchstart="">
+<div class="container" id="container">
+    <div class="page grid js_show">
+        <div class="page__bd" style="height:100%">
+            <div class="weui-panel weui-panel_access">
+                <div class="weui-panel__hd">账号绑定信息</div>
+                <div class="weui-panel__bd">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><img src="lib/icon/info-active.png" alt=""
+                                                        style="width:20px;margin-right:5px;display:block"></div>
+                        <div class="weui-cell__bd">
+                            <p>账号</p>
+                        </div>
+                        <div class="weui-cell__ft">管理员</div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><img src="lib/icon/related-active.png" alt=""
+                                                        style="width:20px;margin-right:5px;display:block"></div>
+                        <div class="weui-cell__bd">
+                            <p>绑定方式</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            钉钉绑定
+                        </div>
+                    </div>
+                    <label class="weui-agree">
+                        <span class="weui-agree__text">
+                            注:在手机钉钉登录会自动绑定,如不需绑定钉钉,请点击解除(下次通过钉钉登录会重新输入账号密码)。
+                        </span>
+                    </label>
+
+                    <div class="weui-btn-area">
+                        <a class="weui-btn weui-btn_primary" id="unrelated">解除钉钉绑定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-tabbar">
+            <a href="#"
+               class="weui-tabbar__item weui-bar__item_on">
+                <img src="lib/icon/info-active.png" alt="" class="weui-tabbar__icon">
+
+                <p class="weui-tabbar__label">个人资料</p>
+            </a>
+            <a href="#"
+               class="weui-tabbar__item">
+                <img src="lib/icon/timetabletoday.png" alt="" class="weui-tabbar__icon">
+
+                <p class="weui-tabbar__label">今日课程</p>
+            </a>
+            <a href="#"
+               class="weui-tabbar__item">
+                <img src="lib/icon/managecenter.png" alt="" class="weui-tabbar__icon">
+
+                <p class="weui-tabbar__label">管理中心</p>
+            </a>
+            <a href="#"
+               class="weui-tabbar__item">
+                <img src="lib/icon/leavemanage.png" alt="" class="weui-tabbar__icon">
+
+                <p class="weui-tabbar__label">请假申请</p>
+            </a>
+            <a href="#"
+               class="weui-tabbar__item">
+                <img src="lib/icon/qrcode.png" alt="" class="weui-tabbar__icon">
+
+                <p class="weui-tabbar__label">扫码签到</p>
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+//        $("#unrelated").click(function () {
+//            $.ajax({
+//                url: "/xterm/index.php/Frontend/Related/indexDing.html",
+//                type: "POST",
+//                success: function (data) {
+//                    if (data.code == 'ok') {
+//                        alert("操作成功");
+//                        location.reload();
+//                    }
+//                }
+//            });
+//        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>楼层首页</title>
+    <link rel="stylesheet" href="__PUBLIC__/vendor/diy_component/yuanqu_page/css/reset.css">
+    <link rel="stylesheet" href="__PUBLIC__/vendor/diy_component/yuanqu_page/css/house1.css">
+    <style>
+        .alarmshui_current {  left: 36%;  top: 36%;  position: absolute;  }
+        .alarmshui1_current {  left: 49%;  top: 26%;  position: absolute;  }
+        .alarmshui2_current {  left: 26%;  top: 36%;  position: absolute;  }
+        .alarmshui3_current {  left: 36%;  top: 36%;  osition: absolute;  }
+        .alarmshui4_current {  left: 46%;  top: 36%;  position: absolute;  }
+        .alarmshui5_current {  left: 56%;  top: 36%;  position: absolute;  }
+        .alarmshui6_current {  left: 66%;  top: 36%;  position: absolute;  }
+        .alarmshui7_current {  left: 58%;  top: 3%;  position: absolute;  }
+        .alarmshui8_current {  left: 32%;  top: 46%;  position: absolute;  }
+
+        .alarmshui {  left: 36%;  top: 43%;  position: absolute;  }
+        .alarmshui1 {  left: 49%;  top: 33%;  position: absolute;  }
+        .alarmshui2 {  left: 26%;  top: 43%;  position: absolute;  }
+        .alarmshui3 {  left: 36%;  top: 43%;  osition: absolute;  }
+        .alarmshui4 {  left: 46%;  top: 43%;  position: absolute;  }
+        .alarmshui5 {  left: 56%;  top: 43%;  position: absolute;  }
+        .alarmshui6 {  left: 66%;  top: 43%;  position: absolute;  }
+        .alarmshui7 {  left: 58%;  top: 10%;  position: absolute;  }
+        .alarmshui8 {  left: 32%;  top: 53%;  position: absolute;  }
+    </style>
+</head>
+<body>
+
+<div class="full_building">
+    <notempty name="bjdata[0].dev_name">
+        <div class="unusual1 unusual" style="z-index:9999;">
+            <p>表类型：{$bjdata[0].dev_name}</p>
+            <p>报警等级：{$bjdata[0].alm_level}</p>
+            <p>报警信息：{$bjdata[0].alm_content}</p>
+            <p>设备采集号：{$bjdata[0].dev_acquisition}</p>
+            <p>设备位置点：{$bjdata[0].rgn_name}</p>
+            <p>报警确认状态： <button onclick="dodetail()">待确认</button>&nbsp;<button onclick="domiss()">关闭</button></p>
+        </div>
+    </notempty>
+
+    <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/1/1-2F.png" width="60%" style="margin-top: 50px">
+
+    <if condition="($Think.get.rgn_atpidcurrent neq null ) and ($Think.get.rgn_atpidcurrent eq $sbdstatus[0]['dev_regionid'])"><img class="alarmimg alarmshui_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" /></if>
+    <a href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$sbdstatus[0].dev_regionid}"
+       class="alarmimg alarmshui"
+       data-mtpis='<p>型号:{$sbdstatus[0].dev_name}</p><p>采集号:{$sbdstatus[0].dev_acquisition}</p><p>报警数目:<font color="red">{$sbdstatus[0].alarmcount}</font>个</p>'>
+        <if condition="($sbdstatus[0]['dev_name'] eq '电表')"><if condition="$sbdstatus[0]['alarmcount'] neq '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png" /></if></if>
+        <if condition="($sbdstatus[0]['dev_name'] eq '水表')"><if condition="$sbdstatus[0]['alarmcount'] neq '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png" /></if></if>
+        <if condition="($sbdstatus[0]['dev_name'] eq '冷暖表')"><if condition="$sbdstatus[0]['alarmcount'] neq '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png" /></if></if>
+    </a>
+    <if condition="($Think.get.rgn_atpidcurrent neq null ) and ($Think.get.rgn_atpidcurrent eq $sbdstatus[1]['dev_regionid'])"><img class="alarmimg alarmshui1_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" /></if>
+    <a href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$sbdstatus[1].dev_regionid}"
+       class="alarmimg alarmshui1"
+       data-mtpis='<p>型号:{$sbdstatus[1].dev_name}</p><p>采集号:{$sbdstatus[1].dev_acquisition}</p><p>报警数目:<font color="red">{$sbdstatus[1].alarmcount}</font>个</p>'>
+        <if condition="($sbdstatus[1]['dev_name'] eq '电表')"><if condition="$sbdstatus[1]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png" /></if></if>
+        <if condition="($sbdstatus[1]['dev_name'] eq '水表')"><if condition="$sbdstatus[1]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png" /></if></if>
+        <if condition="($sbdstatus[1]['dev_name'] eq '冷暖表')"><if condition="$sbdstatus[1]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png" /></if></if>
+    </a>
+    <if condition="($Think.get.rgn_atpidcurrent neq null ) and ($Think.get.rgn_atpidcurrent eq $sbdstatus[2]['dev_regionid'])"><img class="alarmimg alarmshui2_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" /></if>
+    <a href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$sbdstatus[2].dev_regionid}"
+       class="alarmimg alarmshui2"
+       data-mtpis='<p>型号:{$sbdstatus[2].dev_name}</p><p>采集号:{$sbdstatus[2].dev_acquisition}</p><p>报警数目:<font color="red">{$sbdstatus[2].alarmcount}</font>个</p>'>
+        <if condition="($sbdstatus[2]['dev_name'] eq '电表')"><if condition="$sbdstatus[2]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png" /></if></if>
+        <if condition="($sbdstatus[2]['dev_name'] eq '水表')"><if condition="$sbdstatus[2]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png" /></if></if>
+        <if condition="($sbdstatus[2]['dev_name'] eq '冷暖表')"><if condition="$sbdstatus[2]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png" /></if></if>
+    </a>
+    <if condition="($Think.get.rgn_atpidcurrent neq null ) and ($Think.get.rgn_atpidcurrent eq $sbdstatus[3]['dev_regionid'])"><img class="alarmimg alarmshui3_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" /></if>
+    <a href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$sbdstatus[3].dev_regionid}"
+       class="alarmimg alarmshui3"
+       data-mtpis='<p>型号:{$sbdstatus[3].dev_name}</p><p>采集号:{$sbdstatus[3].dev_acquisition}</p><p>报警数目:<font color="red">{$sbdstatus[3].alarmcount}</font>个</p>'>
+        <if condition="($sbdstatus[3]['dev_name'] eq '电表')"><if condition="$sbdstatus[3]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png" /></if></if>
+        <if condition="($sbdstatus[3]['dev_name'] eq '水表')"><if condition="$sbdstatus[3]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png" /></if></if>
+        <if condition="($sbdstatus[3]['dev_name'] eq '冷暖表')"><if condition="$sbdstatus[3]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png" /></if></if>
+    </a>
+    <if condition="($Think.get.rgn_atpidcurrent neq null ) and ($Think.get.rgn_atpidcurrent eq $sbdstatus[4]['dev_regionid'])"><img class="alarmimg alarmshui4_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" /></if>
+    <a href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$sbdstatus[4].dev_regionid}"
+       class="alarmimg alarmshui4"
+       data-mtpis='<p>型号:{$sbdstatus[4].dev_name}</p><p>采集号:{$sbdstatus[4].dev_acquisition}</p><p>报警数目:<font color="red">{$sbdstatus[4].alarmcount}</font>个</p>'>
+        <if condition="($sbdstatus[4]['dev_name'] eq '电表')"><if condition="$sbdstatus[4]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png" /></if></if>
+        <if condition="($sbdstatus[4]['dev_name'] eq '水表')"><if condition="$sbdstatus[4]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png" /></if></if>
+        <if condition="($sbdstatus[4]['dev_name'] eq '冷暖表')"><if condition="$sbdstatus[4]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png" /></if></if>
+    </a>
+    <if condition="($Think.get.rgn_atpidcurrent neq null ) and ($Think.get.rgn_atpidcurrent eq $sbdstatus[5]['dev_regionid'])"><img class="alarmimg alarmshui5_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" /></if>
+    <a href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$sbdstatus[5].dev_regionid}"
+       class="alarmimg alarmshui5"
+       data-mtpis='<p>型号:{$sbdstatus[5].dev_name}</p><p>采集号:{$sbdstatus[5].dev_acquisition}</p><p>报警数目:<font color="red">{$sbdstatus[5].alarmcount}</font>个</p>'>
+        <if condition="($sbdstatus[5]['dev_name'] eq '电表')"><if condition="$sbdstatus[5]['alarmcount'] neq '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png" /></if></if>
+        <if condition="($sbdstatus[5]['dev_name'] eq '水表')"><if condition="$sbdstatus[5]['alarmcount'] neq '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png" /></if></if>
+        <if condition="($sbdstatus[5]['dev_name'] eq '冷暖表')"><if condition="$sbdstatus[5]['alarmcount'] neq '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png" /></if></if>
+    </a>
+    <if condition="($Think.get.rgn_atpidcurrent neq null ) and ($Think.get.rgn_atpidcurrent eq $sbdstatus[6]['dev_regionid'])"><img class="alarmimg alarmshui6_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" /></if>
+    <a href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$sbdstatus[6].dev_regionid}"
+       class="alarmimg alarmshui6"
+       data-mtpis='<p>型号:{$sbdstatus[6].dev_name}</p><p>采集号:{$sbdstatus[6].dev_acquisition}</p><p>报警数目:<font color="red">{$sbdstatus[6].alarmcount}</font>个</p>'>
+        <if condition="($sbdstatus[6]['dev_name'] eq '电表')"><if condition="$sbdstatus[6]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png" /></if></if>
+        <if condition="($sbdstatus[6]['dev_name'] eq '水表')"><if condition="$sbdstatus[6]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png" /></if></if>
+        <if condition="($sbdstatus[6]['dev_name'] eq '冷暖表')"><if condition="$sbdstatus[6]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png" /></if></if>
+    </a>
+    <if condition="($Think.get.rgn_atpidcurrent neq null ) and ($Think.get.rgn_atpidcurrent eq $sbdstatus[7]['dev_regionid'])"><img class="alarmimg alarmshui7_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" /></if>
+    <a href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$sbdstatus[7].dev_regionid}"
+       class="alarmimg alarmshui7"
+       data-mtpis='<p>型号:{$sbdstatus[7].dev_name}</p><p>采集号:{$sbdstatus[7].dev_acquisition}</p><p>报警数目:<font color="red">{$sbdstatus[7].alarmcount}</font>个</p>'>
+        <if condition="($sbdstatus[7]['dev_name'] eq '电表')"><if condition="$sbdstatus[7]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png" /></if></if>
+        <if condition="($sbdstatus[7]['dev_name'] eq '水表')"><if condition="$sbdstatus[7]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png" /></if></if>
+        <if condition="($sbdstatus[7]['dev_name'] eq '冷暖表')"><if condition="$sbdstatus[7]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png" /></if></if>
+    </a>
+    <if condition="($Think.get.rgn_atpidcurrent neq null ) and ($Think.get.rgn_atpidcurrent eq $sbdstatus[8]['dev_regionid'])"><img class="alarmimg alarmshui8_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" /></if>
+    <a href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$sbdstatus[8].dev_regionid}"
+       class="alarmimg alarmshui8"
+       data-mtpis='<p>型号:{$sbdstatus[8].dev_name}</p><p>采集号:{$sbdstatus[8].dev_acquisition}</p><p>报警数目:<font color="red">{$sbdstatus[8].alarmcount}</font>个</p>'>
+        <if condition="($sbdstatus[8]['dev_name'] eq '电表')"><if condition="$sbdstatus[8]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png" /></if></if>
+        <if condition="($sbdstatus[8]['dev_name'] eq '水表')"><if condition="$sbdstatus[8]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png" /></if></if>
+        <if condition="($sbdstatus[8]['dev_name'] eq '冷暖表')"><if condition="$sbdstatus[8]['alarmcount'] != '0'"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png" /><else/><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png" /></if></if>
+    </a>
+</div>
+
+<div class="list-right">
+
+    <a class="energy_message" target="_self">
+        <if condition="$b1_flr_8 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F_ceng8F'"><p class="fl">8F（报警总数：{$b1_flr_8}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid481CB98D-885E-4316-AB13-0D4394AA3A95';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F1_ceng8F'"><p class="fl">8F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid481CB98D-885E-4316-AB13-0D4394AA3A95';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b1_flr_7 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F1_ceng7F'"><p class="fl">7F（报警总数：{$b1_flr_7}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid5F12DA1F-B476-476E-804D-78956D6EC1D5';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F1_ceng7F'"><p class="fl">7F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid5F12DA1F-B476-476E-804D-78956D6EC1D5';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b1_flr_6 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F1_ceng6F'"><p class="fl">6F（报警总数：{$b1_flr_6}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidBD82C01A-DB01-4918-BDCF-8BE8BB6A9837';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F1_ceng6F'"><p class="fl">6F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidBD82C01A-DB01-4918-BDCF-8BE8BB6A9837';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b1_flr_5 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F1_ceng5F'"><p class="fl">5F（报警总数：{$b1_flr_5}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid8DEB922A-DA0C-443E-A36E-7494A19D28E7';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F1_ceng5F'"><p class="fl">5F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid8DEB922A-DA0C-443E-A36E-7494A19D28E7';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b1_flr_3 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F1_ceng4F'"><p class="fl">4F（报警总数：{$b1_flr_4}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid99BB14E0-C216-4780-830B-CF896EBFFE7E';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F1_ceng4F'"><p class="fl">4F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid99BB14E0-C216-4780-830B-CF896EBFFE7E';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b1_flr_3 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F1_ceng3F'"><p class="fl">3F（报警总数：{$b1_flr_3}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid7E36DAD8-2A4C-423F-A80C-5FB3D2630DED';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F1_ceng3F'"><p class="fl">3F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid7E36DAD8-2A4C-423F-A80C-5FB3D2630DED';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b1_flr_2 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F1_ceng2F'"><p class="fl">2F（报警总数：{$b1_flr_2}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid7007AC27-6A45-4C1A-894D-0F41EAC2DF49';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F1_ceng2F'"><p class="fl">2F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid7007AC27-6A45-4C1A-894D-0F41EAC2DF49';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b1_flr_1 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F1_ceng1F'"><p class="fl">1F（报警总数：{$b1_flr_1}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid3FF2D862-1E6E-400A-A9BB-278A072F1793';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F1_ceng1F'"><p class="fl">1F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid3FF2D862-1E6E-400A-A9BB-278A072F1793';preventBubble();">更多</span></header>
+        </if>
+    </a>
+</div>
+
+<div class="total1">
+    <header><p class="fl">1#当月能耗&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 8px;"><?php echo '刷新时间:'.date('G:i:s').'(频率60秒)'; ?></span> </p><span class="fr zhankai"></span></header>
+    <div class="totalcontent clearfix">
+        <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/building.png" class="fl totalhouse">
+        <div class="rightcontent fr">
+            <ul>
+                <li><i class="green"></i>电能消耗：{$zydl}Kwh</li>
+                <li><i class="blue"></i>水能消耗：{$zysl}T</li>
+                <li><i class="orange"></i>暖能消耗：{$zynl}Kwh</li>
+                <li><i class="qing"></i>冷能消耗：{$zyll}Kwh</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<include file="Parkoverview:alarm_icon_description"/>
+
+<script src="__PUBLIC__/vendor/diy_component/yuanqu_page/js/jquery-1.7.2.js"></script>
+<script src="__PUBLIC__/vendor/diy_component/yuanqu_page/js/mTips.js"></script>
+<script>
+    setInterval(function(){
+        location.reload();
+    },60*1000);
+
+    function dodetail() {
+        window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid7007AC27-6A45-4C1A-894D-0F41EAC2DF49&rgn_atpidcurrent={$bjdata[0].rgn_atpid}';
+    }
+
+    function domiss() {
+        $(".unusual1").remove();
+    }
+
+    function preventBubble(event){
+        var e=arguments.callee.caller.arguments[0]||event; //若省略此句，下面的e改为event，IE运行可以，但是其他浏览器就不兼容
+        if (e && e.stopPropagation) {
+            e.stopPropagation();
+        } else if (window.event) {
+            window.event.cancelBubble = true;
+        }
+    }
+</script>
+</body>
+</html>

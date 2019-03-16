@@ -1,0 +1,24 @@
+﻿<div id="checkdvbox" style="overflow:auto; ">
+    <foreach name="rgarr" item="dvdetail"  >
+        <div>
+
+
+                    <if condition="$dvdetail['alarmcount'] neq '0'">
+                        <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"  />
+                        <else/>
+                        <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"  />
+                    </if>
+
+            型号:<span>{$dvdetail.dev_name}</span>&nbsp;&nbsp;&nbsp;采集号:{$dvdetail.dev_acquisition}&nbsp;&nbsp;&nbsp;报警数目:<font color="red">{$dvdetail.alarmcount}</font>个
+            <a  href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$dvdetail.dev_regionid}">
+               <button style="background-color:green;display: inline-block;">点击查看详情</button>
+
+            </a>
+       </div>
+
+
+
+    </foreach>
+
+
+</div>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>楼层首页</title>
+    <link rel="stylesheet" href="__PUBLIC__/vendor/diy_component/yuanqu_page/css/reset.css">
+    <link rel="stylesheet" href="__PUBLIC__/vendor/diy_component/yuanqu_page/css/house1.css">
+    <style>
+
+        .alarmdian1_current {  left: 43%;  top: 8%;  position: absolute;  }
+        .alarmdev1_current {  left: 56%;  top: 26%;  position: absolute;  }
+        .alarmdev2_current {  left: 54%;  top: 31%;  position: absolute;  }
+        .alarmdev3_current {  left: 36%;  top: 12%;  position: absolute;  }
+        .alarmdev4_current {  left: 41%;  top: 36%;  position: absolute;  }
+        .alarmdev5_current {  left: 44%;  top: 36%;  position: absolute;  }
+        .alarmdev6_current {  left: 46%;  top: 36%;  position: absolute;  }
+        .alarmdev7_current {  left: 50%;  top: 36%;  position: absolute;  }
+        .alarmdev8_current {  left: 53%;  top: 4%;  position: absolute;  }
+        .alarmdev9_current {  left: 56%;  top: 42%;  position: absolute;  }
+        .alarmdev10_current {  left: 60%;  top: 36%;  position: absolute;  }
+        .alarmdev11_current {  left: 62%;  top: 36%;  position: absolute;  }
+        .alarmdev12_current {  left: 64%;  top: 36%;  position: absolute;  }
+        .alarmdev13_current {  left: 66%;  top: 4%;  position: absolute;  }
+
+        .alarmdian1 {  left: 36%;  top: 16%;  position: absolute;  }
+        .alarmdev1 {  left: 47%;  top: 25%;  position: absolute;  }
+        .alarmdev2 {  left: 50%;  top: 26%;  position: absolute;  }
+        .alarmdev3 {  left: 49%;  top: 29%;  position: absolute;  }
+        .alarmdev4 {  left: 41%;  top: 43%;  position: absolute;  }
+        .alarmdev5 {  left: 44%;  top: 43%;  position: absolute;  }
+        .alarmdev6 {  left: 46%;  top: 43%;  position: absolute;  }
+        .alarmdev7 {  left: 50%;  top: 43%;  position: absolute;  }
+        .alarmdev8 {  left: 53%;  top: 10%;  position: absolute;  }
+        .alarmdev9 {  left: 56%;  top: 48%;  position: absolute;  }
+        .alarmdev10 {  left: 60%;  top: 43%;  position: absolute;  }
+        .alarmdev11 {  left: 62%;  top: 43%;  position: absolute;  }
+        .alarmdev12 {  left: 64%;  top: 43%;  position: absolute;  }
+        .alarmdev13 {  left: 66%;  top: 10%;  position: absolute;  }
+    </style>
+</head>
+<body>
+
+<div class="full_building">
+
+
+    <!--  当前层报警信息霍尼韦尔不可操作-->
+
+
+
+    <notempty name="$bjdata[0].dev_name">
+        <div class="unusual1 unusual" style="z-index:9999;">
+            <p>表类型：{$bjdata[0].dev_name}</p>
+            <p>报警等级：{$bjdata[0].alm_level}</p>
+            <p>报警信息：{$bjdata[0].alm_content}</p>
+            <p>设备采集号：{$bjdata[0].dev_acquisition}</p>
+            <p>设备位置点：{$bjdata[0].rgn_name}</p>
+            <if condition="$Think.session.is_hnwl eq ''">
+                <p>报警确认状态： <button onclick="dodetail()">待确认</button>&nbsp;<button onclick="domiss()">关闭</button></p>
+            </if>
+        </div>
+    </notempty>
+
+
+
+
+
+
+
+    <!-- 这里一层用的二层的图到时在替换-->
+
+    <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/2/2C-3F.png" width="60%" style="margin-top: 50px">
+
+
+
+
+
+    <!--别的页面跳转过来该设备的的时候在该设备上面加一个向下的图标-->
+    <foreach name="sbdstatus" item="dvdetail"  >
+
+        <!--一个电表对应多个设备点-->
+        <if condition="$key == 'dian'">
+            <?php if (in_array($currentid, $dvdetail['rgnids'])) { ?>
+            <img class="alarmimg alarmdian1_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" />
+
+            <?php  }  ?>
+
+            <!--  __MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$dvdetail.dev_regionid}-->
+            <!-- 每个设备点的图片与悬浮框信息有报警误报警图片不同-->
+            <a href="#" id="sys_checkone"
+               class="alarmimg alarmdian1"
+               data-mtpis='
+                   <foreach item="item" name="dvdetail.data">
+
+                   <p>型号:<span>{$item.dev_name}</span>&nbsp;&nbsp;&nbsp;采集号:{$item.dev_acquisition}&nbsp;&nbsp;&nbsp;报警数目:<font color="red">{$item.alarmcount}</font>个</p>
+                   </foreach>
+                 '>
+                <if condition="$dvdetail['bj'] neq '0'">
+                    <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"  />
+                    <else/>
+                    <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"  />
+                </if>
+
+            </a>
+
+            <else/>
+            <if condition="($Think.get.rgn_atpidcurrent neq null ) and ($Think.get.rgn_atpidcurrent eq $dvdetail['dev_regionid'])">
+                <img class="alarmimg alarmdev{$key}_current" src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/arrow.gif" />
+                <else/>
+            </if>
+
+            <!-- 每个设备点的图片与悬浮框信息有报警误报警图片不同-->
+            <a href="__MODULE__/Rg/indexparkoverviewshell?regionlevel=devicepoint&rgn_atpid={$dvdetail.dev_regionid}"
+               class="alarmimg alarmdev{$key}"
+               data-mtpis='
+               <p>型号:{$dvdetail.dev_name}</p>
+               <p>采集号:{$dvdetail.dev_acquisition}</p>
+               <p>报警数目:<font color="red">{$dvdetail.alarmcount}</font>个
+               </p>'
+                    >
+
+                <if condition="($dvdetail['dev_name'] eq '水表')">
+                    <if condition="$dvdetail['alarmcount'] neq '0'">
+                        <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png"  />
+                        <else/>
+                        <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png"  />
+                    </if>
+                    <else/>
+                </if>
+                <if condition="($dvdetail['dev_name'] eq '冷暖表')">
+                    <if condition="$dvdetail['alarmcount'] neq '0'">
+                        <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png"  />
+                        <else/>
+                        <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png"  />
+                    </if>
+                    <else/>
+                </if>
+            </a>
+        </if>
+
+
+
+    </foreach>
+
+</div>
+
+<div class="list-right">
+    <a class="energy_message" target="_self">
+        <if condition="$b2c_flr_13 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng13F'"><p class="fl">13F（报警总数：{$b2c_flr_13}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidA2E8462E-A18B-4FEB-906F-51083C1716F9';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng13F'"><p class="fl">13F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidA2E8462E-A18B-4FEB-906F-51083C1716F9';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b2c_flr_12 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng12F'"><p class="fl">12F（报警总数：{$b2c_flr_12}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidF8ABD205-7DBB-4FB5-BDC3-35E6F5BDA6E1';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng12F'"><p class="fl">12F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidF8ABD205-7DBB-4FB5-BDC3-35E6F5BDA6E1';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b2c_flr_11 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng11F'"><p class="fl">11F（报警总数：{$b2c_flr_11}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid20A09CAC-F314-43E5-86F3-24A40BFE03E5';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng11F'"><p class="fl">11F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid20A09CAC-F314-43E5-86F3-24A40BFE03E5';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b2c_flr_10 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng10F'"><p class="fl">10F（报警总数：{$b2c_flr_10}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidD665B15B-853C-49FA-8D8D-F3ABBDE69DEE';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng10F'"><p class="fl">10F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidD665B15B-853C-49FA-8D8D-F3ABBDE69DEE';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b2c_flr_9 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng9F'"><p class="fl">9F（报警总数：{$b2c_flr_9}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidA16C8E3C-BB4A-4C68-A864-B003BD85D8FA';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng9F'"><p class="fl">9F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidA16C8E3C-BB4A-4C68-A864-B003BD85D8FA';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+
+        <!-- 需要注意一楼网上没有自动展开效果-->
+        <!-- 有无报警总数展示不同的效果这里只是报警信息-->
+        <if condition="$b2c_flr_8 neq 0">
+            <!--头部调到相应层数控制器展示对应层信息-->
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng8F'">
+                <p class="fl">8F（报警总数：{$b2c_flr_8}）</p>
+                <!-- 更多调到详情页-->
+                <span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidB3796831-AAC8-42BF-90E0-4BC0E54B64E5';preventBubble();">更多</span>
+            </header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng8F'">
+                <p class="fl">8F</p>
+                <span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidB3796831-AAC8-42BF-90E0-4BC0E54B64E5';preventBubble();">更多</span>
+            </header>
+        </if>
+
+    </a>
+
+
+    <a class="energy_message" target="_self">
+        <if condition="$b2c_flr_7 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng7F'"><p class="fl">7F（报警总数：{$b2c_flr_7}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid1E0BB620-A0E9-41ED-AE34-29031826B11D';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng7F'"><p class="fl">7F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid1E0BB620-A0E9-41ED-AE34-29031826B11D';preventBubble();">更多</span></header>
+        </if>
+    </a>
+
+
+
+
+    <a class="energy_message" target="_self">
+        <if condition="$b2c_flr_6 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng6F'"><p class="fl">6F（报警总数：{$b2c_flr_6}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidF46FA1C2-90BD-4AC2-9780-207E7AEF006B';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng6F'"><p class="fl">6F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidF46FA1C2-90BD-4AC2-9780-207E7AEF006B';preventBubble();">更多</span></header>
+        </if>
+    </a>
+
+
+
+    <a class="energy_message" target="_self">
+        <if condition="$b2c_flr_5 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng5F'"><p class="fl">5F（报警总数：{$b2c_flr_5}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid95827E32-A224-4A49-93E4-CA71E365E273';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng5F'"><p class="fl">5F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid95827E32-A224-4A49-93E4-CA71E365E273';preventBubble();">更多</span></header>
+        </if>
+    </a>
+    <a class="energy_message" target="_self">
+        <if condition="$b2c_flr_4 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng4F'"><p class="fl">4F（报警总数：{$b2c_flr_4}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid6C23D55A-2A4D-4D71-B2AB-4F29AF987224';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng4F'"><p class="fl">4F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid6C23D55A-2A4D-4D71-B2AB-4F29AF987224';preventBubble();">更多</span></header>
+        </if>
+    </a>
+
+
+
+    <a class="energy_message cur" target="_self">
+        <if condition="$b2c_flr_3 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng3F'"><p class="fl">3F（报警总数：{$b2c_flr_3}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidAE172084-79D5-4112-9970-87B320424B57';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng3F'"><p class="fl">3F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidAE172084-79D5-4112-9970-87B320424B57';preventBubble();">更多</span></header>
+        </if>
+        <div class="alarmlist">
+            <ul>
+                <!--  霍尼韦尔点击报警信息跳转的也是详细信息页面不会显示报警页面-->
+
+                <foreach item="bj" name="bjdata">
+                    <li class="border_bottom clearfix" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidAE172084-79D5-4112-9970-87B320424B57&rgn_atpidcurrent={$bj.rgn_atpid}'">
+                        <div class="fl tips">{$bj.dev_name}</div>
+                        <div class="ll content">
+                            <div class="fl bold">{$bj.rgn_name}</div>
+                            <div class="fr text_right bold">{$bj.alm_datetime|substr=5}</div><br>
+                            <div class="fl bold">{$bj.alm_content}</div>
+                        </div>
+                    </li>
+                </foreach>
+
+            </ul>
+            <div class="listfooter">
+                <div><p>当日电能</p><p><if condition="$dayused.ydl eq ''">0Kwh<else />{$dayused.ydl}Kwh</if></p></div>
+                <div><p>当日用水量</p><p><if condition="$dayused.ysl eq ''">0T<else />{$dayused.ysl}T</if></p></div>
+                <div><p>当日热能</p><p><if condition="$dayused.ynl eq ''">0Kwh<else />{$dayused.ynl}Kwh</if></p></div>
+                <div><p>当日冷能</p><p><if condition="$dayused.yll eq ''">0Kwh<else />{$dayused.yll}Kwh</if></p></div>
+            </div>
+        </div>
+    </a>
+
+
+
+    <a class="energy_message " target="_self">
+        <if condition="$b2c_flr_2 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng2F'"><p class="fl">2F（报警总数：{$b2c_flr_2}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid25A2379A-668A-49DE-8F8D-46663CEB5E6A';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng2F'"><p class="fl">2F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid25A2379A-668A-49DE-8F8D-46663CEB5E6A';preventBubble();">更多</span></header>
+        </if>
+
+    </a>
+
+
+
+    <a class="energy_message " target="_self">
+        <if condition="$b2c_flr_1 neq 0">
+            <header style="background: #fc9900;cursor: pointer;" onclick="window.location.href='__CONTROLLER__/F2c_ceng1F'"><p class="fl">1F（报警总数：{$b2c_flr_1}）</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid6B6AB76A-1D0B-481C-AF83-AB3BBE05515F';preventBubble();">更多</span></header>
+            <else />
+            <header onclick="window.location.href='__CONTROLLER__/F2c_ceng1F'"><p class="fl">1F</p><span class="fr zhankai" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guid6B6AB76A-1D0B-481C-AF83-AB3BBE05515F';preventBubble();">更多</span></header>
+        </if>
+
+    </a>
+
+
+</div>
+
+<div class="total1">
+    <header><p class="fl">2C#3层当月能耗&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 8px;"><?php echo '刷新时间:'.date('G:i:s').'(频率60秒)'; ?></span> </p><span class="fr zhankai"></span></header>
+    <div class="totalcontent clearfix">
+        <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/building.png" class="fl totalhouse">
+        <div class="rightcontent fr">
+            <ul>
+                <li><i class="green"></i>电能消耗：{$zydl}Kwh</li>
+                <li><i class="blue"></i>水能消耗：{$zysl}T</li>
+                <li><i class="orange"></i>暖能消耗：{$zynl}Kwh</li>
+                <li><i class="qing"></i>冷能消耗：{$zyll}Kwh</li><input type="hidden" id="rid" value="{$rgnid}">
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="sys_dlg" role="dialog" class="modal fade "></div>
+
+<include file="Parkoverview:alarm_icon_description"/>
+<script src="__PUBLIC__/vendor/diy_component/yuanqu_page/js/jquery-1.12.4.js"></script>
+<script src="__PUBLIC__/vendor/diy_component/yuanqu_page/js/layer/layer.js"></script>
+<script src="__PUBLIC__/vendor/diy_component/yuanqu_page/js/mTips.js"></script>
+<script>
+    $('#sys_checkone').on('click',function() {
+        jsonstrig=$("#rid").val();
+        /* $.post(url,{rgjson:jsonstring},function(result){ //通过Ajax发送请求到后台*/
+        layer.open({
+            type: 2,
+            title:'点击查看详情',
+            fix: false,
+            maxmin: true,
+            shadeClose: true,
+            shade: 0.8,
+            area: ['1000px', '700px'],
+            content: "__CONTROLLER__/checkone?rgjson="+jsonstrig,
+            end: function () {
+                location.reload();
+            }
+        });
+    });
+    setInterval(function(){
+        location.reload();
+    },60*1000);
+
+    function dodetail() {
+        window.location.href='__MODULE__/Rg/indexparkoverviewshell?regionlevel=region&rgn_atpid=guidAE172084-79D5-4112-9970-87B320424B57&rgn_atpidcurrent={$bjdata[0].rgn_atpid}';
+    }
+
+    function domiss() {
+        $(".unusual1").remove();
+    }
+
+    function preventBubble(event){
+        var e=arguments.callee.caller.arguments[0]||event; //若省略此句，下面的e改为event，IE运行可以，但是其他浏览器就不兼容
+        if (e && e.stopPropagation) {
+            e.stopPropagation();
+        } else if (window.event) {
+            window.event.cancelBubble = true;
+        }
+    }
+</script>
+</body>
+</html>

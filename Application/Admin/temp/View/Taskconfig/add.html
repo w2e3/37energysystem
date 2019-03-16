@@ -1,0 +1,80 @@
+<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">数据编辑</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+            
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        <span style="color: red;text-align: center">*</span>
+                        任务名称：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="tc_name" type="text"  value="{$data.tc_name}" class="form-control" required>
+                    </div>
+                    <label class="col-sm-2 control-label">
+                        <span style="color: red;text-align: center">*</span>
+                        任务说明：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="tc_describe" type="text"  value="{$data.tc_describe}" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        <span style="color:red;text-align: center">*</span>
+                        任务相关命令：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="tc_code" type="text"  value="{$data.tc_code}" class="form-control" required>
+                    </div>
+                    <label class="col-sm-2 control-label">
+                        <!--<span style="color: #CD0200;text-align: center">*</span>-->
+                        任务执行周期：
+                    </label>
+                    <div class="col-sm-4">
+                        <select name="tc_period" class="chosen-select" >
+                            <option value="每天" <if condition="($data.tc_period eq '每天')">selected<else /></if> >每天</option>
+                            <option value="每月" <if condition="($data.tc_period eq '每月')">selected<else /></if> >每月</option>
+                        </select>
+                        <!--<p class="help-block" id="tc_key_p" style="color: #CD0200;display:none">必填项！</p>-->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        <!--<span style="color: #CD0200;text-align: center">*</span>-->
+                        任务执行时间：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="tc_executiontime" type="number"  value="{$data.tc_executiontime}" class="form-control" placeholder="单位：天">
+                    </div>
+                </div>
+                <input name="tc_atpid" type="hidden" value="{$data.tc_atpid}" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            <button type="button" data-dismiss="" id="sys_dlg_submit" class="btn btn-primary">保存</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+$(function () {
+
+    $(".js-switch").each(function(){
+        new Switchery(this, {color: '#1AB394'});
+    });
+
+    $(".file-pretty").prettyFile();
+
+    $(".chosen-select").chosen({disable_search_threshold: 10, search_contains: true,width:'288px'});
+
+});
+
+</script>

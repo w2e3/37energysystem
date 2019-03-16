@@ -1,0 +1,42 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="园区漫游"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">报警信息详情</h1>
+    </header>
+    <div class="content" id='detail-page'>
+        <div class="page-detail">
+            <foreach name="AlarmData" item="val" key="key">
+                <div class='content-block goods-card'>
+                    <h3>位置点：{$val.rgn_name}</h3>
+                    <p>报警时间：{$val.alm_datetime}</p>
+                    <p>能源类别：{$val.alm_category}</p>
+                    <p>报警等级：{$val.alm_level}</p>
+                    <p>报警类型：{$val.almc_name}</p>
+                    <p>事件详情：{$val.alm_content}</p>
+                    <p>上下限:{$val.value_param}</p>
+                    <p>上下限:{$val.alm_confirmstatus}</p>
+                   <button value="处理" onclick="return dealAlarm('{$val.alm_atpid}');">处理</button>
+                </div>
+            </foreach>
+        </div>
+    </div>
+
+
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+  function dealAlarm(alm_atpid) {
+   console.log(alm_atpid);
+  }
+
+</script>
+<include file="Public:footer"/>

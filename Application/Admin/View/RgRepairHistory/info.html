@@ -1,0 +1,136 @@
+<style type="text/css">
+    .td1 {text-align: right;padding-right: 20px;}
+    .td2 {text-align: left;padding-left: 20px;}
+    td{border:1px solid #000000;color: #000000;}
+</style>
+<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">报警详情</h4>
+        </div>
+        <div class="modal-body">
+            <div style="text-align:center;font-size:16px;margin-bottom:5px;font-size: 20px;margin-top: 20px;">维修单</div>
+            <table style="width: 100%;">
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">设备名称:</td>
+                    <td class="td2">{$Result['dm_name']}</td>
+                    <td class="td1">维修单号:</td>
+                    <td class="td2">{$Result['rl_code']}</td>
+                </tr>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">
+                        维修单名称:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_name']}
+                    </td>
+                    <td class="td1">
+                        维修单描述:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_describe']}
+                    </td>
+                </tr>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">派发处理人:</td>
+                    <td class="td2">{$Result['shouldempname']}</td>
+                    <td class="td1">发起时间:</td>
+                    <td class="td2">{$Result['rl_startdatetime']}</td>
+                </tr>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">计划完成时间:</td>
+                    <td class="td2">{$Result['rl_plandate']}</td>
+                    <td class="td1">维修单配合人:</td>
+                    <td class="td2">{$data['empuser']}</td>
+                </tr>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">维修单接单人:</td>
+                    <td class="td2">{$Result['shouldempname']}</td>
+                    <td class="td1">接单状态:</td>
+                    <td class="td2">{$Result['rl_status']}</td>
+                </tr>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">
+                        处理人:
+                    </td>
+                    <td class="td2">
+                        {$Result['empname']}
+                    </td>
+                    <td class="td1">
+                        处理时间:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_disposedate']}
+                    </td>
+                </tr>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">
+                        处理结果:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_disposeresult']}
+                    </td>
+                    <td class="td1">
+                        处理方法:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_disposemethod']}
+                    </td>
+                </tr>
+            </table>
+            <div style="text-align:center;font-size:16px;margin-bottom:5px;font-size: 20px;margin-top: 20px;">相关配件</div>
+            <table style='width: 100%'>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td>序号</td>
+                    <td>厂家名</td>
+                    <td>名称</td>
+                    <td>规格</td>
+                    <td>数目</td>
+                    <td>备注</td>
+                </tr>
+                <foreach  name="paerdata" item="vo" key="k">
+                    <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                        <td>{$k+1}</td>
+                        <td>{$vo.part_factoryname}</td>
+                        <td>{$vo.part_name}</td>
+                        <td>{$vo.part_format}</td>
+                        <td>{$vo.ppl_outdevicemodel}</td>
+                        <td>{$vo.ppl_remark}</td>
+                    </tr>
+                </foreach>
+            </table>
+            <div style="text-align:center;font-size:16px;margin-bottom:5px;font-size: 20px;margin-top: 20px;">相关报警</div>
+            <table style='width: 100%'>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td>序号</td>
+                    <td>报警时间</td>
+                    <td>报警等级</td>
+                    <td>类别</td>
+                    <td>内容</td>
+                    <td>管理处理人</td>
+                    <td>报警处理状态</td>
+                    <td>计划完成时间</td>
+                </tr>
+                <foreach  name="calldata" item="vo" key="k">
+                    <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                        <td>{$k+1}</td>
+                        <td>{$vo.almp_atpcreatedatetime}</td>
+                        <td>{$vo.alm_level}</td>
+                        <td>{$vo.alm_category}</td>
+                        <td>{$vo.alm_content}</td>
+                        <td>{$vo.emp_name}</td>
+                        <td>{$vo.alm_confirmstatus}</td>
+                        <td>{$vo.rl_plandate}</td>
+                    </tr>
+                </foreach>
+            </table>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>

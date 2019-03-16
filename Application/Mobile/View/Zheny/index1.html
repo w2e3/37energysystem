@@ -1,0 +1,80 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="租户管理"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">租户能源</h1>
+    </header>
+    <div class="bar bar-header-secondary" style="width:100%;height: 20px;">
+        <div class="searchbar">
+            <form action="">
+                <div class="search-input choose-yuanqu">
+                    <select class="search-input choose-year" id="rgn_ids">
+                        <foreach name="rgn_arr" item="vo" >
+                            <option value="{$vo.rgn_atpid}" <if condition=" ($vo.rgn_atpid eq $rgn_id)">selected<else/></if>>{$vo.rgn_name}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="content infinite-scroll">
+        <div class="list-block media-list atp-list" style="margin: 0;">
+            <ul>
+                <foreach name="Result" item="vo">
+                    <li>
+                        <a href="__CONTROLLER__/detail?rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&bs={$Think.get.bs}&us_atpid={$vo.us_atpid}" class="item-link item-content external">
+                            <div class="item-media"><img src="__PUBLIC__/mobile/images/icon3.png" width="80"></div>
+                            <div class="item-inner">
+                                <div class="item-title">{$vo.us_name}</div>
+                                <div class="item-subtitle">水:<font color="green">{$vo.ysl}</font> &nbsp;&nbsp;电:<font color="green">{$vo.dgl}</font></div>
+                                <div class="item-subtitle">冷:<font color="green">{$vo.yll}</font>&nbsp;&nbsp;暖:<font color="green">{$vo.ynl}</font></div>
+                            </div>
+                        </a>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+
+    //改变rgn
+    //修改园区节点
+    $("#rgn_ids").on('change',function () {
+        var rgn_atpid=$(this).val();
+        var regiontype=GetQueryString('regiontype');
+        var snname=GetQueryString('snname');
+        var  pre_rgn_atpid=GetQueryString("pre_rgn_atpid");
+
+//         console.log(pre_rgn_atpid);
+         if(pre_rgn_atpid==null)
+         {
+             pre_rgn_atpid = rgn_atpid;
+         }
+//        console.log(regiontype);
+//        console.log(snname);
+//        console.log(rgn_atpid);
+        var html="__CONTROLLER__/index"+"?rgn_atpid="+rgn_atpid+"&regiontype=rg"+"&snname="+snname+"&pre_rgn_atpid="+pre_rgn_atpid+"&bs={$Think.get.bs}";
+        window.location.href=html;
+    });
+
+//    //获得get参数的值
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  decodeURI(r[2]); return null;
+    }
+</script>
+<include file="Public:footer"/>

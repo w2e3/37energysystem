@@ -1,0 +1,122 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="园区漫游"/>
+
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">日报异常</h1>
+    </header>
+    <div class="content" id='detail-page'>
+        <div class="weui-cells">
+            <div class="weui-cell" style="width: 90%;" >
+                <select  class="weui-select" name="rgn_ids" id="rgn_ids">
+                    <foreach name="rgn_arr" item="vo" >
+                        <option value="{$vo.rgn_atpid}" <if condition=" ($vo.rgn_atpid eq $rgn_id)">selected<else/></if>>{$vo.rgn_name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="weui-cells" style="width: 90%;margin: 10px auto;">
+        </div>
+        <foreach name="Data" item="vo">
+                <div class="weui-cells" style="width: 90%;margin: 10px auto;">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd" style="width: 60%;">
+                            <label for="" class="weui-label">时间（历史异常）:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            {$vo.dt}
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">报警总数:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            {$vo.allcount}
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">待确认:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            {$vo.dqrcount}
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">已忽略:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            {$vo.yhlcount}
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">已确认:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            {$vo.yqrcount}
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">待接单:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            {$vo.djdcount}
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">待处理:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            {$vo.dclcount}
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">已处理:</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            {$vo.yclcount}
+                        </div>
+                    </div>
+
+                </div>
+            </foreach>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<include file="Public:footer"/>
+<script src="__PUBLIC__/vendor/My97DatePicker/WdatePicker.js"></script>
+<script>
+    $("#rgn_ids").on('change',function () {
+        var rgn_atpid=$(this).val();
+        var regiontype=GetQueryString('regiontype');
+        var snname=GetQueryString('snname');
+        var  pre_rgn_atpid=GetQueryString("pre_rgn_atpid");
+//        console.log(pre_rgn_atpid.length);
+        if((pre_rgn_atpid==null)||(pre_rgn_atpid.length==0))
+        {
+            pre_rgn_atpid = pre_atpid;
+        }
+        var html="__CONTROLLER__/index"+"?rgn_atpid="+rgn_atpid+"&regiontype=rg"+"&snname="+snname+"&pre_rgn_atpid="+pre_rgn_atpid;
+        window.location.href=html;
+    });
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  decodeURI(r[2]); return null;
+    }
+</script>
+

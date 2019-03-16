@@ -1,0 +1,36 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="业主管理"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">业主能源</h1>
+    </header>
+    <div class="content" id='detail-page'>
+        <foreach name="Count" item="vo">
+        <div class="page-detail">
+            <div class='content-block goods-card'>
+                <h3>业主：{$vo.us_name}</h3>
+                <p>水能：{$vo.ysl}</p>
+                <p>电能：{$vo.dgl}</p>
+                <p>冷能：{$vo.yll}</p>
+                <p>暖能：{$vo.ynl}</p>
+            </div>
+        </div>
+            </foreach>
+    </div>
+
+
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+
+
+</script>
+<include file="Public:footer"/>

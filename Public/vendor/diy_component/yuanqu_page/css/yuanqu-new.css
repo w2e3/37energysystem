@@ -1,0 +1,292 @@
+.left-yibiao {
+    float: left;
+    width: 49%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+.msgtitle {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #000;
+    font-weight: 700;
+    padding-left: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.tablebox {
+    padding: 15px;
+}
+.yuanqubox {
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+.yibiao-top {
+    width: 49%;
+    margin-top: 15px;
+    float: left;
+
+}
+.onechart {
+    float: left;
+    width: 49%;
+    border: 1px solid #ddd;
+}
+.chartmsg {
+    float: left;
+    width: 50%;
+    height: 100%;
+    margin: 25px 0;
+    border-left: 1.5px solid #ddd;
+}
+.chartmsg > div {
+    color: #333;
+    flex: 1;
+    font-size: 12px;
+    text-align: center;
+}
+.chartmsg > div >p:nth-child(2) {
+    font-size: 10px;
+    line-height: 25px;
+}
+.backimg {
+    margin-top: 15px;
+}
+.ecahrt {
+    float: left;
+    /*width: 50%;*/
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.content {
+    margin-left: 2px;
+}
+#tab span {
+	border: 1px solid #ccc;
+	padding: 0 10px;
+}
+.select {
+	font-weight: bold;
+}
+#tab-content li {
+	display: none;
+}
+#tab-content li.show {
+	display: block;
+}
+.yuanqutop {
+    position: relative;
+    width: 49%;
+    margin-top: 15px;
+    padding-left: 15px;
+    margin-right: 15px;
+    float: left;
+}
+.onehouse {
+    opacity: 0;
+}
+.cur {
+    opacity: 1;
+}
+.point1 {
+    display: block;
+    width: 10%;
+    height: 31%;
+    background: url('../images/house1.png');
+    background-size: 100% 100%;
+    position:absolute;
+    left: 38.6%;
+    top: 30.2%;
+    
+}
+.point2 {
+    display: block;
+    width: 11.2%;
+    height: 27.6%;
+    background: url('../images/house2.png');
+    background-size: 100% 100%;
+    position:absolute;
+    left: 30.2%;
+    top: 19%;
+    
+}
+.point3 {
+    display: block;
+    width: 10.8%;
+    height: 23%;
+    background: url('../images/house3.png');
+    background-size: 100% 100%;
+    position:absolute;
+    left: 51.9%;
+    top: 4%;
+    
+}
+.point4 {
+    display: block;
+    width: 10.5%;
+    height: 29%;
+    background: url('../images/house4.png');
+    background-size: 100% 100%;
+    position:absolute;
+    left: 55.7%;
+    top: 18.3%;
+    
+}
+.point5 {
+    display: block;
+    width: 13%;
+    height: 29%;
+    background: url('../images/house5.png');
+    background-size: 100% 100%;
+    position:absolute;
+    left: 44%;
+    top: 56%;
+    
+}
+.point6 {
+    display: block;
+    width: 12.8%;
+    height: 27.9%;
+    background: url('../images/house6.png');
+    background-size: 100% 100%;
+    position:absolute;
+    left: 59.2%;
+    top: 43.6%;
+    
+}
+.point7 {
+    display: block;
+    width: 10.8%;
+    height: 23%;
+    background: url('../images/house7.png');
+    background-size: 100% 100%;
+    position:absolute;
+    left: 63%;
+    top: 1%;
+    
+}
+.point8 {
+    display: block;
+    width: 12.2%;
+    height: 26%;
+    background: url('../images/house8.png');
+    background-size: 100% 100%;
+    position:absolute;
+    left: 18%;
+    top: 32%;
+}
+/* 左边低楼 */
+.point9 {
+    display: block;
+    width: 8.8%;
+    height: 19%;
+    background: url('../images/house9.png');
+    background-size: 100% 100%;
+    position: absolute;
+    left: 21.2%;
+    top: 58%;
+    opacity: 0;
+}
+.point10 {
+    display: block;
+    width: 7.7%;
+    height: 23.9%;
+    background: url('../images/house10.png');
+    background-size: 100% 100%;
+    position: absolute;
+    left: 30%;
+    top: 52.1%;
+    opacity: 0;
+}
+.point11 {
+    display: block;
+    width: 9.5%;
+    height: 27%;
+    background: url('../images/house11.png');
+    background-size: 100% 100%;
+    position: absolute;
+    left: 24.6%;
+    top: 73%;
+    opacity: 0;
+}
+.point12 {
+    display: block;
+    width: 8.3%;
+    height: 23%;
+    background: url('../images/house12.png');
+    background-size: 100% 100%;
+    position: absolute;
+    left: 34%;
+    top: 73%;
+    opacity: 0;
+}
+/* 右边低楼 */
+.point13 {
+    display: block;
+    width: 9%;
+    height: 24%;
+    background: url('../images/house13.png');
+    background-size: 100% 100%;
+    position: absolute;
+    left: 66%;
+    top: 24%;
+    opacity: 0;
+}
+.point14 {
+    display: block;
+    width: 9.6%;
+    height: 16%;
+    background: url('../images/house14.png');
+    background-size: 100% 100%;
+    position: absolute;
+    left: 70.9%;
+    top: 21.1%;
+    opacity: 0;
+}
+.point15 {
+    display: block;
+    width: 9%;
+    height: 15%;
+    background: url('../images/house15.png');
+    background-size: 100% 100%;
+    position: absolute;
+    left: 72%;
+    top: 45%;
+    opacity: 0;
+}
+.point16 {
+    display: block;
+    width: 10%;
+    height: 23%;
+    background: url('../images/house16.png');
+    background-size: 100% 100%;
+    position: absolute;
+    left: 76.3%;
+    top: 32%;
+    opacity: 0;
+}
+
+.font16 {
+    font-size: 16px;
+}
+.color_one {
+    color: #6cc134;
+}
+.color_two {
+    color: #f8bf50;
+}
+.color_three {
+    color: #da1b1b;
+}
+.color_four {
+    color: #0078d7;
+}
+.horizontal_line {
+    height: 1px;
+    width: 80px;
+    margin: 0px auto 5px;
+    background: #ddd;
+}

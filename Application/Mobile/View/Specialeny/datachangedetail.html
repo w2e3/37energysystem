@@ -1,0 +1,50 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="审批中心"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">数据修改</h1>
+    </header>
+    <div class="content" id='detail-page'>
+        <div class="page-detail">
+            <div class='content-block goods-card'>
+                <h3>审批单号：DSC00011</h3>
+                <p>修改单号：DSC00012</p>
+                <p>审批人：李四</p>
+                <p>审批时间：2017-11-10 13:38:16</p>
+                <p>审批状态：未审批</p>
+                <p>操作：</p>
+                <p>
+                    <span class="button button-fill button-success already" style="margin-bottom: 12px" onclick='$.toast("你点击了通过");'>通过</span>
+                    <span class="button button-fill button-danger ignore" style="margin-bottom: 12px" onclick='$.toast("你点击了打回");'>打回</span>
+                </p>
+            </div>
+
+            <div class='content-block goods-card'>
+                <h3>修改单号：DSB00012</h3>
+                <p>发起人：李四</p>
+                <p>修改内容：d2h_lnlacc1->200</p>
+                <p>发起时间：2017-11-10 13:56:22</p>
+            </div>
+            <div class='content-block goods-card'>
+                <h3>修改单号：DSB00013</h3>
+                <p>发起人：李四</p>
+                <p>修改内容：d2h_lnlacc2->200</p>
+                <p>发起时间：2017-11-10 13:56:22</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+
+
+</script>
+<include file="Public:footer"/>

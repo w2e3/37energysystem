@@ -1,0 +1,161 @@
+﻿﻿<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">数据编辑</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+                <div>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        申请名称：
+                                    </label>
+                                    <div class="col-sm-4">
+                                       {$data.d2mdf_name}
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        审批描述：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        {$data.d2mdf_desc}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        发起人：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        {$data.startempname}
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        发起时间：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        {$data.d2mdf_startdt}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        审批人：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        {$data.agreeempname}
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        审批状态：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        {$data.d2mdf_agreestatus}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        打回意见：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        {$data.d2mdf_agreebackinfo}
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        审批备注：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        {$data.d2mdf_remark}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input name="d2mdf_atpid" type="hidden" value="{$data.d2mdf_atpid}" class="form-control">
+            </form>
+            <div style="text-align:center;font-size:16px;margin-bottom:5px;font-size: 20px;">修改值</div>
+            <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+                   style='border-collapse:collapse;border:none;margin: 0 auto;width: 75%'>
+                <tr style='height:22.95pt'>
+                    <td width=43 style='width:32.4pt;border:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:22.95pt'>
+                        <p class=MsoNormal align=center style='text-align:center;margin:0'><span
+                                style='font-family:宋体'>序号</span></p>
+                    </td>
+                    <td width=84 style='width:63.3pt;border:solid windowtext 1.0pt;border-left:
+  none;padding:0cm 5.4pt 0cm 5.4pt;height:22.95pt'>
+                        <p class=MsoNormal align=center style='text-align:center;margin:0'><span
+                                style='font-family:宋体'>设备</p>
+                    </td>
+                    <td width=246 style='width:184.8pt;border:solid windowtext 1.0pt;border-left:
+  none;padding:0cm 5.4pt 0cm 5.4pt;height:22.95pt'>
+                        <p class=MsoNormal align=center style='text-align:center;margin:0'><span
+                                style='font-family:宋体'>区位置</span></p>
+                    </td>
+                    <td width=89 style='width:67.0pt;border:solid windowtext 1.0pt;border-left:
+  none;padding:0cm 5.4pt 0cm 5.4pt;height:22.95pt'>
+                        <p class=MsoNormal align=center style='text-align:center;margin:0'><span
+                                style='font-family:宋体'>参数</span></span></p>
+                    </td>
+                    <td width=62 style='width:46.25pt;border:solid windowtext 1.0pt;border-left:
+  none;padding:0cm 5.4pt 0cm 5.4pt;height:22.95pt'>
+                        <p class=MsoNormal align=center style='text-align:center;margin:0'><span
+                                style='font-family:宋体'>修改值</span></p>
+                    </td>
+                </tr>
+                <foreach  name="Resultd" item="vo" key="k">
+                    <tr style='height:20.3pt'>
+                        <td width=43 style='width:32.4pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:20.3pt;padding: 0cm 5.4pt 0cm 5.4pt'>
+                            <p class=MsoNormal align=center style='text-align:center;margin:0'><span
+                                    lang=EN-US style='font-family:宋体'>{$k+1}</span></p>
+                        </td>
+                        <td width=84  style='width:63.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:20.3pt'>
+                            <p class=MsoNormal align=center style='text-align:center;margin:0'><span
+                                    lang=EN-US style='font-family:宋体'>{$vo.rgn_name}</span></p>
+                        </td>
+                        <td width=246  style='width:184.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:20.3pt'>
+                            <p class=MsoNormal align=center style='text-align:center;margin:0'><span
+                                    lang=EN-US style='font-family:宋体'>{$vo.dev_name}</span></p>
+                        </td>
+                        <td width=89  style='width:67.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:20.3pt'>
+                            <p class=MsoNormal align=right style='text-align:center;margin:0'><span
+                                    lang=EN-US style='font-family:宋体'>{$vo.d2mdfd_oldvalue}</span></p>
+                        </td>
+                        <td width=62  style='width:46.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:20.3pt'>
+                            <p class=MsoNormal align=center style='text-align:center;margin:0'><span
+                                    lang=EN-US style='font-family:宋体'>{$vo.d2mdfd_newvalue}</span></p>
+                        </td>
+
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+        </div>
+    </div>
+
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+$(function () {
+    $(".js-switch").each(function(){
+        new Switchery(this, {color: '#1AB394'});
+    });
+
+    $(".file-pretty").prettyFile();
+
+    $("#module").chosen({disable_search_threshold: 3, search_contains: true,width:'650px'});
+    $(".chosen-select2").chosen({disable_search_threshold: 3, search_contains: true,width:'284px'});
+});
+</script>

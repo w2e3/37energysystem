@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>星体ERM</title>
+    <link rel="stylesheet" href="lib/ext/stylesheets/style.css" type="text/css">
+    <link rel="stylesheet" href="lib/style/main.css" type="text/css">
+    <link rel="stylesheet" href="lib/style/example.css">
+    <link rel="stylesheet" href="lib/style/zepto.min.js">
+    <link rel="stylesheet" type="text/css" href="lib/style/weui.css">
+    <link rel="stylesheet" type="text/css" href="lib/style/example.js">
+    <script src="lib/style/jquery.js"></script>
+    <style>
+        .input_radius {
+            border-radius: 10px;
+            border: none;
+        }
+
+        .pad30 {
+            padding: 0 40px 0 40px;
+        }
+    </style>
+</head>
+
+<body ontouchstart="">
+<div class="container" id="container">
+    <div class="page js_show" style="background-image: url(&#39;/xterm/Public/xterm/images/soccer_bg2.jpeg&#39;);">
+        <div class="page__hd">
+            <div style="text-align: center;">
+                <img style="height:70%;width:70%;" src="lib/images/logo2.png">
+            </div>
+            <h1 class="page__title" style="color:#000;text-align: center">星体教育运营管理系统</h1>
+        </div>
+        <div class="page__bd pad30">
+            <div class="weui-cells weui-cells_form input_radius">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd weui-cell__primary">
+                        <input class="weui-input" name="phoneNum" id="phoneNum" placeholder="请输入手机号">
+                    </div>
+                </div>
+
+            </div>
+            <div class="weui-cells weui-cells_form input_radius" style="width:40%;display: inline-block">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd weui-cell__primary">
+                        <input type="text" class="weui-input" name="password" id="password" placeholder="输入验证码">
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cell__bd weui-cell__primary sendSMS" style="display:inline-block;width:57%">
+                <a class="weui-btn weui-btn_primary" href="javascript:" id="check">获取验证码</a>
+            </div>
+            <div class="weui-cells weui-cells_form input_radius">
+                <a class="weui-btn weui-btn_primary" href="javascript:" id="login">登录</a>
+            </div>
+            <br>
+            <br>
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+//        $("#login").click(function (){
+//            var account = $("#phoneNum").val();
+//            var password = $("#password").val();
+//            if(account == ''){
+//                alert("手机号不能为空");
+//                return;
+//            }
+//            if(password == ''){
+//                alert("验证码不能为空");
+//                return;
+//            }
+//            $.ajax({
+//                url : "/xterm/index.php/Frontend/Login/doDLogin.html",
+//                type : "POST",
+//                data : {account:account , password:password},
+//                success : function (data){
+//                    if(data.code == 'ok'){
+//                        location.href = "/xterm/index.php/Frontend/Teacher/index.html";
+//                    }else{
+//                        alert(data.msg);
+//                    }
+//                },
+//                error:function (data){
+//                    alert('网络异常，稍后重试');
+//                }
+//            });
+//        });
+    });
+</script>
+<script type="text/javascript" src="lib/ext/javascripts/logger.js"></script>
+<div id="log"></div>
+<script type="text/javascript">
+
+    //    dd.config({
+    //        agentId: _config.agentId,
+    //        corpId: _config.corpId,
+    //        timeStamp: _config.timeStamp,
+    //        nonceStr: _config.nonceStr,
+    //        signature: _config.signature,
+    //        jsApiList: [
+    //            'runtime.info',
+    //            'device.notification.prompt',
+    //            'biz.chat.pickConversation',
+    //            'device.notification.confirm',
+    //            'device.notification.alert',
+    //            'device.notification.prompt',
+    //            'biz.chat.open',
+    //            'biz.util.open',
+    //            'biz.user.get',
+    //            'biz.contact.choose',
+    //            'biz.telephone.call',
+    //            'biz.ding.post']
+    //    });
+    //    dd.userid=0;
+    //    dd.ready(function() {
+    //
+    //        dd.runtime.permission.requestAuthCode({
+    //            corpId: _config.corpId, //企业id
+    //            onSuccess: function (info) {
+    //                console.log(info);
+    //                $.ajax({
+    //                    url: 'http://www.chinasoccer.com.cn/xterm/index.php/Frontend/Teacher/getUserinfo',
+    //                    type:"POST",
+    //                    data: {"event":"get_userinfo","code":info.code},
+    //                    dataType:'json',
+    //                    timeout: 900,
+    //                    success: function (data, status, xhr) {
+    //                        if(data.code == 'no'){
+    //
+    //                        }else if(data.code == 'ok'){
+    //                            location.href = "/xterm/index.php/Frontend/Teacher/index.html";
+    //                        }
+    //
+    //                    }
+    //
+    //                });
+    //            },
+    //            onFail: function (err) {
+    //            }
+    //        });
+    //    });
+
+
+</script>
+<script type="text/javascript">
+    //    var clock = '';
+    //    var nums = 10;
+    //    var btn;
+    //    $(".sendSMS").click(function (){
+    //        sendSms();
+    //    });
+    //    function changeText(){
+    //        $("#check").html(nums+"秒后重发");
+    //        nums--;
+    //        if(nums>=0){
+    //            setTimeout("changeText()",1000);
+    //        }else {
+    //            ablesend();
+    //        }
+    //    }
+    //    function ablesend(){
+    //        $("#check").removeClass("weui-btn_disabled");
+    //        $("#check").bind("click","sendSms()");
+    //        $("#check").html("获取验证码");
+    //    }
+    //    function sendSms(){
+    //        var phoneNo =$("input[name='phoneNum']").val();
+    //        if(phoneNo==""){
+    //            alert("手机号不能为空！");
+    //            return;
+    //        }
+    //        else{
+    //            var re = /^1\d{10}$/
+    //            if (re.test(phoneNo)) {
+    //                $("#check").attr('class',$("#check").attr("class")+" weui-btn_disabled");
+    //                $(".sendSMS").unbind("click");
+    //                changeText();
+    //                var url = "/xterm/index.php/Frontend/Login/generateSMS/phoneNo/"+phoneNo;
+    //                $.post(url,function (data) {
+    //
+    //                })
+    //            } else {
+    //                alert("手机号格式错误！");
+    //            }
+    //        }
+    //    }
+
+</script>
+</body>
+</html>

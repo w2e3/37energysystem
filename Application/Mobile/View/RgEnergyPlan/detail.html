@@ -1,0 +1,93 @@
+<include file="Public:header"/>
+
+<?php if(I('get.regiontype')=='rg') { ?>
+<include file="Public:menu" active="园区漫游"/>
+<?php }elseif (I('get.regiontype')=='sn') { ?>
+<include file="Public:menu" active="专项能源"/>
+<?php } ?>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">能源详情</h1>
+    </header>
+    <div class="content" id='detail-page'>
+        <volist  name="EnergyPlanInfo" id="vo">
+            <div class="weui-cells" style="width: 90%;margin: 5px auto;">
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;">类别:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.epd_category}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;">开始时间:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.ep_startdatetime}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;">结束时间:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.ep_enddatetime}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;"> 要求值:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">
+                        {$vo.epd_requiredvalue}
+                        <if condition="$vo.epd_requiredvalue eq null">
+                            0
+                        </if>
+                        <if condition="$vo.epd_category eq '水'">
+                        T
+                        <else/>
+                        Kwh
+                        </if>
+                    </div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;"> 实际值:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">
+                        {$vo.epd_actualvalue}
+                        <if condition="$vo.epd_actualvalue eq null">
+                            0
+                        </if>
+                        <if condition="$vo.epd_category eq '水'">
+                        T
+                        <else/>
+                        Kwh
+                        </if>
+                    </div>
+                </div>
+            </div>
+        </volist>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<include file="Public:footer"/>
+<script src="__PUBLIC__/vendor/My97DatePicker/WdatePicker.js"></script>
+<script>
+</script>
+<script>
+
+
+</script>
+<script>
+    $("#rgn_ids").on('change',function () {
+        var rgn_atpid=$(this).val();
+        var regiontype=GetQueryString('regiontype');
+        var snname=GetQueryString('snname');
+        var  pre_rgn_atpid=GetQueryString("pre_rgn_atpid");
+//        console.log(pre_rgn_atpid.length);
+
+        if((pre_rgn_atpid==null)||(pre_rgn_atpid.length==0))
+        {
+            pre_rgn_atpid = pre_atpid;
+        }
+        var html="__CONTROLLER__/index"+"?rgn_atpid="+rgn_atpid+"&regiontype=rg"+"&snname="+snname+"&pre_rgn_atpid="+pre_rgn_atpid;
+        window.location.href=html;
+    });
+</script>
+

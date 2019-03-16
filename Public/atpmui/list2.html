@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)http://www.chinasoccer.com.cn/xterm/index.php/Frontend/Teacher/timetable.html -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>所有课程</title>
+    <link rel="stylesheet" href="lib/style/example.css">
+    <link rel="stylesheet" href="lib/style/zepto.min.js">
+    <link rel="stylesheet" type="text/css" href="lib/style/weui.css">
+    <!--<link rel="stylesheet" href="lib/style/main.css" type="text/css">-->
+    <link rel="stylesheet" type="text/css" href="lib/style/example.js">
+    <script src="lib/style/jquery.js"></script>
+</head>
+
+<body ontouchstart="">
+<div class="container" id="container">
+    <div class="page grid js_show">
+        <div class="page__bd" style="height: 100%">
+            <div class="weui-tab">
+                <div class="weui-navbar">
+                    <div id="chooseclass" class="filter-btn weui-navbar__item weui-bar__item_on" data-class="not-on">
+                        <span>马泉营校区</span><img src="lib/icon/triangle-active.png" alt=""
+                                               style="width:20px;margin-right:5px;"></div>
+                </div>
+                <div class="weui-tab__panel">
+                    <div class="weui-panel__bd courselist">
+                        <div class="weui-cells already-on">
+                            <div class="weui-cell" style="background-color:#EAEAEA ">
+                                <div class="weui-cell__hd"><img src="lib/icon/alarm-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd"><p>2017-04-02 20:27:40</p></div>
+                                <div class="weui-cell__ft" style="color:#F29C2F">未上</div>
+                            </div>
+                            <div class="weui-cell" style="background-color: #e5f4fe">
+                                <div class="weui-cell__hd"><img src="lib/icon/timetable-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd"><p>测试课程&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;马泉营校区</p></div>
+                                <div class="weui-cell__ft"></div>
+                            </div>
+                            <div class="weui-cell other" style="background-color: #e5f4fe">
+                                <div class="weui-cell__hd"><img src="lib/icon/ground-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd"><p>百子湾奥莱</p></div>
+                                <div class="weui-cell__ft"><img src="lib/icon/info-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;">3
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cells" style="margin-bottom: 75px"></div>
+                </div>
+                <div class="weui-tabbar">
+                    <a href="#"
+                       class="weui-tabbar__item weui-bar__item_on">
+                        <img src="lib/icon/info-active.png" alt="" class="weui-tabbar__icon">
+
+                        <p class="weui-tabbar__label">个人资料</p>
+                    </a>
+                    <a href="#"
+                       class="weui-tabbar__item">
+                        <img src="lib/icon/timetabletoday.png" alt="" class="weui-tabbar__icon">
+
+                        <p class="weui-tabbar__label">今日课程</p>
+                    </a>
+                    <a href="#"
+                       class="weui-tabbar__item">
+                        <img src="lib/icon/managecenter.png" alt="" class="weui-tabbar__icon">
+
+                        <p class="weui-tabbar__label">管理中心</p>
+                    </a>
+                    <a href="#"
+                       class="weui-tabbar__item">
+                        <img src="lib/icon/leavemanage.png" alt="" class="weui-tabbar__icon">
+
+                        <p class="weui-tabbar__label">请假申请</p>
+                    </a>
+                    <a href="#"
+                       class="weui-tabbar__item">
+                        <img src="lib/icon/qrcode.png" alt="" class="weui-tabbar__icon">
+
+                        <p class="weui-tabbar__label">扫码签到</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="lib/style/weui.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+//        $.ajax({
+//            url: "/xterm/index.php/Frontend/Teacher/timetable.html",
+//            type: "POST",
+//            data: {cls_atpid: "all"},
+//            success: function (data) {
+//                if (data.code == 'ok') {
+//                    $("#chooseclass").html("<span>" + data.cls_name + '</span><img src="/xterm/Public/xterm/icon/triangle-active.png" alt="" style="width:20px;margin-right:5px;"></div>');
+//                    if (data.result) {
+//                        for (var i = 0; i < (data.result).length; i++) {
+//                            if (data.result[i].cp_status == '已上') {
+//                                color = 'style="color:#0495fc"'
+//                            } else {
+//                                color = 'style="color:#F29C2F"'
+//                            }
+//                            $(".courselist").append(
+//                                    '<div class="weui-cells already-on" >' +
+//                                    '<div class="weui-cell" style="background-color:#EAEAEA ">' +
+//                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/alarm-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                    '<div class="weui-cell__bd">' +
+//                                    '<p>' + data.result[i].cp_begindatetime + '</p>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell__ft"' + color + '>' + data.result[i].cp_status + '</div>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell" style="background-color: #e5f4fe">' +
+//                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/timetable-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                    '<div class="weui-cell__bd">' +
+//                                    '<p>' + data.result[i].crs_name + '&nbsp&nbsp&nbsp&nbsp&nbsp' + data.result[i].cls_name + '</p>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell__ft"></div>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell other" style="background-color: #e5f4fe">' +
+//                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/ground-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                    '<div class="weui-cell__bd">' +
+//                                    '<p>' + data.result[i].rm_name + '</p>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell__ft"><img src="/xterm/Public/xterm/icon/info-active.png" alt="" style="width:20px;margin-right:5px;">' + data.result[i].class_count + '</div>' +
+//                                    '</div>' +
+//                                    '</div>'
+//                            );
+//                        }
+//                    }
+//
+//                }
+//            }
+//        });
+        $('#chooseclass').on('click', function () {
+            weui.picker([{
+                "label": "\u5168\u90e8\u73ed\u7ea7\u8bfe\u7a0b",
+                "value": "all"
+            }, {"label": "\u9a6c\u6cc9\u8425\u6821\u533a", "value": "8B87173A-41F0-4AA8-9569-DD44B206853B"}], {
+                onChange: function (result) {
+                    console.log(result);
+                },
+                onConfirm: function (result) {
+                    console.log(result);
+                    var cls_atpid = result;
+//                    $.ajax({
+//                        url: "/xterm/index.php/Frontend/Teacher/timetable.html",
+//                        type: "POST",
+//                        data: {cls_atpid: "" + cls_atpid + ""},
+//                        success: function (data) {
+//                            if (data.code == 'ok') {
+//                                console.log(data);
+//                                $("#chooseclass").html("<span>" + data.cls_name + '</span><img src="/xterm/Public/xterm/icon/triangle-active.png" alt="" style="width:20px;margin-right:5px;"></div>');
+//                                $(".courselist").html("");
+//                                if (data.result) {
+//                                    for (var i = 0; i < (data.result).length; i++) {
+//                                        if (data.result[i].cp_status == '已上') {
+//                                            color = 'style="color:#0495fc"'
+//                                        } else {
+//                                            color = 'style="color:#F29C2F"'
+//                                        }
+//                                        $(".courselist").append(
+//                                                '<div class="weui-cells already-on" >' +
+//                                                '<div class="weui-cell" style="background-color:#EAEAEA ">' +
+//                                                '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/alarm-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                                '<div class="weui-cell__bd">' +
+//                                                '<p>' + data.result[i].cp_begindatetime + '</p>' +
+//                                                '</div>' +
+//                                                '<div class="weui-cell__ft"' + color + '>' + data.result[i].cp_status + '</div>' +
+//                                                '</div>' +
+//                                                '<div class="weui-cell" style="background-color: #e5f4fe">' +
+//                                                '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/timetable-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                                '<div class="weui-cell__bd">' +
+//                                                '<p>' + data.result[i].crs_name + '&nbsp&nbsp&nbsp&nbsp&nbsp' + data.result[i].cls_name + '</p>' +
+//                                                '</div>' +
+//                                                '<div class="weui-cell__ft"></div>' +
+//                                                '</div>' +
+//                                                '<div class="weui-cell other" style="background-color: #e5f4fe">' +
+//                                                '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/ground-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                                '<div class="weui-cell__bd">' +
+//                                                '<p>' + data.result[i].rm_name + '</p>' +
+//                                                '</div>' +
+//                                                '<div class="weui-cell__ft"><img src="/xterm/Public/xterm/icon/info-active.png" alt="" style="width:20px;margin-right:5px;">' + data.result[i].class_count + '</div>' +
+//                                                '</div>' +
+//                                                '</div>'
+//                                        );
+//                                    }
+//                                }
+//
+//                            }
+//                        }
+//                    });
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<style type="text/css">
+    .addbj{
+        min-width: 500px;
+        width: 50%;
+        height: 30%;
+        min-height: 200px;
+        display: none;
+        position: absolute;
+        top: 15%;
+        left: 20%;
+        /*z-index: 99999;*/
+        /*background: #ccc;*/
+    }
+    .addbj2{
+        background: #6d9bfa;
+        /*opacity: 0.9;*/
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        /*z-index: 99998;*/
+    }
+    .savebj{
+        min-width: 500px;
+        width: 50%;
+        height: 30%;
+        min-height: 200px;
+        display: none;
+        position: absolute;
+        top: 15%;
+        left: 20%;
+    }
+    .savebj2{
+        background: #6d9bfa;
+        /*opacity: 0.9;*/
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+</style>
+<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">配置备件</h4>
+        </div>
+        <div class="modal-body">
+            <input name="rl_atpid" type="hidden"  value="{$data['rl_atpid']}" class="form-control" id="rl_atpid">
+            <div class="row row-lg">
+                <div class="form-group">
+                    <div class="col-sm-12" style="width: 90%;margin-left:5%;">
+                        <div id="atpbiztoolbarAlm">
+                            <button class="btn btn-success" type="button" onclick="btn_addbj()"><i class="fa fa-pencil"></i>&nbsp;添加备件</button>
+                        </div>
+                        <table id="atpbiztablePart"></table>
+                    </div>
+                </div>
+            </div>
+            <!--        选择备件     -->
+            <div class="addbj">
+                <div class="addbj2"></div>
+                <div class="modal-body" style="margin-top: 20px;">
+                    <label class="col-sm-2 control-label"  style="color: #fff;margin-top: 5px;">备件：</label>
+                    <div class="col-sm-4">
+                        <select name="ppl_partid" id="add_ppl_partid" class="chosen-select">
+                            <foreach name="part" item="vo"  >
+                                <option value="{$vo.part_atpid}">{$vo.part_name}({$vo.part_format})</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <label class="col-sm-2 control-label" style="color: #fff;margin-top: 5px;">数目：</label>
+                    <div class="col-sm-4">
+                        <input id="add_ppl_outdevicemodel" type="number" value="1" class="form-control" style="width: 200px;height: 30px;" >
+                    </div>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <button type="button" class="btn btn-default addbjclose">关闭</button>
+                    <button type="button" name="bc" id="addbjsubmit" class="btn btn-primary">添加</button>
+                </div>
+
+            </div>
+
+            <!--        编辑备件     -->
+            <div class="savebj">
+                <div class="savebj2"></div>
+                <div class="modal-body" style="margin-top: 20px;">
+                    <label class="col-sm-2 control-label" style="color: #fff;margin-top: 5px;">备件：</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="save_part_name" value="" id="save_part_name" readonly>
+                        <input type="hidden" name="save_ppl_partid" value="" id="save_ppl_partid" readonly>
+                        <input type="hidden" name="save_rl_atpid" value="" id="save_rl_atpid" readonly>
+                        <input type="hidden" name="save_ppl_atpid" value="" id="save_ppl_atpid" readonly>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <label class="col-sm-2 control-label" style="color: #fff;margin-top: 5px;">数目：</label>
+                    <div class="col-sm-4">
+                        <input id="save_ppl_outdevicemodel" type="number" value="" class="form-control" style="width: 200px;height: 30px;" >
+                    </div>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <button type="button" class="btn btn-default savebjclose">关闭</button>
+                    <button type="button" name="bc" id="savebjsubmit" class="btn btn-primary">更新</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+
+
+<!--<script src="__PUBLIC__/vendor/bootstrap-table/jquery.min.js"></script>-->
+<!--<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap/js/bootstrap.min.js"></script>-->
+<!--<script src="__PUBLIC__/vendor/My97DatePicker/WdatePicker.js"></script>-->
+<!--<script src="__PUBLIC__/adminframework/js/plugins/chosen/chosen.jquery.js"></script>-->
+<!--<script src="__PUBLIC__/adminframework/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>-->
+<!--<script src="__PUBLIC__/adminframework/js/plugins/switchery/switchery.js"></script>-->
+<!--<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/bootstrap-table.js"></script>-->
+<!--<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/locale/bootstrap-table-zh-CN.js"></script>-->
+<!--<script src="__PUBLIC__/vendor/html5Validate/src/jquery-html5Validate.js"></script>-->
+
+<script>
+    $(".chosen-select").chosen({disable_search_threshold: 10, search_contains: true,width:'292px'});
+    $(function () {
+        var rl_atpid = $("#rl_atpid").val();
+        $('#atpbiztablePart').bootstrapTable({
+            url: '__CONTROLLER__/getDataPart?ppl_repairlogid='+rl_atpid,         //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+            toolbar: '#atpbiztoolbarAlm',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            iconSize: 'outline',
+            sortable: true,                     //是否启用排序
+            sortName:"part_atpcreatedatetime",
+            sortOrder: "asc",                   //排序方式
+            queryParams: queryParams,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [5,10, 25, 50, 100],        //可供选择的每页的行数（*）
+            // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            // strictSearch: true,
+            // showColumns: true,                  //是否显示所有的列
+            // showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            // clickToSelect: true,                //是否启用点击选中行
+//            height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "ppl_atpid",                     //每一行的唯一标识，一般为主键列
+            // showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+//            cardView: true,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            // detailFormatter: "detailFormatter",
+            columns: [
+                [
+                    // {checkbox: true},
+                    {title: '序号', width: 150,align:'center',
+                        formatter: function (value, row, index)
+                        {
+                            var option =  $('#atpbiztablePart').bootstrapTable("getOptions");
+                            return option.pageSize * (option.pageNumber - 1) + index + 1;
+                        }
+                    },
+                    {field: 'part_name', title: '备件', sortable: true, align:'center', valign:'middle',},
+                    {field: 'ppl_outdevicemodel', title: '数量', sortable: true, align:'center', valign:'middle',},
+                    {field: 'part_format', title: '规格', sortable: true, align:'center', valign:'middle',},
+                    {field: 'ppl_atpid', title: '操作', sortable: true, align:'center', valign:'middle',
+                        formatter: function (value, row, index) {
+                            var inp = "'"+  value +"'";
+                            var rl_atpid = "'"+  rl_atpid +"'";
+                            var a = '<a  class="btn btn-success btn-xs" onclick="opensavebj('+ inp +','+ rl_atpid +')">编辑</a>&nbsp;';
+                            a += '<a  class="btn btn-danger btn-xs" onclick="delbj('+ inp +')">删除</a>&nbsp;';
+                            return a;
+                        }
+                    },
+                    {field: 'ppl_atpid', title: '主键',visible:false},
+                ]
+            ],
+            // 每行鼠标双击事件
+            onDblClickRow: function (row) {
+
+            },
+        });
+    });
+    //选择框的样式调整。
+    //    $(".chosen-select").chosen({disable_search_threshold: 0, search_contains: true,width:'100%'});
+    function queryParams(params) {  //配置参数
+        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            limit: params.limit,   //页面大小
+            offset: params.offset,  //页码
+            search: params.search,
+            sort: params.sort,  //排序列名
+            sortOrder: params.order//排位命令（desc，asc）
+        };
+        return temp;
+    }
+    $(".js-switch").each(function(){
+        new Switchery(this, {color: '#1AB394'});
+    });
+    $(".file-pretty").prettyFile();
+    $(".chosen-select").chosen({disable_search_threshold: 10, search_contains: true,width:'288px'});
+
+    // 添加备件
+    function btn_addbj(){
+        $(".addbj").show();
+    }
+    // 编辑备件
+    function opensavebj(ppl_atpid,rl_atpid){
+        $.post('__CONTROLLER__/partupdateshow', {ppl_atpid: ppl_atpid,rl_atpid:rl_atpid}, function (data) {
+            if(data){
+                $("#save_part_name").val(data.part_name);
+                $("#save_ppl_atpid").val(data.ppl_atpid);
+                $("#save_ppl_partid").val(data.ppl_partid);
+                $("#save_rl_atpid").val(data.rl_atpid);
+                $("#save_ppl_outdevicemodel").val(data.ppl_outdevicemodel);
+                $(".savebj").show();
+            }
+        });
+    }
+    //删除备件
+    function delbj(ppl_atpid){
+        $.post('__CONTROLLER__/partdel', {ppl_atpid: ppl_atpid}, function (data) {
+            $("#atpbiztablePart").bootstrapTable('refresh');
+        });
+    }
+
+    $("#addbjsubmit").click(function(){
+        // alert(1111);
+        var rl_atpid = $("#rl_atpid").val();  // 维修单ID
+        var ppl_partid = $("#add_ppl_partid").find("option:selected").val(); //备件ID
+        var ppl_outdevicemodel = $("#add_ppl_outdevicemodel").val();  //备件数量
+        if(ppl_outdevicemodel==''){
+            alert("备件数量不能为0");
+            return false;
+        }
+        if (ppl_partid == "") {
+            alert("请选择备件");
+            return false;
+        } else {
+            $.post("__CONTROLLER__/partadd", {
+                'ppl_repairlogid':rl_atpid,
+                'ppl_partid': ppl_partid,
+                'ppl_outdevicemodel': ppl_outdevicemodel
+            }, function (data) {
+                $(".addbj").hide();
+                $("#atpbiztablePart").bootstrapTable('refresh');
+            })
+        }
+    });
+
+    $("#savebjsubmit").click(function(){
+        var rl_atpid = $("#save_rl_atpid").val();
+        var ppl_partid = $("#save_ppl_partid").val();
+        var ppl_outdevicemodel = $("#save_ppl_outdevicemodel").val();  //备件数量
+        var ppl_atpid = $("#save_ppl_atpid").val();
+        // alert(ppl_repairlogid);
+        if(ppl_outdevicemodel==''){
+            alert("备件数量不能为0");
+            return false;
+        }else{
+            $.post("__CONTROLLER__/partupdate", {
+                'ppl_repairlogid':rl_atpid,
+                'ppl_partid': ppl_partid,
+                'ppl_atpid': ppl_atpid,
+                'ppl_outdevicemodel': ppl_outdevicemodel
+            }, function (data) {
+                $(".savebj").hide();
+                $("#atpbiztablePart").bootstrapTable('refresh');
+            })
+        }
+    });
+
+    $(".addbjclose").click(function(){
+        $(".addbj").hide();
+    });
+    $(".savebjclose").click(function(){
+        $(".savebj").hide();
+    });
+
+
+</script>

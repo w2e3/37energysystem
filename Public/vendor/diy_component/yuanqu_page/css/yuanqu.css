@@ -1,0 +1,551 @@
+@charset "utf-8";
+html,body {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	overflow: hidden;
+}
+/* 初始化样式 */
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+img {
+    border: none;
+    vertical-align: middle;
+}
+body,p,form,input,button,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: hidden
+}
+textarea {
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    -webkit-appearance: none;
+}
+table {
+    border-collapse: collapse;
+}
+input,select,textarea {
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+     -webkit-appearance: none;
+}
+a {
+    outline: 0;
+    cursor: pointer;
+    *star: expression(this.onbanner=this.blur());
+}
+a:link,
+a:active {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+    -webkit-touch-callout: none;
+}
+em,i {
+    font-style: normal;
+}
+li,ol {
+    list-style: none;
+}
+.border_top {
+	border-top: 1px solid #ccc;
+}
+.text_right {
+	text-align: right;
+}
+.text_left {
+	text-align: left;
+}
+.bold {
+	font-weight: 600;
+}
+.clearfix:after {
+    clear:both;
+    content:'';
+    display:block;
+    width: 0;
+    height: 0;
+    visibility:hidden;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+.border_bottom {
+	border-bottom: 1px solid #ccc;
+}
+.border_right {
+	border-right: 1px solid #ccc;
+}
+.point1 {
+	display: block;
+	width: 7.5%;
+	height: 19%;
+	background: url('../images/house1.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 42%;
+	top: 33%;
+	opacity: 0;
+}
+.point2 {
+	display: block;
+	width: 8.5%;
+	height: 18%;
+	background: url('../images/house2.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 36%;
+	top: 26%;
+	opacity: 0;
+}
+.point3 {
+	display: block;
+	width: 7.8%;
+	height: 15%;
+	background: url('../images/house3.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 51.5%;
+	top: 17%;
+	opacity: 0;
+}
+.point4 {
+	display: block;
+	width: 7.5%;
+	height: 19%;
+	background: url('../images/house4.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 54.2%;
+	top: 25%;
+	opacity: 0;
+}
+.point5 {
+	display: block;
+	width: 9%;
+	height: 17%;
+	background: url('../images/house5.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 46%;
+	top: 48%;
+	opacity: 0;
+}
+.point6 {
+	display: block;
+	width: 9%;
+	height: 17%;
+	background: url('../images/house6.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 56.5%;
+	top: 41%;
+	opacity: 0;
+}
+.point7 {
+	display: block;
+	width: 8%;
+	height: 15%;
+	background: url('../images/house7.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 59%;
+	top: 15%;
+	opacity: 0;
+}
+.point8 {
+	display: block;
+	width: 8.8%;
+	height: 15%;
+	background: url('../images/house8.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 27.7%;
+	top: 34%;
+	opacity: 0;
+}
+/* 左边低楼 */
+.point9 {
+	display: block;
+	width: 6.2%;
+	height: 12%;
+	background: url('../images/house9.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 30%;
+	top: 49%;
+	opacity: 0;
+}
+.point10 {
+	display: block;
+	width: 5.7%;
+	height: 14.2%;
+	background: url('../images/house10.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 36%;
+	top: 46%;
+	opacity: 0;
+}
+.point11 {
+	display: block;
+	width: 6.5%;
+	height: 17%;
+	background: url('../images/house11.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 32.5%;
+	top: 58%;
+	opacity: 0;
+}
+.point12 {
+	display: block;
+	width: 6%;
+	height: 15%;
+	background: url('../images/house12.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 38.8%;
+	top: 58%;
+	opacity: 0;
+}
+/* 右边低楼 */
+.point13 {
+	display: block;
+	width: 7%;
+	height: 14%;
+	background: url('../images/house13.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 61%;
+	top: 29%;
+	opacity: 0;
+}
+.point14 {
+	display: block;
+	width: 7%;
+	height: 11%;
+	background: url('../images/house14.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 64.5%;
+	top: 27%;
+	opacity: 0;
+}
+.point15 {
+	display: block;
+	width: 7%;
+	height: 10%;
+	background: url('../images/house15.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 65%;
+	top: 41%;
+	opacity: 0;
+}
+.point16 {
+	display: block;
+	width: 7.2%;
+	height: 14%;
+	background: url('../images/house16.png');
+	background-size: 100% 100%;
+	position:absolute;
+	left: 68.5%;
+	top: 34%;
+	opacity: 0;
+}
+.full_building {
+	position: relative;
+}
+.right_title {
+	line-height: 40px;
+}
+
+.unusual p {
+	border: 1px solid #1fc230;
+	background: #fff;
+	border-radius: 10px;
+	padding: 4px 10px;
+}
+.unusual {
+	position: absolute;
+	width: 100px;
+	text-align: center;
+	color: #333;
+	display: none;
+}
+.unusual1 {
+	top: 28%;
+	left: 42%;
+}
+.unusual2 {
+	top: 20%;
+	left: 36%;
+}
+.unusual3 {
+	top: 12%;
+	left: 52%;
+}
+.unusual4 {
+	top: 21%;
+	left: 54%;
+}
+.unusual5 {
+	top: 44%;
+	left: 47%;
+}
+.unusual6 {
+	top: 36%;
+	left: 58%;
+}
+.unusual7 {
+	top: 9%;
+	left: 60%;
+}
+.unusual8 {
+	top: 29%;
+	left: 28%;
+}
+.unusual9 {
+	top: 43%;
+	left: 29%;
+}
+.unusual10 {
+	top: 39%;
+	left: 35%;
+}
+.unusual11 {
+	top: 53%;
+	left: 31%;
+}
+ .unusual12 {
+	top: 53%;
+	left: 39%;
+}
+.unusual13 {
+	top: 23%;
+	left: 60%;
+}
+.unusual14 {
+	top: 20%;
+	left: 65%;
+}
+.unusual15 {
+	top: 35%;
+	left: 64%;
+}
+.unusual16 {
+	top: 29%;
+	left: 69%;
+}
+
+
+.list-right {
+	position: fixed;
+	top: 20px;
+	right: 0;
+	width: 330px;
+	height: 90%;
+	overflow: auto;
+}
+.list-right header {
+	background: #0b3d85;
+	height: 40px;
+	color: #fff;
+	padding-top: 10px;
+	border-radius: 5px 5px 0 0;
+}
+.list-right header p {
+	border-left: 4px solid #1fc230;
+	height: 20px;
+	line-height: 20px;
+	padding-left: 10px; 
+	overflow: hidden;
+}
+.alarmlist {
+	background: #fff;
+	color: #333;
+}
+.alarmlist ul {
+    max-height: 163px;
+    overflow-y: auto;
+    overflow-x: none;
+}
+.alarmlist li {
+	padding: 8px;
+}
+.alarmlist a {
+	color: #333;
+}
+.alarmlist .tips {
+	overflow: hidden;
+	width: 40px;
+	height: 20px;
+	background: red;
+	border-radius: 20px;
+	line-height: 20px;
+	text-align: center;
+	font-size: 12px;
+	color: #fff;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.alarmlist .tips-unusual {
+	width: 50px;
+	height: 20px;
+	background: #fe6c0c;
+	border-radius: 20px;
+	line-height: 20px;
+	text-align: center;
+	font-size: 12px;
+	color: #fff;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.alarmlist .content div{
+	font-size: 12px;
+	line-height: 15px;
+}
+.address {
+	margin-left: 60px;
+}
+
+.listfooter {
+	background: #fff;
+	display: flex;
+	padding: 8px;
+}
+.listfooter > div {
+	color: #333;
+	flex: 1;
+	font-size: 12px;
+	text-align: center;
+	border-right: 1px solid #ccc;
+}
+.listfooter > div >p:nth-child(2) {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 30px;
+}
+.listfooter > div:last-child {
+	border-right: none;
+}
+.energy_message {
+	width: 100%;
+	border-radius: 10px;
+	overflow: hidden;
+	margin-bottom: 5px;
+} 
+/* 总数据展示 */
+.total1 {
+	position: fixed;
+	top: 50px;
+	left: 20px;
+	width: 300px;
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	border: 1px solid #0b3d85;
+}
+
+.total1 header {
+	background: #0b3d85;
+	height: 40px;
+	color: #fff;
+	padding-top: 10px;
+	border-radius: 5px 5px 0 0;
+}
+.total1 header p {
+	border-left: 4px solid #1fc230;
+	height: 20px;
+	line-height: 20px;
+	padding-left: 10px; 
+	overflow: hidden;
+}
+
+.totalcontent {
+	padding: 10px;
+}
+.totalhouse {
+	width: 100px;
+}
+.rightcontent {
+	margin-left: 10px;
+}
+.rightcontent li {
+	line-height: 30px;
+}
+.zhankai {
+	margin-right: 10px;
+	font-size: 14px;
+}
+.green {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: green;
+	margin-right: 4px;
+}
+.blue {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: blue;
+	margin-right: 4px;
+}
+.orange {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: #ef7b51;
+	margin-right: 4px;
+}
+.yellow {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: #ffb936;
+	margin-right: 4px;
+}
+.qing {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: cyan;
+	margin-right: 4px;
+}
+.up-red {
+	color: red;
+}
+.down-green {
+	color: green;
+}
+.alarmlist {
+    max-height: 226px;
+    overflow-y: auto;
+    overflow-x: none;
+    display: none;
+}

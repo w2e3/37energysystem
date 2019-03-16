@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="water" style="width: 49%; max-width: 400px; height: 200px;display: inline-block;"></div>
+<div id="electricity" style="width: 49%; max-width: 400px; height: 200px;display: inline-block;"></div>
+<div id="hot" style="width: 49%; max-width: 400px; height: 200px;display: inline-block;"></div>
+<div id="cold" style="width: 49%; max-width: 400px; height: 200px;display: inline-block;"></div>
+
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="js/highcharts-more.js"></script>
+<script>
+$(function () {
+    $('#electricity').highcharts({
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: ``
+        },
+        pane: {
+           startAngle: -130,
+           endAngle: 130,
+            background: [{
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#FFF'],
+                        [1, '#333']
+                    ]
+                },
+                borderWidth: 0,
+                outerRadius: '109%'
+            }, {
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#333'],
+                        [1, '#FFF']
+                    ]
+                },
+                borderWidth: 1,
+                outerRadius: '107%'
+            }, {
+                // default background
+            }, {
+                backgroundColor: '#DDD',
+                borderWidth: 0,
+                outerRadius: '105%',
+                innerRadius: '103%'
+            }]
+        },
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 200,
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: ``
+            },
+            plotBands: [{
+                from: 0,
+                to: 70,
+                color: '#55BF3B' // green
+            }, {
+                from: 70,
+                to: 140,
+                color: '#DDDF0D' // yellow
+            }, {
+                from: 140,
+                to: 200,
+                color: '#DF5353' // red
+            }]
+        },
+        series: [{
+            name: '用电量',
+            data: [120],
+            tooltip: {
+                valueSuffix: ' MW'
+            }
+        }]
+    });
+    $('#water').highcharts({
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: ``
+        },
+        pane: {
+           startAngle: -130,
+           endAngle: 130,
+            background: [{
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#FFF'],
+                        [1, '#333']
+                    ]
+                },
+                borderWidth: 0,
+                outerRadius: '109%'
+            }, {
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#333'],
+                        [1, '#FFF']
+                    ]
+                },
+                borderWidth: 1,
+                outerRadius: '107%'
+            }, {
+                // default background
+            }, {
+                backgroundColor: '#DDD',
+                borderWidth: 0,
+                outerRadius: '105%',
+                innerRadius: '103%'
+            }]
+        },
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 200,
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: 't'
+            },
+            plotBands: [{
+                from: 0,
+                to: 70,
+                color: '#55BF3B' // green
+            }, {
+                from: 70,
+                to: 140,
+                color: '#DDDF0D' // yellow
+            }, {
+                from: 140,
+                to: 200,
+                color: '#DF5353' // red
+            }]
+        },
+        series: [{
+            name: '用水量',
+            data: [80],
+            tooltip: {
+                valueSuffix: '千吨'
+            }
+        }]
+    });
+    $('#hot').highcharts({
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: ``
+        },
+        pane: {
+            startAngle: -130,
+            endAngle: 130,
+            background: [{
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#FFF'],
+                        [1, '#333']
+                    ]
+                },
+                borderWidth: 0,
+                outerRadius: '109%'
+            }, {
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#333'],
+                        [1, '#FFF']
+                    ]
+                },
+                borderWidth: 1,
+                outerRadius: '107%'
+            }, {
+                // default background
+            }, {
+                backgroundColor: '#DDD',
+                borderWidth: 0,
+                outerRadius: '105%',
+                innerRadius: '103%'
+            }]
+        },
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 200,
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: ``
+            },
+            plotBands: [{
+                from: 0,
+                to: 70,
+                color: '#55BF3B' // green
+            }, {
+                from: 70,
+                to: 140,
+                color: '#DDDF0D' // yellow
+            }, {
+                from: 140,
+                to: 200,
+                color: '#DF5353' // red
+            }]
+        },
+        series: [{
+            name: '暖能用量',
+            data: [70],
+            tooltip: {
+                valueSuffix: ' MW'
+            }
+        }]
+    });
+    $('#cold').highcharts({
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: ``
+        },
+        pane: {
+            startAngle: -130,
+            endAngle: 130,
+            background: [{
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#FFF'],
+                        [1, '#333']
+                    ]
+                },
+                borderWidth: 0,
+                outerRadius: '109%'
+            }, {
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#333'],
+                        [1, '#FFF']
+                    ]
+                },
+                borderWidth: 1,
+                outerRadius: '107%'
+            }, {
+                // default background
+            }, {
+                backgroundColor: '#DDD',
+                borderWidth: 0,
+                outerRadius: '105%',
+                innerRadius: '103%'
+            }]
+        },
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 200,
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: ``
+            },
+            plotBands: [{
+                from: 0,
+                to: 70,
+                color: '#55BF3B' // green
+            }, {
+                from: 70,
+                to: 140,
+                color: '#DDDF0D' // yellow
+            }, {
+                from: 140,
+                to: 200,
+                color: '#DF5353' // red
+            }]
+        },
+        series: [{
+            name: '冷能用量',
+            data: [70],
+            tooltip: {
+                valueSuffix: 'MW'
+            }
+        }]
+    });
+});
+</script>
+	
+</body>
+</html>

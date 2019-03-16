@@ -1,0 +1,56 @@
+﻿<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">数据搜索</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_search_form" role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">账号：</label><div class="col-sm-4"><input id="search_u_account" type="text" class="form-control"></div>
+                    <label class="col-sm-2 control-label">姓名：</label><div class="col-sm-4"><input id="search_u_name" type="text" class="form-control"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">生日开始：</label>
+                    <div class="col-sm-4">
+                        <input id="search_u_birthday_begin" type="text" class="form-control" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+                    </div>
+                    <label class="col-sm-2 control-label">生日结束：</label>
+                    <div class="col-sm-4">
+                        <input id="search_u_birthday_end" type="text" class="form-control" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">角色：</label>
+                    <div class="col-sm-4">
+                        <select id="search_u_role" class="chosen-select-search" style="width: 294px;" >
+                            <option value="">&nbsp;</option>
+                            <option value="管理员" >管理员</option>
+                            <option value="安全员" >安全员</option>
+                            <option value="审计员1">审计员1</option>
+                            <option value="审计员2">审计员2</option>
+                            <option value="审计员3">审计员3</option>
+                            <option value="审计员4">审计员4</option>
+                            <option value="审计员5">审计员5</option>
+                            <option value="审计员6">审计员6</option>
+                            <option value="审计员7">审计员7</option>
+                            <option value="审计员8">审计员8</option>
+                            <option value="审计员9">审计员9</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-2 control-label"></label><div class="col-sm-4"></div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            <button type="button" data-dismiss="modal" id="sys_dlg_search_submit" class="btn btn-primary">搜索</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+    $(".chosen-select-search").chosen({disable_search_threshold: 6, search_contains: true,width:'284px'});
+</script>

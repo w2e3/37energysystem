@@ -1,0 +1,86 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="园区漫游"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">综合信息</h1>
+    </header>
+    <div class="content">
+        <div class="atp-list" style="width: 90%;margin:auto">
+            <iframe frameborder=0 width=100% height=400 marginheight=0 marginwidth=0 scrolling=no
+                    src='__PUBLIC__/vendor/diy_component/yuanqu_page/mobileyibiao.html'></iframe>
+        </div>
+        <div class="atp-list" style="width: 90%;margin:auto">
+            <iframe frameborder=0 width=100% height=300 marginheight=0 marginwidth=0 scrolling=no
+                    src='__PUBLIC__/vendor/diy_component/yuanqu_page/mobile-echart.html'></iframe>
+        </div>
+        <div class="list-block atp-list content-block" style="margin: 0;">
+            <ul>
+                <li>
+                    <div class="item-link item-content external" onclick="location.href='__CONTROLLER__/list2'">
+                        <div class="item-media"><img src="__PUBLIC__/mobile/images/icon2.png" width="80"></div>
+                        <div class="item-inner">
+                            <div class="item-title">报警</div>
+                            <div class="item-subtitle">最近：40项</div>
+                            <div class="item-title-row">
+                                <span class="button button-fill button-success already" style="margin-bottom: 12px"
+                                      onclick='$.toast("你点击了确认");'>确认</span>
+                                <span class="button button-fill button-danger ignore"
+                                      onclick='$.toast("你点击了忽略");'>忽略</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-link item-content external" onclick="location.href='__CONTROLLER__/list2'">
+                        <div class="item-media"><img src="__PUBLIC__/mobile/images/icon2.png" width="80"></div>
+                        <div class="item-inner">
+                            <div class="item-title">报警</div>
+                            <div class="item-subtitle">最近：40项</div>
+                            <div class="item-title-row">
+                                <span class="button button-fill button-success already" style="margin-bottom: 12px"
+                                      onclick='$.toast("你点击了确认");'>确认</span>
+                                <span class="button button-fill button-danger ignore"
+                                      onclick='$.toast("你点击了忽略");'>忽略</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-link item-content external" onclick="location.href='__CONTROLLER__/list2'">
+                        <div class="item-media"><img src="__PUBLIC__/mobile/images/icon2.png" width="80"></div>
+                        <div class="item-inner">
+                            <div class="item-title">报警</div>
+                            <div class="item-subtitle">最近：40项</div>
+                            <div class="item-title-row">
+                                <span class="button button-fill button-success already" style="margin-bottom: 12px"
+                                      onclick='$.toast("你点击了确认");'>确认</span>
+                                <span class="button button-fill button-danger ignore"
+                                      onclick='$.toast("你点击了忽略");'>忽略</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+    // 取消点击事件冒泡
+    $(".ignore").click(function (event) {
+        event.stopPropagation();
+    });
+    $(".already").click(function (event) {
+        event.stopPropagation();
+    });
+</script>
+<include file="Public:footer"/>

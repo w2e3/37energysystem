@@ -1,0 +1,173 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="租户管理"/>
+
+<!-- tab1  -->
+
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">租户能源</h1>
+    </header>
+
+
+    <div class="content" id='detail-page'>
+        <div  style="height: 40px;margin-top: 50px;width: 90%;" >
+            <span style="width: 45%; display: inline-block;">查询类型：</span>
+
+            <select name="option" id="select" class="chosen-select" onchange="choice()">
+                <option value="year" <if condition="($Think.get.timerange eq 'year')">selected</if> >按年查询</option>
+                <option value="month" <if condition="($Think.get.timerange eq 'month')">selected</if> >按月查询</option>
+                <option value="day" <if condition="($Think.get.timerange eq 'day')">selected</if> >按日查询</option>
+            </select>
+        </div>
+        <!--按照年查找-->
+        <div  style="height: 40px;margin-top: 10px;width: 90%;" >
+            <span style="width:30%;display: inline-block;">开始日期：</span>
+
+            <input id="startyear" type="text" class="form-control year" <if condition="($Think.get.timerange eq 'year') OR ($Think.get.timerange eq '')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy'})"  onchange="onyearsta()" required placeholder="点击选择日期" value="{$start}">
+
+            <input id="startmonth" type="text" class="form-control month" <if condition="($Think.get.timerange eq 'month')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy-MM'})" onchange="onmonthsta()" required placeholder="点击选择日期" value="{$start}">
+
+            <input id="startday" type="text" class="form-control day" <if condition="($Think.get.timerange eq 'day')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" onchange="ondaysta()" required placeholder="点击选择日期" value="{$start}"><br>
+
+
+            <span style="width:30%;display: inline-block;">结束日期：</span>
+            <input id="endyear" type="text" class="form-control year" <if condition="($Think.get.timerange eq 'year') OR ($Think.get.timerange eq '')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy'})" onchange="onyearend()" required placeholder="点击选择日期" value="{$end}">
+
+            <input id="endmonth" type="text" class="form-control month" <if condition="($Think.get.timerange eq 'month')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy-MM'})" onchange="onmonthend()" required placeholder="点击选择日期" value="{$end}">
+
+            <input id="endday" type="text" class="form-control day" <if condition="($Think.get.timerange eq 'day')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" onchange="ondayend()" required placeholder="点击选择日期" value="{$end}">
+
+            <!--<input style="width:30%;display: inline-block;"type="date" name="start_time">-->
+            <!--<input  style="width:30%;display: inline-block;"type="date" name="end_time">-->
+        </div>
+        <div style="height: 40px;margin-top: 10px;width: 90%;">
+            <button class="btn btn-warning " type="button" id="sys_index_search" style="width:60px;margin: 0 auto;"  value="查询"><i class="fa fa-search"></i>查询</button>
+        </div>
+        <div class="modal-backdrop fade in" style="z-index: -101;"></div>
+        <foreach name="Result" item="vo">
+        <div class="page-detail">
+            <div class='content-block goods-card'>
+                <h3>租户：{$vo.us_name}</h3>
+                <p>水能：{$vo.ysl}</p>
+                <p>电能：{$vo.dgl}</p>
+                <p>冷能：{$vo.yll}</p>
+                <p>暖能：{$vo.ynl}</p>
+            </div>
+        </div>
+        </foreach>
+    </div>
+
+</div>
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+
+<script src="__PUBLIC__/vendor/bootstrap-table/jquery.min.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/vendor/My97DatePicker/WdatePicker.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/switchery/switchery.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/locale/bootstrap-table-zh-CN.js"></script>
+<script src="__PUBLIC__/vendor/html5Validate/src/jquery-html5Validate.js"></script>
+<script type="text/javascript" src="__PUBLIC__/vendor/zTree_v3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="__PUBLIC__/vendor/zTree_v3/js/jquery.ztree.excheck.js"></script>
+<script src="__PUBLIC__/vendor/diy_component/func_scrolltab/atppagetab.js"></script>
+<script src="__PUBLIC__/vendor/ueditor/third-party/highcharts/highcharts.js"></script>
+<script src="__PUBLIC__/vendor/ueditor/third-party/highcharts/highcharts-3d.js"></script>
+<script>
+    GLOBAL_SEARCHNAME = "姓名";
+    $(function () {
+
+         console.log(name+order);
+
+        });
+
+    function choice(){
+        var val = $("#select").val();
+        if(val == 'year'){
+            $(".day").hide();
+            $(".day").val();
+            $(".month").val();
+            $(".month").hide();
+            $(".year").show();
+            $("#startyear").val('');
+            $("#endyear").val('');
+        }
+        if(val == 'month'){
+            $(".day").hide();
+            $(".month").show();
+            $(".year").hide();
+            $(".day").val('');
+            $(".year").val('');
+            $("#startmonth").val('');
+            $("#endmonth").val('');
+        }
+        if(val == 'day'){
+            $(".day").show();
+            $(".month").hide();
+            $(".year").hide();
+            $(".month").val('');
+            $(".year").val('');
+            $("#startday").val('');
+            $("#endday").val('');
+        }
+    }
+    function onyearsta(){
+        onyearsta = $("#startyear").val();
+        $('#start').val(onyearsta);
+    }
+    function onmonthsta(){
+        onmonthsta = $("#startmonth").val();
+        $('#start').val(onmonthsta);
+    }
+    function ondaysta(){
+        ondaysta = $("#startday").val();
+        $('#start').val(ondaysta);
+    }
+    function onyearend(){
+        onyearend = $("#endyear").val();
+        $('#end').val(onyearend);
+    }
+    function onmonthend(){
+        onmonthend = $("#endmonth").val();
+        $('#end').val(onmonthend);
+    }
+    function ondayend(){
+        ondayend = $("#endday").val();
+        $('#end').val(ondayend);
+    }
+</script>
+<script>
+    $('#sys_index_search').on('click', function () {
+        //var selectedtree = window.parent.ATP_SELECTED_TREE_ELEMENT();
+
+
+        var startyear = $('#startyear').val();
+        var endyear = $('#endyear').val()
+
+
+        var startmonth = $('#startmonth').val();
+        var endmonth = $('#endmonth').val()
+
+        var startday = $('#startday').val();
+        var endday = $('#endday').val();
+
+        var start = startyear!='' ? startyear:startyear;
+        var end = endyear!='' ? endyear:endyear;
+
+        var start = startmonth!='' ? startyear:startmonth;
+        var end = endmonth!='' ? endyear:endmonth;
+
+        var start = startday!='' ? startyear:startday;
+        var end = endday!='' ? endyear:endday;
+
+        window.location.href='__CONTROLLER__/detail?start='+start + '&end='+end + '&bs={$bs}';
+    });
+
+</script>
+<include file="Public:footer"/>

@@ -1,0 +1,332 @@
+﻿﻿<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">数据编辑</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+                <div>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        厂家设备：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select name="dev_devicemodelid" id="dev_devicemodelid" class="chosen-select" required>
+                                            <option value="">&nbsp;==请选择==</option>
+                                            <foreach name="ds_devicemodel" item="t_v" key="t_k" >
+                                                <option value="{$t_v.dm_atpid}" <if condition="$data['dev_devicemodelid'] eq $t_v['dm_atpid']">selected<else /></if>>{$t_v.dm_name}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        设备卡编号：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_code" type="text" value="{$data.dev_code}" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        园区位置
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select name="dev_regionid" id="dev_regionid" class="chosen-select" required>
+                                            <option value="">&nbsp;==请选择==</option>
+                                            <foreach name="ds_region" item="t_v" key="t_k">
+                                                <option value="{$t_v.rgn_atpid}" <if condition="$data['dev_regionid'] eq $t_v['rgn_atpid']">selected<else /></if>>{$t_v.rgn_name}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        数据表名称：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_tablename" type="text" value="{$data.dev_tablename}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        设备卡所属部门：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select name="dev_departmentid" id="dev_department" class="chosen-select" required>
+                                            <option value="">&nbsp;==请选择==</option>
+                                            <foreach name="ds_department" item="dpm_v" key="dpm_k" >
+                                                <option value="{$dpm_v.dpm_atpid}" <if condition="$data['dev_departmentid'] eq $dpm_v['dpm_atpid']">selected<else /></if> >{$dpm_v.dpm_name}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        设备卡使用部门：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select name="dev_usedepartmentid" id="dev_usedepartment" class="chosen-select" required>
+                                            <option value="">&nbsp;==请选择==</option>
+                                            <foreach name="ds_department" item="dpm_v" key="dpm_k" >
+                                                <option value="{$dpm_v.dpm_atpid}" <if condition="$data['dev_usedepartmentid'] eq $dpm_v['dpm_atpid']">selected<else /></if> >{$dpm_v.dpm_name}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        设备卡联系电话：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_linkphone" type="telephone"  value="{$data.dev_linkphone}" class="form-control">
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">
+                                        状态：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select name="dev_status" class="chosen-select" >
+                                            <option value="">&nbsp;==请选择==</option>
+                                            <foreach name="ds_devstatus" item="ds_v" key="ds_k" >
+                                                <option value="{$ds_v}" <if condition="$data['dev_status'] eq $ds_v">selected<else /></if> >{$ds_v}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 control-label">
+                                        到货日期：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_arrivedatetime" type="text"  value="{$data.dev_arrivedatetime}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control">
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">
+                                        安装日期：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_startdatetime" type="text"  value="{$data.dev_startdatetime}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        生产日期：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_produceddate" type="text"  value="{$data.dev_produceddate}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control">
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        停用日期：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_stopdatetime" type="text"  value="{$data.dev_stopdatetime}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        设备价格：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_equipmentprice" type="text" value="{$data.dev_equipmentprice}" class="form-control" placeholder="单位：元（人民币）">
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        入库日期：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_instockdate" type="text"  value="{$data.dev_instockdate}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control">
+                                    </div>
+<!--
+                                    <label class="col-sm-2 control-label">
+                                        采集号：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_acquisition" type="text" value="{$data.dev_acquisition}" class="form-control">
+                                    </div>
+                                    --->
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        入库类型：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_instocktype" type="text" value="{$data.dev_instocktype}" class="form-control">
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        保修时间：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_guaranteelastdate" type="text"  value="{$data.dev_guaranteelastdate}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control">
+                                    </div>
+                                    <!--
+                                                                        <label class="col-sm-2 control-label">
+                                                                            采集号：
+                                                                        </label>
+                                                                        <div class="col-sm-4">
+                                                                            <input name="dev_acquisition" type="text" value="{$data.dev_acquisition}" class="form-control">
+                                                                        </div>
+                                                                        --->
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        验收人：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select name="dev_ysempid" class="chosen-select" >
+                                            <option value="">&nbsp;==请选择==</option>
+                                            <foreach name="emp" item="ds_v" key="ds_k" >
+                                                <option value="{$ds_v.emp_atpid}" <if condition="$data['dev_ysempid'] eq $ds_v['emp_atpid']">selected<else /></if> >{$ds_v['emp_name']}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        验收时间：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_ysdate" type="text"  value="{$data.dev_ysdate}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control">
+                                    </div>
+                                    <!--
+                                                                        <label class="col-sm-2 control-label">
+                                                                            采集号：
+                                                                        </label>
+                                                                        <div class="col-sm-4">
+                                                                            <input name="dev_acquisition" type="text" value="{$data.dev_acquisition}" class="form-control">
+                                                                        </div>
+                                                                        --->
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        出库类型：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_outstocktype" type="text" value="{$data.dev_outstocktype}" class="form-control">
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        出库时间：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_outstockdate" type="text"  value="{$data.dev_outstockdate}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control">
+                                    </div>
+                                    <!--
+
+                                                                        --->
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        操作人：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select name="dev_opempid" class="chosen-select" >
+                                            <option value="">&nbsp;==请选择==</option>
+                                            <foreach name="emp" item="ds_v" key="ds_k" >
+                                                <option value="{$ds_v.emp_atpid}" <if condition="$data['dev_opempid'] eq $ds_v['emp_atpid']">selected<else /></if> >{$ds_v['emp_name']}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        保修期：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_guaranteetime" type="text"  value="{$data.dev_guaranteetime}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        采集号：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_acquisition" type="text" value="{$data.dev_acquisition}" class="form-control">
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        名称：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_name" type="text"  value="{$data.dev_name}"  class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        最后上传时间：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_lastuploadtime" type="text"  value="{$data.dev_lastuploadtime}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control">
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        IP地址：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_ip" type="text" value="{$data.dev_ip}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 control-label">
+                                        未上传时长：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_unuploadlegth" type="text" value="{$data.dev_unuploadlegth}" class="form-control" placeholder="单位：小时">
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">
+                                        库存件类别：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_kcstatus" type="text" value="{$data.dev_kcstatus}" class="form-control" >
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 control-label">
+                                        库存备注：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="dev_kcremark" type="text" value="{$data.dev_kcremark}" class="form-control">
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input name="dev_atpid" type="hidden" value="{$data.dev_atpid}" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            <button type="button" name="bc" id="sys_dlg_submit" class="btn btn-primary">保存</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+$(function () {
+    $(".js-switch").each(function(){
+        new Switchery(this, {color: '#1AB394'});
+    });
+    $(".file-pretty").prettyFile();
+    $("#role").chosen({disable_search_threshold: 6, search_contains: true,width:'750px'});
+    $(".chosen-select").chosen({disable_search_threshold: 6, search_contains: true,width:'284px'});
+});
+</script>

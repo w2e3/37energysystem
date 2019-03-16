@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ATP-移动版</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+    <link rel="stylesheet" href="__PUBLIC__/mobile/blue/css/light7.css">
+    <link rel="stylesheet" href="__PUBLIC__/mobile/blue/css/weui.css">
+    <link rel="stylesheet" href="__PUBLIC__/mobile/blue/css/light7-swiper.css">
+    <link rel="stylesheet" href="__PUBLIC__/mobile/blue/css/light7-swipeout.css">
+    <link rel="stylesheet" href="__PUBLIC__/mobile/blue/css/app.css">
+    <style>
+
+      .page {
+        background-color: #30b5fa;
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+      }
+      .logo_img {
+          background: url('__PUBLIC__/mobile/blue/images/login_top.png');
+          background-size: 100% 100%;
+          width: 100%;
+          height: 200px;
+          padding-top: 100px;
+          text-align: center;
+          color: #fff;
+
+
+      }
+     
+    .wechat_bg .wechat_top {
+      left: 38%!important;
+    }
+
+    .weui-cell {
+      padding: 0 !important;
+    }
+    .phoneform {
+      border-radius: 10px;
+      border: 1px solid #0894ec;
+      background-color: rgba(255, 255, 255,1);
+    }
+    .page-login {
+      margin-top: 40px;
+    }
+    .copyright {
+      position: relative;
+      text-align: center;
+      margin: 40px auto;
+      color: #fff;
+    } 
+      /*CSS伪类用法*/  
+   
+    .copyright:after, .copyright:before {  
+      background: #fff;  
+      content: "";  
+      height: 1px;  
+      position: absolute;  
+      top: 50%;  
+      width: 32%;  
+      transform: scale(1, 0.5);
+    }  
+  
+    /*调整背景横线的左右距离*/  
+    .copyright:before {  
+      left: 0;  
+    }  
+  
+    .copyright:after {  
+      right: 0;  
+    }  
+
+    .alreay {
+      text-align: center; 
+      position: relative; 
+      width: 100%; 
+      color: #bbb;
+      height: 30px;
+      line-height: 30px;
+      font-size: 1.6rem;
+    }
+    </style>
+    <script src='__PUBLIC__/mobile/blue/js/i18n/cn.js'></script>
+  </head>
+  <body>
+
+<div class="page">
+  <div class="content">
+      <div class="logo_img">
+        <h3>ATP开发平台移动版</h3>
+        <h4>Agile Platform</h4>
+      </div>
+    <div class="page-login">
+      
+      <div class="list-block inset text-center">
+
+        <form action="" class="phoneform">
+        <div class="weui-cell bordertop">
+              <div class="weui-cell__hd">
+                  <label class="weui-label" style="width: 85px;">手机号</label>
+              </div>
+              <div class="weui-cell__bd">
+                  <input class="weui-input" name="phone" type="tel" pattern="[0-9]*" placeholder="请输入手机号"/>
+              </div>
+          </div>
+          <div class="weui-cell weui-cell_vcode borderbom">
+              <div class="weui-cell__hd">
+                  <label class="weui-label" style="width: 85px;">验证码</label>
+              </div>
+              <div class="weui-cell__bd">
+                  <input class="weui-input" name="vcode" type="number" placeholder="请输入验证码"/>
+              </div>
+              <div class="weui-cell__ft">
+                  <a class="weui-vcode-btn">获取验证码</a>
+              </div>
+          </div>
+        </form>
+      </div>
+      <div class="content-block">
+        <p><a class="button button-big button-fill external button-success" href="__CONTROLLER__/tab1" data-transition='fade'>登&nbsp;&nbsp;录</a></p>
+        <!-- <p class='text-center signup'>
+          <a href="#" class='pull-left' style="color:#fff">没有注册</a>
+          <a href="#" class='pull-right' style="color:#fff">忘记密码?</a>
+        </p> -->
+        <div class="copyright">其他快捷登录</div>
+        <div class="row others">
+          <a class="col-33"> <img src="__PUBLIC__/mobile/blue/images/weixin.png" alt="" width='64'></a>
+          <a class="col-33"> <img src="__PUBLIC__/mobile/blue/images/qq.png" alt="" width='64'></a>
+          <a class="col-33"> <img src="__PUBLIC__/mobile/blue/images/weibo.png" alt="" width='64'></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <script src="__PUBLIC__/mobile/blue/js/zepto.js"></script>
+    <script src="__PUBLIC__/mobile/blue/js/light7.js" ></script>
+    <script src="__PUBLIC__/mobile/blue/js/light7-swiper.js"></script>
+    <script src="__PUBLIC__/mobile/blue/js/light7-swipeout.js"></script>
+    <script src="__PUBLIC__/mobile/blue/js/app.js"></script>
+   
+  </body>
+</html>

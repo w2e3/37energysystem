@@ -1,0 +1,54 @@
+<div class="row row-lg">
+    <div class="col-sm-12">
+        <div id="atpbiztoolbar">
+            <div>
+                <label class="control-label">
+                    &nbsp;&nbsp;&nbsp;&nbsp;查询范围：
+                    <if condition="('' eq $start)"> {$lyear}年&nbsp;-&nbsp;{$tyear}年&nbsp;&nbsp;&nbsp;&nbsp;
+                        <else />
+                        {$start}&nbsp;-&nbsp;{$end}&nbsp;&nbsp;&nbsp;&nbsp;
+                    </if>
+                </label>
+                <input type="hidden" id = "ids" value="{$ids}">
+                <input type="hidden" id = "start" value="{$start}">
+                <input type="hidden" id = "end" value="{$end}">
+
+                <label>
+                    <span>查询类型：</span>
+                    <select name="option" id="select" class="chosen-select" onchange="choice()">
+                        <option value="year" <if condition="($Think.get.timerange eq 'year')">selected</if> >按年查询</option>
+                        <option value="month" <if condition="($Think.get.timerange eq 'month')">selected</if> >按月查询</option>
+                        <option value="day" <if condition="($Think.get.timerange eq 'day')">selected</if> >按日查询</option>
+                    </select>
+                </label>
+                <label class="control-label">开始时间：</label>
+                <label class="control-label">
+                    <input id="startyear" type="text" class="form-control year" <if condition="($Think.get.timerange eq 'year') OR ($Think.get.timerange eq '')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy'})"  onchange="onyearsta()" required placeholder="点击选择日期" value="{$start}">
+                    <input id="startmonth" type="text" class="form-control month" <if condition="($Think.get.timerange eq 'month')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy-MM'})" onchange="onmonthsta()" required placeholder="点击选择日期" value="{$start}">
+                    <input id="startday" type="text" class="form-control day" <if condition="($Think.get.timerange eq 'day')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" onchange="ondaysta()" required placeholder="点击选择日期" value="{$start}">
+                </label>
+                <label class="control-label">结束时间：</label>
+                <label class="control-label">
+                    <input id="endyear" type="text" class="form-control year" <if condition="($Think.get.timerange eq 'year') OR ($Think.get.timerange eq '')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy'})" onchange="onyearend()" required placeholder="点击选择日期" value="{$end}">
+                    <input id="endmonth" type="text" class="form-control month" <if condition="($Think.get.timerange eq 'month')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy-MM'})" onchange="onmonthend()" required placeholder="点击选择日期" value="{$end}">
+                    <input id="endday" type="text" class="form-control day" <if condition="($Think.get.timerange eq 'day')">style="cursor: pointer; width: 120px;"<else/>style="display: none;cursor: pointer; width: 120px;"</if> onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" onchange="ondayend()" required placeholder="点击选择日期" value="{$end}">
+                </label>
+                <br/>
+
+                <label class="control-label">统计参数选择：</label>
+                <select class="chosen-select_long" name="param[]" id="param" multiple>
+                    <foreach name="param" item="emv" key="emk">
+                        <if condition="('是' eq $emv['aux_selected'])">
+                            <option value="{$emv.p_atpid}" selected >{$emv.p_name}</option>
+                            <else />
+                            <option value="{$emv.p_atpid}" >{$emv.p_name}</option>
+                        </if>
+                    </foreach>
+                </select>
+                <button class="btn btn-warning " type="button" id="sys_index_search"><i class="fa fa-search"></i>&nbsp;查询</button>
+            </div>
+        </div>
+        <table id="atpbiztable"></table>
+        <div id="highchart" style="border:1px solid #ccc;margin-top: 20px"></div>
+    </div>
+</div>

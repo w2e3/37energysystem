@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>中关村集成电路设计院</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/yuanqumsg.css">
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+</head>
+
+<body>
+<div class="yuanqutop">
+    <img src="images/yuanqutop.jpg" width="100%">
+    <a href="javascript:;" class="point1 onehouse"></a>
+    <a href="javascript:;" class="point2 onehouse"></a>
+    <a href="javascript:;" class="point3 onehouse"></a>
+    <a href="javascript:;" class="point4 onehouse"></a>
+    <a href="javascript:;" class="point5 onehouse"></a>
+    <a href="javascript:;" class="point6 onehouse"></a>
+    <a href="javascript:;" class="point7 onehouse"></a>
+    <a href="javascript:;" class="point8 onehouse"></a>
+    <a href="javascript:;" class="point9 onehouse"></a>
+    <a href="javascript:;" class="point10 onehouse"></a>
+    <a href="javascript:;" class="point11 onehouse"></a>
+    <a href="javascript:;" class="point12 onehouse"></a>
+    <a href="javascript:;" class="point13 onehouse"></a>
+    <a href="javascript:;" class="point14 onehouse"></a>
+    <a href="javascript:;" class="point15 onehouse"></a>
+    <a href="javascript:;" class="point16 onehouse"></a>
+</div>
+<div class="backimg">
+    <div class="left-yibiao">
+        <div class="yibiao-top">
+            <div id="water" style="width: 23%; max-width: 400px; height: 200px;display: inline-block;"></div>
+            <div id="electricity" style="width: 23%; max-width: 400px; height: 200px;display: inline-block;"></div>
+            <div id="hot" style="width: 23%; max-width: 400px; height: 200px;display: inline-block;"></div>
+            <div id="cold" style="width: 23%; max-width: 400px; height: 200px;display: inline-block;"></div>
+        </div>
+        <div>
+            <iframe frameborder=0 width=100% height=400 marginheight=0 marginwidth=0 scrolling=no src='table.html'></iframe>
+        </div>
+    </div>
+    <div class="ecahrt">
+        <iframe frameborder=0 width=100% height=400 marginheight=0 marginwidth=0 scrolling=no src='yibiao-echart.html'></iframe>
+    </div>
+</div>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="js/highcharts-more.js"></script>
+<script>
+    $('.onehouse').on('mouseenter',function() {
+        $(this).css('opacity',1).siblings('.onehouse').css('opacity',0);
+    })
+</script>
+<script>
+$(function () {
+    $('#electricity').highcharts({
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: '用电量(兆瓦)'
+        },
+        pane: {
+           startAngle: -130,
+           endAngle: 130,
+            background: [{
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#FFF'],
+                        [1, '#333']
+                    ]
+                },
+                borderWidth: 0,
+                outerRadius: '109%'
+            }, {
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#333'],
+                        [1, '#FFF']
+                    ]
+                },
+                borderWidth: 1,
+                outerRadius: '107%'
+            }, {
+                // default background
+            }, {
+                backgroundColor: '#DDD',
+                borderWidth: 0,
+                outerRadius: '105%',
+                innerRadius: '103%'
+            }]
+        },
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 200,
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: ``
+            },
+            plotBands: [{
+                from: 0,
+                to: 70,
+                color: '#55BF3B' // green
+            }, {
+                from: 70,
+                to: 140,
+                color: '#DDDF0D' // yellow
+            }, {
+                from: 140,
+                to: 200,
+                color: '#DF5353' // red
+            }]
+        },
+        series: [{
+            name: '用电量',
+            data: [150],
+            tooltip: {
+                valueSuffix: ' MW'
+            }
+        }]
+    });
+    $('#water').highcharts({
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: '用水量(千吨)'
+        },
+        pane: {
+           startAngle: -130,
+           endAngle: 130,
+            background: [{
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#FFF'],
+                        [1, '#333']
+                    ]
+                },
+                borderWidth: 0,
+                outerRadius: '109%'
+            }, {
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#333'],
+                        [1, '#FFF']
+                    ]
+                },
+                borderWidth: 1,
+                outerRadius: '107%'
+            }, {
+                // default background
+            }, {
+                backgroundColor: '#DDD',
+                borderWidth: 0,
+                outerRadius: '105%',
+                innerRadius: '103%'
+            }]
+        },
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 200,
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: 't'
+            },
+            plotBands: [{
+                from: 0,
+                to: 70,
+                color: '#55BF3B' // green
+            }, {
+                from: 70,
+                to: 140,
+                color: '#DDDF0D' // yellow
+            }, {
+                from: 140,
+                to: 200,
+                color: '#DF5353' // red
+            }]
+        },
+        series: [{
+            name: '用水量',
+            data: [100],
+            tooltip: {
+                valueSuffix: '千吨'
+            }
+        }]
+    });
+    $('#hot').highcharts({
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: '暖能用量(兆瓦)'
+        },
+        pane: {
+            startAngle: -130,
+            endAngle: 130,
+            background: [{
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#FFF'],
+                        [1, '#333']
+                    ]
+                },
+                borderWidth: 0,
+                outerRadius: '109%'
+            }, {
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#333'],
+                        [1, '#FFF']
+                    ]
+                },
+                borderWidth: 1,
+                outerRadius: '107%'
+            }, {
+                // default background
+            }, {
+                backgroundColor: '#DDD',
+                borderWidth: 0,
+                outerRadius: '105%',
+                innerRadius: '103%'
+            }]
+        },
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 200,
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: ``
+            },
+            plotBands: [{
+                from: 0,
+                to: 70,
+                color: '#55BF3B' // green
+            }, {
+                from: 140,
+                to: 140,
+                color: '#DDDF0D' // yellow
+            }, {
+                from: 140,
+                to: 200,
+                color: '#DF5353' // red
+            }]
+        },
+        series: [{
+            name: '暖能用量',
+            data: [70],
+            tooltip: {
+                valueSuffix: ' MW'
+            }
+        }]
+    });
+    $('#cold').highcharts({
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: '冷能用量(兆瓦)'
+        },
+        pane: {
+            startAngle: -130,
+            endAngle: 130,
+            background: [{
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#FFF'],
+                        [1, '#333']
+                    ]
+                },
+                borderWidth: 0,
+                outerRadius: '109%'
+            }, {
+                backgroundColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#333'],
+                        [1, '#FFF']
+                    ]
+                },
+                borderWidth: 1,
+                outerRadius: '107%'
+            }, {
+                // default background
+            }, {
+                backgroundColor: '#DDD',
+                borderWidth: 0,
+                outerRadius: '105%',
+                innerRadius: '103%'
+            }]
+        },
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 200,
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+                step: 2,
+                rotation: 'auto'
+            },
+            title: {
+                text: ``
+            },
+            plotBands: [{
+                from: 0,
+                to: 70,
+                color: '#55BF3B' // green
+            }, {
+                from: 140,
+                to: 140,
+                color: '#DDDF0D' // yellow
+            }, {
+                from: 140,
+                to: 200,
+                color: '#DF5353' // red
+            }]
+        },
+        series: [{
+            name: '冷能用量',
+            data: [70],
+            tooltip: {
+                valueSuffix: 'MW'
+            }
+        }]
+    });
+});
+</script>
+</body>
+</html>

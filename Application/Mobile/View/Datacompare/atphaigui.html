@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ATP-移动版</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="__PUBLIC__/mobile/blue/css/light7.css">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				margin: 0px;
+				overflow: hidden;
+			}
+			#info {
+				color: #fff;
+				position: absolute;
+				top: 10px;
+				width: 100%;
+				text-align: center;
+				z-index: 100;
+				display:block;
+
+			}
+			a { color: white }
+		</style>
+	</head>
+	<body>
+
+
+	<!-- 底部导航 -->
+		<nav class="bar bar-tab">
+		  <a class="tab-item  no-transition external" href='tab1.html'>
+		    <span class="icon icon-home"></span>
+		    <span class="tab-label">九宫格</span>
+		  </a>
+		  <a class="tab-item no-transition  external" href="tab2.html">
+		    <span class="icon icon-download"></span>
+		    <span class="tab-label">列表</span>
+		  </a>
+		  <a class="tab-item no-transition external" href="tab3.html">
+		    <span class="icon icon-app"></span>
+		    <span class="tab-label">地图</span>
+		  </a>
+		  <a class="tab-item no-transition external" href="tab4.html">
+		    <span class="icon icon-me"></span>
+		    <span class="tab-label">常用</span>
+		  </a>
+		</nav>
+
+
+		<div class="page page-amap" id="amap" style="display: block">
+		      <header class="bar bar-nav">
+		      	<a class="button button-link button-nav pull-left back external" href="tab4.html">
+			      <span class="icon icon-left"></span>
+			      返回
+			    </a>
+		        <h1 class="title">ATP在线模型漫游</h1>
+		      </header>
+		    	<div class="content" id="content"> 
+
+		    	</div>
+		 
+		</div>
+
+		<script src="__PUBLIC__/mobile/three-lib/js/three.js"></script>
+
+		<script src="__PUBLIC__/mobile/three-lib/js/OrbitControls.js"></script>
+
+		<script src="__PUBLIC__/mobile/three-lib/js/EffectComposer.js"></script>
+		<script src="__PUBLIC__/mobile/three-lib/js/RenderPass.js"></script>
+		<script src="__PUBLIC__/mobile/three-lib/js/ShaderPass.js"></script>
+		<script src="__PUBLIC__/mobile/three-lib/js/MaskPass.js"></script>
+		<script src="__PUBLIC__/mobile/three-lib/js/CopyShader.js"></script>
+		<script src="__PUBLIC__/mobile/three-lib/js/ColorCorrectionShader.js"></script>
+		<script src="__PUBLIC__/mobile/three-lib/js/VignetteShader.js"></script>
+
+		<script src="__PUBLIC__/mobile/three-lib/js/SEA3D.js"></script>
+		<script src="__PUBLIC__/mobile/three-lib/js/SEA3DLZMA.js"></script>
+		<script src="__PUBLIC__/mobile/three-lib/js/SEA3DLoader.js"></script>
+
+		<script src="__PUBLIC__/mobile/three-lib/js/Detector.js"></script>
+		<script src="__PUBLIC__/mobile/three-lib/js/stats.min.js"></script>
+
+		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+			// console.log("Visit https://github.com/sunag/sea3d to all codes and builds under development.");
+
+			var container, stats;
+
+			var camera, scene, renderer, composer, controls;
+
+			var loader;
+
+			// Initialize Three.JS
+
+			init();
+
+			//
+			// SEA3D Loader
+			//
+
+			loader = new THREE.SEA3D( {
+
+				autoPlay : true, // Auto play animations
+				container : scene // Container to add models
+
+			} );
+
+			loader.onComplete = function( e ) {
+
+				// Get camera from SEA3D Studio
+				// use loader.get... to get others objects
+
+				var cam = loader.getCamera( "Camera007" );
+				camera.position.copy( cam.position );
+				camera.rotation.copy( cam.rotation );
+
+				controls = new THREE.OrbitControls( camera );
+
+				animate();
+
+			};
+
+			loader.load( '__PUBLIC__/mobile/three-lib/js/mascot.tjs.sea' );
+
+			//
+
+			function init() {
+
+				scene = new THREE.Scene();
+
+				container = document.createElement( 'div' );
+				document.getElementById('content').appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.set( 1000, - 300, 1000 );
+
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.setClearColor( 0x333333, 1 );
+				container.appendChild( renderer.domElement );
+
+				stats = new Stats();
+				// container.appendChild( stats.dom );
+
+				// post-processing
+
+				composer = new THREE.EffectComposer( renderer );
+
+				var renderPass = new THREE.RenderPass( scene, camera );
+				var copyPass = new THREE.ShaderPass( THREE.CopyShader );
+				composer.addPass( renderPass );
+
+				var vh = 1.4, vl = 1.2;
+
+				var colorCorrectionPass = new THREE.ShaderPass( THREE.ColorCorrectionShader );
+				colorCorrectionPass.uniforms[ "powRGB" ].value = new THREE.Vector3( vh, vh, vh );
+				colorCorrectionPass.uniforms[ "mulRGB" ].value = new THREE.Vector3( vl, vl, vl );
+				composer.addPass( colorCorrectionPass );
+
+				var vignettePass = new THREE.ShaderPass( THREE.VignetteShader );
+				vignettePass.uniforms[ "darkness" ].value = 1.0;
+				composer.addPass( vignettePass );
+
+				composer.addPass( copyPass );
+				copyPass.renderToScreen = true;
+
+				// events
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				composer.setSize( window.innerWidth, window.innerHeight );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			//
+
+			var clock = new THREE.Clock();
+
+			function animate() {
+
+				var delta = clock.getDelta();
+
+				requestAnimationFrame( animate );
+
+				// Update SEA3D Animations
+				THREE.SEA3D.AnimationHandler.update( delta );
+
+				render( delta );
+
+				stats.update();
+
+			}
+
+			function render( dlt ) {
+
+				//renderer.render( scene, camera );
+				composer.render( dlt );
+
+			}
+
+		</script>
+	</body>
+</html>

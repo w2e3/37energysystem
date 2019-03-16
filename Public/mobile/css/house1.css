@@ -1,0 +1,291 @@
+html,body {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	overflow: hidden;
+}
+
+/* 总数据展示 */
+.total1 {
+	position: fixed;
+	top: 50px;
+	left: 20px;
+	width: 300px;
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	border: 1px solid #0b3d85;
+}
+
+.total1 header {
+	background: #0b3d85;
+	height: 40px;
+	color: #fff;
+	padding-top: 10px;
+	border-radius: 5px 5px 0 0;
+}
+.total1 header p {
+	border-left: 4px solid #1fc230;
+	height: 20px;
+	line-height: 20px;
+	padding-left: 10px; 
+	overflow: hidden;
+}
+/* 图例说明 */
+.legend {
+	position: fixed;
+	bottom: 50px;
+	left: 20px;
+	width: 300px;
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	border: 1px solid #0b3d85;
+}
+.legend header {
+	background: #0b3d85;
+	height: 40px;
+	color: #fff;
+	padding-top: 10px;
+	border-radius: 5px 5px 0 0;
+}
+.legend header p {
+	height: 20px;
+	line-height: 20px;
+	padding-left: 10px; 
+	overflow: hidden;
+}
+.legend ul li {
+	height: 45px;
+	line-height: 45px;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	overflow: hidden;
+	padding: 0 5px;
+	width: 50%;
+	font-size: 14px;
+	float: left;
+}
+.legend ul li label {
+	width: 120px;
+	padding: 4px;
+	text-align: center;
+}
+.legend .totalcontent {
+	padding: 0;
+}
+.totalcontent {
+	padding: 10px;
+}
+.totalhouse {
+	width: 100px;
+}
+.rightcontent {
+	margin-left: 10px;
+	font-size: 14px;
+}
+.rightcontent li {
+	line-height: 30px;
+}
+.green {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: green;
+	margin-right: 4px;
+}
+.blue {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: blue;
+	margin-right: 4px;
+}
+.orange {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: #ef7b51;
+	margin-right: 4px;
+}
+.yellow {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: #ffb936;
+	margin-right: 4px;
+}
+.qing {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: cyan;
+	margin-right: 4px;
+}
+.unusual p {
+	color: #fff;
+}
+.unusual {
+	position: absolute;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 14px;
+	background: rgba(255, 0, 0, .8);
+	color: #fff;
+}
+.unusual button {
+	cursor: pointer;
+	color: red;
+	border: 1px solid #fff;
+	border-radius: 4px;
+	padding: 2px 4px;
+	font-size: 12px;
+}
+.cur {
+	opacity: 1;
+}
+.unusual1 {
+	top: 16%;
+	left: 39%;
+}
+.full_building {
+	position: relative;
+}
+.full_building > img {
+    display: block;
+    margin:auto;
+}
+.alarmimg {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+}
+
+.alarmshui {
+	left: 36%;
+	top: 43%;
+	position: absolute;
+}
+.alarmshui1 {
+	left: 49%;
+	top: 33%;
+	position: absolute;
+}
+.alarmshui2 {
+	left: 26%;
+	top: 43%;
+	position: absolute;
+}
+.alarmshui3 {
+	left: 36%;
+	top: 43%;
+	position: absolute;
+}
+.alarmshui4 {
+	left: 46%;
+	top: 43%;
+	position: absolute;
+}
+.alarmshui5 {
+	left: 56%;
+	top: 43%;
+	position: absolute;
+}
+.alarmshui6 {
+	left: 66%;
+	top: 43%;
+	position: absolute;
+}
+.alarmshui7 {
+	left: 58%;
+	top: 10%;
+	position: absolute;
+}
+.alarmshui8 {
+	left: 32%;
+	top: 53%;
+	position: absolute;
+}
+.alarmnuan {
+	left: 41%;
+	top: 43%;
+}
+.alarmnuan1 {
+	left: 11%;
+	top: 43%;
+}
+.alarmnuan2 {
+	left: 29%;
+	top: 25%;
+}
+.alarmnuan3 {
+	left: 39%;
+	top: 25%;
+}
+.alarmnuan4 {
+	left: 49%;
+	top: 25%;
+}
+.alarmnuan5 {
+	left: 59%;
+	top: 25%;
+}
+.alarmnuan6 {
+	left: 69%;
+	top: 25%;
+}
+.alarmnuan7 {
+	left: 79%;
+	top: 25%;
+}
+.alarmdian {
+	left: 44%;
+	top: 30%;
+}
+.alarmdian1 {
+	left: 14%;
+	top: 20%;
+}
+.alarmdian2 {
+	left: 24%;
+	top: 20%;
+}
+.alarmdian3 {
+	left: 34%;
+	top: 20%;
+}
+.alarmdian4 {
+	left: 44%;
+	top: 20%;
+}
+.alarmdian5 {
+	left: 54%;
+	top: 20%;
+}
+.alarmdian6 {
+	left: 64%;
+	top: 20%;
+}
+.alarmdian7 {
+	left: 74%;
+	top: 20%;
+}
+
+.zhankai {
+	margin-right: 10px;
+	font-size: 14px;
+}
+.alarmlist {
+	display: none;
+}
+.cur .alarmlist {
+	display: block;
+}
+.alarmlist ul {
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: none;
+}
+.alarmlist ul li {
+	overflow: hidden;
+}

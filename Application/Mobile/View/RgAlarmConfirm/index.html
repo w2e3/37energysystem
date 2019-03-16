@@ -1,0 +1,54 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="园区漫游"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">报警详情</h1>
+    </header>
+    <div class="content">
+        <div class="weui-cells" style="width: 90%;margin: 11px auto;">
+            <div class="weui-cell" style="font-size: 12px;font-weight: bolder;color: #9b9b9b;">
+                <div class="weui-cell__bd">设备点 </div>
+                <div class="weui-cell__bd">报警时间</div>
+                <div class="weui-cell__bd">能源类别</div>
+                <div class="weui-cell__bd">报警等级</div>
+                <div class="weui-cell__bd">详情</div>
+            </div>
+            <volist name="Alarm_data" id="vo" >
+                <a href="__CONTROLLER__/alarmdetail?rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Tink.get.snname}&pre_rgn_atpid={$Think.get.pre_rgn_atpid}&alm_atpid={$vo.alm_atpid}" class="weui-cell weui-cell_access external" style="font-size: 10px;color: #393939;">
+                    <div class="weui-cell_bd" style="width: 20%;">{$vo.rgn_name}</div>
+                    <div class="weui-cell_bd" style="width: 25%;">{$vo.alm_datetime}</div>
+                    <div class="weui-cell_bd" style="width: 20%;">{$vo.alm_category}</div>
+                    <div class="weui-cell_bd" style="margin-left:-17px;width: 20%;">{$vo.alm_level}</div>
+                    <div class="weui-cell__ft" style="margin-left: 10px;"></div>
+                </a>
+            </volist>
+            <empty name="Alarm_data">
+                <div class="weui-cell empty">
+                        <span href="#" class="weui-cell_bd external" style="width:120px;font-size:14px;margin: 10px auto;color: #00a0e9;margin-left: 40%;">
+                            暂无数据
+                        </span>
+                </div>
+            </empty>
+        </div>
+    </div>
+
+
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+    function choiceDevice() {
+        var val = $("#selectDevice").val();
+        var url="__CONTROLLER_/index?rgn_atpid="+val+"pre_rgn_atpid"={Think.get.rgn_atpid};
+        window.location.href=url;
+    }
+</script>
+<include file="Public:footer"/>

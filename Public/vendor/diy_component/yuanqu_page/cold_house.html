@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>制冷机房</title>
+	<link rel="stylesheet" href="css/cold_house.css">
+</head>
+<body>
+	<div class="full_building">
+		<img src="images/machine-room.jpg" width="74%">
+		<a class="alarmimg alarmshui">
+			<img src="images/shui.png">
+		</a>
+		<a class="alarmimg alarmshui2">
+			<img src="images/shui.png">
+		</a>
+		<a class="alarmimg alarmdian">
+			<img src="images/dian1.png">
+		</a>
+		<div class="unusual1 unusual">
+				<p>报警等级:预报警</p>
+				<p>报警信息:三相电压过低</p>
+				<p>操作：<button>处理</button>&nbsp;<button>查看详细</button></p>
+		</div>
+		<a class="alarmimg alarmnuan">
+			<img src="images/nuan.png">
+		</a>
+		<a class="alarmimg alarmnuan2">
+			<img src="images/nuan.png">
+		</a>
+	</div>
+	<div class="list-right">
+		<div class="total1">
+			<header><p class="fl">制冷机房能源总体情况</p><span class="fr zhankai">详请</span></header>
+			<div id="container" style="width:300px;height:150px;"></div>
+			<div class="listfooter  border_top" style="display: none">
+				<div><p>相比上月用电</p><p>12325</p><p class="up-red">12%</p></div>
+				<div><p>相比上月用水</p><p>12325</p><p class="down-green">-11%</p></div>
+				<div><p>相比上月冷暖</p><p>12325</p><p class="up-red">8%</p></div>
+			</div>
+		</div>
+		<div class="energy_message3 energy_message">
+			<header><p>仪表监控情况</p></header>
+			<div class="machines clearfix">
+				<div class="machine">
+					<p>1#配电箱</p>
+					<p>电能:12325kwh</p>
+					<p>水能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p><span class="status"></span></p>
+				</div>
+				<div class="machine">
+					<p>1#配电箱</p>
+					<p>电能:12325kwh</p>
+					<p>水能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p><span class="status"></span></p>
+				</div>
+				<div class="machine">
+					<p>1#配电箱</p>
+					<p>电能:12325kwh</p>
+					<p>水能:12t</p>
+					<p>电能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p><span class="status"></span></p>
+				</div>
+				<div class="machine">
+					<p>1#配电箱</p>
+					<p>电能:12325kwh</p>
+					<p>水能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p><span class="status"></span></p>
+				</div>
+				<div class="machine">
+					<p>1#配电箱</p>
+					<p>电能:12325kwh</p>
+					<p>水能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p><span class="status"></span></p>
+				</div>
+				<div class="machine">
+					<p>1#配电箱</p>
+					<p>电能:12325kwh</p>
+					<p>水能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p><span class="status"></span></p>
+				</div>
+				<div class="machine">
+					<p>1#配电箱</p>
+					<p>电能:12325kwh</p>
+					<p>水能:12t</p>
+					<p>电能:123kwh</p>
+					<p>电能:123kwh</p>
+					<p><span class="status"></span></p>
+				</div>
+				<div class="machine">
+					<p>1#配电箱</p>
+					<p>电能:12325kwh</p>
+					<p>水能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p><span class="status"></span></p>
+				</div>
+				<div class="machine">
+					<p>1#配电箱</p>
+					<p>电能:12325kwh</p>
+					<p>水能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p>电能:12325kwh</p>
+					<p><span class="status"></span></p>
+				</div>
+			</div>
+				
+		</div>	
+	</div>
+
+		
+<script src="js/jquery-1.7.2.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="js/highcharts-more.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        title: {
+            text: '能耗占比',
+            align: 'center',
+            verticalAlign: 'middle',
+            y: 30,
+            style: {
+            		fontWeight: '10px',
+                    color: 'black'
+                }
+        },
+        tooltip: {
+            headerFormat: '{series.name}<br>',
+            pointFormat: '{point.name}: <b>{point.y} -{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                dataLabels: {
+                    enabled: false,
+                    distance: -50,
+                    style: {
+                        fontWeight: '8px',
+                        color: 'white',
+                    }
+                },
+                startAngle: -90,
+                endAngle: 90,
+                center: ['50%', '75%']
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '能耗占比',
+            innerSize: '80%',
+            data: [
+                ['冷能用量', 54],
+                ['暖能用量', 46],
+            ]
+        }]
+    });
+});
+			$('.total1 header').on('click',function(){
+					$('.listfooter').toggle()
+			});
+			
+</script>	
+</body>
+</html>

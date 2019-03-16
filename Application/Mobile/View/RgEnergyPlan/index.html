@@ -1,0 +1,76 @@
+<include file="Public:header"/>
+
+<?php if(I('get.regiontype')=='rg') { ?>
+<include file="Public:menu" active="园区漫游"/>
+<?php }elseif (I('get.regiontype')=='sn') { ?>
+<include file="Public:menu" active="专项能源"/>
+<?php } ?>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">业主能源</h1>
+    </header>
+
+    <div class="content infinite-scroll">
+        <div >
+            <select class="search-input choose-year" id="rgn_ids"  style="width:360px;height:30px; display: block;">
+                <foreach name="rgn_arr" item="vo" >
+                    <option value="{$vo.rgn_atpid}" <if condition=" ($vo.rgn_atpid eq $rgn_atpid)">selected<else/></if>>{$vo.rgn_name}</option>
+                </foreach>
+            </select>
+        </div>
+        <div class="list-block media-list atp-list" style="margin: 0;">
+            <ul>
+                <foreach  name="Energy_plan_data" item="vo">
+                    <li>
+						<div class="item-title-row">
+							<button style="font-size: 10px;" onclick="return funadd();">添加能源计划</button>
+						</div>
+                        <a href="__CONTROLLER__/detail?rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&ep_atpid={$vo.ep_atpid}" class="item-link item-content external">
+                            <div class="item-media"><img src="__PUBLIC__/mobile/images/icon2.png" width="80"></div>
+                            <div class="item-inner">
+                                <div class="item-title">{$vo.ep_name}</div>
+                                <div class="item-subtitle">{$vo.ep_category}</div>
+                                <div class="item-title-row">
+                                    <div class="item-text">{$vo.rgn_name}</div>
+                                </div>
+								<div class="item-title-row">
+									<div class="item-text">{$vo.ep_startdatetime}</div>
+								</div>
+								<div class="item-title-row">
+									<div class="item-text">{$vo.ep_enddatetime}</div>
+								</div>
+                            </div>
+                        </a>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<include file="Public:footer"/>
+<script>
+	var funadd = function() {
+       var  rgn_atpid = GetQueryString('rgn_atpid');
+       var  regiontype = GetQueryString('regiontype');
+       var  snname = GetQueryString('snname');
+        var html="__CONTROLLER__/add?rgn_atpid="+rgn_atpid+"&regiontype="+regiontype+"&snname="+snname;
+        window.location.href=html;
+    }
+    //获得get参数的值
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  decodeURI(r[2]); return null;
+    }
+</script>

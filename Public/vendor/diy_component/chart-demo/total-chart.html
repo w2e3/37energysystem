@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="container" style="min-width:400px;height:400px"></div>
+<script src="jquery-1.12.4.js"></script>
+<script src="highcharts.js"></script>
+<script src="highcharts-3d.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        title: {
+            text: '2#楼能源消耗汇总'
+        },
+        xAxis: {
+            categories: ['2#A座', ' 2#B座', '2#C座', '2#D座', '2#E座']
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        labels: {
+            items: [{
+                html: '能耗占比',
+                style: {
+                    left: '100px',
+                    top: '18px',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            }]
+        },
+        series: [{
+            type: 'column',
+            name: '水能',
+            data: [3, 2, 5, 3, 4]
+        }, {
+            type: 'column',
+            name: '电能',
+            data: [2, 3, 5, 7, 6]
+        }, {
+            type: 'column',
+            name: '冷暖量',
+            data: [4, 3, 3, 9, 1]
+        }, {
+            type: 'spline',
+            name: '平均值',
+            data: [3, 2.67, 4, 6.33, 3.33],
+            marker: {
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[3],
+                fillColor: 'white'
+            }
+        }, {
+            type: 'pie',
+            name: '总的消耗',
+            data: [{
+                name: '水能',
+                y: 13,
+                color: Highcharts.getOptions().colors[0] // Jane's color
+            }, {
+                name: '电能',
+                y: 23,
+                color: Highcharts.getOptions().colors[1] // John's color
+            }, {
+                name: '冷暖能',
+                y: 19,
+                color: Highcharts.getOptions().colors[2] // Joe's color
+            }],
+            center: [100, 80],
+            size: 100,
+            showInLegend: false,
+            dataLabels: {
+                enabled: false
+            }
+        }]
+    });
+});
+
+
+</script>
+	
+</body>
+</html>

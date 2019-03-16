@@ -1,0 +1,75 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="园区漫游"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">业主能源</h1>
+    </header>
+
+    <div class="content infinite-scroll">
+        <div class="list-block media-list atp-list" style="margin: 0;">
+            <button onclick="return adddetail();">添加能源计划详情</button>
+            <ul>
+                <foreach  name="EnergyPlanInfo" item="vo">
+                    <li>
+                        <a href="javascript:void(0)" class="item-link item-content external">
+                            <div class="item-inner">
+                                <div class="item-title">{$vo.epd_category}</div>
+                                <div class="item-subtitle">{$vo.ep_startdatetime}</div>
+                                <div class="item-subtitle">{$vo.ep_enddatetime}</div>
+                                <div class="item-title-row">
+                                    要求值:
+                                    <if condition="$vo.epd_category eq '水'">
+                                        <div class="item-after">{$vo.epd_requiredvalue}T</div>
+                                        <else/>
+                                        <div class="item-after">{$vo.epd_requiredvalue}T</div>
+                                    </if>
+                                </div>
+
+                                <div class="item-title-row">
+                                    实际值:
+                                    <if condition="$vo.epd_category eq '水'">
+                                        <div class="item-after">{$vo.epd_actualvalue}T</div>
+                                        <else/>
+                                        <div class="item-after">{$vo.epd_actualvalue}T</div>
+                                    </if>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </foreach>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<include file="Public:footer"/>
+
+<script>
+    var adddetail = function() {
+        var  rgn_atpid = GetQueryString('rgn_atpid');
+        var  regiontype = GetQueryString('regiontype');
+        var  snname = GetQueryString('snname');
+        var  ep_atpid = GetQueryString('ep_atpid');
+        var html="__CONTROLLER__/adddetail?rgn_atpid="+rgn_atpid
+            +"&regiontype="+regiontype+"&snname="+snname+'&ep_atpid='+ep_atpid;
+        window.location.href=html;
+    }
+    //获得get参数的值
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  decodeURI(r[2]); return null;
+    }
+</script>

@@ -1,0 +1,510 @@
+<style type="text/css">
+    .table_add{
+        position: absolute;
+        left: 25%;
+        top: 0%;
+        width: 50%;
+        height: 270px;
+        display: none;
+        background: #6d9bfa;
+        /*opacity: 0.8;*/
+    }
+    .table_save{
+        position: absolute;
+        left: 25%;
+        top: 0%;
+        width: 50%;
+        height: 270px;
+        display: none;
+        background: #6d9bfa;
+        /*opacity: 0.8;*/
+    }
+</style>
+<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">能源计划详情</h4>
+        </div>
+        <div class="modal-body">
+            <div id="atpbiztoolbar">
+                        <div style="height: 50px;">
+                            <!--<input type="text" id ="ep_name" class="form-control" style="width: 150px;display: inline-block;" placeholder="名称">-->
+                            <!--<button class="btn btn-success " type="button" id="sys_search"><i class="fa fa-search"></i>&nbsp;查询</button>-->
+                            <input id="rgn_atpid" type="hidden" value="{$rgn_atpid}" class="form-control">
+                            <input id="ep_atpid" type="hidden" value="{$ep_atpid}" class="form-control">
+                            <button class="btn btn-info " type="button" id="addInRow"><i class="fa fa-pencil"></i>&nbsp;添加</button>
+                            <!-- <button class="btn btn-info " type="button" id="sys_update"><i class="fa fa-pencil-square"></i>&nbsp;编辑</button> -->
+                            <button class="btn btn-danger " type="button" id="sys_dell"><i class="fa fa-eraser"></i>&nbsp;批量删除</button>
+                            <!--<button class="btn btn-warning" type="button" id="sys_out"><i class="fa fa-sign-out"></i>&nbsp;导出</button>-->
+                        </div>
+                    </div>
+            <table id="atpbiztable_info"></table>
+<div class="table_add">
+    <div class="modal-header">
+        <button type="button"  class="add_close close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" style="color: #fff;">添加</h4>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="tab-content">
+                <!-- <div id="tab-1" class="tab-pane active"> -->
+                <!-- <div class="panel-body"> -->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" style="color: #fff;margin-top: 5px;">能源类别：</label>
+                        <div class="col-sm-4">
+                             <select id="epd_category"  class="chosen-select">
+                                 <option value="水">水（T）</option>
+                                 <option value="电">电（Kwh）</option>
+                                 <option value="冷">冷（Kwh）</option>
+                                 <option value="暖">暖（Kwh）</option>
+                             </select>
+                        </div>
+                    </div><br><br><br><br>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" style="color: #fff;margin-top: 5px;">
+                            要求值：
+                        </label>
+                        <div class="col-sm-4">
+                            <input id="epd_requiredvalue" name="epd_requiredvalue" type="text"  value="{$data.epd_requiredvalue}" class="form-control" value="" style="border:1px solid block;">
+                        </div>
+                    </div>
+                    <input id="epd_energyplanid" value="{$data.epd_energyplanid}" type="hidden">
+                <!-- </div> -->
+            </div>
+        </div>
+        <input id="epd_atpid" name="epd_atpid" type="hidden" value="{$data.epd_atpid}" class="form-control">
+        <input id="ep_atpid" name="ep_atpid" type="hidden" value="{$data.epd_energyplanid}" class="form-control">
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="" class="btn btn-default add_close">关闭</button>
+        <button type="button" name="bc" id="sub_add" class="btn btn-primary">保存</button>
+    </div>
+</div>
+<div class="table_save">
+    <div class="modal-header">
+        <button type="button"  class="save_close close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" style="color: #fff;">编辑</h4>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="tab-content">
+                <!-- <div id="tab-1" class="tab-pane active"> -->
+                <!-- <div class="panel-body"> -->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" style="color: #fff;margin-top: 5px;">能源类别：</label>
+                        <div class="col-sm-4">
+                             <select id="save_epd_category"  class="chosen-select" >
+                                 <option value="水">水（T）</option>
+                                 <option value="电">电（Kwh）</option>
+                                 <option value="冷">冷（Kwh）</option>
+                                 <option value="暖">暖（Kwh）</option>
+                             </select>
+                        </div>
+                    </div>
+                <br><br><br><br>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" style="color: #fff;margin-top: 5px;">
+                            要求值：
+                        </label>
+                        <div class="col-sm-4">
+                            <input id="save_epd_requiredvalue" name="save_epd_requiredvalue" type="text"  value="" class="form-control" style="border:1px solid block;">
+                        </div>
+                    </div>
+                    <input id="save_epd_energyplanid" value="" type="hidden">
+                <!-- </div> -->
+            </div>
+        </div>
+        <input id="save_epd_atpid" name="epd_atpid" type="hidden" value="" class="form-control">
+        <input id="save_ep_atpid" name="ep_atpid" type="hidden" value="" class="form-control">
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="" class="btn btn-default save_close">关闭</button>
+        <button type="button" name="bc" id="sub_save" class="btn btn-primary">保存</button>
+    </div>
+</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default" id="sys_dlg_submit">关闭</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<div id="sys_dlg" role="dialog" class="modal fade "></div>
+<script>
+    $(function () {
+        $(".js-switch").each(function(){
+            new Switchery(this, {color: '#1AB394'});
+        });
+        $(".file-pretty").prettyFile();
+        $(".chosen-select").chosen({disable_search_threshold: 10, search_contains: true,width:'188px'});
+        /****************************************************************************************************************/
+        $('#atpbiztable_info').bootstrapTable({
+            url: '__CONTROLLER__/getEnergyPlanInfo?ep_atpid={$Think.get.ep_atpid}',         //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+//            toolbar: '#atpbiztable_info',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            iconSize: 'outline',
+            sortable: true,                     //是否启用排序
+            sortName:"",
+            sortOrder: "",                   //排序方式
+            queryParams: queryParams,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [5,10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+//            strictSearch: true,
+            showColumns: false,                  //是否显示所有的列
+            showRefresh: false,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: false,                //是否启用点击选中行
+//            height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "epd_atpid",                     //每一行的唯一标识，一般为主键列
+//            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+//            cardView: true,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            detailFormatter: "detailFormatter",
+            columns: [
+                [
+                    {checkbox: true},
+                    {title: '序号', width: 50,align:'center',
+                        formatter: function (value, row, index)
+                        {
+                            var option =  $('#atpbiztable_info').bootstrapTable("getOptions");
+                            return option.pageSize * (option.pageNumber - 1) + index + 1;
+                        }
+                    },
+                    {field:'epd_atpid',title:'主键',visible:false},
+                    // {field: 'epd_atpid', title: '类别',align:'center', sortable: true, visible:true},
+                    {field: 'epd_category', title: '类别',align:'center', sortable: true, visible:true},
+                    {field: 'ep_startdatetime', title: '起始时间',align:'center', sortable: true, visible:true},
+                    {field: 'ep_enddatetime', title: '结束时间',align:'center', sortable: true, visible:true},
+
+                    {field: 'epd_requiredvalue', title: '要求值',align:'center', sortable: false,
+                        formatter: function (value, row, index) {
+                            var t = "";
+                            if ("水" == row['epd_category']) {
+                                t = "T";
+                            }
+                            else {
+                                t = "Kwh";
+                            }
+                            return value + "&nbsp;" + t;
+                        }
+                    },
+
+                    {field: 'epd_actualvalue', title: '实际值',align:'center', sortable: false,
+                        formatter: function (value, row, index) {
+                            if(null==value)
+                            {
+                                return value;
+                            }
+
+                            var t = "";
+                            if ("水" == row['epd_category']) {
+                                t = "T";
+                            }
+                            else {
+                                t = "Kwh";
+                            }
+                            return value + "&nbsp;" + t;
+                        }
+                    },
+                    {field: 'epd_atpid', title: '差值',align:'center', sortable: false,
+                        formatter: function (value, row, index) {
+                            var t = "";
+                            if ("水" == row['epd_category']) {
+                                t = "T";
+                            }
+                            else {
+                                t = "Kwh";
+                            }
+                            if (null == row['epd_actualvalue']) {
+                                return null;
+                            }
+                            else {
+                                return row['epd_actualvalue'] - row['epd_requiredvalue'] + "&nbsp;" + t;
+                            }
+                        }
+                    },
+
+
+
+                    {field: 'epd_actualvaluedatetime', title: '实际值生成时间',align:'center', sortable: true, visible:true},
+                    {field: 'epd_atpid', title: '操作',align:'center', sortable: false,width:150,
+                        formatter: function (value, row, index) {
+                            var inp = "'"+  row['epd_atpid'] +"'";
+                            // var a = '<a  class="btn btn-success btn-xs" onclick="saveInRow(' + inp + ')">编辑</a>&nbsp;';
+                            // a += '<a  class="btn btn-danger btn-xs" onclick="delInRow(' + inp + ')">删除</a>'
+                            // return a;
+                            var a = '<a  class="btn btn-info btn-xs" onclick="saveInRow(' + inp + ')">编辑</a>&nbsp;';
+                                a += '<a  class="btn btn-danger btn-xs" onclick="delInRow('+ inp +')">删除</a>';
+                                return a;
+                        }
+                    },
+                ]
+            ],
+            onDblClickRow: function (row) {
+
+            },
+            onSort: function (name, order) {
+//                console.log(name+order);
+            }
+        });
+        function queryParams(params) {  //配置参数
+            var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                limit: params.limit,   //页面大小
+                offset: params.offset,  //页码
+                search: params.search,
+//            disposestatus: $("#search_disposestatus").val(),
+//            rgn_atpid:$('#rgn_atpid').val(),
+                sort: params.sort,  //排序列名
+                sortOrder: params.order//排位命令（desc，asc）
+            };
+            return temp;
+        } 
+    });
+
+    function delInRow(id){
+        // alert(id);
+        $.ajax({
+            url: '__CONTROLLER__/submitdatedel',
+            type: 'POST',
+            data: {"epd_atpid":id},
+            async:false,
+            success: function (data) {
+                if(confirm('确认删除数据？')){
+                    if (data == '1') {
+                        alert("删除成功");
+                         $('#atpbiztable_info').bootstrapTable('refresh');
+                    }else { 
+                        alert("删除成功");
+                         $('#atpbiztable_info').bootstrapTable('refresh');
+                    }
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $('#atpbiztable_info').bootstrapTable('refresh');
+            }
+        });
+    }
+    
+
+    $('#sys_dell').on('click',function() {
+        var tablerow = $('#atpbiztable_info').bootstrapTable('getSelections');
+        if (tablerow.length == 0) {
+            alert("您尚未选择数据");
+        }
+        else {
+            if (confirm('确认删除' + tablerow.length + '条数据?')) {
+                var ids = [];
+                $.each(tablerow, function () {
+                    ids.push(this['epd_atpid']);
+                });
+                $.post('__CONTROLLER__/dell', {ids: ids.join(',')}, function (rep, status) {
+                    if ('' == rep) {
+                        alert("删除成功！");
+                        $('#atpbiztable_info').bootstrapTable('refresh')
+                    }
+                    else {
+                        alert('删除失败' + "可能是因为数据存在关联无法删除<br>错误详情：" + rep);
+                    }
+                });
+            }
+        }
+    });
+    ATP_BOX_OPEN = function (url, childcallback) {
+        $("#sys_dlg").load(url, function () {
+            $('#sys_dlg_submit').on('click', childcallback);
+            $("#sys_dlg").modal({backdrop: true});
+        });
+    };
+    // ATP_BOX_CLOSE = function () {
+    //     $('#sys_dlg').modal('hide');
+    // };
+    // function addInRow(id) {
+    //     window.parent.ATP_BOX_OPEN("__CONTROLLER__/addetail?ep_atpid="+id,addetailCallback);
+    // }
+    // 编辑
+    function saveInRow(id){
+        // alert(id);
+        $.post('__CONTROLLER__/addetail?epd_atpid='+id, {}, function (data) {
+            if(data){
+                $("#save_epd_requiredvalue").val(data.epd_requiredvalue);
+                // $("#save_epd_category").val(data.epd_category);
+                $("#save_epd_atpid").val(data.epd_atpid);
+                $("#save_ep_atpid").val(data.epd_energyplanid);
+                var selects = data['epd_category'];
+            }
+            $(".table_save").show();
+            if(selects == "综合"){
+                $('#save_epd_category option:eq(0)').attr('selected','selected');
+            }else if(selects == "水"){
+                $('#save_epd_category option:eq(1)').attr('selected','selected');
+            }else if(selects == "电"){
+                $('#save_epd_category option:eq(2)').attr('selected','selected');
+            }else if(selects == "冷"){
+                $('#save_epd_category option:eq(3)').attr('selected','selected');
+            }else if(selects == "暖"){
+                $('#save_epd_category option:eq(4)').attr('selected','selected');
+            }
+        });
+
+    }
+    $(".save_close").click(function(){
+        $("#save_epd_category").val();
+        $(".table_save").hide();
+        // $('#atpbiztable_info').bootstrapTable('refresh');
+    });
+    $("#sub_save").click(function(){
+        var epd_requiredvalue = $('#save_epd_requiredvalue').val();
+        if(epd_requiredvalue==''){
+            alert("数值不能为空");
+            return false;
+        }
+        var epd_category = $('#save_epd_category').val();
+        var epd_energyplanid = $('#save_ep_atpid').val();
+        var epd_atpid = $("#save_epd_atpid").val();
+        $.ajax({
+            url: '__CONTROLLER__/submitdate',
+            type: 'POST',
+            data: {"epd_requiredvalue":epd_requiredvalue,"epd_category":epd_category,"epd_energyplanid":epd_energyplanid,"epd_atpid":epd_atpid},
+            async:false,
+            success: function (data) {
+                if (data == '2') {
+                    alert("更新成功");
+                    $(".table_save").hide();
+                    $('#atpbiztable_info').bootstrapTable('refresh');
+                    
+                }else { 
+                    alert("增加成功");
+                    $(".table_add").hide();
+                    $('#atpbiztable_info').bootstrapTable('refresh');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $('#atpbiztable').bootstrapTable('refresh');
+            }
+        });
+    });
+    // 添加
+    $("#addInRow").on('click',function(){
+        var id = $("#ep_atpid").val();
+        $(".table_add").show();
+
+        // window.ATP_BOX_OPEN("__CONTROLLER__/addetail?ep_atpid="+id,childcallback);
+    })
+    $(".add_close").click(function(){
+        $(".table_add").hide();
+    });
+    $("#sub_add").click(function(){
+        var epd_requiredvalue = $('#epd_requiredvalue').val();
+        var epd_category = $('#epd_category').val();
+        var epd_energyplanid = $('#ep_atpid').val();
+        var ep_atpid = $("#ep_atpid").val();
+        if(epd_requiredvalue==''){
+            alert("数值不能为空");
+            return false;
+        }
+        $.ajax({
+            url: '__CONTROLLER__/submitdate',
+            type: 'POST',
+            data: {"epd_requiredvalue":epd_requiredvalue,"epd_category":epd_category,"epd_energyplanid":epd_energyplanid},
+            async:false,
+            success: function (data) {
+                if (data == '2') {
+                    alert("更新成功");
+                    // $(".table_add").hide();
+                    $('#atpbiztable_info').bootstrapTable('refresh');
+                    
+                }else { 
+                    $("#epd_requiredvalue").val("");
+                    alert("增加成功");
+                    $(".table_add").hide();
+                    $('#atpbiztable_info').bootstrapTable('refresh');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $('#atpbiztable').bootstrapTable('refresh');
+            }
+        });
+    });
+    function childcallback(){
+        var epd_requiredvalue = $('#epd_requiredvalue').val();
+        var epd_category = $('#epd_category').val();
+        var epd_atpid = $('#epd_atpid').val();
+        var epd_energyplanid = $('#ep_atpid').val();
+        var ep_atpid = $("#ep_atpid").val();
+        $.ajax({
+            url: '__CONTROLLER__/submitdate',
+            type: 'POST',
+            data: {"epd_requiredvalue":epd_requiredvalue,"epd_category":epd_category,"epd_atpid":epd_atpid,"epd_energyplanid":epd_energyplanid},
+            async:false,
+            success: function (data) {
+                if (data == '2') {
+                    alert("更新成功");
+                    // window.ATP_BOX_OPEN("__CONTROLLER__/view?ep_atpid="+ep_atpid,checkCallback);
+                    // window.location.href="__CONTROLLER__/index?ep_atpid="+ep_atpid;
+                }else { 
+                    alert("增加成功");
+                    // window.ATP_BOX_OPEN("__CONTROLLER__/view?ep_atpid="+ep_atpid,checkCallback);
+                    // window.location.href="__CONTROLLER__/index?ep_atpid="+ep_atpid;
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $('#atpbiztable').bootstrapTable('refresh');
+            }
+        });
+    }
+
+    function addetailCallback() {
+        window.ATP_BOX_CLOSE();
+        var epd_requiredvalue = $('#epd_requiredvalue').val();
+        var epd_category = $('#epd_category').val();
+        var epd_startdatetime = $('#epd_startdatetime',parent.document).val();
+        var epd_enddatetime = $('#epd_enddatetime',parent.document).val();
+        var epd_energyplanid = $('#ep_atpid',parent.document).val();
+        var epd_atpid = $('#epd_atpid').val();
+
+        var formObj = $(this);
+        var formURL = formObj.attr("action");
+        var formData = new FormData();
+
+        formData.append("epd_requiredvalue", epd_requiredvalue);
+        formData.append("epd_category", epd_category);
+        formData.append("epd_startdatetime", epd_startdatetime);
+        formData.append("epd_enddatetime", epd_enddatetime);
+        formData.append("epd_energyplanid", epd_energyplanid);
+        formData.append("epd_atpid", epd_atpid);
+
+        $.ajax({
+            url: '__CONTROLLER__/submitdate',
+            type: 'POST',
+            data:  formData,
+            mimeType:"multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(data, textStatus, jqXHR)
+            {
+                $('#atpbiztable').bootstrapTable('refresh')
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                $('#atpbiztable').bootstrapTable('refresh')
+            }
+        });
+    }
+
+</script>

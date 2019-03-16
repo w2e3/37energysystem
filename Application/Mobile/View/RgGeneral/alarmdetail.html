@@ -1,0 +1,113 @@
+<include file="Public:header"/>
+
+<?php if(I('get.regiontype')=='rg') { ?>
+<include file="Public:menu" active="园区漫游"/>
+<?php }elseif (I('get.regiontype')=='sn') { ?>
+<include file="Public:menu" active="专项能源"/>
+<?php } ?>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">报警详情界面</h1>
+    </header>
+    <div class="content">
+        <div class="weui-cells" style="width: 90%; margin: 5px auto; height: 55px; font-size: 15px;">
+            <div class="weui-cell" >
+                <select  class="weui-select" name="rgn_ids" id="rgn_ids">
+                    <foreach name="rgn_arr" item="vo" >
+                        <option value="{$vo.rgn_atpid}" <if condition=" ($vo.rgn_atpid eq $rgn_id)">selected<else/></if>>{$vo.rgn_name}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <volist  name="Alarm_data" id="vo">
+            <div class="weui-cells" style="width: 90%;margin: 5px auto;">
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;">设备点:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.rgn_name}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;">报警时间:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.alm_datetime}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;"> 能源类别:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.alm_category}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;"> 报警等级:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.alm_level}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;"> 报警类型:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.almc_name}</div>
+                </div>
+                <div class="weui-cell" style="height: 42px;">
+                    <div class="weui-cells__title" style="width: 30%;"> 事件详情:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.alm_content}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;"> 上下限:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.value_param}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 30%;"> 报警状态:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.alm_confirmstatus}</div>
+                </div>
+                <!--<div class="weui-cell" style="height: 36px;">-->
+                    <!--<div class="weui-cells__title" style="width: 30%;"> 操作:</div>-->
+                    <!--<if condition="$vo.alm_confirmstatus eq '待确认'">-->
+                        <!--<a href="#" class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">确认报警</a>-->
+                    <!--</if>-->
+                <!--</div>-->
+            </div>
+        </volist>
+    </div>
+</div>
+
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+    // 取消点击事件冒泡
+    $(".ignore").click(function (event) {
+        event.stopPropagation();
+    });
+    $(".already").click(function (event) {
+        event.stopPropagation();
+    });
+</script>
+<include file="Public:footer"/>
+<script src="__PUBLIC__/mobile/js/jquery-1.12.4.js"></script>
+<script src="__PUBLIC__/mobile/js/highcharts.js"></script>
+<script src="__PUBLIC__/mobile/js/highcharts-more.js"></script>
+<script>
+</script>
+
+<script>
+    $("#rgn_ids").on('change',function () {
+        var rgn_atpid=$(this).val();
+        var regiontype=GetQueryString('regiontype');
+        var snname=GetQueryString('snname');
+        var  pre_rgn_atpid=GetQueryString("pre_rgn_atpid");
+//        console.log(pre_rgn_atpid.length);
+
+        if((pre_rgn_atpid==null)||(pre_rgn_atpid.length==0))
+        {
+            pre_rgn_atpid = pre_atpid;
+        }
+        var html="__CONTROLLER__/index"+"?rgn_atpid="+rgn_atpid+"&regiontype=rg"+"&snname="+snname+"&pre_rgn_atpid="+pre_rgn_atpid;
+        window.location.href=html;
+    });
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  decodeURI(r[2]); return null;
+    }
+</script>

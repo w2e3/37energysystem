@@ -1,0 +1,50 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="园区漫游"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">业主能源</h1>
+    </header>
+    <form action="__CONTROLLER__/submit??rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&ep_atpid={$Think.get.ep_atpid}" method="post">
+        <div class="weui-cells weui-cells_form" style="margin-top: 50px;">
+            <div class="weui-cell weui-cell_select">
+                <div class="weui-cell__hd"><label class="weui-label">能源类别</label></div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="epd_category">
+                        <option selected="" value="">请选择能源类别</option>
+                        <option value="水">水</option>
+                        <option value="电">电</option>
+                        <option value="冷">冷</option>
+                        <option value="暖">暖</option>
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">*要求值</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="epd_requiredvalue" type="text"  placeholder="请输入要求值"/>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <button class="weui-btn weui-btn_primary" type="submit">提交</button>
+                </div>
+            </div>
+            <input class="weui-input" name="epd_atpid" type="hidden" value="{$data.epd_atpid}">
+            <input class="weui-input" name="ep_atpid" type="hidden" value="{$data.ep_atpid}">
+        </div>
+    </form>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<include file="Public:footer"/>
+
+

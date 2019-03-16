@@ -1,0 +1,339 @@
+<include file="Public:header"/>
+
+<?php if(I('get.bs')=='yz') { ?>
+<include file="Public:menu" active="业主管理"/>
+<?php }elseif (I('get.bs')=='zh') { ?>
+<include file="Public:menu" active="租户管理"/>
+<?php } ?>
+
+
+<!-- tab1  -->
+
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <?php if(I('get.bs')=='yz') { ?>
+        <h1 class="title">业主能源</h1>
+        <?php }elseif (I('get.bs')=='zh') { ?>
+        <h1 class="title">租户能源</h1>
+        <?php } ?>
+    </header>
+
+    <div class="content" id='detail-page'>
+        <div class="weui-cells" style="width: 90%;margin: 11px auto;font-size: 13px;">
+            <div class="weui-cell" style="height: 40px;">
+                <div class="weui-cell__hd"><label class="weui-label">查询类型:</label></div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="category">
+                        <option value="year" <if condition="$category eq 'year'">selected</if>>按年查询</option>
+                        <option value="month" <if condition="$category eq 'month'">selected</if>>按月查询</option>
+                        <option value="day" <if condition="$category eq 'day'">selected</if>>按日查询</option>
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell" style="height: 40px;">
+                <div class="weui-cell__hd"><label for="" class="weui-label">开始时间:</label></div>
+                <div class="weui-cell__bd">
+                        <select class="weui-select" name="start_time_year" style="display: none;">
+                            <!--<option value="2018" selected disabled>开始日期</option>-->
+                            <option value="2017" <if condition="$Think.get.start_time eq '2017'">selected</if> >2017</option>
+                            <option value="2018" <if condition="$Think.get.start_time eq '2018'">selected</if> >2018</option>
+                            <option value="2019" <if condition="$Think.get.start_time eq '2019'">selected</if> >2019</option>
+                            <option value="2020" <if condition="$Think.get.start_time eq '2020'">selected</if> >2020</option>
+                            <option value="2021" <if condition="$Think.get.start_time eq '2021'">selected</if> >2021</option>
+                            <option value="2022" <if condition="$Think.get.start_time eq '2022'">selected</if> >2022</option>
+                            <option value="2023" <if condition="$Think.get.start_time eq '2023'">selected</if> >2023</option>
+                            <option value="2024" <if condition="$Think.get.start_time eq '2024'">selected</if> >2024</option>
+                            <option value="2025" <if condition="$Think.get.start_time eq '2025'">selected</if> >2025</option>
+                            <option value="2026" <if condition="$Think.get.start_time eq '2026'">selected</if> >2026</option>
+
+                        </select>
+                    <input class="weui-input" name="start_time_month" type="month"  value="{$start_time}" placeholder="开始时间:" style="display: none;"/>
+                    <input class="weui-input" name="start_time_day"  type="date"  value="{$start_time}" placeholder="开始时间:" style="display: none;"/>
+                </div>
+            </div>
+            <div class="weui-cell" style="height: 40px;">
+                <div class="weui-cell__hd"><label for="" class="weui-label">结束时间:</label></div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="end_time_year" style="display: none;">
+                        <!--<option value="2018" selected disabled>结束日期</option>-->
+                        <option value="2017" <if condition="$Think.get.end_time eq '2017'">selected</if> >2017</option>
+                        <option value="2018" <if condition="$Think.get.end_time eq '2018'">selected</if> >2018</option>
+                        <option value="2019" <if condition="$Think.get.end_time eq '2019'">selected</if> >2019</option>
+                        <option value="2020" <if condition="$Think.get.end_time eq '2020'">selected</if> >2020</option>
+                        <option value="2021" <if condition="$Think.get.end_time eq '2021'">selected</if> >2021</option>
+                        <option value="2022" <if condition="$Think.get.end_time eq '2022'">selected</if> >2022</option>
+                        <option value="2023" <if condition="$Think.get.end_time eq '2023'">selected</if> >2023</option>
+                        <option value="2024" <if condition="$Think.get.end_time eq '2024'">selected</if> >2024</option>
+                        <option value="2025" <if condition="$Think.get.end_time eq '2025'">selected</if> >2025</option>
+                        <option value="2026" <if condition="$Think.get.end_time eq '2026'">selected</if> >2026</option>
+                    </select>
+                    <input class="weui-input" name="end_time_month"  type="month" value="{$end_time}" placeholder="结束时间:" style="display: none;"/>
+                    <input class="weui-input" name="end_time_day"  type="date" value="{$end_time}"  placeholder="结束时间:" style="display: none;"/>
+
+                </div>
+            </div>
+            <div class="weui-cell" style="height: 40px;">
+                <button class="weui-btn weui-btn_primary" id="sys_index_search" style="font-size:13px;width: 50%; height:30px;margin: 0px auto;" value="查询">查询</button>
+            </div>
+        </div>
+
+        <volist  name="Result" id="vo">
+            <div class="weui-cells" style="width: 90%;margin: 5px auto;">
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">租户:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.us_name}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">时间段:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.time}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;"> 水能:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.ysl}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;"> 电能:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.dgl}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">冷能:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.yll}</div>
+                </div>
+                <div class="weui-cell" style="height: 42px;">
+                    <div class="weui-cells__title" style="width: 40%;"> 暖能:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">
+                        <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.ynl}</div>
+                    </div>
+                </div>
+            </div>
+        </volist>
+        <empty name="Result">
+            <div class="weui-cell empty">
+                            <span href="#" class="weui-cell_bd external" style="width:120px;font-size:14px;margin: 10px auto;color: #00a0e9;margin-left: 40%;">
+                                暂无数据
+                            </span>
+            </div>
+        </empty>
+    </div>
+</div>
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+
+<include file="Public:leftrightjs"/>
+<include file="Public:leftrightjs"/>
+<script src="__PUBLIC__/vendor/My97DatePicker/WdatePicker.js"></script>
+<script>
+    $(function () {
+        var category='{$category}';
+        console.log(category);
+        if(category=='month')
+        {
+            $("input[name='start_time_month']").show();
+            $("input[name='end_time_month']").show();
+        }
+        else if(category=='day')
+        {
+            $("input[name='start_time_day']").show();
+            $("input[name='end_time_day']").show();
+        }
+        else
+        {
+            $("select[name='start_time_year']").show();
+            $("select[name='end_time_year']").show();
+        }
+
+    });
+</script>
+<script>
+    //获得get参数的值
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  decodeURI(r[2]); return null;
+    }
+
+    $("select[name='category']").on("click",function () {
+        var category=$(this).val();
+        console.log(category);
+        if(category.length==0)
+        {
+            alert("请选择查询类型");
+        }else
+        {
+            if(category=="year")
+            {
+                $("select[name='start_time_year']").show();
+                $("select[name='end_time_year']").show();
+
+                $("input[name='start_time_month']").hide();
+                $("input[name='end_time_month']").hide();
+
+                $("input[name='start_time_day']").hide();
+                $("input[name='end_time_day']").hide();
+            }
+            else if(category=="month")
+            {
+                $("select[name='start_time_year']").hide();
+                $("select[name='end_time_year']").hide();
+
+                $("input[name='start_time_month']").show();
+                $("input[name='end_time_month']").show();
+
+                $("input[name='start_time_day']").hide();
+                $("input[name='end_time_day']").hide();
+            }
+            else if(category=="day")
+            {
+                $("select[name='start_time_year']").hide();
+                $("select[name='end_time_year']").hide();
+
+                $("input[name='start_time_month']").hide();
+                $("input[name='end_time_month']").hide();
+
+                $("input[name='start_time_day']").show();
+                $("input[name='end_time_day']").show();
+            }
+        }
+    });
+</script>
+<script>
+    $("#sys_index_search").on("click",function () {
+        var html="__CONTROLLER__/detail";
+        var  rgn_atpid = GetQueryString('rgn_atpid');
+        var  regiontype = GetQueryString('regiontype');
+        var  snname = GetQueryString('snname');
+        var  pre_rgn_atpid = GetQueryString('pre_rgn_atpid');
+        var  bs = GetQueryString('bs');
+        var  us_atpid = GetQueryString('us_atpid');
+
+        var category=$("select[name='category']").val();
+//        var start_time=$("input[name='start_time']").val();
+//        var end_time=$("input[name='end_time']").val();
+        var start_time = null;
+        var end_time = null;
+
+//        console.log(category);
+        if(category=='year')
+        {
+             start_time=$("select[name='start_time_year']").val();
+             end_time=$("select[name='end_time_year']").val();
+        }
+        else if(category=='month')
+        {
+             start_time=$("input[name='start_time_month']").val();
+             end_time=$("input[name='end_time_month']").val();
+        }
+        else if(category=='day')
+        {
+             start_time=$("input[name='start_time_day']").val();
+             end_time=$("input[name='end_time_day']").val();
+        }
+
+//        console.log(start_time);
+//        console.log(end_time);
+        if(start_time.length==0)
+        {
+            alert("开始日期不能为空");
+        }
+        if(end_time.length==0)
+        {
+            alert("结束日期不能为空");
+        }
+
+        if(start_time>end_time)
+        {
+            alert("开始日期不能大于结束日期");
+        }
+        console.log(start_time.length);
+        console.log(end_time.length);
+
+        if(category=='year')
+        {
+            if((start_time.length!==4)||(end_time.length!==4))
+            {
+                alert("请选择正确的开始日期或者结束日期");
+            }
+        }
+        else if(category=='month')
+        {
+            if((start_time.length!==7)||(end_time.length!==7))
+            {
+                alert("请选择正确的开始日期或者结束日期");
+            }
+        }
+        else if(category=='day')
+        {
+            if((start_time.length!==10)||(end_time.length!==10))
+            {
+                alert("请选择正确的开始日期或者结束日期");
+            }
+        }
+        html+="?rgn_atpid="+rgn_atpid+"&regiontype="+regiontype+"&snname="+snname+'&pre_rgn_atpid='+pre_rgn_atpid+"&bs=zh"
+            +"&category="+category+"&start_time="+start_time+"&end_time="+end_time+'&bs='+bs+'&us_atpid='+us_atpid;
+        window.location.href=html;
+    });
+    $("select[name='category']").on('change',function () {
+        category=$(this).val();
+        console.log(category);
+        console.log(2);
+        if(category=='year')
+        {
+            $("select[name='start_time_year']").val('');
+            $("select[name='end_time_year']").val('');
+            $("input[name='start_time_month']").val('');
+            $("input[name='end_time_month']").val('');
+            $("input[name='start_time_day']").val('');
+            $("input[name='end_time_day']").val('');
+        }
+        else if(category=='month')
+        {
+            $("select[name='start_time_year']").val('');
+            $("select[name='end_time_year']").val('');
+            $("input[name='start_time_month']").val('');
+            $("input[name='end_time_month']").val('');
+            $("input[name='start_time_day']").val('');
+            $("input[name='end_time_day']").val('');
+        }
+        else if(category=='day')
+        {
+            $("select[name='start_time_year']").val('');
+            $("select[name='end_time_year']").val('');
+            $("input[name='start_time_month']").val('');
+            $("input[name='end_time_month']").val('');
+            $("input[name='start_time_day']").val('');
+            $("input[name='end_time_day']").val('');
+        }
+
+        if(category=='month')
+        {
+            $("select[name='start_time_year']").hide();
+            $("select[name='end_time_year']").hide();
+            $("input[name='start_time_month']").show();
+            $("input[name='end_time_month']").show();
+            $("input[name='start_time_day']").hide();
+            $("input[name='end_time_day']").hide();
+        }
+        else if(category=='day')
+        {
+            $("select[name='start_time_year']").hide();
+            $("select[name='end_time_year']").hide();
+            $("input[name='start_time_month']").hide();
+            $("input[name='end_time_month']").hide();
+            $("input[name='start_time_day']").show();
+            $("input[name='end_time_day']").show();
+        }
+        else
+        {
+            $("select[name='start_time_year']").show();
+            $("select[name='end_time_year']").show();
+            $("input[name='start_time_month']").hide();
+            $("input[name='end_time_month']").hide();
+            $("input[name='start_time_day']").hide();
+            $("input[name='end_time_day']").hide();
+        }
+    });
+</script>

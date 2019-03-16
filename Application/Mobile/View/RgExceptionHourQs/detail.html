@@ -1,0 +1,92 @@
+<include file="Public:header"/>
+
+<?php if(I('get.regiontype')=='rg') { ?>
+<include file="Public:menu" active="园区漫游"/>
+<?php }elseif (I('get.regiontype')=='sn') { ?>
+<include file="Public:menu" active="专项能源"/>
+<?php } ?>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">时报缺失</h1>
+    </header>
+    <div class="content" id='detail-page'>
+        <volist  name="Data" id="vo">
+            <div class="weui-cells" style="width: 90%;margin: 5px auto;">
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">时间:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.deve_dt}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">设备名称:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.dev_name}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">园区位置:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.rgn_name}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">内容:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.deve_content}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">处理状态:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.deve_status}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">处理时间:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.deve_opdt}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">处理人:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.emp_name}</div>
+                </div>
+                <div class="weui-cell" style="height: 36px;">
+                    <div class="weui-cells__title" style="width: 40%;">处理备注:</div>
+                    <div class="weui-cell__bd" style="font-size: 13px;margin-bottom: -2%;">{$vo.deve_opremark}</div>
+                </div>
+            </div>
+        </volist>
+        <empty name="Data">
+            <div class="weui-cell empty">
+                        <span href="#" class="weui-cell_bd external" style="width:120px;font-size:14px;margin: 10px auto;color: #00a0e9;margin-left: 40%;">
+                            暂无数据
+                        </span>
+            </div>
+        </empty>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<include file="Public:footer"/>
+<script src="__PUBLIC__/vendor/My97DatePicker/WdatePicker.js"></script>
+<script>
+</script>
+<script>
+
+
+</script>
+<script>
+    $("#rgn_ids").on('change',function () {
+        var rgn_atpid=$(this).val();
+        var regiontype=GetQueryString('regiontype');
+        var snname=GetQueryString('snname');
+        var  pre_rgn_atpid=GetQueryString("pre_rgn_atpid");
+//        console.log(pre_rgn_atpid.length);
+
+        if((pre_rgn_atpid==null)||(pre_rgn_atpid.length==0))
+        {
+            pre_rgn_atpid = pre_atpid;
+        }
+        var html="__CONTROLLER__/index"+"?rgn_atpid="+rgn_atpid+"&regiontype=rg"+"&snname="+snname+"&pre_rgn_atpid="+pre_rgn_atpid;
+        window.location.href=html;
+    });
+</script>
+

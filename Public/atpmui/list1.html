@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)http://www.chinasoccer.com.cn/xterm/index.php/Frontend/Teacher/classManage.html -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>班级管理</title>
+    <link rel="stylesheet" href="lib/style/example.css">
+    <link rel="stylesheet" href="lib/style/zepto.min.js">
+    <link rel="stylesheet" type="text/css" href="lib/style/weui.css">
+    <!--<link rel="stylesheet" href="lib/style/main.css" type="text/css">-->
+    <link rel="stylesheet" type="text/css" href="lib/style/example.js">
+    <script src="lib/style/jquery.js"></script>
+</head>
+
+<body ontouchstart="">
+<div class="container" id="container">
+    <div class="page grid js_show">
+        <div class="page__bd" style="height: 100%">
+            <div class="weui-tab">
+                <div class="weui-navbar">
+                    <div id="chooseclass" class="filter-btn weui-navbar__item weui-bar__item_on" data-class="not-on">
+                        <span>全部班级</span><img src="lib/icon/triangle-active.png" alt=""
+                                              style="width:20px;margin-right:5px;"></div>
+                </div>
+                <div class="weui-tab__panel">
+                    <div class="weui-panel__bd courselist">
+
+                        <div class="weui-cells already-on">
+                            <div class="weui-cell" style="background-color:#EAEAEA ">
+                                <div class="weui-cell__hd"><img src="lib/icon/class-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd"><p>马泉营校区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3人</p></div>
+                                <div class="weui-cell__ft"></div>
+                            </div>
+                            <div class="weui-cell other" style="background-color: #e5f4fe">
+                                <div class="weui-cell__hd"><img src="lib/icon/timetable-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd"><p>班级课程</p></div>
+                                <div class="weui-cell__ft">测试课程</div>
+                            </div>
+                            <div class="weui-cell other" style="background-color: #e5f4fe">
+                                <div class="weui-cell__hd"><img src="lib/icon/info-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd"><p>班主任</p></div>
+                                <div class="weui-cell__ft">管理员</div>
+                            </div>
+                            <div class="weui-cell other" style="background-color: #e5f4fe">
+                                <div class="weui-cell__hd"><img src="lib/icon/list-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd"><p>班级名单</p></div>
+                                <div class="weui-cell__ft"></div>
+                            </div>
+                            <div class="weui-cell other student" style="background-color: rgb(229, 244, 254);">
+                                <div class="weui-cell__hd"><img src="lib/icon/info-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd"><p>测试1&nbsp;&nbsp;t1&nbsp;&nbsp;13300000099</p></div>
+                                <div class="weui-cell__ft"></div>
+                            </div>
+                            <div class="weui-cell other student" style="background-color: rgb(229, 244, 254);">
+                                <div class="weui-cell__hd"><img src="lib/icon/info-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd"><p>测试2&nbsp;&nbsp;t1&nbsp;&nbsp;13300000099</p></div>
+                                <div class="weui-cell__ft"></div>
+                            </div>
+                            <div class="weui-cell other student" style="background-color: rgb(229, 244, 254);">
+                                <div class="weui-cell__hd"><img src="lib/icon/info-active.png" alt=""
+                                                                style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd"><p>测试3&nbsp;&nbsp;t1&nbsp;&nbsp;13300000099</p></div>
+                                <div class="weui-cell__ft"></div>
+                            </div>
+                            <div class="weui-form-preview__ft ">
+                                <button class="weui-form-preview__btn weui-form-preview__btn_primary showstudents"
+                                        style="display: none;">展开学生名单
+                                </button>
+                            </div>
+                            <div class="weui-form-preview__ft ">
+                                <button class="weui-form-preview__btn weui-form-preview__btn_primary hidestudents"
+                                        style="">收起学生名单
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cells" style="margin-bottom: 75px"></div>
+                </div>
+                <div class="weui-tabbar">
+                    <a href="#"
+                       class="weui-tabbar__item weui-bar__item_on">
+                        <img src="lib/icon/info-active.png" alt="" class="weui-tabbar__icon">
+
+                        <p class="weui-tabbar__label">个人资料</p>
+                    </a>
+                    <a href="#"
+                       class="weui-tabbar__item">
+                        <img src="lib/icon/timetabletoday.png" alt="" class="weui-tabbar__icon">
+
+                        <p class="weui-tabbar__label">今日课程</p>
+                    </a>
+                    <a href="#"
+                       class="weui-tabbar__item">
+                        <img src="lib/icon/managecenter.png" alt="" class="weui-tabbar__icon">
+
+                        <p class="weui-tabbar__label">管理中心</p>
+                    </a>
+                    <a href="#"
+                       class="weui-tabbar__item">
+                        <img src="lib/icon/leavemanage.png" alt="" class="weui-tabbar__icon">
+
+                        <p class="weui-tabbar__label">请假申请</p>
+                    </a>
+                    <a href="#"
+                       class="weui-tabbar__item">
+                        <img src="lib/icon/qrcode.png" alt="" class="weui-tabbar__icon">
+
+                        <p class="weui-tabbar__label">扫码签到</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="lib/style/weui.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+//        $.ajax({
+//            url: "/xterm/index.php/Frontend/Teacher/classManage.html",
+//            type: "POST",
+//            data: {cls_atpid: "all"},
+//            success: function (data) {
+//                $("#chooseclass").html("<span>" + data.cls_name + '</span><img src="/xterm/Public/xterm/icon/triangle-active.png" alt="" style="width:20px;margin-right:5px;"></div>');
+//                if (data.code == 'ok') {
+//                    if (data.result) {
+//                        for (var i = 0; i < (data.result).length; i++) {
+//                            var student_html = "";
+//                            for (var j = 0; j < (data.result[i].student_list).length; j++) {
+//                                var student_phone = data.result[i].student_list[j].s_bindphone;
+//                                var student_ename = data.result[i].student_list[j].s_ename;
+//                                var student_bxstatus = data.result[i].student_list[j].s_bxstatus;
+//                                if (student_phone == null) {
+//                                    student_phone = '';
+//                                }
+//                                if (student_ename == null) {
+//                                    student_ename = '';
+//                                }
+//                                if (student_bxstatus == null) {
+//                                    student_bxstatus = '';
+//                                }
+//                                student_html +=
+//                                        '<div class="weui-cell other student" style="background-color: #e5f4fe;display:none;">' +
+//                                        '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/info-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                        '<div class="weui-cell__bd">' +
+//                                        '<p>' + data.result[i].student_list[j].s_name + '&nbsp&nbsp' + student_ename + '&nbsp&nbsp' + data.result[i].student_list[j].s_bindphone + '</p>' +
+//                                        '</div>' +
+//                                        '<div class="weui-cell__ft">' + student_bxstatus + '</div>' +
+//                                        '</div>';
+//                            }
+//                            $(".courselist").append(
+//                                    '<div class="weui-cells already-on" >' +
+//                                    '<div class="weui-cell" style="background-color:#EAEAEA ">' +
+//                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/class-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                    '<div class="weui-cell__bd">' +
+//                                    '<p>' + data.result[i].cls_name + '&nbsp&nbsp&nbsp&nbsp&nbsp' + data.result[i].class_count + '人</p>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell__ft"></div>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell other" style="background-color: #e5f4fe">' +
+//                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/timetable-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                    '<div class="weui-cell__bd">' +
+//                                    '<p>班级课程</p>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell__ft">' + data.result[i].crs_name + '</div>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell other" style="background-color: #e5f4fe">' +
+//                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/info-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                    '<div class="weui-cell__bd">' +
+//                                    '<p>班主任</p>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell__ft">' + data.result[i].cls_manageremployeename + '</div>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell other" style="background-color: #e5f4fe">' +
+//                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/list-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                    '<div class="weui-cell__bd">' +
+//                                    '<p>班级名单</p>' +
+//                                    '</div>' +
+//                                    '<div class="weui-cell__ft"></div>' +
+//                                    '</div>' +
+//                                    student_html +
+//                                    '<div class="weui-form-preview__ft "> <button class="weui-form-preview__btn weui-form-preview__btn_primary showstudents">展开学生名单</button> </div>' +
+//                                    '<div class="weui-form-preview__ft "> <button class="weui-form-preview__btn weui-form-preview__btn_primary hidestudents" style="display:none;">收起学生名单</button> </div>' +
+//                                    '</div>'
+//                            );
+//                        }
+                        $(".showstudents").click(function () {
+                            $(this).parent().parent().find(".student").show();
+                            $(this).parent().next().children().show();
+                            $(this).hide();
+                        });
+                        $(".hidestudents").click(function () {
+                            $(this).parent().parent().find(".student").hide();
+                            $(this).parent().prev().children().show();
+                            $(this).hide();
+                        });
+//                    }
+//
+//
+//                }
+//            }
+//        });
+        $('#chooseclass').on('click', function () {
+            weui.picker([{
+                "label": "\u5168\u90e8\u73ed\u7ea7",
+                "value": "all"
+            }, {"label": "\u9a6c\u6cc9\u8425\u6821\u533a", "value": "8B87173A-41F0-4AA8-9569-DD44B206853B"}], {
+                onChange: function (result) {
+                    console.log(result);
+                },
+                onConfirm: function (result) {
+                    console.log(result);
+                    var cls_atpid = result;
+//                    $.ajax({
+//                        url: "/xterm/index.php/Frontend/Teacher/classManage.html",
+//                        type: "POST",
+//                        data: {cls_atpid: "" + cls_atpid + ""},
+//                        success: function (data) {
+//                            if (data.code == 'ok') {
+//                                $("#chooseclass").html("<span>" + data.cls_name + '</span><img src="/xterm/Public/xterm/icon/triangle-active.png" alt="" style="width:20px;margin-right:5px;"></div>');
+//                                $(".courselist").html("");
+//                                if (data.code == 'ok') {
+//                                    if (data.result) {
+//                                        for (var i = 0; i < (data.result).length; i++) {
+//                                            var student_html = "";
+//                                            for (var j = 0; j < (data.result[i].student_list).length; j++) {
+//                                                var student_phone = data.result[i].student_list[j].s_bindphone;
+//                                                var student_bxstatus = data.result[i].student_list[j].s_bxstatus;
+//                                                if (student_phone == null) {
+//                                                    student_phone = '';
+//                                                }
+//                                                if (student_bxstatus) {
+//                                                    student_bxstatus = '';
+//                                                }
+//                                                student_html +=
+//                                                        '<div class="weui-cell other student" style="background-color: #e5f4fe;display:none;">' +
+//                                                        '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/info-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                                        '<div class="weui-cell__bd">' +
+//                                                        '<p>' + data.result[i].student_list[j].s_name + '&nbsp&nbsp' + student_phone + '</p>' +
+//                                                        '</div>' +
+//                                                        '<div class="weui-cell__ft">' + student_bxstatus + '</div>' +
+//                                                        '</div>';
+//                                            }
+//                                            $(".courselist").append(
+//                                                    '<div class="weui-cells already-on" >' +
+//                                                    '<div class="weui-cell" style="background-color:#EAEAEA ">' +
+//                                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/class-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                                    '<div class="weui-cell__bd">' +
+//                                                    '<p>' + data.result[i].cls_name + '&nbsp&nbsp&nbsp&nbsp&nbsp' + data.result[i].class_count + '人</p>' +
+//                                                    '</div>' +
+//                                                    '<div class="weui-cell__ft"></div>' +
+//                                                    '</div>' +
+//                                                    '<div class="weui-cell other" style="background-color: #e5f4fe">' +
+//                                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/timetable-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                                    '<div class="weui-cell__bd">' +
+//                                                    '<p>班级课程</p>' +
+//                                                    '</div>' +
+//                                                    '<div class="weui-cell__ft">' + data.result[i].crs_name + '</div>' +
+//                                                    '</div>' +
+//                                                    '<div class="weui-cell other" style="background-color: #e5f4fe">' +
+//                                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/info-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                                    '<div class="weui-cell__bd">' +
+//                                                    '<p>班主任</p>' +
+//                                                    '</div>' +
+//                                                    '<div class="weui-cell__ft">' + data.result[i].cls_manageremployeename + '</div>' +
+//                                                    '</div>' +
+//                                                    '<div class="weui-cell other" style="background-color: #e5f4fe">' +
+//                                                    '<div class="weui-cell__hd"><img src="/xterm/Public/xterm/icon/list-active.png" alt="" style="width:20px;margin-right:5px;display:block"></div>' +
+//                                                    '<div class="weui-cell__bd">' +
+//                                                    '<p>班级名单</p>' +
+//                                                    '</div>' +
+//                                                    '<div class="weui-cell__ft"></div>' +
+//                                                    '</div>' +
+//                                                    student_html +
+//                                                    '<div class="weui-form-preview__ft"> <button class="weui-form-preview__btn weui-form-preview__btn_primary showstudents">展开学生名单</button> </div>' +
+//                                                    '<div class="weui-form-preview__ft"> <button class="weui-form-preview__btn weui-form-preview__btn_primary hidestudents" style="display:none;">收起学生名单</button> </div>' +
+//                                                    '</div>'
+//                                            );
+//                                        }
+//
+//                                        $(".showstudents").click(function () {
+//                                            $(this).parent().parent().find(".student").show();
+//                                            $(this).parent().next().children().show();
+//                                            $(this).hide();
+//                                        });
+//                                        $(".hidestudents").click(function () {
+//                                            $(this).parent().parent().find(".student").hide();
+//                                            $(this).parent().prev().children().show();
+//                                            $(this).hide();
+//                                        });
+//                                    }
+//
+//
+//                                }
+//
+//
+//                            }
+//                        }
+//                    });
+                }
+            });
+        });
+
+    });
+</script>
+
+
+</body>
+</html>

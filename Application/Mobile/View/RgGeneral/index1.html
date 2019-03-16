@@ -1,0 +1,517 @@
+<include file="Public:header"/>
+
+<?php if(I('get.regiontype')=='rg') { ?>
+<include file="Public:menu" active="园区漫游"/>
+<?php }elseif (I('get.regiontype')=='sn') { ?>
+<include file="Public:menu" active="专项能源"/>
+<?php } ?>
+
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">综合信息</h1>
+    </header>
+
+    <div class="content">
+        <div class="atp-list" style="width: 90%;margin:auto">
+             <div id="showwaterechars" style="width: 49%;max-width: 400px;height: 200px;display: inline-block">
+                 <div id="water" style="width: 90%;height: 160px;"></div>
+                 <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当日用水量:{$Result.ysl}T</span>
+                 <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当月用电量:{$Result.m_ysl}T</span>
+                 <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当年用电量:{$Result.y_ysl}T</span>
+             </div>
+            <div id="showelectricityechars" style="width: 49%;max-width: 400px;height: 200px;display: inline-block">
+                <div id="electricity" style="width: 90%;height: 160px;"></div>
+                <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当日用电量:{$Result.dgl}Kwh</span>
+                <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当月用电量:{$Result.m_dgl}Kwh</span>
+                <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当年用电量:{$Result.y_dgl}Kwh</span>
+            </div>
+            <div id="showhotechars" style="width: 49%;max-width: 400px;height: 200px;display: inline-block">
+                <div id="hot" style="width: 90%;height: 160px;"></div>
+                <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当日用暖量:{$Result.ynl}Kwh</span>
+                <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当月用暖量:{$Result.m_ynl}Kwh</span>
+                <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当年用暖量:{$Result.y_ynl}Kwh</span>
+            </div>
+            <div id="showcoldechars" style="width: 49%;max-width: 400px;height: 200px;display: inline-block">
+                <div id="cold" style="width: 90%;height: 160px;"></div>
+                <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当日用冷量:{$Result.yll}Kwh</span>
+                <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当月用冷量:{$Result.m_yll}Kwh</span>
+                <span style=" font-size:10px;width: 90%;height:12px;display: inline-block; margin: 0 auto;">当年用冷量:{$Result.y_yll}Kwh</span>
+            </div>
+            <!--<div id="water" style="width: 49%; max-width: 400px; height: 200px;display: inline-block;"></div>-->
+            <!--<div id="electricity" style="width: 49%; max-width: 400px; height: 200px;display: inline-block;"></div>-->
+            <!--<div id="hot" style="width: 49%; max-width: 400px; height: 200px;display: inline-block;"></div>-->
+            <!--<div id="cold" style="width: 49%; max-width: 400px; height: 200px;display: inline-block;"></div>-->
+
+        </div>
+        <div class="atp-list" style="width: 90%;margin:auto">
+            <iframe frameborder=0 width=100% height=300 marginheight=0 marginwidth=0 scrolling=no
+                    src='__CONTROLLER__/func_energytrend?rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Think.get.snname}'></iframe>
+        </div>
+        <div class="list-block atp-list content-block" style="margin: 0; width: 90%;">
+            <!--<iframe frameborder=0 width=100% height=300 marginheight=0 marginwidth=0 scrolling=no-->
+                    <!--src='__CONTROLLER__/func_alarminfo?rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Think.get.snname}'></iframe>-->
+            <ul style="width: 90%;">
+                <li>
+                    <ul style="height: 20px; display: block;">
+                        <li style="width:20%;height: 20px;display: inline-block;font-size: 8px;float: left;">能源类型</li>
+                        <li style="width:20%;height: 20px;display: inline-block;font-size: 8px;float: left;">设备点</li>
+                        <li style="width:20%;height: 20px;display: inline-block;font-size: 8px;float: left;">报警时间</li>
+                        <li style="width:20%;height: 20px;display: inline-block;font-size: 8px;float: left;">报警等级</li>
+                        <li style="width:20%;height: 20px;display: inline-block;font-size: 8px;float: left;">报警详情</li>
+                        <li style="width:20%;height: 20px;display: inline-block;font-size: 8px;float: left;">查看</li>
+                    </ul>
+                </li>
+                <foreach  name="Alarm_data" item="vo">
+                <li>
+                        <!--<li>{$vo.alm_category}</li>-->
+                        <!--<li>{$vo.rgn_name}</li>-->
+                        <!--<li>{$vo.alm_datetime}</li>-->
+                        <!--<li>{$vo.alm_level}</li>-->
+                        <!--<li>{$vo.alm_content}</li>-->
+                        <!--<li>-->
+                            <!--<button value="查看详情" onclick="dealAlarm()"></button>-->
+                        <!--</li>-->
+                    <div class="item-link item-content external" onclick="location.href='__CONTROLLER__/list2'">
+                        <div class="item-media"><img src="__PUBLIC__/mobile/images/icon2.png" width="40px;"></div>
+                        <div class="item-inner">
+                            <div class="item-title">{$vo.rgn_name}</div>
+                            <div class="item-subtitle">{$vo.alm_datetime}</div>
+                            <div class="item-subtitle">{$vo.alm_level}</div>
+                            <div class="item-subtitle">{$vo.alm_content}</div>
+                            <div class="item-title-row">
+                                <span class="button button-fill button-success already" style="margin-bottom: 12px"
+                                onclick="return getAlarm('{$vo.rgn_atpid}');">查看</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="item-link item-content external" onclick="location.href='__CONTROLLER__/list2'">-->
+                        <!--<div class="item-media"><img src="__PUBLIC__/mobile/images/icon2.png" width="40px;"></div>-->
+                        <!--<div class="item-inner">-->
+                            <!--<div class="item-title">报警</div>-->
+                            <!--<div class="item-subtitle">最近：40项</div>-->
+                            <!--<div class="item-subtitle">最近：40项</div>-->
+                            <!--<div class="item-subtitle">最近：40项</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                </li>
+                </foreach>
+                <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="item-link item-content external" onclick="location.href='__CONTROLLER__/list2'">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item-media"><img src="__PUBLIC__/mobile/images/icon2.png" width="80"></div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item-inner">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="item-title">报警</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="item-subtitle">最近：40项</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="item-title-row">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="button button-fill button-success already" style="margin-bottom: 12px"&ndash;&gt;-->
+                                      <!--&lt;!&ndash;onclick='$.toast("你点击了确认");'>确认</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="button button-fill button-danger ignore"&ndash;&gt;-->
+                                      <!--&lt;!&ndash;onclick='$.toast("你点击了忽略");'>忽略</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--</ul>-->
+        </div>
+    </div>
+</div>
+
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+    // 取消点击事件冒泡
+    $(".ignore").click(function (event) {
+        event.stopPropagation();
+    });
+    $(".already").click(function (event) {
+        event.stopPropagation();
+    });
+</script>
+<include file="Public:footer"/>
+<script src="__PUBLIC__/mobile/js/jquery-1.12.4.js"></script>
+<script src="__PUBLIC__/mobile/js/highcharts.js"></script>
+<script src="__PUBLIC__/mobile/js/highcharts-more.js"></script>
+<script>
+    $(function () {
+        $('#electricity').highcharts({
+            chart: {
+                type: 'gauge',
+                plotBackgroundColor: null,
+                plotBackgroundImage: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            title: {
+                text: '当月电量值(Kwh)'
+            },
+            pane: {
+                startAngle: -130,
+                endAngle: 130,
+                background: [{
+                    backgroundColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, '#FFF'],
+                            [1, '#333']
+                        ]
+                    },
+                    borderWidth: 0,
+                    outerRadius: '109%'
+                }, {
+                    backgroundColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, '#333'],
+                            [1, '#FFF']
+                        ]
+                    },
+                    borderWidth: 1,
+                    outerRadius: '107%'
+                }, {
+                    // default background
+                }, {
+                    backgroundColor: '#DDD',
+                    borderWidth: 0,
+                    outerRadius: '105%',
+                    innerRadius: '103%'
+                }]
+            },
+            // the value axis
+            yAxis: {
+                min: 0,
+                max: parseInt(2*{$Result.c_dgl_plan}),
+                minorTickInterval: 'auto',
+                minorTickWidth: 1,
+                minorTickLength: 10,
+                minorTickPosition: 'inside',
+                minorTickColor: '#666',
+                tickPixelInterval: 30,
+                tickWidth: 2,
+                tickPosition: 'inside',
+                tickLength: 10,
+                tickColor: '#666',
+                labels: {
+                step: 2,
+                rotation: 'auto'
+                },
+        title: {
+            text: ''
+        },
+        plotBands: [{
+            from: 0,
+            to: parseInt({$Result.c_dgl_plan}/2),
+        color: '#55BF3B' // green
+    }, {
+            from: parseInt({$Result.c_dgl_plan}/2),
+            to: parseInt({$Result.c_dgl_plan}),
+            color: '#DDDF0D' // yellow
+        }, {
+            from: parseInt({$Result.c_dgl_plan}),
+            to: parseInt(2*{$Result.c_dgl_plan}),
+            color: '#DF5353' // red
+        }]
+    },
+        series: [{
+            name: '电量值',
+            data: [{$Result.c_dgl}],
+            tooltip: {
+            valueSuffix: ' Kwh'
+        }
+    }
+        ]
+    });
+        $('#water').highcharts({
+            chart: {
+                type: 'gauge',
+                plotBackgroundColor: null,
+                plotBackgroundImage: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            title: {
+                text: "当月用水量(T)"
+            },
+            pane: {
+                startAngle: -130,
+                endAngle: 130,
+                background: [{
+                    backgroundColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, '#FFF'],
+                            [1, '#333']
+                        ]
+                    },
+                    borderWidth: 0,
+                    outerRadius: '109%'
+                }, {
+                    backgroundColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, '#333'],
+                            [1, '#FFF']
+                        ]
+                    },
+                    borderWidth: 1,
+                    outerRadius: '107%'
+                }, {
+                    // default background
+                }, {
+                    backgroundColor: '#DDD',
+                    borderWidth: 0,
+                    outerRadius: '105%',
+                    innerRadius: '103%'
+                }]
+            },
+            // the value axis
+            yAxis: {
+                min: 0,
+                max: parseInt(2*{$Result.c_ysl_plan}),
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+            step: 2,
+                rotation: 'auto'
+        },
+        title: {
+            text: ''
+        },
+        plotBands: [{
+            from: 0,
+            to: parseInt({$Result.c_ysl_plan}/2),
+        color: '#55BF3B' // green
+    }, {
+            from: parseInt({$Result.c_ysl_plan}/2),
+            to: parseInt({$Result.c_ysl_plan}),
+            color: '#DDDF0D' // yellow
+        }, {
+            from: parseInt({$Result.c_ysl_plan}),
+            to: parseInt(2*{$Result.c_ysl_plan}),
+            color: '#DF5353' // red
+        }]
+    },
+        series: [{
+            name: '用水量',
+            data: [{$Result.c_ysl}],
+            tooltip: {
+            valueSuffix: 'T'
+        }
+    }
+        ]
+    })
+        ;
+        $('#hot').highcharts({
+            chart: {
+                type: 'gauge',
+                plotBackgroundColor: null,
+                plotBackgroundImage: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            title: {
+                text: "当月暖能用量(Kwh)"
+            },
+            pane: {
+                startAngle: -130,
+                endAngle: 130,
+                background: [{
+                    backgroundColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, '#FFF'],
+                            [1, '#333']
+                        ]
+                    },
+                    borderWidth: 0,
+                    outerRadius: '109%'
+                }, {
+                    backgroundColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, '#333'],
+                            [1, '#FFF']
+                        ]
+                    },
+                    borderWidth: 1,
+                    outerRadius: '107%'
+                }, {
+                    // default background
+                }, {
+                    backgroundColor: '#DDD',
+                    borderWidth: 0,
+                    outerRadius: '105%',
+                    innerRadius: '103%'
+                }]
+            },
+            // the value axis
+            yAxis: {
+                min: 0,
+                max: parseInt(2*{$Result.c_ynl_plan}),
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+            step: 2,
+                rotation: 'auto'
+        },
+        title: {
+            text: ""
+        },
+        plotBands: [{
+            from: 0,
+            to: parseInt({$Result.c_ynl_plan}/2),
+        color: '#55BF3B' // green
+    }, {
+            from: parseInt({$Result.c_ynl_plan}/2),
+            to: parseInt({$Result.c_ynl_plan}),
+            color: '#DDDF0D' // yellow
+        }, {
+            from: parseInt({$Result.c_ynl_plan}),
+            to: parseInt(2*{$Result.c_ynl_plan}),
+            color: '#DF5353' // red
+        }]
+    },
+        series: [{
+            name: '当月暖能用量',
+            data: [{$Result.c_ynl}],
+            tooltip: {
+            valueSuffix: ' Kwh'
+        }
+    }
+        ]
+    })
+        ;
+        $('#cold').highcharts({
+            chart: {
+                type: 'gauge',
+                plotBackgroundColor: null,
+                plotBackgroundImage: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            title: {
+                text: "当月冷能用量(Kwh)"
+            },
+            pane: {
+                startAngle: -130,
+                endAngle: 130,
+                background: [{
+                    backgroundColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, '#FFF'],
+                            [1, '#333']
+                        ]
+                    },
+                    borderWidth: 0,
+                    outerRadius: '109%'
+                }, {
+                    backgroundColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, '#333'],
+                            [1, '#FFF']
+                        ]
+                    },
+                    borderWidth: 1,
+                    outerRadius: '107%'
+                }, {
+                    // default background
+                }, {
+                    backgroundColor: '#DDD',
+                    borderWidth: 0,
+                    outerRadius: '105%',
+                    innerRadius: '103%'
+                }]
+            },
+            // the value axis
+            yAxis: {
+                min: 0,
+                max: parseInt(2*{$Result.c_yll_plan}),
+            minorTickInterval: 'auto',
+            minorTickWidth: 1,
+            minorTickLength: 10,
+            minorTickPosition: 'inside',
+            minorTickColor: '#666',
+            tickPixelInterval: 30,
+            tickWidth: 2,
+            tickPosition: 'inside',
+            tickLength: 10,
+            tickColor: '#666',
+            labels: {
+            step: 2,
+                rotation: 'auto'
+        },
+        title: {
+            text: ""
+        },
+        plotBands: [{
+            from: 0,
+            to: parseInt({$Result.c_yll_plan}/2),
+        color: '#55BF3B' // green
+    },{
+            from: parseInt({$Result.c_yll_plan}/2),
+            to: parseInt({$Result.c_yll_plan}),
+            color: '#DDDF0D' // yellow
+        },{
+            from: parseInt({$Result.c_yll_plan}),
+            to: parseInt(2*{$Result.c_yll_plan}),
+            color: '#DF5353' // red
+        }]
+    },
+        series: [{
+            name: '冷能用量',
+            data: [{$Result.c_yll}],
+            tooltip: {
+            valueSuffix: 'Kwh'
+        }
+    }
+        ]
+    })
+        ;
+    })
+    ;
+</script>
+
+<script>
+    function getAlarm(rgn_atpid){
+        console.log(rgn_atpid);
+        var url="__MODULE__/RgAlarmConfirm?rgn_atpid="+rgn_atpid+'&pre_rgn_atpid={$Think.get.rgn_atpid}';
+        if('{$Think.get.regionlevel}' == 'devicepoint'){
+            window.location.href=url;
+        }else{
+            window.location.href=url;
+        }
+    }
+</script>
+<script>
+    function GetQueryString(name)
+    {
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  decodeURI(r[2]); return null;
+    }
+</script>

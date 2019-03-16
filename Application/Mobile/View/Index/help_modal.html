@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ATP-移动版</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<style>
+	*{ padding:0px; margin:0px}
+	a {
+		text-decoration: none;
+	}
+	.help-madal {
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, .5);
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 100;
+		color: #fff;
+		text-align: center;
+	}
+
+	.close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+	}
+
+	.step1 {
+		position: absolute;
+		top: 70px;
+		left: 100px;
+	}
+	.content1 {
+		width: 150px;
+		height: 50px;
+		position: absolute;
+		top: 0;
+		left: 50px;
+		z-index: 200;
+		background: transparent;
+	}
+	.step2 {
+		position: absolute;
+		top: 250px;
+		left: 50px;
+		display: none;
+	}
+	.step3 {
+		position: absolute;
+		top: 300px;
+		right: 50px;
+		display: none;
+	}
+	.step4 {
+		position: absolute;
+		bottom: 70px;
+		right: 50px;
+		display: none;
+	}
+</style>
+</head>
+
+<body>
+<div class="help-madal">
+	<div class="close">
+		<a href="tab4.html">
+		<img src="__PUBLIC__/mobile/blue/images/close.png" alt="">
+		<p style="color:#fff">跳过</p>
+		</a>
+	</div>
+	<div class="step1">
+		<div class="content1"></div>
+		<img src="__PUBLIC__/mobile/blue/images/arrow-right.png" alt="">
+		<p>第一步</p>
+	</div>
+	<div class="step2">
+		<img src="__PUBLIC__/mobile/blue/images/arrow-left.png" alt="">
+		<p>第二步</p>
+	</div>
+	<div class="step3">
+		<img src="__PUBLIC__/mobile/blue/images/arrow-top.png" alt="">
+		<p>第三步</p>
+	</div>
+	<div class="step4">
+		<a href="tab4.html">
+		<p style="color:#fff">开始启用</p>
+		<img src="__PUBLIC__/mobile/blue/images/arrow-bottom.png" alt="">
+		</a>
+	</div>
+</div>
+
+<div class="main">
+    <div style="float: left;width: 100%"><img src="__PUBLIC__/mobile/blue/images/index.png" width="100%"></div>
+</div>
+
+<script src="__PUBLIC__/mobile/blue/js/zepto.js"></script>
+<script>
+	$('.step1').on('click',function() {
+		$('.step1').hide(200);
+		$('.step2').show();
+	})
+	$('.step2').on('click',function() {
+		$('.step2').hide(200);
+		$('.step3').show();
+	})
+	$('.step3').on('click',function() {
+		$('.step3').hide(200);
+		$('.step4').show();
+	})
+	// $('.step4').on('click',function() {
+	// 	$('.help-madal').hide();
+	// })
+
+	// $('.close').on('click',function() {
+	// 	$('.help-madal').hide();
+	// 	location.href = 'tab4.html'
+	// })
+
+
+</script>
+</body>
+</html>

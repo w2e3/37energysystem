@@ -1,0 +1,60 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="审批中心"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">审批中心</h1>
+    </header>
+
+    <div class="content infinite-scroll">
+        <!-- 轮播图 -->
+        <div class="swiper-container swiper-container-horizontal" data-space-between="10">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="#" >
+                        <img class='card-cover' src="__PUBLIC__/mobile/images/p1.png" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" >
+                        <img class='card-cover' src="__PUBLIC__/mobile/images/p1.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-pagination"><span
+                    class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
+                    class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+        </div>
+
+        <div class="weui-grids">
+            <a href="__CONTROLLER__/wxd" class="weui-grid js_grid external">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/wx.png" alt=""></div>
+                <p class="weui-grid__label">维修单处理</p></a>
+            <a href="__CONTROLLER__/datachange" class="weui-grid js_grid external" >
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/xg.png" alt=""></div>
+                <p class="weui-grid__label">数据修改</p></a>
+            <a href="__CONTROLLER__/instork" class="weui-grid js_grid external" >
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/rk.png" alt=""></div>
+                <p class="weui-grid__label">入库审批</p></a>
+            <a href="__CONTROLLER__/outstork" class="weui-grid js_grid external" >
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/ck.png" alt=""></div>
+                <p class="weui-grid__label">出库审批</p></a>
+            <a href="__CONTROLLER__/bill" class="weui-grid js_grid external" >
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/dd.png" alt=""></div>
+                <p class="weui-grid__label">全部订单</p></a>
+
+        </div>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+
+</script>
+<include file="Public:footer"/>

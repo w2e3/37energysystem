@@ -1,0 +1,173 @@
+.left-yibiao {
+    float: left;
+    width: 49%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 15px;
+    height: 326px;
+}
+.msgtitle {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #000;
+    font-weight: 700;
+    padding-left: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.tablebox {
+    padding: 15px;
+}
+.yibiao-top {
+	padding: 15px;
+    width: 100%;
+}
+.yibiao-top .onechart {
+    border: 1px solid #ddd;
+    float: left;
+    width: 24%;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+.yibiao-top .onechart:last-child {
+    margin-right: 0px;
+}
+
+#water {
+    border-bottom: 1px solid #ddd;
+}
+#electricity {
+    border-bottom: 1px solid #ddd;
+}
+#hot {
+    border-bottom: 1px solid #ddd;
+}
+#cold {
+    border-bottom: 1px solid #ddd;
+}
+.backimg {
+    margin-top: 15px;
+}
+.ecahrt {
+    float: right;
+    width: 49%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.content {
+    margin-left: 2px;
+}
+#tab span {
+	border: 1px solid #ccc;
+	padding: 0 10px;
+}
+.select {
+	font-weight: bold;
+}
+#tab-content li {
+	display: none;
+}
+#tab-content li.show {
+	display: block;
+}
+.yuanqutop {
+    position: relative;
+    width: 100%;
+}
+.chartmsg {
+    background: #fff;
+    display: flex;
+    padding: 8px;
+}
+.chartmsg > div {
+    color: #333;
+    flex: 1;
+    font-size: 12px;
+    text-align: center;
+    border-right: 1px solid #ddd;
+}
+.chartmsg > div >p:nth-child(2) {
+    font-size: 10px;
+    line-height: 30px;
+}
+.chartmsg > div:last-child {
+    border-right: none;
+}
+.font16 {
+    font-size: 16px;
+}
+.color_one {
+    color: #6cc134;
+}
+.color_two {
+    color: #f8bf50;
+}
+.color_three {
+    color: #da1b1b;
+}
+.color_four {
+    color: #0078d7;
+}
+
+/* 表页面 */
+.border_right {
+	border-right: 1px solid #ddd;
+}
+.chart_title {
+	height: 40px;
+	font-weight: 500;
+	line-height: 40px;
+	border-bottom: 1px solid #ddd;
+	overflow-y: hidden;
+}
+.two_columns {
+	display: flex;
+}
+.two_columns >div {
+    padding-top: 10px;
+}
+.two_columns p {
+	line-height: 30px;
+	font-size: 14px;
+	color: #aaa;
+}
+.flex_1 {
+	flex: 1;
+}
+.chart_message {
+	margin-top: 20px;
+	overflow: hidden;
+}
+.chartimg {
+	width: 150px;
+	margin-right: 20px;
+}
+.color_black {
+	color: #000;
+}
+.yibiaoLeft {
+	width: 80%;
+	padding-right: 20px;
+	border-right: 1px solid #ddd;
+	height: 300px;
+}
+.yibiaoRight {
+	text-align: center;
+	padding-top: 50px;
+	overflow: hidden;
+}
+
+.horizontal_line {
+	height: 1px;
+	width: 120px;
+	margin: 20px auto;
+	background: #ddd;
+}
+.color_black {
+	color: #000;
+}
+.font24 {
+	font-size: 24px;
+    font-weight: bold;
+}

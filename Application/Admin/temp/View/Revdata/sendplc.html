@@ -1,0 +1,111 @@
+<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">命令下发</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        <span style="color: red;text-align: center">*</span>
+                        功能码：
+                    </label>
+                    <div class="col-sm-4">
+                        <select name="functionId" class="chosen-select" >
+                            <option value="1" <if condition="($data.emp_sex eq '1')">selected<else /></if> >1（代表电表上传）</option>
+                            <option value="2" <if condition="($data.emp_sex eq '2')">selected<else /></if> >2（代表热能表上传）</option>
+                            <option value="3" <if condition="($data.emp_sex eq '3')">selected<else /></if> >3（代表水表上传）</option>
+                            <option value="4" <if condition="($data.emp_sex eq '4')">selected<else /></if> >4（代表采集模块参数上传）</option>
+                            <option value="11" <if condition="($data.emp_sex eq '11')">selected<else /></if> >11（代表采集模块参数下发）</option>
+                        </select>
+                    </div>
+
+                    <label class="col-sm-2 control-label">
+                        <span style="color: red;text-align: center">*</span>
+                        采集号：
+                    </label>
+                    <div class="col-sm-4">
+                        <select name="collectionId" class="chosen-select" >
+                            <foreach item="dd" name="DeviceData">
+                                <option value="{$dd.dev_acquisition}" >{$dd.dev_acquisition}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        上传频率：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="frequency" type="number" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        服务器IP地址：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="serverIP" type="text"  class="form-control" pattern="((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)">
+                    </div>
+                    <label class="col-sm-2 control-label">
+                        服务器端口号：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="serverPort" type="number"  class="form-control" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <label class="col-sm-2 control-label">
+                        采集模块IP网关：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="gateIP" type="text"  class="form-control" pattern="((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)">
+                    </div>
+                    <label class="col-sm-2 control-label">
+                        采集模块IP掩码：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="maskIP" type="text" class="form-control" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        采集模块IP地址：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="collectionIP" type="text" class="form-control" pattern="((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)">
+                    </div>
+                </div>
+                <input name="revd_atpid" type="hidden" value="{$data.revd_atpid}" class="form-control">
+                <input name="revd_ip" type="hidden" value="{$data.revd_ip}" class="form-control">
+                <input name="revd_port" type="hidden" value="{$data.revd_port}" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            <button type="button" data-dismiss="" id="sys_dlg_submit" class="btn btn-primary">下发</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+$(function () {
+
+    $(".js-switch").each(function(){
+        new Switchery(this, {color: '#1AB394'});
+    });
+
+    $(".file-pretty").prettyFile();
+
+    $(".chosen-select").chosen({disable_search_threshold: 10, search_contains: true,width:'288px'});
+
+});
+
+</script>

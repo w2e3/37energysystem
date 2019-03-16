@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>统计查看</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+		.nav-tabs {
+			margin-bottom: 5px;
+		}
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-lg-8 col-sm-6 m-b-xs">
+            <div data-toggle="buttons" class="btn-group nav-tabs">
+                <label class="btn btn-sm btn-white" data-target="1">
+                    <input type="radio" id="option2" name="options">用水量</label>
+            </div>
+       <!--      <div class="col-lg-3 col-sm-4">
+                <div class="input-daterange input-group" id="datepicker">
+                    <input type="text" class="input-sm form-control data1" name="start" value="2014-11-10" />
+                    <span class="input-group-addon">到</span>
+                    <input type="text" class="input-sm form-control data1" name="end" value="2014-11-17" />
+                </div>
+            </div> -->
+         <!--    <div class="col-lg-1 col-sm-2">
+                <button type="button" class="btn btn-sm btn-primary"> 查找</button>
+            </div> -->
+        </div>
+        <div class="ctab cbody tab-content">
+            <div class="ctab content " id="mycharts" style="height: 300px;">
+            </div>
+            <div class="ctab content active" id="charts2" style="display: none;height: 300px;">
+            </div>
+            <div class="ctab content " id="charts3" style="display: none;height: 300px;">
+            </div>
+            <div class="ctab content " id="charts4" style="display:none;height: 300px;">
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/echarts.js"></script>
+    <script>
+    var charts = [];
+    var opts = [{
+        color:['#0099cc'],
+        title: {
+            text: '用水量',
+            left: '20px'
+        },
+        tooltip: {
+             trigger: 'axis',
+            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        legend: {
+            data: ['用水量']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: { show: true },
+                dataView: { show: true, readOnly: true },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        xAxis: {
+            data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+        },
+        yAxis: {},
+        series: [{
+            name: '用水量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20,25]
+        }]
+    }];
+    </script>
+    <script>
+    $(function() {
+        $(".cbody>.content:gt(0)").hide();
+        $(".nav-tabs ").delegate('label', 'click', function(e) {
+            if ($(this).hasClass("active")) {
+                return;
+            }
+            $(this).addClass('active').siblings('label').removeClass("active");
+            var index = $(this).data('target');
+            $('.cbody>.content:eq(' + index + ')').show(function() {
+                charts[index].setOption(opts[index]);
+                charts[index].resize();
+            }).siblings().hide();
+
+        });
+        $(".cbody>.content").each(function() {
+            charts.push(echarts.init($(this).get(0)));
+        });
+        charts[0].setOption(opts[0]);
+    });
+    $(window).resize(function() {
+        $(charts).each(function(index, chart) {
+            chart.resize();
+        });
+    });
+    </script>
+</body>
+
+</html>

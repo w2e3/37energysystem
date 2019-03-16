@@ -1,0 +1,41 @@
+<div class="modal-dialog" style="width: 800px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">维修单接单</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+                <input name="rl_atpid" type="hidden"  value="{$data['rl_atpid']}" class="form-control" id="rl_atpid">
+                <div class="modal-body">
+                    <label class="col-sm-3 control-label" style="padding-left: 0px">接单人：</label>
+                    <div class="col-sm-9">
+                        <input name="ppl_outdevicemodel" id="ppl_outdevicemodel" type="text"  value="{$username}" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <label class="col-sm-3 control-label">预计维修完成时间：</label>
+                    <div class="col-sm-9">
+                        <input id="rl_user_plandate" name="rl_user_plandate" type="text"  value="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control" required>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default" id="clickOnclose">关闭</button>
+            <button type="button" name="bc" id="sys_dlg_submit" class="btn btn-primary">保存</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+    $(function () {
+        $(".js-switch").each(function(){
+            new Switchery(this, {color: '#1AB394'});
+        });
+        $(".file-pretty").prettyFile();
+        $(".chosen-select").chosen({disable_search_threshold: 10, search_contains: true,width:'288px'});
+    });
+</script>

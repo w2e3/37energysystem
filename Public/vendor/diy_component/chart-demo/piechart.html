@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="container" style="height: 400px"></div>
+<script src="jquery-1.12.4.js"></script>
+<script src="highcharts.js"></script>
+<script src="highcharts-3d.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: '2#楼用水量各层占比统计图'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '用水量占比',
+            data: [
+                ['2#A座',   33.0],
+                ['2#B座',       26.8],
+                {
+                    name: '2#C座',
+                    y: 12.8,
+                    sliced: true,
+                    selected: true
+                },
+                ['2#D座',    8.5],
+                ['2#E座',     6.2],
+                ['2#F座',   12.7]
+            ]
+        }]
+    });
+});
+
+
+</script>
+	
+</body>
+</html>

@@ -1,0 +1,4 @@
+﻿<option value="" selected>全部</option>
+<foreach name="devicealarm" item="emv" key="emk">
+    <option value="{$emv.rgn_deviceid}" >{$emv.rgn_name},报警数:{$emv.alm_count}</option>
+</foreach>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>楼层首页</title>
+    <link rel="stylesheet" href="__PUBLIC__/vendor/diy_component/yuanqu_page/css/reset.css">
+    <link rel="stylesheet" href="__PUBLIC__/vendor/diy_component/yuanqu_page/css/house1.css">
+</head>
+<body>
+
+<div class="full_building">
+    <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/1/1-2F.png" width="60%" style="margin-top: 50px">
+    <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[0].dev_regionid}" class="alarmimg alarmdian" data-mtpis='<p>型号：{$newsbd[0].dev_name}</p><p>设备采集号{$newsbd[0].dev_acquisition}</p>'>
+        <notempty name="newsbd[0].alm_level">
+            <switch name="newsbd[0].dev_name">
+                <case value="电表"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"></case>
+                <case value="水表"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png"></case>
+                <case value="冷暖表"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png"></case>
+                <default />
+            </switch>
+        <else />
+            <switch name="newsbd[0].dev_name">
+                <case value="电表"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"></case>
+                <case value="水表"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png"></case>
+                <case value="冷暖表"><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png"></case>
+                <default />
+            </switch>
+        </notempty>
+    </a>
+    <notempty name="bj1[0].dev_name">
+        <div class="unusual1 unusual" style="z-index:9999;">
+            <p>表名称：{$bj1[0].dm_name}</p>
+            <p>表类型：{$bj1[0].dev_name}</p>
+            <p>报警等级：{$bj1[0].alm_level}</p>
+            <p>报警信息：{$bj1[0].alm_content}</p>
+            <p>设备采集号：{$bj1[0].dev_acquisition}</p>
+            <p>报警确认状态： <button onclick="dodetail()">待确认</button></p>
+        </div>
+    <else />
+    </notempty>
+
+    <if condition="$newsbd[1].dev_name">
+        <notempty name="newsbd1">
+            <switch name="newsbd[1].dev_name">
+                <case value="水表"> <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[1].dev_regionid}" class="alarmimg alarmshui1" data-mtpis='<p>型号：{$newsbd[1].dev_name}</p><p>设备采集号：{$newsbd[1].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png">
+                </case>
+                <case value="电表">
+                 <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[1].dev_regionid}" class="alarmimg alarmshui1" data-mtpis='<p>型号：{$newsbd[1].dev_name}</p><p>设备采集号：{$newsbd[1].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"></case>
+                <case value="冷暖表">
+                 <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[1].dev_regionid}" class="alarmimg alarmshui1" data-mtpis='<p>型号：{$newsbd[1].dev_name}</p><p>设备采集号：{$newsbd[1].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png"></case>
+                <default /></a>
+            </switch>
+        <else />
+            <switch name="newsbd[1].dev_name">
+                <case value="水表"> <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[1].dev_regionid}" class="alarmimg alarmshui1" data-mtpis='<p>型号：{$newsbd[1].dev_name}</p><p>设备采集号：{$newsbd[1].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png">
+                </case>
+                <case value="电表">
+                 <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[1].dev_regionid}" class="alarmimg alarmshui1" data-mtpis='<p>型号：{$newsbd[1].dev_name}</p><p>设备采集号：{$newsbd[1].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"></case>
+                <case value="冷暖表">
+                 <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[1].dev_regionid}" class="alarmimg alarmshui1" data-mtpis='<p>型号：{$newsbd[1].dev_name}</p><p>设备采集号：{$newsbd[1].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png"></case>
+                <default /></a>
+            </switch>    
+        </notempty>
+    </if>
+
+    <if condition="$newsbd[2].dev_name">
+        <notempty name="newsbd2">
+            <switch name="newsbd[2].dev_name">
+                <case value="水表"> <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[2].dev_regionid}" class="alarmimg alarmshui2" data-mtpis='<p>型号：{$newsbd[2].dev_name}</p><p>设备采集号：{$newsbd[2].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png">
+                </case>
+                <case value="电表">
+                 <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[2].dev_regionid}" class="alarmimg alarmshui2" data-mtpis='<p>型号：{$newsbd[2].dev_name}</p><p>设备采集号：{$newsbd[2].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"></case>
+                <case value="冷暖表">
+                 <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[2].dev_regionid}" class="alarmimg alarmshui2" data-mtpis='<p>型号：{$newsbd[2].dev_name}</p><p>设备采集号：{$newsbd[2].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png"></case>
+                <default /></a>
+            </switch>
+        <else />
+            <switch name="newsbd[2].dev_name">
+                <case value="水表"> <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[2].dev_regionid}" class="alarmimg alarmshui2" data-mtpis='<p>型号：{$newsbd[2].dev_name}</p><p>设备采集号：{$newsbd[2].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png">
+                </case>
+                <case value="电表">
+                 <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[2].dev_regionid}" class="alarmimg alarmshui2" data-mtpis='<p>型号：{$newsbd[2].dev_name}</p><p>设备采集号：{$newsbd[2].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"></case>
+                <case value="冷暖表">
+                 <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[2].dev_regionid}" class="alarmimg alarmshui2" data-mtpis='<p>型号：{$newsbd[2].dev_name}</p><p>设备采集号：{$newsbd[2].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png"></case>
+                <default /></a>
+            </switch>
+        </notempty>
+    </if>
+
+    <if condition="$newsbd[3].dev_name">
+        <notempty name="newsbd3">
+            <switch name="newsbd[3].dev_name">
+                <case value="水表"> 
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[3].dev_regionid}" class="alarmimg alarmshui3" data-mtpis='<p>型号：{$newsbd[3].dev_name}</p><p>设备采集号：{$newsbd[3].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[3].dev_regionid}" class="alarmimg alarmshui3" data-mtpis='<p>型号：{$newsbd[3].dev_name}</p><p>设备采集号：{$newsbd[3].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[3].dev_regionid}" class="alarmimg alarmshui3" data-mtpis='<p>型号：{$newsbd[3].dev_name}</p><p>设备采集号：{$newsbd[3].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png"></case>
+                <default /></a>
+            </switch>
+        <else />
+            <switch name="newsbd[3].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[3].dev_regionid}" class="alarmimg alarmshui3" data-mtpis='<p>型号：{$newsbd[3].dev_name}</p><p>设备采集号：{$newsbd[3].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[3].dev_regionid}" class="alarmimg alarmshui3" data-mtpis='<p>型号：{$newsbd[3].dev_name}</p><p>设备采集号：{$newsbd[3].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[3].dev_regionid}" class="alarmimg alarmshui3" data-mtpis='<p>型号：{$newsbd[3].dev_name}</p><p>设备采集号：{$newsbd[3].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png"></case>
+                <default /></a>
+            </switch>
+        </notempty>
+    </if>
+
+    <if condition="$newsbd[4].dev_name">
+        <notempty name="newsbd4">
+            <switch name="newsbd[4].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[4].dev_regionid}" class="alarmimg alarmshui4" data-mtpis='<p>型号：{$newsbd[4].dev_name}</p><p>设备采集号：{$newsbd[4].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[4].dev_regionid}" class="alarmimg alarmshui4" data-mtpis='<p>型号：{$newsbd[4].dev_name}</p><p>设备采集号：{$newsbd[4].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[4].dev_regionid}" class="alarmimg alarmshui4" data-mtpis='<p>型号：{$newsbd[4].dev_name}</p><p>设备采集号：{$newsbd[4].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png"></case>
+                <default /></a>
+            </switch>
+        <else />
+            <switch name="newsbd[4].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[4].dev_regionid}" class="alarmimg alarmshui4" data-mtpis='<p>型号：{$newsbd[4].dev_name}</p><p>设备采集号：{$newsbd[4].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[4].dev_regionid}" class="alarmimg alarmshui4" data-mtpis='<p>型号：{$newsbd[4].dev_name}</p><p>设备采集号：{$newsbd[4].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[4].dev_regionid}" class="alarmimg alarmshui4" data-mtpis='<p>型号：{$newsbd[4].dev_name}</p><p>设备采集号：{$newsbd[4].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png"></case>
+                <default /></a>
+            </switch> 
+        </notempty>
+    </if>
+    
+    <if condition="$newsbd[5].dev_name">
+        <notempty name="newsbd5">
+            <switch name="newsbd[5].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[5].dev_regionid}" class="alarmimg alarmshui5" data-mtpis='<p>型号：{$newsbd[5].dev_name}</p><p>设备采集号：{$newsbd[5].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[5].dev_regionid}" class="alarmimg alarmshui5" data-mtpis='<p>型号：{$newsbd[5].dev_name}</p><p>设备采集号：{$newsbd[5].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[5].dev_regionid}" class="alarmimg alarmshui5" data-mtpis='<p>型号：{$newsbd[5].dev_name}</p><p>设备采集号：{$newsbd[5].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png"></case>
+                <default /></a>
+            </switch>
+        <else />
+            <switch name="newsbd[5].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[5].dev_regionid}" class="alarmimg alarmshui5" data-mtpis='<p>型号：{$newsbd[5].dev_name}</p><p>设备采集号：{$newsbd[5].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[5].dev_regionid}" class="alarmimg alarmshui5" data-mtpis='<p>型号：{$newsbd[5].dev_name}</p><p>设备采集号：{$newsbd[5].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[5].dev_regionid}" class="alarmimg alarmshui5" data-mtpis='<p>型号：{$newsbd[5].dev_name}</p><p>设备采集号：{$newsbd[5].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png"></case>
+                <default /></a>
+            </switch>     
+        </notempty>
+    </if>
+
+    <if condition="$newsbd[6].dev_name">
+        <notempty name="newsbd6">
+            <switch name="newsbd[6].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[6].dev_regionid}" class="alarmimg alarmshui6" data-mtpis='<p>型号：{$newsbd[6].dev_name}</p><p>设备采集号：{$newsbd[6].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[6].dev_regionid}" class="alarmimg alarmshui6" data-mtpis='<p>型号：{$newsbd[6].dev_name}</p><p>设备采集号：{$newsbd[6].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[6].dev_regionid}" class="alarmimg alarmshui6" data-mtpis='<p>型号：{$newsbd[6].dev_name}</p><p>设备采集号：{$newsbd[6].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png"></case>
+                <default /></a>
+            </switch>
+        <else />
+            <switch name="newsbd[6].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[6].dev_regionid}" class="alarmimg alarmshui6" data-mtpis='<p>型号：{$newsbd[6].dev_name}</p><p>设备采集号：{$newsbd[6].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[6].dev_regionid}" class="alarmimg alarmshui6" data-mtpis='<p>型号：{$newsbd[6].dev_name}</p><p>设备采集号：{$newsbd[6].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[6].dev_regionid}" class="alarmimg alarmshui6" data-mtpis='<p>型号：{$newsbd[6].dev_name}</p><p>设备采集号：{$newsbd[6].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png"></case>
+                <default /></a>
+            </switch>
+        </notempty>
+    </if>
+
+    <if condition="$newsbd[7].dev_name">
+        <notempty name="newsbd7">
+            <switch name="newsbd[7].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[7].dev_regionid}" class="alarmimg alarmshui7" data-mtpis='<p>型号：{$newsbd[7].dev_name}</p><p>设备采集号：{$newsbd[7].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[7].dev_regionid}" class="alarmimg alarmshui7" data-mtpis='<p>型号：{$newsbd[7].dev_name}</p><p>设备采集号：{$newsbd[7].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[7].dev_regionid}" class="alarmimg alarmshui7" data-mtpis='<p>型号：{$newsbd[7].dev_name}</p><p>设备采集号：{$newsbd[7].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png"></case>
+                <default /></a>
+            </switch>
+        <else />
+            <switch name="newsbd[7].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[7].dev_regionid}" class="alarmimg alarmshui7" data-mtpis='<p>型号：{$newsbd[7].dev_name}</p><p>设备采集号：{$newsbd[7].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[7].dev_regionid}" class="alarmimg alarmshui7" data-mtpis='<p>型号：{$newsbd[7].dev_name}</p><p>设备采集号：{$newsbd[7].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[7].dev_regionid}" class="alarmimg alarmshui7" data-mtpis='<p>型号：{$newsbd[7].dev_name}</p><p>设备采集号：{$newsbd[7].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png"></case>
+                <default /></a>
+            </switch>
+        </notempty>
+    </if>
+
+    <if condition="$newsbd[8].dev_name">
+        <notempty name="newsbd8">
+            <switch name="newsbd[8].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[8].dev_regionid}" class="alarmimg alarmshui8" data-mtpis='<p>型号：{$newsbd[8].dev_name}</p><p>设备采集号：{$newsbd[8].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui1.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[8].dev_regionid}" class="alarmimg alarmshui8" data-mtpis='<p>型号：{$newsbd[8].dev_name}</p><p>设备采集号：{$newsbd[8].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian1.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[8].dev_regionid}" class="alarmimg alarmshui8" data-mtpis='<p>型号：{$newsbd[8].dev_name}</p><p>设备采集号：{$newsbd[8].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan1.png"></case>
+                <default /></a>
+            </switch>
+        <else />
+            <switch name="newsbd[8].dev_name">
+                <case value="水表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[8].dev_regionid}" class="alarmimg alarmshui8" data-mtpis='<p>型号：{$newsbd[8].dev_name}</p><p>设备采集号：{$newsbd[8].dev_acquisition}</p>'>
+                <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/shui.png">
+                </case>
+                <case value="电表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[8].dev_regionid}" class="alarmimg alarmshui8" data-mtpis='<p>型号：{$newsbd[8].dev_name}</p><p>设备采集号：{$newsbd[8].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/dian.png"></case>
+                <case value="冷暖表">
+                <a  href="__MODULE__/Rg/indexparkoverviewshell?bs=sbd&rgn_atpid={$newsbd[8].dev_regionid}" class="alarmimg alarmshui8" data-mtpis='<p>型号：{$newsbd[8].dev_name}</p><p>设备采集号：{$newsbd[8].dev_acquisition}</p>'><img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/nuan.png"></case>
+                <default /></a>
+            </switch>
+        </notempty>
+    </if>
+</div>
+
+<div class="list-right">
+    
+    <a href="__CONTROLLER__/F3_ceng8F" class="energy_message" target="_self">
+        <header>
+            <p class="fl">8F</p><span class="fr zhankai">详请</span></header>
+        
+    </a>
+    <a href="__CONTROLLER__/F3_ceng7F" class="energy_message" target="_self">
+        <header>
+            <p class="fl">7F</p><span class="fr zhankai">详请</span></header>
+        
+    </a>
+    <a class="energy_message cur" target="_self">
+        <header onclick="window.location.href='__CONTROLLER__/F3_ceng6F'">
+            <p class="fl">6F</p><span class="fr zhankai">详请</span></header>
+        <div class="alarmlist">
+            <ul>
+                <foreach item="bj1" name="bj1">
+                <li class="border_bottom clearfix" onclick="window.location.href='__MODULE__/Rg/indexparkoverviewshell?bs=bj&rgn_atpid={$bj1.rgn_atpid}'">
+                    <div class="fl tips">{$bj1.alm_content}</div>
+                    <div class="ll content">
+                        <div class="fl bold">{$bj1.dev_name}</div>
+                        <div class="fr text_right bold">报警时间：{$bj1.alm_datetime}</div><br>
+                        <div class="address">位置：1号楼-{$bj1.rgn_floorstatus}-{$bj1.rgn_codename}-{$bj1.rgn_name}</div>
+                    </div>
+                </li>
+                </foreach>
+            </ul>
+            <div class="listfooter">
+                <div><p>电能(kwh)</p><p><if condition="$list1.ydl eq ''">0<else />{$list1.ydl}</if></p></div>
+                <div><p>用水量(t)</p><p><if condition="$list1.ysl eq ''">0<else />{$list1.ysl}</if></p></div>
+                <div><p>热能(kwh)</p><p><if condition="$list1.ynl eq ''">0<else />{$list1.ynl}</if></p></div>
+                <div><p>冷能(kwh)</p><p><if condition="$list1.yll eq ''">0<else />{$list1.yll}</if></p></div>
+            </div>
+        </div>
+    </a>
+    <a href="__CONTROLLER__/F3_ceng5F" class="energy_message" target="_self">
+        <header>
+            <p class="fl">5F</p><span class="fr zhankai">详请</span></header>
+    </a>
+    <a href="__CONTROLLER__/F3_ceng4F" class="energy_message" target="_self">
+        <header>
+            <p class="fl">4F</p><span class="fr zhankai">详请</span></header>
+    </a>
+    <a href="__CONTROLLER__/F3_ceng3F" class="energy_message" target="_self">
+        <header>
+            <p class="fl">3F</p><span class="fr zhankai">详请</span></header>
+    </a>
+    <a href="__CONTROLLER__/F3_ceng2F" class="energy_message" target="_self">
+        <header>
+            <p class="fl">2F</p><span class="fr zhankai">详请</span></header>
+    </a>
+    <a href="__CONTROLLER__/F3_ceng1F" class="energy_message" target="_self">
+        <header>
+            <p class="fl">1F</p><span class="fr zhankai">详请</span></header>
+        
+    </a>
+    <a href="__CONTROLLER__/F3_ceng9F" class="energy_message" target="_self">
+        <header>
+            <p class="fl">-1F</p><span class="fr zhankai">详请</span></header>
+    </a>
+</div>
+<div class="total1">
+    <header><p class="fl">3#楼能耗状况</p><span class="fr zhankai">详请</span></header>
+    <div class="totalcontent clearfix">
+        <img src="__PUBLIC__/vendor/diy_component/yuanqu_page/images/building.png" class="fl totalhouse">
+        <div class="rightcontent fr">
+            <ul>
+                <li><i class="green"></i>电能消耗：<if condition="$daycou.ydl eq ''">0<else />{$daycou.ydl}</if>kwh</li>
+                <li><i class="blue"></i>水能消耗：<if condition="$daycou.ysl eq ''">0<else />{$daycou.ysl}</if>t</li>
+                <li><i class="orange"></i>暖能消耗：<if condition="$daycou.ynl eq ''">0<else />{$daycou.ynl}</if>kwh</li>
+                <li><i class="yellow"></i>冷能消耗：<if condition="$daycou.yll eq ''">0<else />{$daycou.yll}</if>kwh</li>
+            </ul>
+        </div>
+    </div>
+    <div class="listfooter  border_top">
+        <div>
+            <p>相比上月用电</p>
+            <p>{$duibi.ydl}Kwh</p>
+            <if condition="$duibi.ydl gt 0"><p style="color:red;">{$duibi.ydl%}%</p><else /><p style="color:green;">{$duibi.ydl%}%</p></if>
+        </div>
+        <div>
+            <p>相比上月用水</p>
+            <p>{$duibi.ysl}t</p>
+            <if condition="$duibi.ysl gt 0"><p style="color:red;">{$duibi.ysl%}%</p><else /><p style="color:green;">{$duibi.ysl%}%</p></if>
+        </div>
+        <div>
+            <p>相比上月冷暖</p>
+            <p>{$duibi.lnl}Kwh</p>
+            <if condition="$duibi.lnl gt 0"><p style="color:red;">{$duibi.lnl%}%</p><else /><p style="color:green;">{$duibi.lnl%}%</p></if>
+        </div>
+    </div>
+</div>
+
+<include file="Parkoverview:alarm_icon_description"/>
+
+<script src="__PUBLIC__/vendor/diy_component/yuanqu_page/js/jquery-1.7.2.js"></script>
+<script src="__PUBLIC__/vendor/diy_component/yuanqu_page/js/mTips.js"></script>
+<script>
+    $('.energy_message header').on('click', function() {
+        $(this).next('.alarmlist').toggle();
+    });
+    // 取消点击事件冒泡
+    $(".energy_message header").click(function(event) {
+        event.stopPropagation();
+    });
+</script>
+<script>
+    function dodetail1() {
+        window.location.href='__MODULE__/Dprocessed?rgn_atpid={$bj1.rgn_atpid}';
+    }
+    function dodetail() {
+        window.location.href='__MODULE__/Rg/indexparkoverviewshell?bs=bj&rgn_atpid={$bj1.rgn_atpid}';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="__PUBLIC__/vendor/bootstrap-table/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="__PUBLIC__/adminframework/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/adminframework/css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="__PUBLIC__/adminframework/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <link href="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/bootstrap-table.css" rel="stylesheet" >
+    <link href="__PUBLIC__/adminframework/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/adminframework/css/style.css?v=4.0.0" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/vendor/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link href="__PUBLIC__/vendor/diy_component/func_scrolltab/atppagetab.css" rel="stylesheet">
+    <base target="_blank">
+    <style>
+        .wrapper-content {
+            padding: 0px;
+        }
+        .wrapper {
+            padding: 0px;
+        }
+
+        .ibox-content {
+            border-width: 0px 0px;
+            padding: 0px 0px 0px 0px
+        }
+        .gray-bg {
+            background-color: #ffffff;
+        }
+        .table
+        {
+            max-width: none;;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .tabs .atp-nav {
+            border-left: 1px solid #F8F7EE;
+            height: 40px;
+        }
+        .tabs .atp-nav li {
+            float: left;
+            width: 100px;
+            border-top: 1px solid #F8F7EE;
+            border-right: 1px solid #F8F7EE;
+            list-style: none;
+        }
+        .tabs .atp-nav li a {
+            display: inline-block;
+            width: 100%;
+            height: 40px;
+            background-color: #F8F7EE;
+            text-align: center;
+            line-height: 40px;
+            font-size: 16px;
+            color: #ccc;
+            text-decoration: none;
+        }
+        .tabs .atp-nav li a:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .tabs .atp-nav li a.selected {
+            background-color: #fff;
+            color: #000;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="content-tabs">
+                <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i></button>
+                <nav class="page-tabs J_menuTabs">
+                   <div class="page-tabs-content">
+                        <a target="_self" href="__CONTROLLER__/Usersidezhxx?rgn_atpid={$rgn_atpid}&us_atpid={$us_atpid}"  class="onetab">综合信息</a>
+                        <a target="_self" href="__CONTROLLER__/Usersidepm?rgn_atpid={$rgn_atpid}&us_atpid={$us_atpid}"  class="onetab">报表及排名</a>
+                        <a target="_self" href="__CONTROLLER__/Usersidereport?rgn_atpid={$rgn_atpid}&us_atpid={$us_atpid}" class="onetab">分项报表</a>
+                        <a target="_self" href="__CONTROLLER__/Usersidetbhb?rgn_atpid={$rgn_atpid}&us_atpid={$us_atpid}"  class="onetab selected">同比环比</a>
+                    </div>
+                </nav>
+                <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
+            </div>
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <div id="atpbiztoolbar">
+                        <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_search_form" role="form" class="form-horizontal">
+                            <input  id="us_start" type="hidden" class="form-control" value="{$start}"  style="width: 120px; display:inline-block;" >
+                            <input id="us_end" type="hidden" class="form-control"  value="{$end}" style="width: 120px; display:inline-block;">
+                            <input type="hidden"  id="us_atpid"  value="{$us_atpid}">
+                            <input type="hidden"  id="rgn_atpid"  value="{$rgn_atpid}">
+                            <input type="hidden"  id="ids"  value="{$ids}">
+                            <label class="control-label">&emsp;查询范围：
+                                <empty name="start">
+                                    {$lyear}年&nbsp;-&nbsp;{$tyear}年&nbsp;&nbsp;&nbsp;&nbsp;
+                                <else />
+                                    {$start}&nbsp;-&nbsp;{$end}&nbsp;&nbsp;&nbsp;&nbsp;
+                                </empty>
+                            </label>
+                            <label>
+                                <span>查询类型：</span>
+                                <select name="option" id="select" onchange="choice()"  class="chosen-select">
+                                    <option value="year" selected="">年报表</option>
+                                    <option value="month">月报表</option>
+                                    <!-- <option value="day">日报表</option> -->
+                                </select>
+                            </label>
+                            <label class="control-label">开始时间：</label>
+                            <label class="control-label">
+                                <input id="startyear" type="text" class="form-control year" style="cursor: pointer; width: 150px;" onClick="WdatePicker({dateFmt:'yyyy'})"  onchange="onyearsta()" required placeholder="点击选择日期" value="{$start}">
+                                <input id="startmonth" type="text" class="form-control month" style="display: none;cursor: pointer; width: 150px;" onClick="WdatePicker({dateFmt:'yyyy-MM'})" onchange="onmonthsta()" required placeholder="点击选择日期" value="{$start}">
+                                 <input id="startday" type="text" class="form-control day" style="display: none;cursor: pointer;width: 150px;" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" onchange="ondaysta()" required placeholder="点击选择日期" value="{$start}">
+                            </label>
+                            <label class="control-label">结束时间：</label>
+                            <label class="control-label">
+                                <input id="endyear" type="text" class="form-control year" style="cursor: pointer; width: 150px;" onClick="WdatePicker({dateFmt:'yyyy'})" onchange="onyearend()" required placeholder="点击选择日期" value="{$end}">
+                                <input id="endmonth" type="text" class="form-control month" style="display: none;cursor: pointer; width: 150px;" onClick="WdatePicker({dateFmt:'yyyy-MM'})" onchange="onmonthend()" required placeholder="点击选择日期" value="{$end}">
+                                <input id="endday" type="text" class="form-control day" style="display: none;cursor: pointer; width: 150px;" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" onchange="ondayend()" required placeholder="点击选择日期" value="{$end}">
+                            </label>
+                            <br>
+                            <label class="control-label">统计参数选择：</label>
+                            <select class="chosen-select_long" name="param[]" id="param">
+                                <foreach name="param" item="emv" key="emk">
+                                    <if condition="('是' eq $emv['aux_selected'])">
+                                        <option value="{$emv.p_atpid}" selected >{$emv.p_name}</option>
+                                        <else />
+                                        <option value="{$emv.p_atpid}" >{$emv.p_name}</option>
+                                    </if>
+                                </foreach>
+                            </select>
+                            <button class="btn btn-warning " type="button" id="sys_index_search"><i class="fa fa-search"></i>&emsp;查询</button>
+                        </form>
+                    </div>
+                    <table id="atpbiztable"></table>
+                    <div id="highchart" style="border:1px solid #ccc;margin-top: 20px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="sys_dlg" role="dialog" class="modal fade "></div>
+
+<script src="__PUBLIC__/vendor/bootstrap-table/jquery.min.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/vendor/My97DatePicker/WdatePicker.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/switchery/switchery.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/locale/bootstrap-table-zh-CN.js"></script>
+<script src="__PUBLIC__/vendor/html5Validate/src/jquery-html5Validate.js"></script>
+<script type="text/javascript" src="__PUBLIC__/vendor/zTree_v3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="__PUBLIC__/vendor/zTree_v3/js/jquery.ztree.excheck.js"></script>
+<script src="__PUBLIC__/vendor/diy_component/func_scrolltab/atppagetab.js"></script>
+<script>
+    var currenttab=3;
+    jumptab(currenttab);
+
+    $(function () {
+        $(".chosen-select2").chosen({disable_search_threshold: 10, search_contains: true, width:'150px'});
+        $(".chosen-select").chosen({disable_search_threshold: 10, search_contains: false, width:'150px'});
+    });
+    $(function () {
+        $(".chosen-select2").chosen({disable_search_threshold: 10, search_contains: true, width:'150px'});
+        $("#param").chosen({disable_search_threshold: 10, search_contains: true,width:'380px'});
+    });
+    var num = $("#us_start").val();
+    // alert(num.length);
+    if(num.length == 4){
+        $('#select option:eq(0)').attr('selected','selected');
+    }else if(num.length == 7){
+        $('#select option:eq(1)').attr('selected','selected');
+    }else if(num.length == 10){
+        $('#select option:eq(2)').attr('selected','selected');
+    }
+    function choice(){
+        var val = $("#select").val();
+        if(val == 'year'){
+            $(".day").hide();
+            $(".day").val();
+            $(".month").val();
+            $(".month").hide();
+            $(".year").show();
+            $("#startyear").val('');
+            $("#endyear").val('');
+        }
+        if(val == 'month'){
+            $(".day").hide();
+            $(".month").show();
+            $(".year").hide();
+            $(".day").val('');
+            $(".year").val('');
+            $("#startmonth").val('');
+            $("#endmonth").val('');
+        }
+    }
+
+    function onyearsta(){
+        onyearsta = $("#startyear").val();
+        $('#us_start').val(onyearsta);
+    }
+    function onmonthsta(){
+        onmonthsta = $("#startmonth").val();
+        $('#us_start').val(onmonthsta);
+    }
+    function onyearend(){
+        onyearend = $("#endyear").val();
+        $('#us_end').val(onyearend);
+    }
+    function onmonthend(){
+        onmonthend = $("#endmonth").val();
+        $('#us_end').val(onmonthend);
+    }
+</script>
+<script>
+    GLOBAL_SEARCHNAME = "用户名称";
+    $(function () {
+        $('#atpbiztable').bootstrapTable({
+            url: '__CONTROLLER__/getDatatbhb?ids={$ids}&us_atpid={$us_atpid}&selectParam={$selectParam}&start={$start}&end={$end}',         //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+            toolbar: '#atpbiztoolbar',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            iconSize: 'outline',
+            sortable: false,                     //是否启用排序
+            sortName:"",
+            sortOrder: "",                   //排序方式
+            queryParams: queryParams,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [5,10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+//            strictSearch: true,
+//            showColumns: true,                  //是否显示所有的列
+            showRefresh: false,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: false,                //是否启用点击选中行
+//            height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "us_atpid",                     //每一行的唯一标识，一般为主键列
+//            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+//            cardView: true,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            detailFormatter: "detailFormatter",
+            columns: [
+                [
+                    // {checkbox: true},
+                    {title: '序号', width: 40,align:'center',
+                        formatter: function (value, row, index)
+                        {
+                            var option =  $('#atpbiztable').bootstrapTable("getOptions");
+                            return option.pageSize * (option.pageNumber - 1) + index + 1;
+                        }
+                    },
+                    {field: 'rgn_name', title: '位置', align:'center', valign:'middle',sortable: true, width: 140},
+                    {field: 'time', title: '时间', align:'center', valign:'middle',sortable: true, width: 140},
+                <foreach name="columns" item="vo" key ="k">
+                    {field: '{$vo.field}', title: '{$vo.title}',align:'center', valign:'middle', sortable: true},
+                </foreach>
+                ]
+            ],
+            onDblClickRow: function (row) {
+            },
+            onSort: function (name, order) {
+//                console.log(name+order);
+            },
+        });
+    });
+
+    function queryParams(params) {  //配置参数
+        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            limit: params.limit,   //页面大小
+            offset: params.offset,  //页码
+            search: params.search,
+            sort: params.sort,  //排序列名
+            sortOrder: params.order//排位命令（desc，asc）
+        };
+        return temp;
+    }
+
+    $('#sys_search').on('click', function () {
+        $('#atpbiztable').bootstrapTable('refresh')
+    });
+
+    $('#sys_dlg_search_submit').on('click', function () {
+        $('#atpbiztable').bootstrapTable('refresh')
+    });
+    $('#sys_index_search').on('click', function () {
+        var start = $('#us_start').val();
+        var end = $('#us_end').val();
+        var us_atpid = $('#us_atpid').val();
+        var rgn_atpid = $('#rgn_atpid').val();
+        var param = $('#param').val();
+        // var endparam = param.join(",");
+        window.location.href='__CONTROLLER__/Usersidetbhb?start='+start + '&end='+end+'&rgn_atpid='+ rgn_atpid+'&us_atpid='+us_atpid+'&param='+param;
+    });
+</script>
+<script src="__PUBLIC__/vendor/echarts-2.2.7/build/dist/echarts-all.js"></script>
+<script src="__PUBLIC__/vendor/echarts-2.2.7/build/dist/echarts-all.js"></script>
+<script src="__PUBLIC__/vendor/ueditor/third-party/highcharts/highcharts.js"></script>
+<script src="__PUBLIC__/vendor/ueditor/third-party/highcharts/highcharts-3d.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            type: "GET",
+            url: "__CONTROLLER__/getDatatbhb?ids={$ids}&us_atpid={$us_atpid}&selectParam={$selectParam}&start={$start}&end={$end}",
+            dataType: "json",
+            success: function (data){
+                ///////////////////////////////////////////////
+                if(undefined == data.rows[0]['category']){
+                    var category = '';
+                }else{
+                    category = data.rows[0]['category'];
+                }
+                /////////////////////////////////////////////
+                var categories =[];
+                $.each(data.rows,function (i,v) {
+                    categories.push(v.region_time);
+                });
+                /////////////////////////////////////////////
+                var series = data.rows[0]['series'];
+                var data_series_json = JSON.stringify(series);
+                var data_array = $.parseJSON(data_series_json);
+                ///////////////////////////////////////////////
+                $('#highchart').highcharts({
+                    chart: {
+                        type: 'column',
+                        options3d: {
+                            enabled: true,
+                            alpha: 15,
+                            beta: 5,
+                            viewDistance: 25,
+                            depth: 60
+                        },
+                        marginRight: 40
+                    },
+                    title: {
+                        text: category+'同比环比'
+                    },
+                    xAxis: {
+                        categories: categories
+                    },
+                    yAxis: {
+                        allowDecimals: false,
+                        min: 0,
+                        title: {
+                            text: '能量消耗量'
+                        }
+                    },
+                    tooltip: {
+                        headerFormat: '<b>{point.key}</b><br>',
+                        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y}'
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: 'normal',
+                            depth: 40
+                        }
+                    },
+                    series:data_array
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

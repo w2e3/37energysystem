@@ -1,0 +1,96 @@
+<include file="Public:header"/>
+
+<?php if(I('get.bs')=='yz') { ?>
+<include file="Public:menu" active="业主管理"/>
+<?php }elseif (I('get.bs')=='zh') { ?>
+<include file="Public:menu" active="租户管理"/>
+<?php } ?>
+
+
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+
+        <?php if(I('get.bs')=='yz') { ?>
+        <h1 class="title">业主能源</h1>
+        <?php }elseif (I('get.bs')=='zh') { ?>
+        <h1 class="title">租户能源</h1>
+        <?php } ?>
+
+
+    </header>
+    <!--<div class="weui-cells" style="width:90%;margin: 11px auto;font-size: 13px;margin-top: 56px;">-->
+        <!--<div class="weui-cell">-->
+            <!--<select  class="weui-select" name="rgn_ids" id="rgn_ids">-->
+                <!--<foreach name="rgn_arr" item="vo" >-->
+                    <!--<option value="{$vo.rgn_atpid}" <if condition=" ($vo.rgn_atpid eq $rgn_atpid)">selected<else/></if>>{$vo.rgn_name}</option>-->
+                <!--</foreach>-->
+            <!--</select>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="weui-cells" style="width: 90%;margin: 11px auto;margin-top: 50px;">
+        <div class="weui-cell" style="font-size: 12px;font-weight: bolder;color: #9b9b9b;">
+            <div class="weui-cell__bd" style="width: 25%; margin-right:4%;margin-left: 1.5%">公司姓名</div>
+            <div class="weui-cell__bd" style="width: 15%; margin-left:7%;">姓名</div>
+            <div class="weui-cell__bd" style="width: 25%; margin-right:10%;">联系方式</div>
+            <!--<div class="weui-cell__bd">备注</div>-->
+            <div class="weui-cell__bd" style="width: 25%;">详情</div>
+        </div>
+        <volist name="Data" id="vo">
+            <a href="__CONTROLLER__/detail?rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Tink.get.snname}&pre_rgn_atpid={$Think.get.pre_rgn_atpid}&bs={$Think.get.bs}&us_atpid={$vo.us_atpid}" class="weui-cell weui-cell_access external" style="font-size: 10px;color: #393939;">
+                <div class="weui-cell_bd" style="width: 25%;margin:0 auto;">{$vo.us_companyname}</div>
+                <div class="weui-cell_bd" style="width: 15%;margin:0 auto;">{$vo.us_name}</div>
+                <div class="weui-cell_bd" style="width: 20%;margin:0 auto;">{$vo.us_linkphone}</div>
+                <!--<div class="weui-cell_bd" style="width: 25%;margin-left: -3%;">{$vo.us_remark}</div>-->
+                <div class="weui-cell__ft" style="width:25%;margin-left: 10px;"></div>
+            </a>
+        </volist>
+        <empty name="Data">
+            <div class="weui-cell empty">
+                        <span href="#" class="weui-cell_bd external" style="width:120px;font-size:14px;margin: 10px auto;color: #00a0e9;margin-left: 40%;">
+                            暂无数据
+                        </span>
+            </div>
+        </empty>
+    </div>
+
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+
+    //改变rgn
+    //修改园区节点
+    $("#rgn_ids").on('change',function () {
+        var rgn_atpid=$(this).val();
+        var regiontype=GetQueryString('regiontype');
+        var snname=GetQueryString('snname');
+        var  pre_rgn_atpid=GetQueryString("pre_rgn_atpid");
+
+//         console.log(pre_rgn_atpid);
+         if(pre_rgn_atpid==null)
+         {
+             pre_rgn_atpid = rgn_atpid;
+         }
+//        console.log(regiontype);
+//        console.log(snname);
+//        console.log(rgn_atpid);
+        var html="__CONTROLLER__/index"+"?rgn_atpid="+rgn_atpid+"&regiontype=rg"+"&snname="+snname+"&pre_rgn_atpid="+pre_rgn_atpid+"&bs={$Think.get.bs}";
+        window.location.href=html;
+    });
+
+//    //获得get参数的值
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  decodeURI(r[2]); return null;
+    }
+</script>
+<include file="Public:footer"/>

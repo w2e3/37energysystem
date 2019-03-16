@@ -1,0 +1,83 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="园区漫游"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">业主能源</h1>
+    </header>
+
+    <div class="content infinite-scroll">
+        <div >
+            <select class="search-input choose-year" id="rgn_ids" style="width:360px;height:30px; display: block;">
+                <foreach name="rgn_arr" item="vo" >
+                    <option value="{$vo.rgn_atpid}" <if condition=" ($vo.rgn_atpid eq $rgn_atpid)">selected<else/></if>>{$vo.rgn_name}</option>
+                </foreach>
+            </select>
+        </div>
+        <div class="list-block media-list atp-list" style="margin: 0;">
+            <ul>
+                <foreach  name="DeviceInfo" item="vo">
+                    <li>
+                        <a href="__CONTROLLER__/detail?rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&dev_atpid={$vo.rgn_atpid}" class="item-link item-content external">
+                            <div class="item-media"><img src="__PUBLIC__/mobile/images/icon2.png" width="80"></div>
+                            <div class="item-inner">
+                                <div class="item-title">{$vo.rgn_name}</div>
+                                <div class="item-subtitle">{$vo.rgn_path}</div>
+                                <div class="item-title-row">
+                                    <div class="item-text">{$vo.dev_acquisition}</div>
+                                    <if condition="$type eq 待确认">
+                                        <div class="item-text">待确认报警数:{$vo.alm_count}</div>
+                                    </if>
+                                    <if condition="$type eq 待处理">
+                                        <div class="item-text">待处理报警数:{$vo.alm_count}</div>
+                                    </if>
+                                    <if condition="$type eq 总">
+                                        <div class="item-text">总报警数:{$vo.alm_count}</div>
+                                    </if>
+
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<include file="Public:footer"/>
+<script>
+   $("#rgn_ids").on("change",function () {
+       var rgn_atpid=$(this).val();
+       var regiontype=GetQueryString('regiontype');
+       var snname=GetQueryString('snname');
+       var type=GetQueryString('type');
+       var pre_rgn_atpid=GetQueryString('rgn_atpid');
+
+       console.log(regiontype);
+       console.log(snname);
+       console.log(rgn_atpid);
+       console.log(pre_rgn_atpid);
+       var html=window.location.href;
+       var arr=html.split('?');
+       console.log(arr[0])
+       var html=arr[0]+"?rgn_atpid="+rgn_atpid+"&regiontype="+regiontype+"&snname="+snname+"&pre_rgn_atpid="+pre_rgn_atpid;
+       window.location.href=html;
+   });
+
+   //获得get参数的值
+   function GetQueryString(name)
+   {
+       var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+       var r = window.location.search.substr(1).match(reg);
+       if(r!=null)return  decodeURI(r[2]); return null;
+   }
+</script>

@@ -1,0 +1,51 @@
+.list-block ul {
+	background: none;
+}
+body {
+	background: #14d212;
+}
+/* .page {
+	background:#14d212;
+} */
+.bar-nav {
+	background: #14d212;
+} 
+
+.bar-nav a {
+	color: #fff;
+}
+.bar-nav .title {
+	color: #fff;
+}
+.buttons-tab .button.active {
+	color: #14d212;
+}
+.buttons-tab .button.active {
+	border-color:#14d212;
+}
+
+.bar-tab .tab-item.active {
+	color: #14d212;
+}
+
+.bar .button-link {
+	color: #fff;
+}
+
+.row a {
+	color: #14d212;
+}
+a {
+	color: #14d212;
+}
+
+.buttons-row .button.active {
+	background-color: #14d212;
+}
+
+.buttons-row .button {
+	border: 1px solid #14d212;
+	color: #14d212;
+}
+
+

@@ -1,0 +1,51 @@
+<if condition="$Think.get.tabshow neq 'false'">
+    <div class="content-tabs">
+        <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i></button>
+        <nav class="page-tabs J_menuTabs">
+            <div class="page-tabs-content">
+
+
+
+                <if condition="$Think.get.regionlevel eq 'regionroot'">
+                    <!--根节点-->
+                    <a href='__MODULE__/RgGeneral/indexregionroot?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=0&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>综合信息</a>
+                </if>
+                <if condition="$Think.get.regionlevel eq 'region'">
+                    <!--非根节点-->
+                    <a href='__MODULE__/RgGeneral/indexregion?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=0&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>综合信息</a>
+                </if>
+                <if condition="$Think.get.regionlevel eq 'devicepoint'">
+                    <!--设备点-->
+                    <a href='__MODULE__/RgGeneral/indexdevicepoint?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=0&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>综合信息</a>
+                </if>
+                <!--<a href='__MODULE__/RgGeneral/indexsn?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=1&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>能源鸟瞰</a>-->
+                <a href='__MODULE__/RgDev?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=1&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>设备状态</a>
+
+                <if condition="$Think.session.role_iskfs eq false">
+                <a href='__MODULE__/RgAlarmConfirm?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=2&rgn_atpid={$Think.get.rgn_atpid}' target="_self"  class='J_menuTab'>待确认报警</a>
+                <a href='__MODULE__/RgRepairAdd?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=3&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>添加维修单</a>
+                <a href='__MODULE__/RgRepairDist?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=4&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>待接维修单</a>
+                <a href='__MODULE__/RgRepairProcess?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=5&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>待处理维修单</a>
+                <a href='__MODULE__/RgAlarmHistory?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=6&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>历史报警记录</a>
+                <a href='__MODULE__/RgRepairHistory?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=7&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>历史维修记录</a>
+                <a href='__MODULE__/RgItemAnalyzes?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=8&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>分项报表</a>
+                <!-- <if condition="$Think.get.regtype eq 'DEVICE'">
+                <else/>
+                    <a href='__MODULE__/RgAnalyzes?regtype={$Think.get.regtype}&tabindex=9&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>数据分析</a>
+                </if> -->
+                <a href='__MODULE__/RgAnalyzes?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=9&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>数据分析</a>
+                <a href='__MODULE__/RgReport?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=10&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>报表</a>
+                <a href='__MODULE__/RgContrastAnalyzes?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=11&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>同比环比</a>
+                <a href='__MODULE__/RgEngeryPlan?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=12&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>能源计划</a>
+                <a href='__MODULE__/RgExceptionDayQs?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=13&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>日报缺失</a>
+                <a href='__MODULE__/RgExceptionDayEc?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=14&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>日报异常</a>
+                <a href='__MODULE__/RgExceptionHourQs?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=15&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>时报缺失</a>
+                <a href='__MODULE__/RgExceptionHourEc?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=16&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>时报异常</a>
+                <a href='__MODULE__/RgOriginalData/Twicedatay?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=17&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>历史采集数据</a>
+                <!--<a href='__MODULE__/RgSample/index?regtype={$Think.get.regtype}&tabindex=18&rgn_atpid={$Think.get.rgn_atpid}' target="_self" class='J_menuTab'>示例:雇员管理</a>-->
+                </if>
+            </div>
+        </nav>
+        <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
+    </div>
+</if>

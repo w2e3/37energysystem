@@ -1,0 +1,151 @@
+<style type="text/css">
+    .td1 {text-align: right;padding-right: 20px;}
+    .td2 {text-align: left;padding-left: 20px;}
+    td{border:1px solid #000000;color: #000000;}
+</style>
+<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">报警详情</h4>
+        </div>
+        <div class="modal-body">
+            <div style="text-align:center;font-size:16px;margin-bottom:5px;font-size: 20px;margin-top: 20px;">维修单</div>
+            <table style="width: 100%;">
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">
+                        设备名称:
+                    </td>
+                    <td class="td2">
+                        {$Result['dm_name']}
+                    </td>
+                    <td class="td1">
+                        维修单号:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_code']}
+                    </td>
+                </tr>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">
+                        维修单名称:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_name']}
+                    </td>
+                    <td class="td1">
+                        维修单描述:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_describe']}
+                    </td>
+                </tr>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">
+                        派发处理人:
+                    </td>
+                    <td class="td2">
+                        {$Result['shouldempname']}
+                    </td>
+                    <td class="td1">
+                        发起时间:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_startdatetime']}
+                    </td>
+                </tr>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">
+                        计划完成时间:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_plandate']}
+                    </td>
+                    <td class="td1">
+                        维修单配合人:
+                    </td>
+                    <td class="td2">
+                        {$data.empuser}
+                    </td>
+                </tr>
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td class="td1">
+                        接单状态:
+                    </td>
+                    <td class="td2">
+                        {$Result['rl_status']}
+                    </td>
+                    <td class="td1">
+                    </td>
+                    <td class="td2">
+                    </td>
+                </tr>
+            </table>
+            <input id="ep_atpid" name="ep_atpid" type="hidden" value="{$data.ep_atpid}" class="form-control">
+            <div style="text-align:center;font-size:16px;margin-bottom:5px;font-size: 20px;margin-top: 20px;">相关报警</div>
+            <table style="width: 100%;">
+                <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                    <td >
+                        <p align=center style='text-align:center;margin:0'><span >序号</span></p>
+                    </td>
+                    <td >
+                        <p align=center style='text-align:center;margin:0'><span >报警时间</p>
+                    </td>
+                    <td >
+                        <p align=center style='text-align:center;margin:0'><span >报警等级</span></p>
+                    </td>
+                    <td >
+                        <p align=center style='text-align:center;margin:0'><span >类别</span></span></p>
+                    </td>
+                    <td >
+                        <p align=center style='text-align:center;margin:0'><span >内容</span></p>
+                    </td>
+                    <td >
+                        <p align=center style='text-align:center;margin:0'><span >管理处理人</span></p>
+                    </td>
+                    <td >
+                        <p align=center style='text-align:center;margin:0'><span >报警处理状态</span></p>
+                    </td>
+                    <td >
+                        <p align=center style='text-align:center;margin:0'><span >计划完成时间</span></p>
+                    </td>
+                </tr>
+                <foreach  name="calldata" item="vo" key="k">
+                    <tr style="width: 100%;height: 40px;line-height: 40px;text-align: center;">
+                        <td >
+                            <p align=center style='text-align:center;margin:0'><span lang=EN-US >{$k+1}</span></p>
+                        </td>
+                        <td >
+                            <p align=center style='text-align:center;margin:0'><span lang=EN-US >{$vo.almp_atpcreatedatetime}</span></p>
+                        </td>
+                        <td >
+                            <p align=center style='text-align:center;margin:0'><span lang=EN-US >{$vo.alm_level}</span></p>
+                        </td>
+                        <td >
+                            <p align=right style='text-align:center;margin:0'><span lang=EN-US >{$vo.alm_category}</span></p>
+                        </td>
+                        <td >
+                            <p align=center style='text-align:center;margin:0'><span lang=EN-US >{$vo.alm_content}</span></p>
+                        </td>
+                        <td >
+                            <p align=right style='text-align:center;margin:0'><span lang=EN-US >{$vo.emp_name}</span></p>
+                        </td>
+                        <td >
+                            <p align=right style='text-align:center;margin:0'><span lang=EN-US >{$vo.alm_confirmstatus}</span></p>
+                        </td>
+                        <td >
+                            <p align=right style='text-align:center;margin:0'><span lang=EN-US >{$vo.rl_plandate}</span></p>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+

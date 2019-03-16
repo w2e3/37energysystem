@@ -1,0 +1,78 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="园区漫游"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">业主能源</h1>
+    </header>
+    <form action="__CONTROLLER__/submit?rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&snname={$Think.get.snname}"  method="post">
+        <div class="weui-cells weui-cells_form" style="margin-top: 50px;">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">*名称</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="ep_name" type="text"  placeholder="请输入名称"/>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select">
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="ep_category">
+                        <option selected="" value="1">请选择</option>
+                        <option value="2">园区</option>
+                        <option value="3">设备点</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">开始时间</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="ep_startdatetime" type="date" value=""/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">结束时间</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="ep_enddatetime"  type="date" value="" placeholder=""/>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select">
+                <div class="weui-cell__hd"><label for="" class="weui-label">关联园区</label></div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="region">
+                        <foreach name="region" item="emv" key="emk" >
+                            <if condition="('是' eq $emv['aux_selected'])">
+                                <option value="{$emv.rgn_atpid}" selected >{$emv.rgn_name}</option>
+                                <else />
+                                <option value="{$emv.rgn_atpid}" >{$emv.rgn_name}</option>
+                            </if>
+                        </foreach>
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <button class="weui-btn weui-btn_primary" type="submit">提交</button>
+                </div>
+            </div>
+            <input id="ep_atpid" name="ep_atpid" type="hidden" value="{$data.ep_atpid}" class="form-control">
+
+        </div>
+    </form>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<include file="Public:footer"/>
+
+<script>
+    function addEnergy()
+    {
+        window.location.href="__CONTROLLER__/add?";
+    }
+</script>

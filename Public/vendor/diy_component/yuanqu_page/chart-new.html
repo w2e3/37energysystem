@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>中关村集成电路设计院</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/chart-new.css">
+</head>
+
+<body>
+
+<div class="backimg clearfix">
+    <div class="left-yibiao">
+        <div class="msgtitle">1#楼1F电能表---C2-02-04-01</div>
+        <div class="tablebox chartbox clearfix">
+            <div class="chartimg fl">
+                 <img src="images/dianchart.png" width="100%">
+            </div>
+            <div class="chart_message">
+                <p class="chart_title">DDS666型电能表</p>
+                <div class="two_columns">
+                    <div class="flex_1 border_right">
+                        <p>当前状态：<span class="color_one">正常</span><span class="color_three">异常</span></p>
+                        <p>总电量：<span class="color_black">223554MW</span></p>
+                        <p>报警数量：<span class="color_black">15</span></p>
+                        <p>待确认报警：<span class="color_black">25</span></p>
+                        <p>待处理报警：<span class="color_black">2</span></p>
+                    </div>
+                    <div class="flex_1" style="padding-left: 10px">
+                        <p>品牌：<span class="color_black">CHNT/正泰</span></p>
+                        <p>型号：<span class="color_black">DDS666</span></p>
+                        <p>电流：<span class="color_black">10-40A</span></p>
+                        <p>电表类型：<span class="color_black">有功电度表</span></p>
+                        <p>工作原理：<span class="color_black">电子式电度表</span></p>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <div class="ecahrt">
+        <div class="msgtitle">报警信息预览</div>
+        <div class="tablebox">
+            <iframe frameborder=0 width=100% height=250 marginheight=0 marginwidth=0 scrolling=no src='table.html'></iframe>
+        </div>
+    </div>
+</div>
+<div class="messagetop clearfix" style="margin-top: 20px;border:1px solid #ddd">
+    <div class="msgtitle">仪表读数列表</div>
+    <div class="yibiao-top clearfix">
+        <div id="chart" class="yibiaoLeft fl"></div>
+        <div class="yibiaoRight">
+            <p>今日用暖</p><p class="color_black"><span class="font24">3859.5</span>MW</p>
+            <div class="horizontal_line"></div>
+            <p>月平均用暖</p><p class="color_black"><span class="font24">3626.7</span>MW</p>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="js/highcharts-more.js"></script>
+<script>
+    $('.onehouse').on('mouseenter',function() {
+        $(this).css('opacity',1).siblings('.onehouse').css('opacity',0);
+    })
+</script>
+<script>
+$(function () {
+    $(function () {
+    $('#chart').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: ``
+        },
+        xAxis: {
+            allowDecimals: false,
+            labels: {
+                formatter: function () {
+                    return this.value; // clean, unformatted number for year
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: ``
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+        },
+        tooltip: {
+            pointFormat: '{series.name}  <b>用电量：{point.y}MW</b>'
+        },
+        plotOptions: {
+            area: {
+                pointStart: 2000,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'DDS666型电能表',
+            data: [ 110, 235, 369, 640,755, 800, 1000,
+                   1005, 1436, 2063, 3057, 4618, 5444, 6322, 5468, 4434, 5126]
+        }]
+    });
+});
+});
+</script>
+</body>
+</html>

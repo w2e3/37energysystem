@@ -1,0 +1,86 @@
+body{
+  background: #eee;
+  margin: 10px 0;
+}
+.circle-box{
+  padding: 31px 57px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 21px;
+}
+.cirlcle-item{
+  position: relative;
+}
+.circle-text{
+  position: absolute;
+  top: 0;
+  width: 74px;
+  height: 74px;
+  padding: 17px 0;
+  text-align: center;
+  line-height: 20px;
+}
+.circle-value{
+  color: #444;
+  font-size: 9px;
+  font-weight: 300;
+}
+.circle-weight{
+  color: #999;
+  font-size: 4px;
+}
+.circle-box canvas{
+  width: 74px;
+}
+.circle-title{
+  color: #444;
+  font-size: 5px;
+  text-align: center;
+  margin: 10px;
+}
+.echart-box{
+  height: 300px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.weui-cell__bd{
+  display: flex;
+  align-items: center;
+  font-size: 5px;
+  color: #666;
+  text-align: center;
+}
+.weui-cell__ft{
+  font-size: 5px;
+  min-width: 10px;
+  color: #666;
+  text-align: center;
+}
+.weui-media-box:before{
+  left: 0;
+}
+.weui-cell__bd img{
+  width: 10px;
+  margin-right: 2px;
+}
+.flex2{
+  flex: 2;
+  color: #999;
+  text-align: left;
+}
+.weui-cell__head{
+  color: #0B3D85;
+  font-size: 7px;
+  line-height: 3em;
+  padding-left: 15px;
+}
+.weui-cell:before{
+  border: none;
+}
+.weui-panel__hd{
+  font-size: 5px;
+}
+.weui-panel__hd:after{
+  left: 0;
+}

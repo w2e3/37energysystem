@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link href="__PUBLIC__/vendor/bootstrap-table/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+	<link href="__PUBLIC__/adminframework/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+	<link href="__PUBLIC__/adminframework/css/plugins/chosen/chosen.css" rel="stylesheet">
+	<link href="__PUBLIC__/adminframework/css/plugins/switchery/switchery.css" rel="stylesheet">
+	<link href="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/bootstrap-table.css" rel="stylesheet" >
+	<link href="__PUBLIC__/adminframework/css/animate.css" rel="stylesheet">
+	<link href="__PUBLIC__/adminframework/css/style.css?v=4.0.0" rel="stylesheet">
+	<link rel="stylesheet" href="__PUBLIC__/vendor/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<link href="__PUBLIC__/vendor/diy_component/func_scrolltab/atppagetab.css" rel="stylesheet">
+	<base target="_blank">
+	<style>
+		.wrapper-content {
+			padding: 0px;
+		}
+		.wrapper {
+			padding: 0px;
+		}
+
+		.ibox-content {
+			border-width: 0px 0px;
+			padding: 0px 0px 0px 0px
+		}
+		.gray-bg {
+			background-color: #ffffff;
+		}
+		.table
+		{
+			max-width: none;;
+		}
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.tabs .atp-nav {
+			border-left: 1px solid #F8F7EE;
+			height: 40px;
+		}
+		.tabs .atp-nav li {
+			float: left;
+			width: 100px;
+			border-top: 1px solid #F8F7EE;
+			border-right: 1px solid #F8F7EE;
+			list-style: none;
+		}
+		.tabs .atp-nav li a {
+			display: inline-block;
+			width: 100%;
+			height: 40px;
+			background-color: #F8F7EE;
+			text-align: center;
+			line-height: 40px;
+			font-size: 16px;
+			color: #ccc;
+			text-decoration: none;
+		}
+		.tabs .atp-nav li a:hover {
+			background-color: #fff;
+			color: #000;
+		}
+
+		.tabs .atp-nav li a.selected {
+			background-color: #fff;
+			color: #000;
+			font-size: 18px;
+		}
+
+        .table
+        {
+            max-width: none;
+        }
+        .form-control
+        {
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .float-e-margins .btn
+        {
+            margin-bottom: 1px;
+        }
+        .control-label
+        {
+            display: inline-block;
+            /*margin-bottom: 5px;;*/
+        }
+        #atpbiztable tr:hover{
+        	cursor: pointer;
+        }
+	</style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="ibox float-e-margins">
+		<div class="ibox-content">
+            <include file="Public:rgtabitem"/>
+			<div class="row row-lg">
+				<div class="col-sm-12">
+					<div id="atpbiztoolbar">
+                        今日异常：总数：<font color="red">{$allcount}</font>&nbsp;
+                        待确认：<font color="red">{$dqrcount}</font>&nbsp;
+                        已确认：<font color="GREEN">{$yqrcount}</font>&nbsp;
+                        已忽略：<font color="GREEN">{$yhlcount}</font>
+                    </div>
+                    <table id="atpbiztable"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="__PUBLIC__/vendor/bootstrap-table/jquery.min.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/vendor/My97DatePicker/WdatePicker.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/switchery/switchery.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/locale/bootstrap-table-zh-CN-atp.js"></script>
+<script src="__PUBLIC__/vendor/html5Validate/src/jquery-html5Validate.js"></script>
+<script type="text/javascript" src="__PUBLIC__/vendor/zTree_v3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="__PUBLIC__/vendor/zTree_v3/js/jquery.ztree.excheck.js"></script>
+<script src="__PUBLIC__/vendor/diy_component/func_scrolltab/atppagetab.js"></script>
+
+<script>
+	jumptab('{$Think.get.tabindex}');
+	$(function () {
+        $(".chosen-select2").chosen({disable_search_threshold: 10, search_contains: true, width:'150px'});
+    });
+</script>
+<script>
+    var navs = $('.tabs .onetab');
+    navs.on('click',function() {
+        $(this).addClass('selected').parent().siblings().children('.onetab').removeClass('selected');
+    });
+
+    $('.left_button').click(function() {
+        var tabswidth = $('.tabs').width()-50;
+        console.log(tabswidth);
+        $('.atp-nav').css('transform','translateX(0)');
+        $('.left_button').hide();
+    });
+
+    $('.right_button').click(function() {
+        var tabswidth = -$('.tabs').width()+50;
+        console.log(tabswidth);
+        $('.atp-nav').css('transform','translateX('+tabswidth+'px)');
+        $('.left_button').show();
+    });
+    /***********************************************************************************************************/
+    GLOBAL_SEARCHNAME = "搜索时间";
+    $(function () {
+        $('#atpbiztable').bootstrapTable({
+            url: '__CONTROLLER__/getData?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex={$Think.get.tabindex}&rgn_atpid={$Think.get.rgn_atpid}',
+            method: 'post',                      //请求方式（*）
+            toolbar: '#atpbiztoolbar',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            iconSize: 'outline',
+            sortable: true,                     //是否启用排序
+            sortName:"",
+            sortOrder: "",                   //排序方式
+            queryParams: queryParams,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [5,10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+//            strictSearch: true,
+//            showColumns: true,                  //是否显示所有的列
+            showRefresh: false,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: true,                //是否启用点击选中行
+//            height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "deve_atpid",                     //每一行的唯一标识，一般为主键列
+//            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+//            cardView: true,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            detailFormatter: "detailFormatter",
+            height:510,
+            columns: [
+                [
+//                    {checkbox: true},
+                    {title: '序号', width: 40,align:'center',
+                        formatter: function (value, row, index)
+                        {
+                            var option =  $('#atpbiztable').bootstrapTable("getOptions");
+                            return option.pageSize * (option.pageNumber - 1) + index + 1;
+                        }
+                    },
+                    {field: 'dt', title: '时间（历史异常）', align:'center', valign:'middle',sortable: true},
+                    {field: 'allcount', title: '报警总数',align:'center', valign:'middle', sortable: false},
+                    {field: 'dqrcount', title: '待确认', align:'center', valign:'middle',sortable: false},
+                    {field: 'yhlcount', title: '已忽略', align:'center', valign:'middle',sortable: false},
+                    {field: 'yqrcount', title: '已确认',align:'center', valign:'middle', sortable: false},
+                    {field: 'djdcount', title: '待接单',align:'center', valign:'middle', sortable: false},
+                    {field: 'dclcount', title: '待处理',align:'center', valign:'middle', sortable: false},
+                    {field: 'yclcount', title: '已处理',align:'center', valign:'middle', sortable: false},
+                ]
+            ],
+            onDblClickRow: function (row) {
+
+            },
+            onSort: function (name, order) {
+
+            },
+        });
+    });
+
+    function queryParams(params) {  //配置参数
+        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            limit: params.limit,   //页面大小
+            offset: params.offset,  //页码
+            search: params.search,
+            sort: params.sort,  //排序列名
+            devicename:$('#devicename').val(),
+            sortOrder: params.order//排位命令（desc，asc）
+        };
+        return temp;
+    }
+
+    $("#sys_search").on('click',function() {
+        $('#atpbiztable').bootstrapTable('refresh');
+    });
+
+    function dealInRow(id) {
+        window.parent.ATP_BOX_OPEN("__CONTROLLER__/deal?deve_atpid="+id,dealCallback);
+    }
+
+    function dealCallback()
+    {
+        if (window.parent.ATP_BOX_VALIDATE()) {
+            window.parent.ATP_BOX_CLOSE();
+            $("#sys_dlg_form",parent.document).submit(function(e)
+            {
+                var formObj = $(this);
+                var formURL = formObj.attr("action");
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '__CONTROLLER__/dealsubmit',
+                    type: 'POST',
+                    data:  formData,
+                    mimeType:"multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(data, textStatus, jqXHR)
+                    {
+                        $('#atpbiztable').bootstrapTable('refresh')
+                    },
+                    error: function(jqXHR, textStatus, errorThrown)
+                    {
+                        $('#atpbiztable').bootstrapTable('refresh')
+                    }
+                });
+                e.preventDefault();
+            });
+            $("#sys_dlg_form",parent.document).submit();
+        }
+    }
+
+    function ignoreInRow(id)
+    {
+        window.parent.ATP_BOX_OPEN("__CONTROLLER__/ignore?deve_atpid="+id,ignoreCallback);
+    }
+
+    function ignoreCallback()
+    {
+        if (window.parent.ATP_BOX_VALIDATE()) {
+            window.parent.ATP_BOX_CLOSE();
+            $("#sys_dlg_form",parent.document).submit(function(e)
+            {
+                var formObj = $(this);
+                var formURL = formObj.attr("action");
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '__CONTROLLER__/ignoresubmit',
+                    type: 'POST',
+                    data:  formData,
+                    mimeType:"multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(data, textStatus, jqXHR)
+                    {
+                        $('#atpbiztable').bootstrapTable('refresh')
+                    },
+                    error: function(jqXHR, textStatus, errorThrown)
+                    {
+                        $('#atpbiztable').bootstrapTable('refresh')
+                    }
+                });
+                e.preventDefault();
+            });
+            $("#sys_dlg_form",parent.document).submit();
+        }
+    }
+</script>
+</body>
+</html>

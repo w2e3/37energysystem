@@ -1,0 +1,149 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="数据对比"/>
+<style>
+select {
+  /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+  border: solid 1px #b4b4b4;
+  border-radius: 5px;
+  width: 31%;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  float: left;
+  /*很关键：将默认的select选择框样式清除*/
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  /*在选择框的最右侧中间显示小箭头图片*/
+  background: url("__PUBLIC__/mobile/images/downarrow.png") no-repeat scroll  transparent;
+  background-position: 90% center;
+  background-size: 14px 8px;
+  /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+  padding-left: 5px;
+}
+.choose-machine {
+    width: 63%;
+}
+.searchbtn {
+    float: left;
+    width: 31%;
+}
+
+
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+select::-ms-expand { display: none; }
+
+</style>
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">数据对比</h1>
+    </header>
+    
+    <div class="content infinite-scroll">
+        <div class="content-block" style="margin:5px 0px 5px 8px;">
+        <!-- 下拉列表 -->
+       <div class="btn-group">
+            <form action="" class="clearfix">
+               <select class="search-input choose-year">
+                    <option selected>2017</option>
+                    <option>2016</option>
+                    <option>2015</option>
+                    <option>2014</option>
+                    <option>2013</option>
+                    <option>2012</option>
+                    <option>2011</option>
+              </select>
+               <select class="search-input choose-month">
+                    <option selected>6</option>
+                    <option>5</option>
+                    <option>4</option>
+                    <option>3</option>
+                    <option>2</option>
+                    <option>1</option>
+                    <option>12</option>
+                    <option>11</option>
+              </select>
+               <select class="search-input choose-day">
+                    <option>6</option>
+                    <option selected>5</option>
+                    <option>4</option>
+                    <option>3</option>
+                    <option>2</option>
+                    <option>1</option>
+              </select>
+               <select class="search-input choose-machine">
+                    <option selected>电压</option>
+                    <option>电压</option>
+                    <option>电压</option>
+                    <option>电压</option>
+                    <option>电流</option>
+                    <option>电压</option>
+                    <option>电压</option>
+              </select>
+              <button class="button button-fill button-success searchbtn">搜索</button>
+            </form>
+       </div>
+    </div>
+        <div id="highchart"></div>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<include file="Public:footer"/>
+<script src="__PUBLIC__/vendor/bootstrap-table/jquery.min.js"></script>
+<script src="__PUBLIC__/vendor/ueditor/third-party/highcharts/highcharts.js"></script>
+<script src="__PUBLIC__/vendor/ueditor/third-party/highcharts/highcharts-3d.js"></script>
+<script>
+$(function () {
+    $('#highchart').highcharts({
+        chart: {
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 5,
+                viewDistance: 25,
+                depth: 60
+            },
+            marginRight: 40
+        },
+        title: {
+            text: '用水量月报表(千吨)'
+        },
+       xAxis: {
+            categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+        },
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: ``
+            }
+        },
+        tooltip: {
+            headerFormat: '<b>{point.key}</b><br>',
+            pointFormat: '<span style="color:{series.color}">\u25CF</span>{point.y}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                depth: 40
+            }
+        },
+         series: [{
+            type: 'column',
+            colorByPoint: true,
+            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 150, 154, 95.6, 54.4],
+            showInLegend: false
+        }]
+    });
+});
+
+</script>
+

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+    <link href="__PUBLIC__/vendor/bootstrap-table/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="__PUBLIC__/adminframework/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/adminframework/css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="__PUBLIC__/adminframework/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <link href="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/bootstrap-table.css" rel="stylesheet" >
+    <link href="__PUBLIC__/adminframework/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/adminframework/css/style.css?v=4.0.0" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/vendor/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link href="__PUBLIC__/vendor/diy_component/func_scrolltab/atppagetab.css" rel="stylesheet">
+	<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+	<base target="_blank">
+	<style>
+        .wrapper-content {
+            padding: 0px;
+        }
+        .wrapper {
+            padding: 0px;
+        }
+        .ibox-content {
+            border-width: 0px 0px;
+            padding: 0px 0px 0px 0px
+        }
+        .gray-bg {
+            background-color: #ffffff;
+        }
+        .table
+        {
+            max-width: none;;
+        }
+        .meterimg {
+            float: left;
+            width: 50%;
+        }
+        .meterstate {
+            font-size: 16px;
+            padding-top: 50px;
+        }
+        .metermessage {
+            background: #eee;
+        }
+        .right {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: green;
+        }
+    </style>
+    <link rel="stylesheet" href="__PUBLIC__/vendor/diy_component/yuanqu_page/css/reset.css">
+    <link rel="stylesheet" href="__PUBLIC__/vendor/diy_component/yuanqu_page/css/chart-new.css">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <include file="Public:rgtabitem"/>
+            <div class="messagetop clearfix" style="margin-top: 20px;margin-right: 5px;padding-bottom:5px;border:1px solid #ddd;border-radius: 5px">
+                <div class="msgtitle">{$result[0].dm_name}</div>
+                    <div class="tablebox chartbox clearfix">
+                        <div class="chartimg fl" style="width: 100px;">
+                            <img src="__PUBLIC__/uploads/{$dm_picture}" width="100%" style="margin-top: 50%;">
+                        </div>
+                        <div class="chart_message">
+                            <p class="chart_title">{$result[0].dm_size}</p>
+                            <div class="two_columns">
+                                <div class="flex_1 border_right" style="margin-top: 15px;">
+                                    <table>
+                                        <tr style="height: 30px;line-height: 30px;">
+                                            <td style="width: 60%;min-width: 85px;text-align: right;">当前状态：</td>
+                                            <td style="width: 40%;min-width: 78px;text-align: left;">
+                                                <if condition="$typecon eq '异常'">
+                                                    <span class="color_three">异常</span>
+                                                <else />
+                                                    <span class="color_one">正常</span>
+                                                </if>
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 30px;line-height: 30px;">
+                                            <td style="width: 60%;min-width: 85px;text-align: right;">能源总用量：</td>
+                                            <td style="width: 40%;min-width: 78px;text-align: left;"><span class="color_black">{$count}</span></td>
+                                        </tr>
+                                        <tr style="height: 30px;line-height: 30px;">
+                                            <td style="width: 60%;min-width: 85px;text-align: right;">报警数量：</td>
+                                            <td style="width: 40%;min-width: 78px;text-align: left;"><span class="color_black">{$countc}</span></td>
+                                        </tr>
+                                        <tr style="height: 30px;line-height: 30px;">
+                                            <td style="width: 60%;min-width: 85px;text-align: right;">待确认报警：</td>
+                                            <td style="width: 40%;min-width: 78px;text-align: left;"><span class="color_black">{$countd}</span></td>
+                                        </tr>
+                                        <tr style="height: 30px;line-height: 30px;">
+                                            <td style="width: 60%;min-width: 85px;text-align: right;">待处理报警：</td>
+                                            <td style="width: 40%;min-width: 78px;text-align: left;"><span class="color_black">{$counta}</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="flex_1" style="padding-left: 10px;margin-top: 15px;">
+                                    <table>
+                                        <tr style="height: 30px;line-height: 30px;">
+                                            <td style="width: 40%;min-width: 65px;text-align: right;">品牌：</td>
+                                            <td style="width: 60%;min-width: 128px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;"><span class="color_black">{$result[0].dm_name}</span></td>
+                                        </tr>
+                                        <tr style="height: 30px;line-height: 30px;">
+                                            <td style="width: 40%;min-width: 65px;text-align: right;">型号：</td>
+                                            <td><span class="color_black">{$result[0].dm_size}</span></td>
+                                        </tr>
+                                        <tr style="height: 30px;line-height: 30px;">
+                                            <td style="width: 40%;min-width: 65px;text-align: right;">电流：</td>
+                                            <td><span class="color_black">10-40A</span></td>
+                                        </tr>
+                                        <if condition="$result[0]['dev_name'] eq '电表'">
+                                        <tr style="height: 30px;line-height: 30px;">
+                                            <td style="width: 40%;min-width: 65px;text-align: right;">电表类型：</td>
+                                            <td><span class="color_black">有功电度表</span></td>
+                                        </tr>
+                                        <tr style="height: 30px;line-height: 30px;">
+                                            <td style="width: 40%;min-width: 65px;text-align: right;">工作原理：</td>
+                                            <td><span class="color_black">电子式电度表</span></td>
+                                        </tr>
+                                            <else/>
+                                            <if condition="$result[0]['dev_name'] eq '水表'">
+                                            <tr style="height: 30px;line-height: 30px;">
+                                                <td style="width: 40%;min-width: 65px;text-align: right;">水表类型：</td>
+                                                <td><span class="color_black">智能水表</span></td>
+                                            </tr>
+                                            <tr style="height: 30px;line-height: 30px;">
+                                                <td style="width: 40%;min-width: 65px;text-align: right;">工作原理：</td>
+                                                <td><span class="color_black">电子式水能表</span></td>
+                                            </tr>
+                                                <else/>
+                                                <tr style="height: 30px;line-height: 30px;">
+                                                    <td style="width: 40%;min-width: 65px;text-align: right;">冷暖表类型：</td>
+                                                    <td><span class="color_black">立式热量表</span></td>
+                                                </tr>
+                                                <tr style="height: 30px;line-height: 30px;">
+                                                    <td style="width: 40%;min-width: 65px;text-align: right;">工作原理：</td>
+                                                    <td><span class="color_black">电子式热能表</span></td>
+                                                </tr>
+                                            </if>
+                                            </if>
+                                    </table>
+                                    <!-- <p>品牌：<span class="color_black">{$result[0].dm_name}</span></p>
+                                    <p>型号：<span class="color_black">{$result[0].dm_size}</span></p>
+                                    <p>电流：<span class="color_black">10-40A</span></p>
+                                    <p>电表类型：<span class="color_black">有功电度表</span></p>
+                                    <p>工作原理：<span class="color_black">电子式电度表</span></p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="messagetop clearfix" style="margin-top: 20px;margin-right: 5px;padding-bottom:5px;border:1px solid #ddd;border-radius: 5px">
+            <div class="yibiao">
+                <div class="msgtitle">最近30天能源趋势图</div>
+                <div class="tablebox" >
+                    <iframe frameborder=0 width=100% style="min-height:340px"  marginheight=0 marginwidth=0 scrolling=no src='__CONTROLLER__/func_energytrend?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=0&rgn_atpid={$Think.get.rgn_atpid}'></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="messagetop clearfix" style="margin-top: 20px;margin-right: 5px;padding-bottom:5px;border:1px solid #ddd;border-radius: 5px">
+            <div class="yibiao">
+                <div class="msgtitle">报警信息预览</div>
+                <div class="tablebox" >
+                    <iframe frameborder=0 width=100% style="min-height:300px" marginheight=0 marginwidth=0 scrolling=no src='__CONTROLLER__/func_alarminfo?regiontype={$Think.get.regiontype}&snname={$Think.get.snname}&regionlevel={$Think.get.regionlevel}&tabindex=0&rgn_atpid={$Think.get.rgn_atpid}'></iframe>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="__PUBLIC__/vendor/bootstrap-table/jquery.min.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/vendor/My97DatePicker/WdatePicker.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script src="__PUBLIC__/adminframework/js/plugins/switchery/switchery.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="__PUBLIC__/vendor/bootstrap-table/bootstrap-table/src/locale/bootstrap-table-zh-CN.js"></script>
+<script src="__PUBLIC__/vendor/html5Validate/src/jquery-html5Validate.js"></script>
+<script type="text/javascript" src="__PUBLIC__/vendor/zTree_v3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="__PUBLIC__/vendor/zTree_v3/js/jquery.ztree.excheck.js"></script>
+<script src="__PUBLIC__/vendor/diy_component/func_scrolltab/atppagetab.js"></script>
+
+<script>
+jumptab('{$Think.get.tabindex}');
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+﻿﻿<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">数据修改单详情</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+                <div>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <h3 class="modal-title" style="text-align: center">数据修改单</h3>
+                                    <br/>
+                                    <label class="col-sm-2 control-label">
+                                        名称：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input type="text"  value="{$data.d2mdf_name}"  class="form-control" readonly>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        描述：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input type="text"  value="{$data.d2mdf_desc}"  class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        发起人：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input type="text"  value="{$data.startempname}"  class="form-control" readonly>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        发起时间：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input type="text"  value="{$data.d2mdf_startdt}"  class="form-control" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        审批人：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input type="text"  value="{$data.agreeempname}"  class="form-control" readonly>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        审批时间：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input type="text"  value="{$data.d2mdf_agreeempdt}"  class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        审批备注：
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="d2mdf_remark" value="{$data.d2mdf_remark}"  class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        打回意见：
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="d2mdf_agreebackinfo"  value="{$data.d2mdf_agreebackinfo}"  class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h3 class="modal-title" style="text-align: center">修改单详情</h3>
+                                    <br/>
+                                    <table id="atpbiztable_info"></table>
+                                </div>
+                                <input type="hidden" name="d2mdf_atpid"  value="{$data.d2mdf_atpid}"  class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            <button type="button"  id="sys_dlg_pass" class="btn btn-primary">同意</button>
+            <button type="button"  id="sys_dlg_back" class="btn btn-primary">打回</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+    $(function () {
+        $(".js-switch").each(function(){
+            new Switchery(this, {color: '#1AB394'});
+        });
+        $(".file-pretty").prettyFile();
+        $(".chosen-select").chosen({disable_search_threshold: 3, search_contains: true,width:'284px'});
+
+        $('#atpbiztable_info').bootstrapTable({
+            url: '__CONTROLLER__/getXiangqingData?d2mdf_atpid={$Think.get.d2mdf_atpid}',         //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+//            toolbar: '#atpbiztable_info',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: false,                   //是否显示分页（*）
+            iconSize: 'outline',
+            sortable: false,                     //是否启用排序
+            sortName:"",
+            sortOrder: "",                   //排序方式
+            queryParams: queryParamsInfo,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [5,10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+//            strictSearch: true,
+            showColumns: false,                  //是否显示所有的列
+            showRefresh: false,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: false,                //是否启用点击选中行
+            height: 300,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "group",                     //每一行的唯一标识，一般为主键列
+//            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+//            cardView: true,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            detailFormatter: "detailFormatter",
+            columns: [
+                [
+                    {title: '序号', width: 40,align:'center',
+                        formatter: function (value, row, index)
+                        {
+                            var option =  $('#atpbiztable').bootstrapTable("getOptions");
+                            return option.pageSize * (option.pageNumber - 1) + index + 1;
+                        }
+                    },
+                    {field: 'rgn_name', title: '设备点',align:'center', valign:'middle', sortable: false},
+                    {field: 'd2mdfd_dt', title: '时间',align:'center', valign:'middle', sortable: false},
+                    {field: 'info', title: '能源数值',align:'left', valign:'middle', sortable: false},
+                ]
+            ],
+            onDblClickRow: function (row) {
+
+            },
+            onSort: function (name, order) {
+            }
+        });
+        function queryParamsInfo(params) {
+            var temp = {
+                limit: params.limit,
+                offset: params.offset,
+                search: params.search,
+                sort: params.sort,
+                sortOrder: params.order
+            };
+            return temp;
+        }
+    });
+</script>

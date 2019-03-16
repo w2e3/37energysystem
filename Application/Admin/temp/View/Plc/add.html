@@ -1,0 +1,98 @@
+<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">数据编辑</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        <span style="color:red;text-align: center">*</span>
+                        名称：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="plc_name" type="text"  value="{$data.plc_name}" class="form-control" required>
+                    </div>
+                    <label class="col-sm-2 control-label">
+                        <span style="color:red;text-align: center">*</span>
+                        位置：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="plc_location" type="text"  value="{$data.plc_location}" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        <span style="color:red;text-align: center">*</span>
+                        IP：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="plc_ip" type="text"  value="{$data.plc_ip}" class="form-control" required pattern="((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)">
+                    </div>
+                    <label class="col-sm-2 control-label">
+                        <span style="color:red;text-align: center">*</span>
+                        端口：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="plc_port" type="text"  value="{$data.plc_port}" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <label class="col-sm-2 control-label">
+                        掩码：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="plc_mask" type="text"  value="{$data.plc_mask}" class="form-control">
+                    </div>
+                    <label class="col-sm-2 control-label">
+                        网关IP：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="plc_gateip" type="text"  value="{$data.plc_gateip}" class="form-control" pattern="((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        状态：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="plc_status" type="text"  value="{$data.plc_status}" class="form-control">
+                    </div>
+                    <label class="col-sm-2 control-label">
+                        备注：
+                    </label>
+                    <div class="col-sm-4">
+                        <input name="plc_remark" type="text"  value="{$data.plc_remark}" class="form-control">
+                    </div>
+                </div>
+                <input name="plc_atpid" type="hidden" value="{$data.plc_atpid}" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            <button type="button" data-dismiss="" id="sys_dlg_submit" class="btn btn-primary">保存</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+$(function () {
+
+    $(".js-switch").each(function(){
+        new Switchery(this, {color: '#1AB394'});
+    });
+
+    $(".file-pretty").prettyFile();
+
+    $(".chosen-select").chosen({disable_search_threshold: 10, search_contains: true,width:'288px'});
+
+});
+
+</script>

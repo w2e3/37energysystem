@@ -1,0 +1,31 @@
+<script>
+$("#rgn_ids").on("change",function () {
+    var rgn_atpid=$(this).val();
+    var regiontype=GetQueryString('regiontype');
+    var snname=GetQueryString('snname');
+    var type=GetQueryString('type');
+    var pre_rgn_atpid=GetQueryString('pre_rgn_atpid');
+    console.log(pre_rgn_atpid);
+    if(pre_rgn_atpid==null)
+    {
+        pre_rgn_atpid=rgn_atpid;
+    }
+//    console.log(regiontype);
+//    console.log(snname);
+//    console.log(rgn_atpid);
+//    console.log(pre_rgn_atpid);
+    var html=window.location.href;
+    var arr=html.split('?');
+    html=arr[0];
+    console.log(arr[0]);
+    var html=html+"?rgn_atpid="+rgn_atpid+"&regiontype="+regiontype+"&snname="+snname+"&pre_rgn_atpid="+pre_rgn_atpid;
+    window.location.href=html;
+});
+//获得get参数的值
+function GetQueryString(name)
+{
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  decodeURI(r[2]); return null;
+}
+</script>

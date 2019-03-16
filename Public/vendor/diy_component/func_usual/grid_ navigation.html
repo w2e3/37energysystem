@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+    	* {
+    		margin: 0;
+    		padding: 0;
+    	}
+		.gird {
+			padding: 20px;
+			width: 800px;
+			
+		}
+		.gird_nav li {
+			float: left;
+			width: 150px;
+			height: 150px;
+			margin-right: 10px;
+			margin-bottom: 40px;
+			list-style: none;
+			position: relative;
+
+		}
+		.gird_nav li a {
+			display: inline-block;
+			width: 100%;
+			height: 100%;
+			background: url('img2.jpg') no-repeat;
+			background-size: cover;
+		}
+		.gird_nav li a:hover {
+			border: 3px solid #ccc;
+			box-sizing: border-box;
+			overflow: hidden;
+
+		}
+		.gird_nav li p {
+			text-align: center;
+		}
+		
+		.gird_nav li a.selected {
+			color: #000;
+		}
+		img{
+			width: 100%;
+		}
+	
+
+    </style>
+</head>
+<body>
+
+<div class="gird">
+	<ul class="gird_nav">
+		<li><a href="javascript:;"><img src="image/img1.jpg" alt="" height="150px"></a><p>在线客服</p></li>
+		<li><a href="javascript:;"><img src="image/img2.jpg" alt="" height="150px"></a><p>电话服务</p></li>
+		<li><a href="javascript:;"><img src="image/img3.jpg" alt="" height="150px"></a><p>电话服务</p></li>
+		<li><a href="javascript:;"><img src="image/img1.jpg" alt="" height="150px"></a><p>人工服务</p></li>
+		<li><a href="javascript:;"><img src="image/img2.jpg" alt="" height="150px"></a><p>电话服务</p></li>
+		<li><a href="javascript:;"><img src="image/img3.jpg" alt="" height="150px"></a><p>电话服务</p></li>
+		<li><a href="javascript:;"><img src="image/img1.jpg" alt="" height="150px"></a><p>帮助</p></li>
+		<li><a href="javascript:;"><img src="image/img2.jpg" alt="" height="150px"></a><p>设置</p></li>
+		
+	</ul>
+</div>
+
+
+
+</body>
+<script src="js/jquery-1.8.2.js"></script>
+<script>
+ 	var navs = $('.aaa');
+ 	navs.on('click',function() {
+	 	$(this).addClass('selected').parent().siblings().children('.aaa').removeClass('selected');
+ 	})
+ 	
+ 	
+
+</script>
+</html>

@@ -1,0 +1,205 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ATP-移动版</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+   <!-- 引入 weui -->
+    <link rel="stylesheet" href="css/weui.css">
+    <link rel="stylesheet" href="css/light7.css">
+    <link rel="stylesheet" href="css/light7-swiper.css">
+    <link rel="stylesheet" href="css/light7-swipeout.css">
+    <link rel="stylesheet" href="css/app.css">
+    
+    <link rel="stylesheet" href="css/gray-themes.css">
+    <style>
+      .atp-tabs {
+        padding: 0!important;
+        margin: 0!important;
+      }
+    </style>
+  </head>
+  <body>
+<!-- 底部导航 -->
+<nav class="bar bar-tab">
+  <a class="tab-item external" href='tab1.html'>
+    <span class="icon icon-home"></span>
+    <span class="tab-label">九宫格</span>
+  </a>
+  <a class="tab-item active external" href="#">
+    <span class="icon icon-download"></span>
+    <span class="tab-label">列表</span>
+  </a>
+  <a class="tab-item external" href="tab3.html">
+    <span class="icon icon-app"></span>
+    <span class="tab-label">地图</span>
+  </a>
+  <a class="tab-item external" href="tab4.html">
+    <span class="icon icon-me"></span>
+    <span class="tab-label">常用</span>
+  </a>
+</nav>
+<!-- tab1 首页 -->
+<div class="page page-home page-current" id="page-home">
+     <header class="bar bar-nav">
+        <a class="icon icon-menu  pull-right open-popup" data-popup=".popup-about">
+        </a>
+        <h1 class="title">列表</h1>
+      </header>
+       <div class="bar bar-header-secondary">
+          <div class="searchbar">
+             <form action="">
+                <a class="searchbar-cancel">取消</a>
+                <div class="search-input">
+                  <label class="icon icon-search" for="search"></label>
+                  <input type="search" id='search' placeholder='请输入您要搜索的内容'/>
+                </div>
+              </form>
+          </div>
+        </div>
+      <div class="content pull-to-refresh-content page-home infinite-scroll">
+        <div class="pull-to-refresh-layer">
+          <div class="preloader"></div>
+          <div class="pull-to-refresh-arrow"></div>
+        </div>
+
+
+        <div class="buttons-tab">
+          <a href="#" class="active button">biglist</a>
+          <a href="tab2_list.html" class="button external">smalllist</a>
+          <!-- <a href="#tab3" class="tab-link button">thirdlist</a> -->
+        </div>
+        <div class="content-block atp-tabs">
+          <div class="tabs">
+            <div id="tab1" class="tab active">
+              <div class="list">
+                  <div class="card color-default">
+                    <a href="detail.html" class="external">
+                    <div style="" valign="bottom" class="card-header color-white no-border no-padding">
+                      <img class='card-cover' src="images/house2.jpg"  alt="">
+                    </div>
+                    <div class="card-content">
+                      <div class="card-content-inner">
+                        <p class="color-black">图片标题</p>
+                        <p class="color-gray">图片描述</p>
+                      </div>
+                    </div>
+                    </a>
+                    <div class="card-footer">
+                      <span class="link">喜欢(120)</span>
+                      <span class="link">评论(20)</span>
+                    </div>
+                  </div>
+                  <div class="card color-default">
+                    <a href="detail.html" class="external">
+                    <div style="" valign="bottom" class="card-header color-white no-border no-padding">
+                      <img class='card-cover' src="images/house2.jpg"  alt="">
+                    </div>
+                    <div class="card-content">
+                      <div class="card-content-inner">
+                        <p class="color-black">图片标题</p>
+                        <p class="color-gray">图片描述</p>
+                      </div>
+                    </div>
+                    </a>
+                    <div class="card-footer">
+                      <span class="link">喜欢(120)</span>
+                      <span class="link">评论(20)</span>
+                    </div>
+                  </div>
+                  <div class="card color-default">
+                    <a href="detail.html" class="external">
+                    <div style="" valign="bottom" class="card-header color-white no-border no-padding">
+                      <img class='card-cover' src="images/house2.jpg"  alt="">
+                    </div>
+                    <div class="card-content">
+                      <div class="card-content-inner">
+                        <p class="color-black">图片标题</p>
+                        <p class="color-gray">图片描述</p>
+                      </div>
+                    </div>
+                    </a>
+                    <div class="card-footer">
+                      <span class="link">喜欢(120)</span>
+                      <span class="link">评论(20)</span>
+                    </div>
+                  </div>
+              </div>
+              
+              <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+              </div>
+
+
+              <div style='display:none' id='index-tpl'>
+                <div class="card color-default">
+                    <a href="detail.html" class="external">
+                    <div style="" valign="bottom" class="card-header color-white no-border no-padding">
+                      <img class='card-cover' src="images/house2.jpg"  alt="">
+                    </div>
+                    <div class="card-content">
+                      <div class="card-content-inner">
+                        <p class="color-black">图片标题</p>
+                        <p class="color-gray">图片描述</p>
+                      </div>
+                    </div>
+                    </a>
+                    <div class="card-footer">
+                      <span class="link">喜欢(120)</span>
+                      <span class="link">评论(20)</span>
+                    </div>
+                  </div>
+              </div>
+
+            </div>
+            <div id="tab2" class="tab">
+              <!-- 列表房子 -->
+            </div>
+            
+            <!-- <div id="tab3" class="tab">
+              <div class="content-block">
+                <p>This is tab 3 content</p>
+                <p>This is tab 3 content</p>
+                <p>This is tab 3 content</p>
+                <p>This is tab 3 content</p>
+                <p>This is tab 3 content</p>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+
+        
+
+
+      </div>
+</div>
+
+
+
+
+<!-- 关于页面 -->
+<div class="popup popup-about">
+  <div class="content-block">
+    <h2 class="text-center">图文介绍</h2>
+    <p style="text-indent: 2em">北京，简称“京”，是中华人民共和国的首都、直辖市、国家中心城市、超大城市、国际大都市，全国政治中心、文化中心、国际交往中心、科技创新中心，是中部战区司令部驻地，是中国共产党中央委员会、中华人民共和国中央人民政府、全国人民代表大会、中国人民政治协商会议全国委员会、中华人民共和国中央军事委员会所在地。</p>
+    <br><br>
+    <p><a href="#" class="button button-big button-fill button-danger close-popup">关闭</a></p>
+  </div>
+</div>
+
+    <script type='text/javascript' src="js/zepto.js"></script>
+    <script type='text/javascript' src="js/light7.js"></script>
+    <script type='text/javascript' src="js/light7-swiper.js"></script>
+    <script type='text/javascript' src="js/light7-swipeout.js"></script>
+    <script src="js/app.js"></script>
+     <script language="JavaScript"> 
+    javascript:window.history.forward(1); 
+    </script> 
+
+  </body>
+</html>

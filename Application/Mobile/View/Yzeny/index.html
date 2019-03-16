@@ -1,0 +1,49 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="业主管理"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">业主能源</h1>
+    </header>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label for="" class="weui-label">:</label>
+                <label for="" class="weui-label">租户:</label>
+                <label for="" class="weui-label">水:</label>
+                <label for="" class="weui-label">电:</label>
+                <label for="" class="weui-label">冷:</label>
+                <label for="" class="weui-label">暖:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <label for="" class="weui-label">详情:</label>
+            </div>
+        </div>
+    </div>
+    <foreach name="Count" item="vo">
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <a href="__CONTROLLER__/detail?us_atpid={$vo.us_atpid}&rgn_atpid={$Think.get.rgn_atpid}&regiontype={$Think.get.regiontype}&&snname={$Think.get.snname}" class="item-link item-content external"></a>
+                <div class="weui-cell__hd">{$vo.us_name}</div>
+                <div class="weui-cell__hd">{$vo.ysl}</div>
+                <div class="weui-cell__hd">{$vo.dgl}</div>
+                <div class="weui-cell__hd">{$vo.yll}</div>
+                <div class="weui-cell__hd">{$vo.ynl}</div>
+            </div>
+        </div>
+    </foreach>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+
+
+</script>
+<include file="Public:footer"/>

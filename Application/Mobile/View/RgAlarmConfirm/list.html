@@ -1,0 +1,92 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="园区漫游"/>
+
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">业主能源</h1>
+    </header>
+
+    <div class="content infinite-scroll">
+        <div>
+            <select id="selectDevice" class="chosen-select" onchange="choiceDevice()">
+                <option value="">全部</option>
+                <foreach name="devicealarm" item="emv" key="emk">
+                    <option value="{$emv.rgn_deviceid}" <if condition="$rgn_atpid eq $emv['rgn_atpid']">selected</if> >{$emv.rgn_name},报警数:{$emv.alm_count}</option>
+                </foreach>
+            </select>
+        </div>
+        <div class="list-block media-list atp-list" style="margin: 0;">
+            <ul>
+                <foreach  name="devicealarm" item="vo">
+                    <li>
+                        <a href="javascript:void(0)" class="item-link item-content external">
+                            <div class="item-media"><img src="__PUBLIC__/mobile/images/icon2.png" width="80"></div>
+                            <div class="item-inner">
+                                <div class="item-title">{$vo.rgn_name}</div>
+                                <div class="item-subtitle">{$vo.alm_datetime}</div>
+                                <div class="item-title-row">
+                                    <div class="item-text">{$vo.alm_category}</div>
+                                    <div class="item-after">{$vo.alm_level}</div>
+                                    <div class="item-after">{$vo.almc_name}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </foreach>
+
+                <!--<li>-->
+                    <!--<a href="__CONTROLLER__/detail" class="item-link item-content external">-->
+                        <!--<div class="item-media"><img src="__PUBLIC__/mobile/images/icon2.png" width="80"></div>-->
+                        <!--<div class="item-inner">-->
+                            <!--<div class="item-title">2#1单元1层水表</div>-->
+                            <!--<div class="item-subtitle">报警等级：高</div>-->
+                            <!--<div class="item-title-row">-->
+                                <!--<div class="item-text">事件：超限</div>-->
+                                <!--<div class="item-after">状态：未处理</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</a>-->
+                <!--</li>-->
+            </ul>
+        </div>
+
+        <!--<div class="infinite-scroll-preloader">-->
+        <!--<div class="preloader"></div>-->
+        <!--</div>-->
+
+        <div style='display:none' id='tab2-tpl'>
+            <!--<li>-->
+            <!--<a href="#"  class="item-link item-content external">-->
+            <!--<div class="item-media">-->
+            <!--<img src="__PUBLIC__/mobile/images/icon1.png" width="80"></div>-->
+            <!--<div class="item-inner">-->
+            <!--<div class="item-title">北京壹号院 精装修</div>-->
+            <!--<div class="item-subtitle">朝阳-三里屯</div>-->
+            <!--<div class="item-title-row">-->
+            <!--<div class="item-text">2室2厅 整租</div>-->
+            <!--<div class="item-after">5000元/m²</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</a>-->
+            <!--</li>-->
+        </div>
+
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+    function choiceDevice() {
+        var val = $("#selectDevice").val();
+        var url="__CONTROLLER_/index?rgn_atpid="+val+"pre_rgn_atpid"={Think.get.rgn_atpid};
+        window.location.href=url;
+    }
+</script>
+<include file="Public:footer"/>

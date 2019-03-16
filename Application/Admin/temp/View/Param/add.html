@@ -1,0 +1,84 @@
+﻿﻿<div class="modal-dialog" style="width: 1000px;z-index: 10;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">数据编辑</h4>
+        </div>
+        <div class="modal-body">
+            <form onkeydown="if(event.keyCode==13){return false;}"  id="sys_dlg_form" role="form" class="form-horizontal">
+                <div>
+                    <!--<ul class="nav nav-tabs">-->
+                        <!--&lt;!&ndash;<li class="active"><a data-toggle="tab" href="#tab-1">基础信息</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li class=""><a data-toggle="tab" href="#tab-2">球员/领队信息</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li class=""><a data-toggle="tab" href="#tab-3">裁判信息</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li class=""><a data-toggle="tab" href="#tab-4">保险信息</a></li>&ndash;&gt;-->
+                    <!--</ul>-->
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color:red;">*</span>
+                                        能源类别：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <select name="p_energytypeid" id="" class="chosen-select" required>
+                                            <foreach name="ds_energy" item="e_v" key="e_k" >
+                                                <option value="{$e_v.et_atpid}" <if condition="$data['p_energytypeid'] eq $e_v['et_atpid']">selected<else /></if>>{$e_v.et_name}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        <span style="color: red">*</span>
+                                        统计参数名称：
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input name="p_name" type="text" value="{$data.p_name}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"><span style="color:red;">*</span>统计参数字段：</label>
+                                    <div class="col-sm-4">
+                                        <input name="p_shortname" type="text" value="{$data.p_shortname}" class="form-control" required>
+                                    </div>
+                                    <label class="col-sm-2 control-label"><span style="color:red;">*</span>统计数值单位：</label>
+                                    <div class="col-sm-4">
+                                        <input name="p_unit" type="text" value="{$data.p_unit}" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">统计参数类型：</label>
+                                    <div class="col-sm-4">
+                                        <select name="p_category" id="p_category" class="chosen-select">
+                                            <foreach name="ds_pcategory" item="pcg_v" key="pcg_k" >
+                                                <option value="{$pcg_v}" <if condition="$data['p_category'] eq $pcg_v">selected<else /></if> >{$pcg_v}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input name="p_atpid" type="hidden" value="{$data.p_atpid}" class="form-control">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">关闭</button>
+            <button type="button" data-dismiss="" id="sys_dlg_submit" class="btn btn-primary">保存</button>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in" style="z-index: -101;"></div>
+<script>
+$(function () {
+    $(".js-switch").each(function(){
+        new Switchery(this, {color: '#1AB394'});
+    });
+    $(".file-pretty").prettyFile();
+    $("#role").chosen({disable_search_threshold: 6, search_contains: true,width:'750px'});
+    $(".chosen-select").chosen({disable_search_threshold: 6, search_contains: true,width:'284px'});
+});
+</script>

@@ -1,0 +1,177 @@
+<html lang="zh-cn" >
+<head>
+<meta charset="utf-8" />
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" media="screen" />
+<title>ATP-移动版</title>
+<link rel="stylesheet" href="__PUBLIC__/mobile/blue/css/chat.css">
+<link rel="stylesheet" href="__PUBLIC__/mobile/blue/css/light7.css">
+<link rel="stylesheet" href="__PUBLIC__/mobile/blue/css/gray-themes.css">
+
+</head>
+<body>
+
+<div class="page" style="display: block;">
+    <header class="bar bar-nav">
+     <a class="button button-link button-nav pull-left back external" href="tab4.html">
+      <span class="icon icon-left"></span>
+      返回
+    </a>
+    <h1 class="title">琢磨先生</h1>
+  </header>
+    <div class="content">
+			<!-- <div class="speak_window"> -->
+	<div class="speak_box">
+		<div class="answer">
+			<div class="heard_img left"><img src="__PUBLIC__/mobile/blue/images/boss.png"></div>
+			<p class="name_nicheng">琢磨先生</p>
+			<div class="answer_text">
+				<p>Hey，您的专属导游在此！您可以向我提问哦！有时微信会跟我闹点小脾气，试试关闭当前页面重新进入就ok啦!</p>
+				<i></i>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="saying">
+	<img src="__PUBLIC__/mobile/blue/images/saying.gif"/>
+</div>
+
+
+<div class="wenwen-footer">
+	<div class="wenwen_btn left" onClick="to_write()"><img src="__PUBLIC__/mobile/blue/images/jp_btn.png"></div>
+	<div class="wenwen_text left">
+	    <div class="write_box">
+	        <input type="text" class="left" onKeyUp="keyup()" placeholder="请输入关键字" />
+	    </div>   
+	    <div class="circle-button" id="wenwen">
+	        按住 说话
+	    </div>
+	</div>
+	<div class="wenwen_help right">
+		<!-- http://www.dgtour.com.cn/yuyin/index.html -->
+	    <a href="#">
+	        <img src="__PUBLIC__/mobile/blue/images/help_btn.png">
+	    </a>
+	    <button onClick="up_say()" class="right">发送</button>
+	</div>
+	<!-- <div style="opacity:0;" class="clear"></div> -->
+</div>
+
+    </div>
+<!-- </div> -->
+
+
+
+
+<script type="text/javascript" src="__PUBLIC__/mobile/blue/lib/jquery-2.1.4.js"></script>
+<script type="text/javascript">
+	function to_write(){
+	    $('.wenwen_btn img').attr('src','images/yy_btn.png');
+	    $('.wenwen_btn').attr('onclick','to_say()');
+	    $('.write_box,.wenwen_help button').show();
+	    $('.circle-button,.wenwen_help a').hide();
+	    $('.write_box input').focus();
+	    for_bottom();
+	}
+
+	function to_say(){
+		$('.write_list').remove();
+	    $('.wenwen_btn img').attr('src','images/jp_btn.png');
+	    $('.wenwen_btn').attr('onclick','to_write()');
+	    $('.write_box,.wenwen_help button').hide();
+	    $('.circle-button,.wenwen_help a').show();
+	}
+
+	function up_say(){
+		$('.write_list').remove();
+	    var text = $('.write_box input').val(),
+	        str  = '<div class="question">';
+	        str += '<div class="heard_img right"><img src="images/dglvyou.jpg"/></div>';
+	        str += '<div class="question_text clear"><p>'+text+'</p><i></i>';
+	        str += '</div></div>';
+
+	    if(text == ''){
+	        alert('请输入提问！');
+	        $('.write_box input').focus();
+	    }else{
+	        $('.speak_box').append(str);
+	        $('.write_box input').val('');
+	        $('.write_box input').focus();
+	        autoWidth();
+	        for_bottom();
+	        setTimeout(function(){
+	            var ans  = '<div class="answer"><div class="heard_img left"><img src="images/boss.png"/></div>';
+	            	ans += '<p class="name_nicheng">琢磨先生</p>';
+	            	ans += '<div class="answer_text"><p>您发送的文字是：'+text+'</p><i></i>';
+	        		ans += '</div></div>';
+	        	$('.speak_box').append(ans);
+				for_bottom();
+	        },1000);
+	    }
+	}
+
+	function keyup(){
+		var footer_height = $('.wenwen-footer').outerHeight(),
+			text = $('.write_box input').val(),
+			str = '<div class="write_list">'+text+'</div>';
+		if (text == '' || text == undefined){
+			$('.write_list').remove();
+		}else{
+			// $('.wenwen-footer').append(str);
+			$('.write_list').css('bottom',footer_height);
+		}
+	}
+
+	var wen  = document.getElementById('wenwen');
+	function _touch_start(event){
+        event.preventDefault();
+        $('.wenwen_text').css('background','#c1c1c1');
+        $('.wenwen_text span').css('color','#fff');
+        $('.saying').show();
+    }
+
+    function _touch_end(event){
+        event.preventDefault();
+        $('.wenwen_text').css('background','#fff');
+        $('.wenwen_text .circle-button').css('color','#666');    
+        $('.saying').hide();
+        var str  = '<div class="question">';
+	        str += '<div class="heard_img right"><img src="images/dglvyou.jpg"/></div>';
+	        str += '<div class="question_text clear"><p>不好意思，我听不清！</p><i></i>';
+	        str += '</div></div>';
+		$('.speak_box').append(str);
+		for_bottom();
+        setTimeout(function(){
+        	var ans  = '<div class="answer"><div class="heard_img left"><img src="images/boss.png"/></div>';
+        		ans += '<p class="name_nicheng">琢磨先生</p>';
+	        	ans += '<div class="answer_text"><p>我不知道你在说什么?</p><i></i>';
+	    		ans += '</div></div>';
+	    	$('.speak_box').append(ans);
+			for_bottom();
+        },1000);       
+    }
+
+    wen.addEventListener("touchstart", _touch_start, false);
+    wen.addEventListener("touchend", _touch_end, false);
+    
+    function for_bottom(){
+		var speak_height = $('.speak_box').height();
+		$('.speak_box,.speak_window').animate({scrollTop:speak_height},500);
+	}
+	
+	function autoWidth(){
+		$('.question_text').css('max-width',$('.question').width()-60);
+	}
+	autoWidth();
+</script>
+<div style="text-align:center;">
+</div>
+</body>
+</html>

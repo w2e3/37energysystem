@@ -1,0 +1,453 @@
+<include file="Public:header"/>
+<include file="Public:menu" active="专项能源"/>
+<style>
+select {
+  /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+  border: solid 1px #0064b4;
+  border-radius: 5px;
+  width: 100%;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  /*很关键：将默认的select选择框样式清除*/
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  /*在选择框的最右侧中间显示小箭头图片*/
+  background: url("__PUBLIC__/mobile/images/downarrow.png") no-repeat scroll  transparent;
+  background-position: 95% center;
+  background-size: 14px 8px;
+  /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+  padding-left: 15px;
+}
+
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+select::-ms-expand { display: none; }
+
+</style>
+<!-- tab1  -->
+<div class="page page-goods" style="display: block">
+    <header class="bar bar-nav">
+        <a class="icon icon-me pull-left atp-leftbtn"></a>
+        <a class="icon icon-star pull-right atp-rightbtn"></a>
+        <h1 class="title">专项能源</h1>
+    </header>
+    <div class="bar bar-header-secondary">
+        <div class="searchbar">
+            <form action="">
+            <div class="search-input choose-yuanqu">
+                 <select class="search-input choose-year" id="rgn_ids">
+                     <!--<option  value="guid1A15CA6C-E3D2-4779-BF6B-F6C2D4706C9D" >园区</option>-->
+                     <foreach name="rgn_arr" item="vo" >
+                         <option value="{$vo.rgn_atpid}" <if condition=" ($vo.rgn_atpid eq $rgn_id)">selected<else/></if>>{$vo.rgn_name}</option>
+                     </foreach>
+                </select>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="content infinite-scroll">
+        <!-- 轮播图 -->
+        <div class="swiper-container swiper-container-horizontal" data-space-between="10">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="__MODULE__/RgGeneral" >
+                        <img class='card-cover' src="__PUBLIC__/mobile/images/p1.png" alt="">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" >
+                        <img class='card-cover' src="__PUBLIC__/mobile/images/p1.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-pagination"><span
+                    class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
+                    class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+        </div>
+
+        <div class="weui-grids">
+            <!--<a href="__MODULE__/RgGeneral?rgn_atpid=guid1A15CA6C-E3D2-4779-BF6B-F6C2D4706C9D" class="weui-grid js_grid external" onclick="return fun();">-->
+            <a href="__MODULE__/RgGeneral"  class="weui-grid js_grid external">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview1.png" alt=""></div>
+                <p class="weui-grid__label"><font color="RED">综合信息</font></p></a>
+            <a href="#" class="weui-grid js_grid" " >
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview2.png" alt=""></div>
+                <p class="weui-grid__label">设备状态</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview3.png" alt=""></div>
+                <p class="weui-grid__label">待确认报警</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview4.png" alt=""></div>
+                <p class="weui-grid__label">待处理报警</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview5.png" alt=""></div>
+                <p class="weui-grid__label">历史报警</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview6.png" alt=""></div>
+                <p class="weui-grid__label">报警维修记录</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview7.png" alt=""></div>
+                <p class="weui-grid__label">分项报表</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview8.png" alt=""></div>
+                <p class="weui-grid__label">数据分析</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview9.png" alt=""></div>
+                <p class="weui-grid__label">历史采集数据</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview10.png" alt=""></div>
+                <p class="weui-grid__label">能源计划</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview11.png" alt=""></div>
+                <p class="weui-grid__label">报告/指标要求</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview12.png" alt=""></div>
+                <p class="weui-grid__label">日报缺失</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview13.png" alt=""></div>
+                <p class="weui-grid__label">日报异常</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview14.png" alt=""></div>
+                <p class="weui-grid__label">时报缺失</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview15.png" alt=""></div>
+                <p class="weui-grid__label">时报异常</p></a>
+            <a href="#" class="weui-grid js_grid" ">
+                <div class="weui-grid__icon"><img src="__PUBLIC__/mobile/images/overview15.png" alt=""></div>
+                <p class="weui-grid__label">退出</p></a>
+        </div>
+    </div>
+</div>
+
+<include file="Public:leftbox"/>
+<include file="Public:rightbox"/>
+<include file="Public:footerjs"/>
+<include file="Public:leftrightjs"/>
+<script>
+    +function (a) {
+        a.smConfig.rawCitiesData = [
+            {
+                name: "园区",
+                sub: [{name: "", sub: [], type: 0}], type: 1
+            },
+            {
+                name: "1#",
+                sub: [
+                    {
+                        name: "1层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "2层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "3层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "4层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "5层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "6层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "7层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "8层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                ],
+                type: 1
+            },
+
+            {
+                name: "2#",
+                sub: [
+                    {
+                        name: "1层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "2层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "3层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "4层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "5层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "6层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "7层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "8层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                ],
+                type: 1
+            },
+
+            {
+                name: "3#",
+                sub: [
+                    {
+                        name: "1层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "2层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "3层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "4层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "5层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "6层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "7层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "8层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                ],
+                type: 1
+            },
+
+            {
+                name: "4#",
+                sub: [
+                    {
+                        name: "1层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "2层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "3层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "4层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "5层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "6层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "7层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "8层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                ],
+                type: 1
+            },
+
+            {
+                name: "5#",
+                sub: [
+                    {
+                        name: "1层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "2层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "3层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "4层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "5层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "6层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "7层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                    {
+                        name: "8层",
+                        sub: [{name: "位置点1"}, {name: "位置点2"}, {name: "位置点3"}, {name: "位置点4"}],
+                        type: 0
+                    },
+                ],
+                type: 1
+            }
+
+
+        ]
+
+    }($), +function (a) {
+        "use strict";
+        a.fn.cityPicker = function (b) {
+            return this.each(function () {
+                if (this) {
+                    var c = function (a) {
+                        for (var b = [], c = 0; c < a.length; c++) {
+                            var d = a[c];
+                            "请选择" !== d.name && b.push(d.name)
+                        }
+                        return b.length ? b : [""]
+                    }, d = function (a) {
+                        return a.sub ? c(a.sub) : [""]
+                    }, e = function (a) {
+                        for (var b = 0; b < g.length; b++)if (g[b].name === a)return d(g[b]);
+                        return [""]
+                    }, f = function (a, b) {
+                        for (var c = 0; c < g.length; c++)if (g[c].name === a)for (var e = 0; e < g[c].sub.length; e++)if (g[c].sub[e].name === b)return d(g[c].sub[e]);
+                        return [""]
+                    }, g = a.smConfig.rawCitiesData, h = g.map(function (a) {
+                        return a.name
+                    }), i = d(g[0]), j = [""], k = h[0], l = i[0], m = j[0], n = {
+                        cssClass: "city-picker",
+                        rotateEffect: !1,
+                        onChange: function (a, b, c) {
+                            var d, g = b[0];
+                            if (g !== k) {
+                                var h = e(g);
+                                d = h[0];
+                                var i = f(g, d);
+                                return a.cols[1].replaceValues(h), a.cols[2].replaceValues(i), k = g, l = d, void a.updateValue()
+                            }
+                            d = a.cols[1].value, d !== l && (a.cols[2].replaceValues(f(g, d)), l = d, a.updateValue())
+                        },
+                        cols: [{values: h, cssClass: "col-province"}, {values: i, cssClass: "col-city"}, {
+                            values: j,
+                            cssClass: "col-district"
+                        }]
+                    }, o = a.extend(n, b), p = a(this).val();
+                    p && (o.value = p.split(" "), o.value[0] && (k = o.value[0], o.cols[1].values = e(o.value[0])), o.value[1] ? (l = o.value[1], o.cols[2].values = f(o.value[0], o.value[1])) : (m = o.value[2], o.cols[2].values = f(o.value[0], o.cols[1].values[0]))), a(this).picker(o)
+                }
+            })
+        }
+    }($);
+
+    $("#city-picker").cityPicker({
+        toolbarTemplate: '<header class="bar bar-nav">\
+          <button class="button button-link pull-right close-picker">确定</button>\
+          <h1 class="title">请选择园区位置</h1>\
+          </header>'
+    });
+</script>
+<script>
+    var rgn_id=$("#rgn_ids").val();
+    $(function () {
+        $(".weui-grid js_grid.external").bind('click', fun($(this).attr("href"),$(this)));
+        $(".weui-grid.js_grid").each(function () {
+            $('#demo').bind('click', fun($(this).attr("href"),$(this)));
+        });
+//        console.log($(".weui-grids").children("a").html());
+    })
+    function fun(href,dom) {
+        event.preventDefault();
+        console.log(href);
+        var rgn_atpid=$("#rgn_ids").val();
+        console.log($(this));
+        var html=href+"?rgn_atpid="+rgn_id;
+        dom.attr('href',html);
+        console.log(html);
+        console.log(dom.attr('href',html));
+//        window.location.href=href+"?rgn_atpid="+rgn_id;
+//        console.log(rgn_atpid);
+        return true;
+    }
+    //修改园区节点
+    $("#rgn_ids").on('change',function () {
+        var rgn_id=$(this).val();
+        console.log(rgn_id);
+        window.location.href="__CONTROLLER__/index?rgn_atpid="+rgn_id;
+    });
+</script>
+<include file="Public:footer"/>

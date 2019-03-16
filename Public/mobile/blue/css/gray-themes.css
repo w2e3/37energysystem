@@ -1,0 +1,63 @@
+.list-block ul {
+	background: none;
+}
+body {
+	background: #efeff4;
+	color: #333;
+}
+.page {
+	background: #efeff4;
+}
+.bar {
+	background: #efeff4;
+} 
+.title {
+	color: #333;
+}
+.card {
+	background: #efeff4;
+}
+
+.page-settings .row {
+	background: #efeff4;
+}
+
+
+.atp-person {
+  background: #efeff4;
+}
+
+
+.buttons-tab {
+	background: #efeff4;
+}
+
+.popup {
+	background: #efeff4;
+}
+/* 集成电路色 */
+a {
+  color: #0064b4;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+a:active {
+  color: #0064b4;
+}
+.bar-tab .tab-item.active, .bar-tab .tab-item:active {
+    color: #0064b4;
+}
+.bar .button-link {
+    top: 0;
+    height: 2.2rem;
+    padding: 0;
+    font-size: .8rem;
+    line-height: 2.2rem;
+    color: #0064b4;
+    border: 0;
+}
+.buttons-tab .button.active {
+    z-index: 100;
+    color: #0064b4;
+    border-color: #0064b4;
+}
